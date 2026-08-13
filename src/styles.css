@@ -1,0 +1,181 @@
+/* 디자인 토큰은 docs/figma-make-프롬프트.md 와 같은 값을 쓴다.
+   와이어프레임이 돌아왔을 때 색·간격을 다시 맞추지 않아도 되게 하려는 것이다.
+   흑백 + 회색 4단계. 액센트 컬러 없음. */
+
+:root {
+  --ink: #0a0a0a;
+  --ink-secondary: #52514e;
+  --ink-muted: #8e8c86;
+  --line: #e3e1db;
+  --line-strong: #b5b3ab;
+  --surface: #fff;
+  --canvas: #fafaf8;
+
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s6: 24px;
+  --s8: 32px;
+  --s12: 48px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--s6) var(--s8) var(--s12);
+}
+
+@media (max-width: 640px) {
+  .wrap { padding: var(--s4) 20px var(--s8); }
+}
+
+/* ---- 타이포 ---- */
+
+h1 { font-size: 32px; line-height: 1.25; font-weight: 500; margin: 0 0 var(--s2); letter-spacing: -0.01em; }
+h2 { font-size: 17px; line-height: 1.4; font-weight: 500; margin: var(--s8) 0 var(--s3); }
+.lede { color: var(--ink-secondary); margin: 0 0 var(--s8); }
+.small { font-size: 13px; line-height: 1.55; }
+.muted { color: var(--ink-muted); }
+.mono { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; }
+
+/* ---- 알림 줄 ---- */
+
+.notice {
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  padding: var(--s3) var(--s4);
+  margin: 0 0 var(--s4);
+  font-size: 13px;
+}
+
+.notice--strong { border-color: var(--ink); }
+
+/* ---- 칩 ---- */
+
+.chips { display: flex; flex-wrap: wrap; gap: var(--s2); margin: 0 0 var(--s4); }
+
+.chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s2);
+  min-height: 36px;
+  padding: 0 var(--s3);
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.chip[aria-pressed='true'] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.chip:disabled { color: var(--ink-muted); border-color: var(--line); cursor: not-allowed; }
+.chip__tag { font-size: 11px; color: var(--ink-muted); }
+.chip[aria-pressed='true'] .chip__tag { color: #cfcdc7; }
+
+.cat { margin: 0 0 var(--s6); }
+.cat__name { font-size: 13px; color: var(--ink-muted); margin: 0 0 var(--s2); }
+
+/* ---- 검색 ---- */
+
+.search {
+  width: 100%;
+  max-width: 360px;
+  height: 44px;
+  padding: 0 var(--s3);
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  font: inherit;
+  margin: 0 0 var(--s6);
+}
+
+/* ---- 계획 카드 ---- */
+
+.cards { display: grid; gap: var(--s3); margin: 0; padding: 0; list-style: none; }
+
+.card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: var(--s4);
+}
+
+.card__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); }
+.card__name { font-size: 17px; font-weight: 500; }
+.card__agency { font-size: 11px; color: var(--ink-muted); }
+.card__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-top: var(--s3); }
+.card__label { font-size: 13px; color: var(--ink-secondary); min-width: 68px; }
+
+select,
+input[type='date'] {
+  height: 36px;
+  padding: 0 var(--s2);
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+}
+
+.linkbtn {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---- D-Day ---- */
+
+.dday { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+
+.dday__item {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: baseline;
+  gap: var(--s3);
+  padding: var(--s3) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.dday__num { font-size: 17px; font-weight: 500; }
+.dday__num--today { }
+.dday__what { min-width: 0; }
+.dday__exam { font-weight: 500; }
+.dday__kind { font-size: 13px; color: var(--ink-secondary); }
+.dday__date { font-size: 13px; color: var(--ink-muted); }
+
+/* 접수 마감은 시험보다 시각적으로 한 단계 약하게. 색이 없으므로 굵기와 테두리로 구분한다 */
+.dday__item--reg .dday__num { font-weight: 400; }
+.dday__item--exam { border-left: 2px solid var(--ink); padding-left: var(--s3); }
+
+.empty {
+  border: 1px dashed var(--line-strong);
+  padding: var(--s6);
+  text-align: center;
+  color: var(--ink-secondary);
+  font-size: 14px;
+}
+
+footer { margin-top: var(--s12); padding-top: var(--s4); border-top: 1px solid var(--line); }
+footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }

@@ -6,8 +6,8 @@
  * `fetchedAt` 만 저장하고 여기서 계산한다.
  */
 
-import type { MetaFile, SourceHealth } from '../types';
-import { diffDays, today } from './dates';
+import type { MetaFile, SourceHealth } from '../types.ts';
+import { diffDays, today } from './dates.ts';
 
 /** 접수 마감을 놓치면 실질적 손해가 나므로 경고 임계를 낮게 잡는다 */
 export const STALE_WARN_DAYS = 3;
