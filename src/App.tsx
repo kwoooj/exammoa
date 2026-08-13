@@ -7,6 +7,7 @@ import { encodePlans, persist, readInitial } from './lib/urlState.ts';
 import { ExamPicker, MAX_PICK } from './components/ExamPicker.tsx';
 import { PlanCard } from './components/PlanCard.tsx';
 import { DDayList } from './components/DDayList.tsx';
+import { MonthCalendar } from './components/MonthCalendar.tsx';
 
 type Data = { exams: ExamsFile; groups: GroupsFile; sessions: SessionsFile; meta: MetaFile };
 
@@ -149,6 +150,16 @@ npm run publish:data`}</pre>
 
       <h2>다가오는 일정</h2>
       <DDayList items={items} />
+
+      {items.length > 0 && (
+        <>
+          <h2>달력</h2>
+          <p className="small muted" style={{ margin: '0 0 12px' }}>
+            쓰고 있는 캘린더와 나란히 놓고 보기 위한 화면이에요.
+          </p>
+          <MonthCalendar items={items} today={now} />
+        </>
+      )}
 
       {pickedExams.length > 0 && (
         <>
