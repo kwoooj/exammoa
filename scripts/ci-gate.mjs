@@ -45,6 +45,7 @@ export function decide(meta) {
   const broken = sources.filter(([, s]) => s.health !== 'ok');
   const splits = meta.groupSplits ?? [];
   const splitCount = meta.groupSplitCount ?? splits.length;
+  const failedExams = meta.failed ?? [];
 
   const lines = [
     `그룹 ${meta.groupCount ?? '?'}개 · 회차 ${meta.sessionCount ?? '?'}건 · 이벤트 ${meta.eventCount ?? '?'}개 · 노출 종목 ${meta.examCount ?? '?'}개`,
@@ -78,12 +79,50 @@ export function decide(meta) {
         ...lines,
         '',
         '사라지는 것보다 낡았다고 밝히며 보여주는 것이 낫다 (FR-DAT-07).',
-        ...broken.map(([id, s]) => `- \`${id}\` — ${s.health}${s.error ? `: ${s.error}` : ''}`),
+        // store.mjs 가 쓰는 필드 이름은 reason 이다. error 만 보면 사유가 영원히 안 보인다.
+        ...broken.map(([id, s]) => {
+          const why = s.reason ?? s.error;
+          return `- \`${id}\` — ${s.health}${why ? `: ${why}` : ''}`;
+        }),
+        ...failedLines(failedExams),
       ],
     };
   }
 
+  /**
+   * 소스는 건강한데 종목 몇 개가 빠진 경우.
+   *
+   * 커밋한다 — 나머지 종목은 정상이고, 빠진 것을 감추려고 전체를 되돌리면 오늘 확정된
+   * 일정을 잃는다. 그러나 **초록불로 넘기지 않는다.** 호출하는 종목은 전부 응답한다고
+   * 실측된 화이트리스트라 0건은 이상 신호다. 그룹의 종목이 전부 빠지면 그 그룹이
+   * 화면에서 사라지는데, 소스 단위 폴백은 이걸 잡지 못한다 (#18).
+   */
+  if (failedExams.length) {
+    return {
+      commit: true,
+      fail: true,
+      headline: `종목 ${failedExams.length}건이 빠졌다 — 커밋하되 확인이 필요하다`,
+      lines: [...lines, '', ...failedLines(failedExams)],
+    };
+  }
+
   return { commit: true, fail: false, headline: '수집 정상', lines };
+}
+
+/** 실패한 종목을 사유별로 묶는다. 29건을 한 줄씩 찍으면 요약을 읽지 않게 된다. */
+function failedLines(failedExams, limit = 6) {
+  if (!failedExams.length) return [];
+  const byReason = new Map();
+  for (const f of failedExams) {
+    const k = String(f.reason ?? '사유 불명');
+    if (!byReason.has(k)) byReason.set(k, []);
+    byReason.get(k).push(f.slug ?? f.jmCd ?? '?');
+  }
+  return [`빠진 종목 ${failedExams.length}건:`, ...[...byReason].map(([reason, slugs]) => {
+    const shown = slugs.slice(0, limit).join(', ');
+    const more = slugs.length > limit ? ` … 외 ${slugs.length - limit}건` : '';
+    return `- ${reason} (${slugs.length}건): ${shown}${more}`;
+  })];
 }
 
 /** GitHub Actions 요약 마크다운 */

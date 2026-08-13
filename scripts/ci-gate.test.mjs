@@ -57,6 +57,13 @@ test('실패한 소스의 id 와 사유를 요약에 적는다', () => {
   assert.match(s, /인증 실패/);
 });
 
+test('store.mjs 가 쓰는 필드 이름은 reason 이다 — error 만 보면 사유가 안 보인다', () => {
+  const s = summary(decide(ok({
+    sources: { qnet: { health: 'stale', method: 'api', sessionCount: 102, reason: '거절 22 일일 요청제한 횟수 초과' } },
+  })));
+  assert.match(s, /일일 요청제한/);
+});
+
 test('health 가 failed 든 stale 든 커밋한다', () => {
   for (const health of ['stale', 'failed']) {
     const d = decide(ok({ sources: { qnet: { health, sessionCount: 0 } } }));
@@ -143,6 +150,54 @@ test('커밋하면서 실패한 경우와 커밋조차 못 한 경우를 다른 
 test('stale 회차 수가 있으면 요약에 적는다', () => {
   const s = summary(decide(ok({ staleCount: 102, sources: { qnet: { health: 'stale', sessionCount: 102 } } })));
   assert.match(s, /낡은 회차 102건/);
+});
+
+// ---- 종목 단위 실패 (#18) ----------------------------------------------
+
+test('소스는 건강한데 종목이 빠지면 커밋하고 빨간불', () => {
+  const d = decide(ok({
+    failed: [
+      { slug: '품질경영기사', jmCd: '1500', reason: '레코드 없음' },
+      { slug: '전기기사', jmCd: '1150', reason: '레코드 없음' },
+    ],
+  }));
+  assert.equal(d.commit, true, '나머지 종목은 정상이다. 되돌리면 오늘 확정된 일정을 잃는다');
+  assert.equal(d.fail, true, '조용히 초록불이면 그룹이 사라진 것을 아무도 모른다');
+  assert.match(d.headline, /2건/);
+});
+
+test('빠진 종목을 사유별로 묶는다 — 29줄을 찍으면 요약을 읽지 않게 된다', () => {
+  const failed = Array.from({ length: 29 }, (_, i) => ({
+    slug: `종목${i}`, jmCd: String(1000 + i), reason: '레코드 없음',
+  }));
+  const s = summary(decide(ok({ failed })));
+  assert.match(s, /레코드 없음 \(29건\)/);
+  assert.match(s, /외 23건/, '앞 6건만 보이고 나머지는 개수로 접혀야 한다');
+  assert.ok(s.split('\n').length < 15, `요약이 너무 길다 (${s.split('\n').length}줄)`);
+});
+
+test('소스 실패가 종목 실패보다 앞선다 — 둘 다면 소스 얘기를 먼저 한다', () => {
+  const d = decide(ok({
+    sources: { qnet: { health: 'stale', sessionCount: 102 } },
+    failed: [{ slug: 'x', reason: '레코드 없음' }],
+  }));
+  assert.match(d.headline, /소스/);
+  assert.equal(d.commit, true);
+  assert.match(summary(d), /빠진 종목 1건/, '종목 실패도 함께 적어야 한다');
+});
+
+test('그룹 갈림은 종목 실패보다 앞서고 커밋을 막는다', () => {
+  const d = decide(ok({
+    groupSplitCount: 1,
+    groupSplits: [{ groupId: 'g', variants: [] }],
+    failed: [{ slug: 'x', reason: '레코드 없음' }],
+  }));
+  assert.equal(d.commit, false);
+});
+
+test('failed 가 빈 배열이면 정상이다', () => {
+  const d = decide(ok({ failed: [] }));
+  assert.equal(d.fail, false);
 });
 
 // ---- 커밋 제목 --------------------------------------------------------
