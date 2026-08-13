@@ -141,7 +141,10 @@ export interface Exam {
   tier: 'T1' | 'T2' | 'T3' | 'T4';
   priority: number;
   agency?: string;
-  sourceUrl?: string;
+  /**
+   * 수집 대상 URL 은 여기 두지 않는다. ScheduleGroup.sourceUrl 이 정본이다 —
+   * 종목에 두었더니 실제로 그룹과 어긋났다 (한국사능력검정시험).
+   */
   /** true 면 확정 일정이 없다. 타임라인에 막대를 그리지 않는다 */
   rolling?: boolean;
   rollingRule?: string;
@@ -156,37 +159,27 @@ export interface Category {
 // ---- 응시 예정일 ------------------------------------------------------
 
 /**
- * 사용자가 "언제 볼 예정인지" 지정한 것.
+ * 사용자가 "이 시험을 언제 볼 것인지" 지정한 것. 서비스의 중심 데이터다.
  *
- * 실측 결과 시험 이벤트 243개 중 239개가 기간 시행(필기 중위 5일, 실기 중위 19일)이라
- * 기간끼리 겹쳐도 실제로는 응시일을 조정할 수 있다. 사용자가 예정일을 지정하면
- * 그 시험은 고정일이 되고, 그때부터 의미 있는 충돌 판정이 가능해진다.
+ * 실측 결과 시험 이벤트의 98%가 기간 시행(필기 중위 5일, 실기 중위 19일)이다.
+ * 기간끼리는 거의 항상 겹치므로 '겹친다' 는 사실 자체가 정보가 되지 못한다.
+ * 사용자가 응시일을 지정해야 비로소 D-Day 와 '같은 날' 판단이 의미를 갖는다.
  */
 export interface ExamPlan {
   examSlug: string;
   groupId: string;
-  /** 회차 선택 (frequent 종목). Session.id */
-  sessionId?: string;
-  phase?: EventPhase;
-  /** 기간 안에서 고른 응시일. 'YYYY-MM-DD' */
+  /** Session.id */
+  sessionId: string;
+  phase: EventPhase;
+  /**
+   * 응시 예정일 'YYYY-MM-DD'.
+   * 하루짜리 시험은 자동으로 채워지고, 기간 시행은 사용자가 고를 때까지 비어 있다.
+   */
   date?: string;
-  /** 확정 일정이 없는 rolling 종목의 목표 시기. 'YYYY-MM' */
-  targetMonth?: string;
 }
 
-// ---- 충돌 -------------------------------------------------------------
-
-export type ConflictLevel = 'blocking' | 'warning' | 'info';
-
-export interface Conflict {
-  level: ConflictLevel;
-  /** YYYY-MM-DD. 충돌 구간 */
-  start: string;
-  end: string;
-  a: { groupId: string; examSlug: string; event: ExamEvent };
-  b: { groupId: string; examSlug: string; event: ExamEvent };
-  message: string;
-}
+/** 계획 하나를 식별하는 키. 같은 종목의 필기·실기를 따로 담을 수 있어야 한다 */
+export type PlanKey = string;
 
 // ---- 빌드 산출물 ------------------------------------------------------
 
