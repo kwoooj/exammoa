@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-13T05:35:48.009Z",
+  "fetchedAt": "2026-08-13T05:40:11.540Z",
   "year": 2026,
   "examCount": 47,
   "groupCount": 7,
@@ -15,7 +15,7 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-13T05:35:48.009Z",
+      "fetchedAt": "2026-08-13T05:40:11.540Z",
       "sessionCount": 102
     }
   },
