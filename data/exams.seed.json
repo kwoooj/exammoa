@@ -1,5 +1,5 @@
 {
-  "$comment": "시험 종목 마스터 시드. jmCd는 q-net.or.kr/crf005.do 상세페이지 title 서버렌더로 검증된 값만 수록. 미검증 항목은 jmCd: null.",
+  "$comment": "시험 종목 마스터 시드. jmCd는 q-net.or.kr/crf005.do 상세페이지 title 서버렌더로 검증된 값만 수록. 미검증 항목은 jmCd: null. 수집 대상 URL(sourceUrl)은 groups.seed.json 이 정본이다. 종목에 두면 그룹과 어긋난다 (실제로 한국사능력검정시험이 어긋나 있었다).",
   "version": "0.1.0",
   "generatedAt": "2026-08-13",
   "verification": {
@@ -840,7 +840,6 @@
       "tier": "T3",
       "priority": 1,
       "agency": "YBM",
-      "sourceUrl": "https://exam.toeic.co.kr/receipt/examSchList.php",
       "collect": "crawl",
       "multiReg": true,
       "note": "정기접수 + 추가접수 2세트"
@@ -857,7 +856,6 @@
       "tier": "T3",
       "priority": 2,
       "agency": "YBM",
-      "sourceUrl": "https://www.toeicswt.co.kr/receipt/examSchList.php",
       "collect": "crawl",
       "multiReg": true
     },
@@ -889,7 +887,6 @@
       "tier": "T3",
       "priority": 2,
       "agency": "KBS",
-      "sourceUrl": "https://www.kbskorean.org/klt/exam-apply/list",
       "collect": "crawl",
       "note": "robots.txt Disallow 빈 값 = 전면 허용. SSR로 표 전량 초기 HTML 포함"
     },
@@ -905,7 +902,6 @@
       "tier": "T3",
       "priority": 1,
       "agency": "국사편찬위원회",
-      "sourceUrl": "https://m.historyexam.go.kr/main/examSchedule.do",
       "collect": "crawl",
       "note": "모바일 .do 페이지가 SSR로 유리. 일정 전용 API 없음"
     }
