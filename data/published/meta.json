@@ -1,13 +1,13 @@
 {
-  "fetchedAt": "2026-08-13T08:48:01.000Z",
+  "fetchedAt": "2026-08-13T20:06:53.128Z",
   "year": 2026,
   "examCount": 54,
   "qnetExamCount": 47,
   "groupCount": 14,
-  "sessionCount": 179,
-  "eventCount": 780,
+  "sessionCount": 178,
+  "eventCount": 777,
   "tbdCount": 0,
-  "staleCount": 102,
+  "staleCount": 107,
   "contradictionCount": 0,
   "groupSplitCount": 0,
   "groupSplits": [],
@@ -18,30 +18,31 @@
       "method": "api",
       "fetchedAt": "2026-08-13T08:02:37.132Z",
       "sessionCount": 102,
-      "reason": "거절 22 일일 요청제한 횟수 초과"
+      "reason": "47종목 전부 실패"
     },
     "history-exam": {
-      "health": "ok",
+      "health": "stale",
       "method": "crawl",
       "fetchedAt": "2026-08-13T08:48:01.000Z",
-      "sessionCount": 5
+      "sessionCount": 5,
+      "reason": "타임아웃"
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-13T08:48:01.000Z",
+      "fetchedAt": "2026-08-13T20:06:53.128Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-13T08:48:01.000Z",
-      "sessionCount": 45
+      "fetchedAt": "2026-08-13T20:06:53.128Z",
+      "sessionCount": 44
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-13T08:48:01.000Z",
+      "fetchedAt": "2026-08-13T20:06:53.128Z",
       "sessionCount": 6
     },
     "dataq-csv": {
@@ -54,7 +55,244 @@
   },
   "archive": null,
   "notes": [
-    "qnet 실패 — 이전 102회차를 유지하고 stale 로 표시했다 (거절 22 일일 요청제한 횟수 초과)"
+    "qnet 실패 — 이전 102회차를 유지하고 stale 로 표시했다 (47종목 전부 실패)",
+    "history-exam 실패 — 이전 5회차를 유지하고 stale 로 표시했다 (타임아웃)"
   ],
-  "failed": []
+  "failed": [
+    {
+      "slug": "전기기사",
+      "jmCd": "1150",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "전기산업기사",
+      "jmCd": "2140",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "정보처리기사",
+      "jmCd": "1320",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "산업안전기사",
+      "jmCd": "1431",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "위험물산업기사",
+      "jmCd": "2121",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "직업상담사2급",
+      "jmCd": "9511",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "사회조사분석사2급",
+      "jmCd": "9521",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "지게차운전기능사",
+      "jmCd": "7875",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "전기기능사",
+      "jmCd": "7780",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "소방설비기사-전기",
+      "jmCd": "1910",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "소방설비기사-기계",
+      "jmCd": "1900",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "일반기계기사",
+      "jmCd": "1021",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "건축기사",
+      "jmCd": "1630",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "토목기사",
+      "jmCd": "1250",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "정보처리산업기사",
+      "jmCd": "2290",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "산업안전산업기사",
+      "jmCd": "2381",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "건설안전기사",
+      "jmCd": "1440",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "위험물기능사",
+      "jmCd": "6697",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "품질경영기사",
+      "jmCd": "1500",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "굴착기운전기능사",
+      "jmCd": "7862",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "한식조리기능사",
+      "jmCd": "7910",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "제과기능사",
+      "jmCd": "7892",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "제빵기능사",
+      "jmCd": "7893",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "기계설계산업기사",
+      "jmCd": "2031",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "가스기능사",
+      "jmCd": "6335",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "프로그래밍기능사",
+      "jmCd": "6921",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "사무자동화산업기사",
+      "jmCd": "2193",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "건설안전산업기사",
+      "jmCd": "2390",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "산업위생관리기사",
+      "jmCd": "1472",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "품질경영산업기사",
+      "jmCd": "2420",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "대기환경기사",
+      "jmCd": "1661",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "수질환경기사",
+      "jmCd": "1662",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "컨벤션기획사2급",
+      "jmCd": "9536",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "양식조리기능사",
+      "jmCd": "7911",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "미용사-일반",
+      "jmCd": "7937",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "전산응용기계제도기능사",
+      "jmCd": "6151",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "에너지관리기사",
+      "jmCd": "1340",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "피복아크용접기능사",
+      "jmCd": "6223",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "정보기기운용기능사",
+      "jmCd": "6892",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "정보관리기술사",
+      "jmCd": "0601",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "산업위생관리산업기사",
+      "jmCd": "2472",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "수질환경산업기사",
+      "jmCd": "2572",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "화학분석기사",
+      "jmCd": "1563",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "텔레마케팅관리사",
+      "jmCd": "9541",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "미용사-피부",
+      "jmCd": "7947",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "미용사-메이크업",
+      "jmCd": "7967",
+      "reason": "fetch failed"
+    },
+    {
+      "slug": "조경기능사",
+      "jmCd": "7900",
+      "reason": "fetch failed"
+    }
+  ]
 }
