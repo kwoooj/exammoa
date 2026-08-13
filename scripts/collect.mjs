@@ -9,7 +9,8 @@
 //   PowerShell:  $env:QNET_KEY="발급받은키"; node scripts/collect.mjs --probe
 //   bash:        QNET_KEY="발급받은키" node scripts/collect.mjs --probe
 
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
+import { readPrevious, mergeStale, writeAll, archive, PUBLISHED } from './lib/store.mjs';
 
 const ENDPOINT = 'https://apis.data.go.kr/B490007/qualExamSchd/getQualExamSchdList';
 const KEY = process.env.QNET_KEY;
@@ -519,10 +520,9 @@ async function collect(seed, groupSeed) {
 
   // ---- 그룹 접기 ----
   const beforeFold = perExam.reduce((s, m) => s + m.sessions.length, 0);
-  const { sessions, splits } = foldGroups(perExam);
-  const groups = buildGroups(groupSeed, sessions, splits);
+  const { sessions: folded, splits } = foldGroups(perExam);
 
-  console.log(`\n그룹 접기: ${perExam.length}종목 · ${beforeFold}회차 → ${new Set(sessions.map(s => s.groupId)).size}그룹 · ${sessions.length}회차`);
+  console.log(`\n그룹 접기: ${perExam.length}종목 · ${beforeFold}회차 → ${new Set(folded.map(s => s.groupId)).size}그룹 · ${folded.length}회차`);
   if (splits.length) {
     console.log(`⚠ 선언된 그룹인데 일정이 갈린 곳 ${splits.length}건 — 시드의 groupId 를 고쳐야 한다:`);
     for (const sp of splits) {
@@ -531,54 +531,78 @@ async function collect(seed, groupSeed) {
     }
   }
 
-  await mkdir('build', { recursive: true });
+  // ---- 소스 단위 병합 ----
+  // 지금은 소스가 qnet 하나뿐이다. 크롤러를 붙이기 전에 이 구조를 깔아두는 이유는,
+  // 안전망 없이 어댑터를 추가하면 그 소스가 죽는 날 해당 그룹이 화면에서 사라지기 때문이다.
+  const now = new Date().toISOString();
+  const stamp = now.slice(0, 10);
+
+  // 종목을 하나도 못 받았으면 소스 실패다. 일부 실패는 성공으로 본다 (FR-DAT-06).
+  const qnetOk = perExam.length > 0;
+  const harvests = [{
+    id: 'qnet',
+    method: 'api',
+    ok: qnetOk,
+    sessions: folded,
+    error: qnetOk ? null : `${exams.length}종목 전부 실패`,
+  }];
+
+  const prev = await readPrevious();
+  if (!prev) {
+    console.log(`\n※ ${PUBLISHED}/ 에 이전 결과가 없다. 첫 실행이므로 폴백 대상이 없다.`);
+  }
+  const merged = mergeStale(harvests, prev, { now });
+  for (const n of merged.notes) console.log(`  · ${n}`);
+
+  const groups = buildGroups(groupSeed, merged.sessions, splits);
 
   // 원본 아카이브. implYy=2024 가 빈 응답이므로 과거 데이터는 재수집이 불가능하다.
-  const stamp = new Date().toISOString().slice(0, 10);
-  await mkdir(`build/raw/${YEAR}`, { recursive: true });
-  await writeFile(`build/raw/${YEAR}/${stamp}.json`, JSON.stringify(raw), 'utf8');
+  //
+  // 성공했을 때만 남긴다. 실패한 실행의 빈 응답을 저장하면 아카이브가 오염되고,
+  // 다음 성공 실행이 그 빈 스냅샷과 비교해 '내용이 바뀌었다' 로 오판해 매번 재저장한다.
+  let arch = { written: false, path: null, reason: '수집 실패로 저장하지 않음' };
+  if (qnetOk) {
+    arch = await archive({ year: YEAR, sourceId: 'qnet', body: raw, stamp });
+  }
+  console.log(`\n아카이브: ${arch.written ? '저장' : '생략'} — ${arch.reason}`);
+  if (arch.written) console.log(`  ${arch.path}`);
 
-  await writeFile(
-    'build/sessions.json',
-    JSON.stringify({ year: YEAR, sessions }, null, 0),
-    'utf8'
-  );
-  await writeFile(
-    'build/groups.json',
-    JSON.stringify({ year: YEAR, groups }, null, 0),
-    'utf8'
-  );
-  await writeFile(
-    'build/exams.json',
-    JSON.stringify({ exams, categories: seed.categories, links: seed.links }, null, 0),
-    'utf8'
-  );
-  await writeFile(
-    'build/meta.json',
-    JSON.stringify({
-      fetchedAt: new Date().toISOString(),
-      year: YEAR,
-      examCount: exams.length,
-      groupCount: new Set(sessions.map(s => s.groupId)).size,
-      sessionCount: sessions.length,
-      eventCount: sessions.reduce((s, x) => s + x.events.length, 0),
-      tbdCount: sessions.filter(s => s.status === 'tbd').length,
-      contradictionCount: sessions.filter(s => s.contradictions).length,
-      groupSplitCount: splits.length,
-      groupSplits: splits,
-      sessionsBeforeFold: beforeFold,
-      rawArchive: `build/raw/${YEAR}/${stamp}.json`,
-      failed,
-    }, null, 2),
-    'utf8'
-  );
+  const meta = {
+    fetchedAt: now,
+    year: YEAR,
+    examCount: exams.length,
+    groupCount: new Set(merged.sessions.map(s => s.groupId)).size,
+    sessionCount: merged.sessions.length,
+    eventCount: merged.sessions.reduce((s, x) => s + x.events.length, 0),
+    tbdCount: merged.sessions.filter(s => s.status === 'tbd').length,
+    staleCount: merged.sessions.filter(s => s.stale).length,
+    contradictionCount: merged.sessions.filter(s => s.contradictions).length,
+    groupSplitCount: splits.length,
+    groupSplits: splits,
+    sessionsBeforeFold: beforeFold,
+    sources: merged.sources,
+    archive: arch.written ? arch.path : null,
+    notes: merged.notes,
+    failed,
+  };
 
-  console.log(`\n그룹 ${new Set(sessions.map(s => s.groupId)).size}개 · 회차 ${sessions.length}건 · 이벤트 ${sessions.reduce((s, x) => s + x.events.length, 0)}개`);
-  if (failed.length) console.log(`실패 ${failed.length}건 — build/meta.json 참고`);
-  console.log('build/sessions.json, groups.json, exams.json, meta.json 생성 완료');
+  await writeAll({
+    year: YEAR,
+    sessions: merged.sessions,
+    groups,
+    exams,
+    categories: seed.categories,
+    links: seed.links,
+    meta,
+    provenance: merged.provenance,
+  });
 
-  // 선언이 사실과 어긋난 것은 사람이 고쳐야 한다. 산출물은 이미 썼으니 알림만 남긴다.
-  if (splits.length) process.exitCode = 1;
+  console.log(`\n그룹 ${meta.groupCount}개 · 회차 ${meta.sessionCount}건 · 이벤트 ${meta.eventCount}개${meta.staleCount ? ` · stale ${meta.staleCount}건` : ''}`);
+  if (failed.length) console.log(`종목 실패 ${failed.length}건 — ${PUBLISHED}/meta.json 참고`);
+  console.log(`${PUBLISHED}/ sessions·groups·exams·meta·provenance 생성 완료`);
+
+  // 산출물을 먼저 쓴 다음에 빨간불을 켠다. 파서 하나가 틀린 것으로 사이트를 얼리지 않는다.
+  if (splits.length || merged.failedSources.length) process.exitCode = 1;
 }
 
 // ---- 실행 -------------------------------------------------------------
