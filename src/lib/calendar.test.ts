@@ -6,7 +6,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  calendarRange, firstOfMonth, groupByDate, lastOfMonth, monthGrid, monthLabel, monthsBetween, ym,
+  calendarRange, firstOfMonth, groupByDate, lastOfMonth, monthGrid, monthLabel, monthsBetween, shiftMonth, ym,
 } from './calendar.ts';
 
 test('ym 은 YYYY-MM 을 뽑는다', () => {
@@ -162,4 +162,32 @@ test('오늘 달부터 마지막 일정 달까지', () => {
 
 test('오늘 것은 포함한다', () => {
   assert.deepEqual(calendarRange(['2026-08-13'], '2026-08-13'), { from: '2026-08', to: '2026-08' });
+});
+
+// ---- 달 이동 ----------------------------------------------------------
+
+test('달을 앞뒤로 옮긴다', () => {
+  assert.equal(shiftMonth('2026-08', 1), '2026-09');
+  assert.equal(shiftMonth('2026-08', -1), '2026-07');
+  assert.equal(shiftMonth('2026-08', 0), '2026-08');
+});
+
+test('연 경계를 넘는다', () => {
+  assert.equal(shiftMonth('2026-12', 1), '2027-01');
+  assert.equal(shiftMonth('2026-01', -1), '2025-12');
+});
+
+test('여러 해를 넘어도 맞는다', () => {
+  assert.equal(shiftMonth('2026-08', 12), '2027-08');
+  assert.equal(shiftMonth('2026-08', -12), '2025-08');
+  assert.equal(shiftMonth('2026-08', 30), '2029-02');
+  assert.equal(shiftMonth('2026-08', -30), '2024-02');
+});
+
+test('옮긴 달이 유효한 격자를 만든다', () => {
+  for (let n = -18; n <= 18; n++) {
+    const m = shiftMonth('2026-08', n);
+    assert.match(m, /^\d{4}-(0[1-9]|1[0-2])$/, `${n} → ${m}`);
+    assert.ok(monthGrid(m).length >= 4);
+  }
 });

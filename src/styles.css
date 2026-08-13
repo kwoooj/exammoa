@@ -183,10 +183,9 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 /* ---- 월간 캘린더 ----
    흑백뿐이라 시험일은 채움, 접수 마감은 테두리만으로 구분한다. */
 
-.cal { display: grid; gap: var(--s6); }
+.cal { display: block; }
 
-.cal__month { }
-.cal__title { font-size: 13px; font-weight: 500; color: var(--ink-secondary); margin: 0 0 var(--s2); }
+.cal__title { font-size: 15px; font-weight: 500; color: var(--ink); margin: 0; }
 
 .cal__grid {
   display: grid;
@@ -282,4 +281,122 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 .dday__exam,
 .card__name {
   overflow-wrap: anywhere;
+}
+
+/* ---- 달력 월 이동 ---- */
+
+.cal__nav { display: flex; align-items: center; gap: var(--s2); margin: 0 0 var(--s2); }
+.cal__nav .cal__title { margin: 0; font-size: 15px; color: var(--ink); min-width: 96px; }
+
+.cal__navBtn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cal__todayBtn { margin-left: auto; }
+.cal__none { margin-left: auto; }
+
+/* ---- 가로 타임라인 ----
+   모바일에서 가로 스크롤을 쓰지 않는다. 6개월을 화면 폭에 맞춘다. */
+
+.tl { border: 1px solid var(--line); background: var(--surface); padding: var(--s3); }
+
+.tl__axis,
+.tl__row {
+  display: grid;
+  grid-template-columns: 108px minmax(0, 1fr);
+  gap: var(--s2);
+  align-items: center;
+}
+
+.tl__row { min-height: 38px; border-top: 1px solid var(--line); }
+.tl__axis { padding-bottom: var(--s1); }
+
+.tl__label { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.tl__name { font-size: 13px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tl__agency { font-size: 10px; color: var(--ink-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.tl__track { position: relative; height: 22px; min-width: 0; }
+.tl__track--axis { height: 16px; }
+
+.tl__tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(1px);
+  font-size: 10px;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.tl__gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); }
+.tl__now { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--ink); }
+
+/* 접수 = 속 빈 막대 / 시험 = 채운 막대 / 발표 = 속 빈 점 */
+.tl__bar { position: absolute; top: 50%; height: 9px; transform: translateY(-50%); border-radius: 1px; }
+.tl__bar--reg { border: 1px solid var(--line-strong); background: var(--surface); }
+.tl__bar--exam { background: var(--ink); }
+.tl__bar--result { border: 1px solid var(--line-strong); background: var(--surface); border-radius: 50%; }
+
+.tl__bar--point { width: 9px; border-radius: 50%; margin-left: -4px; }
+.tl__bar--past { opacity: 0.35; }
+/* 응시일을 지정하면 원래 기간 막대는 배경으로 물러난다 */
+.tl__bar--superseded { opacity: 0.25; }
+
+.tl__marker {
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin-left: -4px;
+  background: var(--ink);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.tl__band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 18px;
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  font-size: 10px;
+  color: var(--ink-secondary);
+  padding: 0 var(--s2);
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tl__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s1) var(--s3);
+  margin: var(--s3) 0 0;
+  padding-top: var(--s2);
+  border-top: 1px solid var(--line);
+}
+
+.tl__bar--sample,
+.tl__marker--sample { position: static; transform: none; width: 20px; margin: 0 2px 0 0; }
+.tl__bar--point.tl__bar--sample { width: 9px; }
+.tl__marker--sample { width: 9px; height: 9px; transform: rotate(45deg); }
+.tl__nowKey { font-weight: 700; }
+
+@media (max-width: 640px) {
+  .tl { padding: var(--s2); }
+  .tl__axis,
+  .tl__row { grid-template-columns: 68px minmax(0, 1fr); gap: var(--s1); }
+  .tl__name { font-size: 12px; }
+  .tl__agency { display: none; }
 }

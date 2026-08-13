@@ -8,6 +8,7 @@ import { ExamPicker, MAX_PICK } from './components/ExamPicker.tsx';
 import { PlanCard } from './components/PlanCard.tsx';
 import { DDayList } from './components/DDayList.tsx';
 import { MonthCalendar } from './components/MonthCalendar.tsx';
+import { Timeline } from './components/Timeline.tsx';
 
 type Data = { exams: ExamsFile; groups: GroupsFile; sessions: SessionsFile; meta: MetaFile };
 
@@ -150,6 +151,16 @@ npm run publish:data`}</pre>
 
       <h2>다가오는 일정</h2>
       <DDayList items={items} />
+
+      {plans.length > 0 && (
+        <>
+          <h2>6개월 일정</h2>
+          <p className="small muted" style={{ margin: '0 0 12px' }}>
+            어느 시기에 몰려 있는지 보는 화면이에요. 한 줄이 시행그룹 하나입니다.
+          </p>
+          <Timeline plans={plans} sessions={sessions} groups={groups} nameOf={nameOf} today={now} />
+        </>
+      )}
 
       {items.length > 0 && (
         <>
