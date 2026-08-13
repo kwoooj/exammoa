@@ -75,24 +75,36 @@ export function mergeStale(harvests, prev, { now }) {
   const failedSources = [];
   const notes = [];
 
-  const CONF = { api: 'verified', file: 'verified', crawl: 'parsed', manual: 'manual' };
+  // `Confidence` 정의를 그대로 따른다 — csv 는 "기관이 기계 판독용으로 발행" 이라 verified.
+  // 신선도는 별개 축이고 fetchedAt 이 말한다.
+  const CONF = { api: 'verified', file: 'verified', csv: 'verified', crawl: 'parsed', manual: 'manual' };
 
   for (const h of harvests) {
     if (h.ok) {
       const conf = CONF[h.method] ?? 'parsed';
+      /**
+       * 소스가 자기 관측 시각을 선언할 수 있다.
+       *
+       * 연 1회 갱신되는 CSV 를 오늘 읽었다고 `now` 를 쓰면 화면이 "최종 확인 오늘" 이라고
+       * 거짓말한다. 실패한 소스의 fetchedAt 을 갱신하지 않는 것과 같은 이유다 — 확인한
+       * 시각과 파일을 읽은 시각은 다르다.
+       */
+      const seenAt = h.observedAt ?? now;
       for (const s of h.sessions ?? []) {
         const hash = hashEvents(s.events);
         const before = prevProv[s.id];
         // 내용이 같으면 '처음 관측한 시각' 을 보존한다. 매일 갱신하면 변경 감지가 죽는다.
-        const observedAt = before && before.hash === hash ? before.observedAt : now;
+        const observedAt = before && before.hash === hash ? before.observedAt : seenAt;
         sessions.push({ ...s, src: h.id, conf });
-        provenance[s.id] = { src: h.id, method: h.method, hash, observedAt, fetchedAt: now };
+        provenance[s.id] = { src: h.id, method: h.method, hash, observedAt, fetchedAt: seenAt };
       }
       sources[h.id] = {
         health: 'ok',
         method: h.method,
-        fetchedAt: now,
+        fetchedAt: seenAt,
         sessionCount: (h.sessions ?? []).length,
+        // 소스마다 갱신 주기가 다르다. 화면이 하나의 임계로 재면 연 1회 소스가 상시 경고가 된다.
+        ...(h.staleAfterDays ? { staleAfterDays: h.staleAfterDays } : {}),
       };
       continue;
     }

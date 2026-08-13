@@ -15,9 +15,30 @@ import { classifyResponse, rejectionMessage, sourceHealth } from './lib/qnet.mjs
 import * as historyExam from './sources/history-exam.mjs';
 import * as kbsKorean from './sources/kbs-korean.mjs';
 import { toeic, toeicSpeaking } from './sources/ybm.mjs';
+import * as dataqCsv from './sources/dataq-csv.mjs';
 
 /** 크롤 어댑터 목록. 여기 없는 사이트는 요청되지 않는다. */
 const CRAWL_SOURCES = [historyExam, toeic, toeicSpeaking, kbsKorean];
+
+/**
+ * 파일 소스. 네트워크를 타지 않는다.
+ *
+ * `observedAt` 은 파일의 **데이터 기준일**이다 (파일명의 20260106). 오늘로 쓰면 화면이
+ * "최종 확인 오늘" 이라고 거짓말한다 — 갱신주기가 연간인 파일이다.
+ */
+const FILE_SOURCES = [
+  {
+    src: dataqCsv,
+    path: 'data/dataq-2026.csv',
+    observedAt: '2026-01-06T00:00:00.000Z',
+    /**
+     * 이 소스는 219일 된 것이 정상이다. 기본 임계(3일)로 재면 경고가 영구히 켜진다.
+     * 400일로 잡은 근거: 차기등록예정일이 2027-01-22 이므로 그때까지는 이 파일이 최신이고,
+     * 그 뒤로도 낡아 있으면 **연 1회 수기 갱신을 아무도 하지 않은 것**이다. 그게 잡고 싶은 실패다.
+     */
+    staleAfterDays: 400,
+  },
+];
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36';
 
@@ -639,6 +660,25 @@ async function collect(seed, groupSeed) {
         : `  !! ${src.id} ${h.error}`,
     );
     if (h.rawHtml) crawlRaw[src.id] = h.rawHtml;
+  }
+
+  // ---- 파일 소스 ----
+  // 원본은 이미 저장소에 커밋돼 있으므로 아카이브하지 않는다.
+  for (const { src, path, observedAt, staleAfterDays } of FILE_SOURCES) {
+    const h = await src.collectFile({ path, year: YEAR, observedAt });
+    harvests.push({ ...h, staleAfterDays });
+    const d = h.diagnostics ?? {};
+    console.log(
+      h.ok
+        ? `  ok ${src.id} ${h.sessions.length}회차 · 이벤트 ${h.sessions.reduce((s, x) => s + x.events.length, 0)}개`
+          + `${d.ignored ? ` · 대상 외 ${d.ignored}행 무시` : ''}`
+        : `  !! ${src.id} ${h.error}`,
+    );
+    // 매핑에 없는 시험명은 표기가 바뀐 것이다. 조용히 넘기지 않고 눈에 보이게 찍는다.
+    for (const f of (d.failures ?? []).slice(0, 5)) {
+      console.log(`     · ${f.reason}: ${f.name ?? ''} ${f.label ?? ''} ${f.raw ?? ''}`.trimEnd());
+    }
+    if ((d.failures ?? []).length > 5) console.log(`     · … 외 ${d.failures.length - 5}건`);
   }
 
   const prev = await readPrevious();
