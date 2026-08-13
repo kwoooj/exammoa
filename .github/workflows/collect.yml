@@ -1,0 +1,93 @@
+# 하루 1회 수집 배치. `docs/데이터-수집-활용.md` 가 전제하는 그 배치다.
+#
+# 산출물(`data/published/`)이 git 에 추적되기 때문에 이 워크플로가 성립한다. CI 는 매번
+# 깨끗한 체크아웃에서 돌므로, 저장소에 이전 결과가 없으면 store.mjs 의 stale 폴백이
+# 비교할 대상을 못 찾아 무동작이 된다.
+#
+# ⚠️ schedule 과 workflow_dispatch 는 **기본 브랜치(main)에 있는 파일만** 발동한다.
+#    이 파일이 mvp 에만 있으면 cron 도 수동 실행 버튼도 나타나지 않는다.
+#    아래 DATA_BRANCH 는 체크아웃·푸시 대상이고 발동 조건과는 무관하다.
+
+name: 수집
+
+on:
+  schedule:
+    # 19:10 UTC = 04:10 KST. docs/데이터-수집-활용.md §2 가 잡은 시각이다.
+    # 정시(:00)는 러너 대기열이 길어 10분 밀어 둔다.
+    - cron: '10 19 * * *'
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: '수집 결과를 커밋할 브랜치'
+        default: mvp
+        required: false
+
+permissions:
+  contents: write
+
+# 겹쳐 돌면 같은 파일에 두 번 푸시한다. 앞 실행을 죽이지 않고 기다린다.
+concurrency:
+  group: collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    env:
+      DATA_BRANCH: ${{ inputs.branch || 'mvp' }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.branch || 'mvp' }}
+
+      # 수집 스크립트는 의존성이 없다 (node: 내장 모듈만). npm ci 를 돌리지 않는다.
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+
+      - name: QNET_KEY 확인
+        env:
+          QNET_KEY: ${{ secrets.QNET_KEY }}
+        run: |
+          if [ -z "$QNET_KEY" ]; then
+            echo "::error::QNET_KEY 시크릿이 없다. gh secret set QNET_KEY 로 등록하라."
+            echo "값은 .env 와 같은 **URL 인코딩된 상태**(%3D%3D) 그대로 넣는다."
+            exit 1
+          fi
+
+      # 종료코드 1 은 실패가 아니라 신호다. 산출물은 이미 쓰였고, 무엇을 할지는
+      # 다음 스텝이 meta.json 을 보고 정한다.
+      - name: 수집
+        id: collect
+        continue-on-error: true
+        env:
+          QNET_KEY: ${{ secrets.QNET_KEY }}
+        run: npm run collect
+
+      - name: 판정
+        id: gate
+        run: node scripts/ci-gate.mjs
+
+      - name: 커밋
+        if: steps.gate.outputs.commit == 'true'
+        env:
+          SUBJECT: ${{ steps.gate.outputs.subject }}
+        run: |
+          git config user.name  'exammoa 수집 봇'
+          git config user.email 'action@github.com'
+          git add data/published data/archive
+          if git diff --cached --quiet; then
+            echo '변경 없음 — 커밋하지 않는다.'
+            echo '변경 없음 — 오늘 기관 일정이 그대로다.' >> "$GITHUB_STEP_SUMMARY"
+          else
+            git commit -m "$SUBJECT" -m "하루 1회 수집 배치 (${{ github.workflow }} #${{ github.run_number }})"
+            git push origin "HEAD:$DATA_BRANCH"
+            echo "\`$DATA_BRANCH\` 에 커밋했다: $SUBJECT" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # 산출물을 먼저 남긴 다음에 빨간불을 켠다 — collect.mjs 와 같은 순서다.
+      - name: 실패 알림
+        if: steps.gate.outputs.fail == 'true'
+        run: |
+          echo '::error::수집에 문제가 있다. 위 요약을 확인하라.'
+          exit 1
