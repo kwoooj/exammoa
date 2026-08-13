@@ -9,13 +9,17 @@
 ## 명령
 
 ```bash
-npm run collect        # Q-Net API 수집 → build/*.json  (QNET_KEY 필요)
-npm run publish:data   # build/*.json → public/data/    (화면이 읽는 경로)
+npm run collect        # API·크롤 수집 → data/published/*.json  (QNET_KEY 필요)
+npm run publish:data   # data/published/ → public/data/  (화면이 읽는 경로)
 npm run dev            # predev 가 publish:data 를 먼저 돌린다
+npm test               # node --test. scripts/**/*.test.mjs + src/**/*.test.ts
 npm run typecheck      # 오류 0 을 유지한다
+npm run check          # PR 전 체크 한 방 = test + typecheck + 산출물 점검
 npm run probe          # Q-Net API 진단
 npm run probe:crawl    # 기관 페이지 크롤링 가능성 진단
 ```
+
+수집 산출물은 `data/published/` 다. `build/` 는 진단·스크래치 전용이고 `.gitignore` 대상이다.
 
 `QNET_KEY` 는 `.env` 에 있고 **URL 인코딩된 상태(`%3D%3D`)로 그대로** 넣는다. `URLSearchParams` 로 감싸면 `%` 가 이중 인코딩되어 인증이 깨진다.
 
@@ -39,10 +43,13 @@ npm run probe:crawl    # 기관 페이지 크롤링 가능성 진단
 컴활·워드·OPIc·ITQ 는 확정 회차가 없다. `mode: 'rolling'`, `events: []`, `rollingRule` 로 규칙 카드만 낸다. `status: 'tbd'`(미공고)와 혼동하지 말 것 — 둘 다 `events` 가 비지만 완전히 다른 정보다.
 
 **6. 사람이 고치는 파일과 기계가 쓰는 파일을 섞지 않는다.**
-`data/*.seed.json` · `data/manual-schedules.json` 은 사람. `build/` 는 기계. 수집 결과를 시드에 자동 커밋하면 cron 이 사람의 수정을 덮는다.
+`data/*.seed.json` · `data/manual-schedules.json` 은 사람. `data/published/` · `data/archive/` 는 기계(하루 1회 배치가 커밋한다). 수집 결과를 시드에 자동 커밋하면 cron 이 사람의 수정을 덮는다.
 
 **7. 부분 실패로 전체를 멈추지 않는다.**
 소스 하나가 죽어도 나머지로 빌드가 성공해야 한다 (FR-DAT-06). 산출물을 먼저 쓰고 그다음 종료코드로 알린다. 낡은 데이터를 **낡았다고 밝히면서** 보여주는 것이 사라지는 것보다 낫다 (FR-DAT-07).
+
+**8. 종료코드 1 을 뭉치지 않는다.**
+`collect.mjs` 는 두 가지 다른 이유로 1 을 낸다. **소스 실패**는 직전 값이 `stale` 로 유지되므로 산출물이 유효하다 — 커밋해야 폴백이 저장소에 남는다. **그룹 갈림**은 `groupId` 가 바뀌므로 커밋하면 사용자가 저장한 계획과 공유된 `?p=` 링크가 깨진다 — 커밋하지 않는다. 판정은 `scripts/ci-gate.mjs` 한 곳에만 둔다. 워크플로 YAML 안에서 다시 판정하지 말 것 (테스트할 수 없다).
 
 ---
 
@@ -74,7 +81,9 @@ gh pr create --fill
 groupId 는 시드에 선언하고 동일성은 수집 시점에 검증한다.
 ```
 
-**PR 전 체크**: `npm run typecheck` 오류 0 · `npm run collect` 종료코드 0 · `meta.json` 의 `groupSplitCount` 0.
+**PR 전 체크**: `npm run check` (test + typecheck + `groupSplitCount` 0). `.github/workflows/ci.yml` 이 PR 에서 같은 것을 돌린다.
+
+`npm run collect` 는 CI 에서 돌지 않는다 — 외부 기관 사이트가 죽은 날 코드 리뷰가 막히면 안 된다. 수집 경로를 건드린 PR 은 손으로 한 번 돌려 보고 종료코드를 확인한다.
 
 ---
 
