@@ -12,9 +12,11 @@
 import { readFile } from 'node:fs/promises';
 import { readPrevious, mergeStale, writeAll, archive, PUBLISHED } from './lib/store.mjs';
 import * as historyExam from './sources/history-exam.mjs';
+import * as kbsKorean from './sources/kbs-korean.mjs';
+import { toeic, toeicSpeaking } from './sources/ybm.mjs';
 
 /** 크롤 어댑터 목록. 여기 없는 사이트는 요청되지 않는다. */
-const CRAWL_SOURCES = [historyExam];
+const CRAWL_SOURCES = [historyExam, toeic, toeicSpeaking, kbsKorean];
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36';
 
