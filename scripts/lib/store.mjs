@@ -148,22 +148,47 @@ export async function writeAll({ dir = PUBLISHED, year, sessions, groups, exams,
 }
 
 /**
+ * 해시를 뜨기 전에 지우는 휘발성 조각.
+ *
+ * **저장하는 바이트는 건드리지 않는다.** 아카이브의 존재 이유가 "그날 바이트가 유일한
+ * 단서" 인데 우리가 손댄 바이트를 남기면 `--replay` 가 원본을 재현하지 못한다.
+ * 정규화는 '바뀌었는가' 를 판정할 때만 쓰고, 파일에는 원본을 쓴다.
+ *
+ * @param {string} text
+ * @param {RegExp[]} volatile  각각 전역(g) 플래그를 가정한다
+ */
+export function forHashing(text, volatile = []) {
+  let out = text;
+  for (const re of volatile) out = out.replace(re, '');
+  return out;
+}
+
+/**
  * 원본 스냅샷. **내용 해시가 직전과 같으면 쓰지 않는다.**
  *
  * 하루 1회 × 240KB 를 무조건 커밋하면 1년에 파일 365개가 쌓인다. 일정은 연초에
  * 확정된 뒤 거의 변하지 않으므로 해시로 걸면 연 수십 건이 되고, 남은 파일 목록
  * 자체가 '언제 일정이 바뀌었는가' 의 기록이 된다 (FR-DAT-08).
  *
+ * 그 게이트가 실측에서 한 번 무력화됐다. KBS 페이지는 Nuxt SSR 페이로드에 서버 시각
+ * (`SERVER_NOW`)과 서버가 계산한 카운트다운(`D_DAY`)을 박아 보낸다. 일정 값은 그대로인데
+ * 해시만 매번 달라져 122KB 가 실행마다 쌓였다. 그래서 `volatile` 을 받는다 — 패턴은
+ * 어댑터가 선언한다. 여기가 사이트별 사정을 알면 안 된다.
+ *
+ * @param {{year:number, sourceId:string, body:string|object, volatile?:RegExp[],
+ *          ext?:string, dir?:string, stamp:string}} args
  * @returns {{written:boolean, path:string, hash:string, reason:string}}
  */
-export async function archive({ year, sourceId, body, dir = ARCHIVE, stamp }) {
+export async function archive({ year, sourceId, body, volatile = [], ext = 'json', dir = ARCHIVE, stamp }) {
   const text = typeof body === 'string' ? body : JSON.stringify(body);
-  const hash = sha256(text);
+  const hash = sha256(forHashing(text, volatile));
   const base = `${dir}/${year}`;
   await mkdir(base, { recursive: true });
 
+  // 확장자로 거르지 않는다. 크롤 원본은 .html, API 응답은 .json 이고
+  // 확장자가 바뀌어도 같은 소스의 직전 스냅샷을 찾아야 한다.
   const existing = (await readdir(base).catch(() => []))
-    .filter(f => f.startsWith(`${sourceId}.`) && f.endsWith('.json'))
+    .filter(f => f.startsWith(`${sourceId}.`))
     .sort();
   const last = existing.at(-1);
   if (last) {
@@ -174,7 +199,8 @@ export async function archive({ year, sourceId, body, dir = ARCHIVE, stamp }) {
     }
   }
 
-  const path = `${base}/${sourceId}.${stamp}.${hash.slice(0, 12)}.json`;
+  const path = `${base}/${sourceId}.${stamp}.${hash.slice(0, 12)}.${ext}`;
+  // 원본 그대로. forHashing 의 결과를 쓰지 않는다.
   await writeFile(path, text, 'utf8');
   return {
     written: true,
