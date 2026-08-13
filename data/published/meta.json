@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-13T07:12:52.130Z",
+  "fetchedAt": "2026-08-13T08:02:37.132Z",
   "year": 2026,
   "examCount": 51,
   "qnetExamCount": 47,
@@ -16,31 +16,31 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-13T07:12:52.130Z",
+      "fetchedAt": "2026-08-13T08:02:37.132Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-13T07:12:52.130Z",
+      "fetchedAt": "2026-08-13T08:02:37.132Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-13T07:12:52.130Z",
+      "fetchedAt": "2026-08-13T08:02:37.132Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-13T07:12:52.130Z",
+      "fetchedAt": "2026-08-13T08:02:37.132Z",
       "sessionCount": 45
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-13T07:12:52.130Z",
+      "fetchedAt": "2026-08-13T08:02:37.132Z",
       "sessionCount": 6
     }
   },
