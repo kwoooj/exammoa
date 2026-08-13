@@ -1,0 +1,172 @@
+{
+  "$comment": "Q-Net API 밖의 대표 시험 일정. 손으로 채운다. 각 항목의 sourceUrl 에서 2026년 일정을 확인해 sessions 를 채울 것.",
+  "version": "0.1.0",
+  "year": 2026,
+
+  "howToFill": {
+    "1": "sourceUrl 을 열어 2026년 일정표를 본다",
+    "2": "회차마다 sessions 에 항목 하나를 추가한다",
+    "3": "날짜는 'YYYY-MM-DD'. 하루짜리는 start 와 end 를 같게 쓴다",
+    "4": "접수가 정기+추가 2세트면 events 에 kind:'reg' 를 두 개 넣고 seq 를 1·2로 준다",
+    "5": "모르는 날짜는 항목을 아예 넣지 않는다. 빈 문자열이나 '미정' 을 넣지 말 것",
+    "6": "cadence 가 'rolling' 인 종목은 sessions 를 비워두고 rollingRule 만 쓴다",
+    "eventKinds": "reg 원서접수 · exam 시험 · result 합격발표",
+    "eventPhases": "written 필기 · practical 실기 · single 구분 없음",
+    "example": {
+      "seq": 1,
+      "label": "제79회",
+      "events": [
+        { "kind": "reg", "phase": "single", "start": "2026-06-15", "end": "2026-06-22", "seq": 1, "label": "원서접수" },
+        { "kind": "exam", "phase": "single", "start": "2026-08-09", "end": "2026-08-09", "seq": 1, "label": "시험" },
+        { "kind": "result", "phase": "single", "start": "2026-08-28", "end": "2026-08-28", "seq": 1, "label": "합격발표" }
+      ]
+    }
+  },
+
+  "groups": [
+    {
+      "id": "history-exam",
+      "name": "한국사능력검정시험",
+      "agency": "국사편찬위원회",
+      "cadence": "periodic",
+      "examSlugs": ["한국사능력검정시험"],
+      "sourceUrl": "https://www.historyexam.go.kr/pageLink.do?link=examSchedule",
+      "note": "연 6회. 심화(1~3급)와 기본(4~6급)이 같은 날 시행되므로 하나의 그룹으로 둔다",
+      "sessions": []
+    },
+    {
+      "id": "toeic",
+      "name": "TOEIC",
+      "agency": "YBM",
+      "cadence": "frequent",
+      "examSlugs": ["토익"],
+      "sourceUrl": "https://exam.toeic.co.kr/receipt/examSchList.php",
+      "note": "월 2회 내외. 정기접수 + 추가접수 2세트가 있으므로 reg 를 seq 1·2로 나눠 넣을 것",
+      "sessions": []
+    },
+    {
+      "id": "toeic-speaking",
+      "name": "TOEIC Speaking",
+      "agency": "YBM",
+      "cadence": "frequent",
+      "examSlugs": ["토익스피킹"],
+      "sourceUrl": "https://www.toeicswt.co.kr/receipt/examSchList.php",
+      "sessions": []
+    },
+    {
+      "id": "kbs-korean",
+      "name": "KBS한국어능력시험",
+      "agency": "KBS",
+      "cadence": "periodic",
+      "examSlugs": ["KBS한국어능력시험"],
+      "sourceUrl": "https://www.kbskorean.org/klt/exam-apply/list",
+      "note": "연 4~6회. 접수·추가접수·시험·발표가 표에 개별 컬럼으로 있어 그대로 옮기면 됨",
+      "sessions": []
+    },
+    {
+      "id": "kdata-bigdata",
+      "name": "빅데이터분석기사",
+      "agency": "한국데이터산업진흥원",
+      "cadence": "periodic",
+      "examSlugs": ["빅데이터분석기사"],
+      "sourceUrl": "https://www.dataq.or.kr/www/accept/schedule.do",
+      "note": "⚠ 이름에 '기사'가 붙지만 한국산업인력공단 정기 일정과 무관하다. 화면에 시행기관을 반드시 함께 표기할 것",
+      "sessions": []
+    },
+    {
+      "id": "kdata-sqld",
+      "name": "SQL 개발자(SQLD)",
+      "agency": "한국데이터산업진흥원",
+      "cadence": "periodic",
+      "examSlugs": ["SQLD"],
+      "sourceUrl": "https://www.dataq.or.kr/www/accept/schedule.do",
+      "note": "연 4회 내외",
+      "sessions": []
+    },
+    {
+      "id": "kdata-adsp",
+      "name": "데이터분석 준전문가(ADsP)",
+      "agency": "한국데이터산업진흥원",
+      "cadence": "periodic",
+      "examSlugs": ["ADsP"],
+      "sourceUrl": "https://www.dataq.or.kr/www/accept/schedule.do",
+      "sessions": []
+    },
+    {
+      "id": "kca-security",
+      "name": "정보보안기사",
+      "agency": "한국방송통신전파진흥원",
+      "cadence": "periodic",
+      "examSlugs": ["정보보안기사"],
+      "sourceUrl": "https://www.cq.or.kr/qh_quagm03_001.do",
+      "note": "⚠ 이름에 '기사'가 붙지만 한국산업인력공단 정기 일정과 무관하다. 도메인이 kca.kr 이 아니라 cq.or.kr",
+      "sessions": []
+    },
+    {
+      "id": "korcham-rolling",
+      "name": "컴퓨터활용능력 · 워드프로세서",
+      "agency": "대한상공회의소",
+      "cadence": "rolling",
+      "rollingRule": "상시시험. 접수는 시험일 4일 전까지",
+      "examSlugs": ["컴퓨터활용능력1급", "컴퓨터활용능력2급", "워드프로세서"],
+      "sourceUrl": "https://license.korcham.net/co/examschedule.do",
+      "applyUrl": "https://license.korcham.net/ex/dailyExam_join.do",
+      "note": "확정 일정이 없다. 사용자가 목표 시기를 지정하는 방식으로만 타임라인에 올린다",
+      "sessions": []
+    },
+    {
+      "id": "opic",
+      "name": "OPIc",
+      "agency": "크레듀",
+      "cadence": "rolling",
+      "rollingRule": "상시 시행. 센터별 좌석 예약제",
+      "examSlugs": ["오픽"],
+      "sourceUrl": "https://www.opic.or.kr/opics/servlet/controller.opic.site.receipt.AnnualScheduleServlet?p_process=select-new-list",
+      "sessions": []
+    },
+    {
+      "id": "kait-linux",
+      "name": "리눅스마스터 2급",
+      "agency": "한국정보통신진흥협회",
+      "cadence": "periodic",
+      "examSlugs": ["리눅스마스터2급"],
+      "sourceUrl": "https://www.ihd.or.kr",
+      "note": "연 4회 내외. 1차 필기 + 2차 실기 구조",
+      "sessions": []
+    },
+    {
+      "id": "kacpta-tax",
+      "name": "전산세무회계",
+      "agency": "한국세무사회",
+      "cadence": "periodic",
+      "examSlugs": ["전산회계1급", "전산세무2급"],
+      "sourceUrl": "https://license.kacpta.or.kr",
+      "note": "연 6회. 전산회계·전산세무 각 급수가 같은 날 시행",
+      "sessions": []
+    },
+    {
+      "id": "kpc-itq",
+      "name": "ITQ",
+      "agency": "한국생산성본부",
+      "cadence": "rolling",
+      "rollingRule": "매월 시행. 접수는 시험일 약 3주 전까지",
+      "examSlugs": ["ITQ"],
+      "sourceUrl": "https://license.kpc.or.kr",
+      "sessions": []
+    }
+  ],
+
+  "newExams": [
+    { "slug": "한국사능력검정시험", "name": "한국사능력검정시험", "short": "한능검", "category": "lang", "priority": 1 },
+    { "slug": "토익", "name": "TOEIC", "short": "토익", "category": "lang", "priority": 1 },
+    { "slug": "토익스피킹", "name": "TOEIC Speaking", "short": "토스", "category": "lang", "priority": 2 },
+    { "slug": "KBS한국어능력시험", "name": "KBS한국어능력시험", "short": "KBS한국어", "category": "lang", "priority": 2 },
+    { "slug": "오픽", "name": "OPIc", "short": null, "category": "lang", "priority": 2 },
+    { "slug": "SQLD", "name": "SQL 개발자(SQLD)", "short": "SQLD", "category": "it", "priority": 1 },
+    { "slug": "ADsP", "name": "데이터분석 준전문가(ADsP)", "short": "ADsP", "category": "it", "priority": 2 },
+    { "slug": "리눅스마스터2급", "name": "리눅스마스터 2급", "short": null, "category": "it", "priority": 3 },
+    { "slug": "전산회계1급", "name": "전산회계 1급", "short": null, "category": "office", "priority": 2 },
+    { "slug": "전산세무2급", "name": "전산세무 2급", "short": null, "category": "office", "priority": 3 },
+    { "slug": "ITQ", "name": "ITQ", "short": null, "category": "office", "priority": 3 }
+  ]
+}
