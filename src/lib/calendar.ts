@@ -100,3 +100,13 @@ export function calendarRange(dates: string[], from: string): { from: YearMonth;
   return { from: ym(from), to: ym(future.at(-1)!) };
 }
 
+
+/** 달을 n 만큼 옮긴다. 연 경계를 넘어간다. */
+export function shiftMonth(m: YearMonth, n: number): YearMonth {
+  const [y, mm] = m.split('-').map(Number);
+  // 0-based 로 바꿔 계산하면 연 넘김을 나눗셈으로 처리할 수 있다
+  const total = y! * 12 + (mm! - 1) + n;
+  const year = Math.floor(total / 12);
+  const month = total % 12 + 1;
+  return `${year}-${String(month).padStart(2, '0')}`;
+}
