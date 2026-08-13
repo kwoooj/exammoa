@@ -1,0 +1,23 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+
+# 비밀값. QNET_KEY 가 들어있다. 절대 커밋하지 않는다.
+.env
+.env.local
+
+# 빌드 산출물. cron 이 매일 재생성한다.
+# ⚠ Step 2 에서 data/published/ 와 data/archive/ 를 git 추적으로 옮긴다.
+#   CI 는 매번 깨끗한 체크아웃에서 도므로, 산출물이 저장소에 없으면
+#   '실패한 소스는 이전 결과 유지'(FR-DAT-07)가 구조적으로 불가능하다.
+#   자세한 근거는 docs/데이터-수집-활용.md §2.
+build/
+public/data/
+
+# IDE. .iml 파일명에 폴더명이 박혀 사람마다 달라진다.
+.idea/
+.vscode/
+
+# Claude Code — 공유 설정은 커밋하고 개인 설정만 제외한다
+.claude/settings.local.json

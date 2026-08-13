@@ -1,0 +1,29 @@
+{
+  "name": "exam-timeline",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "predev": "node scripts/publish.mjs",
+    "dev": "vite",
+    "prebuild": "node scripts/publish.mjs",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "probe": "node scripts/collect.mjs --probe",
+    "probe:crawl": "node scripts/probe-crawl.mjs",
+    "collect": "node scripts/collect.mjs",
+    "publish:data": "node scripts/publish.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7"
+  }
+}
