@@ -1,10 +1,11 @@
 {
-  "fetchedAt": "2026-08-13T05:40:11.540Z",
+  "fetchedAt": "2026-08-13T07:06:42.237Z",
   "year": 2026,
-  "examCount": 47,
-  "groupCount": 7,
-  "sessionCount": 102,
-  "eventCount": 521,
+  "examCount": 48,
+  "qnetExamCount": 47,
+  "groupCount": 8,
+  "sessionCount": 107,
+  "eventCount": 541,
   "tbdCount": 0,
   "staleCount": 0,
   "contradictionCount": 0,
@@ -15,8 +16,14 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-13T05:40:11.540Z",
+      "fetchedAt": "2026-08-13T07:06:42.237Z",
       "sessionCount": 102
+    },
+    "history-exam": {
+      "health": "ok",
+      "method": "crawl",
+      "fetchedAt": "2026-08-13T07:06:42.237Z",
+      "sessionCount": 5
     }
   },
   "archive": null,
