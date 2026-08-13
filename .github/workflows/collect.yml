@@ -35,12 +35,12 @@ jobs:
     env:
       DATA_BRANCH: ${{ inputs.branch || 'mvp' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ inputs.branch || 'mvp' }}
 
       # 수집 스크립트는 의존성이 없다 (node: 내장 모듈만). npm ci 를 돌리지 않는다.
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '24'
 

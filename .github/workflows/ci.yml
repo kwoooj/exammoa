@@ -24,10 +24,10 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # node --test 가 .ts 를 타입 스트리핑으로 직접 읽는다. 24 미만이면 src 테스트가 안 돈다.
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '24'
           cache: npm
