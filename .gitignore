@@ -7,13 +7,17 @@ dist/
 .env
 .env.local
 
-# 빌드 산출물. cron 이 매일 재생성한다.
-# ⚠ Step 2 에서 data/published/ 와 data/archive/ 를 git 추적으로 옮긴다.
-#   CI 는 매번 깨끗한 체크아웃에서 도므로, 산출물이 저장소에 없으면
-#   '실패한 소스는 이전 결과 유지'(FR-DAT-07)가 구조적으로 불가능하다.
-#   자세한 근거는 docs/데이터-수집-활용.md §2.
+# 진단·스크래치 전용. 여기 있는 것은 잃어도 재생성된다.
+#   probe-crawl.mjs → build/crawl-report.json, build/crawl/*.html
 build/
+
+# vite 가 서빙하는 사본. data/published/ 에서 복사되므로 원본이 아니다.
 public/data/
+
+# ⚠ data/published/ 와 data/archive/ 는 의도적으로 git 에 추적한다. ignore 하지 말 것.
+#   CI 는 매번 깨끗한 체크아웃에서 돌기 때문에, 산출물이 저장소에 없으면
+#   readPrevious() 가 항상 null 이고 '실패한 소스는 이전 결과 유지'(FR-DAT-07)가
+#   코드와 무관하게 무동작이 된다. 근거는 docs/데이터-수집-활용.md §2.
 
 # IDE. .iml 파일명에 폴더명이 박혀 사람마다 달라진다.
 .idea/
