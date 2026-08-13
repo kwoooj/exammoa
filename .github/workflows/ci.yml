@@ -1,0 +1,49 @@
+# PR 검사. CLAUDE.md 의 "PR 전 체크" 를 사람 손에서 떼어낸다.
+#
+# 네트워크와 비밀값을 쓰지 않는다. 수집(`npm run collect`)은 여기서 돌리지 않는다 —
+# 외부 사이트 상태에 따라 빨간불이 켜지면 코드 리뷰가 막힌다. 대신 저장소에 들어와
+# 있는 산출물이 온전한지만 `ci-gate --pr` 로 본다.
+
+name: 검사
+
+on:
+  pull_request:
+    branches: [main, mvp]
+  push:
+    branches: [main, mvp]
+
+permissions:
+  contents: read
+
+# 같은 브랜치에 연달아 밀면 앞의 실행은 버린다
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # node --test 가 .ts 를 타입 스트리핑으로 직접 읽는다. 24 미만이면 src 테스트가 안 돈다.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci
+
+      # 테스트를 먼저 돌린다 — 가장 빠르고 가장 많이 잡는다
+      - name: 테스트
+        run: npm test
+
+      - name: 타입 검사
+        run: npm run typecheck
+
+      # 저장소에 커밋된 산출물의 무결성. stale 은 정상, 그룹 갈림은 머지 차단.
+      - name: 산출물 점검
+        run: node scripts/ci-gate.mjs --pr
+
+      - name: 빌드
+        run: npm run build
