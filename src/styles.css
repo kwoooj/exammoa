@@ -400,3 +400,15 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
   .tl__name { font-size: 12px; }
   .tl__agency { display: none; }
 }
+
+/* 고른 회차만 그리므로, 창 안의 다른 회차가 있다는 것만 조용히 알린다 */
+.tl__other {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 9px;
+  color: var(--ink-muted);
+  background: var(--surface);
+  padding: 0 2px;
+}

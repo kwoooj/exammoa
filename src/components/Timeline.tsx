@@ -57,9 +57,7 @@ export function Timeline({ plans, sessions, groups, nameOf, today }: Props) {
             <span className="tl__now" style={{ left: pct(nowLeft) }} />
 
             {row.dense ? (
-              <span className="tl__band">
-                6개월 중 {row.sessionCount}회 시행 · 회차를 골라 응시일을 정하세요
-              </span>
+              <span className="tl__band">6개월 중 {row.sessionCount}회 시행 · 회차를 골라주세요</span>
             ) : (
               row.bars.map(b => (
                 <span
@@ -75,6 +73,10 @@ export function Timeline({ plans, sessions, groups, nameOf, today }: Props) {
                   title={b.label}
                 />
               ))
+            )}
+
+            {row.otherCount > 0 && !row.dense && (
+              <span className="tl__other">다른 회차 {row.otherCount}개</span>
             )}
 
             {row.markers.map(m => (

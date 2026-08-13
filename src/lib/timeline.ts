@@ -85,6 +85,8 @@ export interface Row {
   dense: boolean;
   eventCount: number;
   sessionCount: number;
+  /** 창 안에 있지만 그리지 않은 다른 회차 수 */
+  otherCount: number;
   bars: Bar[];
   markers: Marker[];
 }
@@ -122,7 +124,18 @@ export function buildRows(
         && s.events.some(e => e.end >= w.from && e.start <= w.to),
     );
 
-    const events = inWindow.flatMap(s => s.events.map(e => ({ session: s, e })));
+    /**
+     * 사용자가 고른 회차만 그린다.
+     *
+     * 그룹의 회차를 전부 그리면 토익(11회차·44이벤트)이나 상시 기능사(41회차)가 밴드로
+     * 뭉개지면서 정작 사용자가 고른 회차가 사라진다. 이 행이 존재하는 이유는 사용자가
+     * 그 종목을 담았기 때문이고, 보고 싶은 것은 '내가 정한 일정' 이다.
+     */
+    const plannedIds = new Set(plans.filter(p => p.groupId === groupId).map(p => p.sessionId));
+    const drawn = inWindow.filter(s => plannedIds.has(s.id));
+    const otherCount = inWindow.length - drawn.length;
+
+    const events = (drawn.length ? drawn : inWindow).flatMap(s => s.events.map(e => ({ session: s, e })));
     const visible = events.filter(({ e }) => e.end >= w.from && e.start <= w.to);
 
     // 이 그룹에서 사용자가 지정한 응시일
@@ -161,6 +174,8 @@ export function buildRows(
       dense,
       eventCount: visible.length,
       sessionCount: inWindow.length,
+      /** 창 안에 있지만 안 그린 다른 회차 수. 회차를 바꿀 수 있다는 힌트로 쓴다 */
+      otherCount,
       bars,
       markers,
     });
