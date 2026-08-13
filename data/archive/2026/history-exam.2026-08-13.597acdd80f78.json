@@ -1,0 +1,865 @@
+
+
+
+<!DOCTYPE html>
+<html lang=ko>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>한국사능력검정시험</title>
+<link rel="stylesheet" href="/css/common.css" />
+<style type="text/css">
+.tab_main{min-width:320px;max-width:100%;border-radius:7px;background:#ffffff;font-size:1.4em;font-weight:700;letter-spacing:-1px;word-spacing:-1px;}
+.tab_main input{display:none;}
+.tab_main label{display:inline-block;vertical-align:bottom;padding:11px 23px;color:#747474;border:thin solid #C2C2C2;border-left:hidden;border-bottom:1px solid #406B98;background:#FAFAFA;text-align:center;}
+.tab_main label:hover{color:#406B98;cursor:pointer;}
+.tab_main .checked + label{letter-spacing:-1px;word-spacing:-1px;padding:12px 23px;font-size:1.1em;color:#407DBB;background:#FFF;border:1px solid #406B98;border-top:2px solid #406B98;border-bottom:hidden;text-align:center;}
+</style>
+<script type="text/javascript" src="/js/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery-ui-1.10.4.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.ui.datepicker-ko.js"></script>
+<script type="text/javascript" src="/js/jQuery.slide_v2.js"></script>
+<script type="text/javascript" src="/js/slider.script.js"></script>
+<script type="text/javascript" src="/js/flexslider.js"></script>
+<script type="text/javascript" src="/js/menu.js"></script>
+<script type="text/javascript">
+//새로고침(F5) 방지
+const status1="새로고침을 할 수 없습니다.";
+function noEvent(){
+	if ( event.keyCode == 116 ){
+		event.keyCode = 2;
+		//alert(status1);
+		return false;
+	}
+	else if ( event.ctrlKey && (event.keyCode == 78 || event.keyCode == 82) ){
+		//alert(status1);
+		return false;
+	}
+}
+document.onkeydown = noEvent;
+//우측 클릭 방지
+//const status2="Right click is not available.";
+const status2="오른쪽버튼을 이용할 수 없습니다.";
+function disableclick(event){
+	if ( event.button == 2 ){
+		//alert(status2);
+		return false;
+	}
+}
+//document.onmousedown = disableclick;
+//우클릭 방지
+document.oncontextmenu = function(e){
+//	alert("오른쪽버튼을 이용할 수 없습니다...");
+	return false;
+}
+//드래그 방지
+document.ondragstart = new Function('return false');
+//선택 방지
+document.onselectstart = new Function('return false');
+</script>
+</head>
+
+<body>
+<div class="skipNav">
+	<a href="#header_btn" id="header_btn">상단메뉴 바로가기 </a>
+	<a href="#container_btn" id="container_btn">본문 내용 바로가기 </a>
+	<a href="#footer_btn" id="footer_btn">하단 주소 바로가기 </a>
+</div>
+<div id="header">
+
+
+<script type="text/javascript">
+var mobileKeyWords = new Array('iPhone', 'iPod', 'BlackBerry', 'Android', 'Windows CE', 'LG', 'MOT', 'SAMSUNG', 'SonyEricsson');
+for (var word in mobileKeyWords){
+	if ( navigator.userAgent.match(mobileKeyWords[word]) != null ){
+		
+		location.href = "http://m.historyexam.go.kr";
+		break;
+	}
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#searchKeyword2').focus();
+	$('#searchKeyword2').bind('keydown', function(e){
+		if ( e.keyCode == 13 ){// enter key
+			fn_goSearch2();
+			return false;
+		}
+	});
+});
+function fn_goSearch2(){
+	if ( $('#searchKeyword2').val() === "" ){
+		alert("검색어를 입력하세요.");
+		$('#searchKeyword2').focus();
+		return;
+	}
+	//NetFunnel Action
+	NetFunnel_Action({action_id:'etcService'}, function(ev,ret){
+		$('#searchFrm').attr('action', '/pst/searchList.do?netfunnel_key=' + ret.data.key);// 암호화된 넷퍼넬 키
+		$('#searchFrm').submit();
+	});
+}
+
+function gnbShow(){
+	$('#gnb .close').show();
+	$('.depth02').slideDown();	
+}
+function gnbClose(){
+	$('.depth02').stop().slideUp();
+	$('#gnb .close').hide();
+};
+
+</script>
+<div id="wrapper">
+	<div class="wrap">
+		<div class="top_menu">
+			
+			
+			<a href="/user/userLgin.do">로그인</a>
+			<a href="javascript:void(0);" onclick="fnNetFunnelAction('/user/userEntAgreeBefore.do', 'mbrService')">회원가입</a>
+			
+			
+			<a href="javascript:void(0);" onclick="fnNetFunnelAction('/etcPageLink.do?link=siteMap', 'etcService')">사이트맵</a>
+			<div>
+				<form id="searchFrm" name="searchFrm" method="post" action="/pst/searchList.do">
+					<input type="hidden" name="searchCondition" value="titleCntn" />
+					<div class="se_left">
+						<label class="blind" for="searchKeyword2">검색 입력창</label>
+						<input type="text" name="searchKeyword2" id="searchKeyword2" />
+					</div>
+					<div class="se_right"><a href="javascript:void(0)" onclick="fn_goSearch2();"><img src="/images/common/main_14.jpg" alt="검색" /></a></div>
+				</form>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="logo"><a href="/"><img src="/images/common/main_17.jpg" alt='국사편찬위원회 한국사능력검정시험' /></a></div>
+		<div id="gnb">
+			<ul class="list">
+				<li>
+					<a href="javascript:void(0);" onfocus="gnbShow()">시험 안내</a>
+					<div class="depth02">
+						<div class="depth02_bottom">
+							<ul>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pageLink.do?link=examInfo', 'examInfo')">시험 소개</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pageLink.do?link=apyexmInfo', 'examInfo')">응시 안내</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pageLink.do?link=sclpstRegltn', 'examInfo')">응시 규정</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pageLink.do?link=examArea', 'examInfo')">시험장 현황</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="li_left">
+					<a href="javascript:void(0);" onfocus="gnbShow()">원서 접수</a>
+					<div class="depth02">
+						<div class="depth02_bottom">
+							<ul>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/mypage/exam/apply.do', 'step01')">원서 접수 신청</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/mypage/exam/confirm.do', 'confirm')">원서 접수 확인</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/mypage/exam/print.do', 'print')">수험표 출력</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="li_left">
+					<a href="javascript:void(0);" onfocus="gnbShow()">문제 관리</a>
+					<div class="depth02">
+						<div class="depth02_bottom">
+							<ul>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pst/list.do?bbs=dat', 'bbsDat')">시험 자료실</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/req/pst/list.do', 'reqPst')">문항 이의 신청</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/answer/list.do', 'answer')">정답 보기</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="li_left">
+					<a href="javascript:void(0);" onfocus="gnbShow()">알림마당</a>
+					<div class="depth02">
+						<div class="depth02_bottom">
+							<ul>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pst/list.do?bbs=noti', 'bbsNoti')">공지사항</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pst/list.do?bbs=faq', 'bbsFaq')">자주하는 질문</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pst/list.do?bbs=pat', 'bbsPat')">각종 서식</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="li_left" id="li_long">
+					<a href="javascript:void(0);" onfocus="gnbShow()">나의 시험 정보</a>
+					<div class="depth02">
+						<div class="depth02_bottom">
+							<ul>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/mypage/info/examlist.do', 'examList')">나의 접수 정보</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/mypage/info/examresult.do', 'examResult')">나의 응시 결과</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/mypage/info/issuelist.do', 'issueList')">발급 내역 조회</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/mypage/userModify.do', 'userModify')">회원 정보 수정</a></li>
+								<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/mypage/info/renameReq.do', 'renameReq')" onblur="gnbClose()">개명신청 및 내역</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<a href="javascript:;" class="close"><img src="/images/common/closed.png" alt="메뉴닫기" /></a>
+		</div>
+	</div>
+</div></div>
+<!-- 컨텐츠 메인 -->
+<div id="sub_content">
+	
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<div class="left_sider">
+	<div class="left_gnb">
+		<div class="left_tit">시험 안내</div>
+		<ul>
+			<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pageLink.do?link=examInfo', 'examInfo')" class="mouse_on">시험 소개</a></li>
+			<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pageLink.do?link=apyexmInfo', 'examInfo')">응시 안내</a></li>
+			<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pageLink.do?link=sclpstRegltn', 'examInfo')">응시 규정</a></li>
+			<li><a href="javascript:void(0);" onclick="fnNetFunnelAction('/pageLink.do?link=examArea', 'examInfo')">시험장 현황</a></li>
+		</ul>
+	</div>
+</div>
+	
+
+
+
+
+
+
+
+<div class="right_sider">
+	<div class="sub_location">
+		<div>HOME &gt; 시험 안내 &gt; 시험 소개 &gt; <strong>시험 일정</strong></div>
+		<p class="clear"></p>
+		<h1>시험 일정</h1>
+	</div>
+	<div class="clear"></div>
+	<div class="right_contents">
+		<div class="tab_main">
+			<input id="tab1" type="radio" name="tabs" /><label for="tab1" style="width:76px;border-left:thin solid #C2C2C2;" onclick="fnNetFunnelAction('/pageLink.do?link=examInfo', 'examInfo')"><a href="javascript:fnNetFunnelAction('/pageLink.do?link=examInfo', 'examInfo')">시험 개요</a></label
+			><input id="tab2" type="radio" name="tabs" /><label for="tab2" style="width:76px" onclick="fnNetFunnelAction('/pageLink.do?link=examGuideline', 'examInfo')"><a href="javascript:fnNetFunnelAction('/pageLink.do?link=examGuideline', 'examInfo')">시험 요강</a></label
+			><input id="tab3" type="radio" name="tabs" class="checked" /><label for="tab3" style="width:76px;cursor:default">시험 일정</label
+			><input id="tab4" type="radio" name="tabs" /><label for="tab4" style="width:97px;padding:11px 18px;" onclick="fnNetFunnelAction('/pageLink.do?link=useBenefit', 'examInfo')"><a href="javascript:fnNetFunnelAction('/pageLink.do?link=useBenefit', 'examInfo')">활용 &nbsp;및&nbsp; 특전</a></label
+			><input id="tabE" name="tabs" /><label for="tabE" style="background:#fff;width:193px;cursor:default;border-top:hidden;border-right:hidden">&nbsp;</label>
+		</div>
+		
+<!-- 취소좌석 접수여부 -->
+<!-- 부분환불여부 -->
+
+	
+		
+	
+	
+		
+	
+
+	
+		
+	
+	
+		
+	
+
+	
+		
+	
+	
+		
+	
+
+	
+		
+	
+	
+		
+	
+
+	
+		
+	
+	
+		
+	
+
+		<div class="r_stit_doub"><h4>시험일정</h4></div>
+
+
+		<table cellspacing="0" cellpadding="0" width="100%" summary="6개등급(1급~6급)" class="tabtop">
+			<caption>평가등급</caption>
+			<colgroup>
+				<col width="8%" />
+				<col width="27%" />
+				<col width="27%" />
+				<col width="19%" />
+				<col width="19%" />
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="col">구분</th>
+					<th scope="col">원서접수</th>
+					<th scope="col">취소좌석 접수</th>
+					<th scope="col">시험일시</th>
+					<th scope="col" class="no_b_right">합격자발표</th>
+				</tr>
+	
+		
+		
+		
+		
+		
+		
+				<tr>
+					<td>제77회</td>
+					<td style="line-height:22px;">
+						2026년 1월 6일(화) 10:00 ~
+						<br/>
+						2026년 1월 13일(화) 17:00
+					</td>
+					<td style="line-height:22px;">
+		
+		
+						2026년 1월 20일(화) 10:00 ~
+						<br/>
+						2026년 1월 23일(금) 17:00
+		
+					</td>
+					<td style="font-size:0.9em">2026년 2월 7일(토)</td>
+					<td style="font-size:0.9em" class="no_b_right">2026년 2월 20일(금)</td>
+				</tr>
+	
+		
+		
+		
+		
+		
+		
+				<tr>
+					<td>제78회</td>
+					<td style="line-height:22px;">
+						2026년 4월 21일(화) 10:00 ~
+						<br/>
+						2026년 4월 28일(화) 17:00
+					</td>
+					<td style="line-height:22px;">
+		
+		
+						2026년 5월 5일(화) 10:00 ~
+						<br/>
+						2026년 5월 8일(금) 17:00
+		
+					</td>
+					<td style="font-size:0.9em">2026년 5월 23일(토)</td>
+					<td style="font-size:0.9em" class="no_b_right">2026년 6월 5일(금)</td>
+				</tr>
+	
+		
+		
+		
+		
+		
+		
+				<tr>
+					<td>제79회</td>
+					<td style="line-height:22px;">
+						2026년 7월 7일(화) 10:00 ~
+						<br/>
+						2026년 7월 14일(화) 17:00
+					</td>
+					<td style="line-height:22px;">
+		
+		
+						2026년 7월 21일(화) 10:00 ~
+						<br/>
+						2026년 7월 24일(금) 17:00
+		
+					</td>
+					<td style="font-size:0.9em">2026년 8월 9일(일)</td>
+					<td style="font-size:0.9em" class="no_b_right">2026년 8월 21일(금)</td>
+				</tr>
+	
+		
+		
+		
+		
+		
+		
+				<tr>
+					<td>제80회</td>
+					<td style="line-height:22px;">
+						2026년 9월 15일(화) 10:00 ~
+						<br/>
+						2026년 9월 22일(화) 17:00
+					</td>
+					<td style="line-height:22px;">
+		
+		
+						2026년 9월 29일(화) 10:00 ~
+						<br/>
+						2026년 10월 2일(금) 17:00
+		
+					</td>
+					<td style="font-size:0.9em">2026년 10월 17일(토)</td>
+					<td style="font-size:0.9em" class="no_b_right">2026년 10월 30일(금)</td>
+				</tr>
+	
+		
+		
+		
+		
+		
+		
+				<tr>
+					<td>제81회</td>
+					<td style="line-height:22px;">
+						2026년 11월 3일(화) 10:00 ~
+						<br/>
+						2026년 11월 10일(화) 17:00
+					</td>
+					<td style="line-height:22px;">
+		
+		
+						2026년 11월 11일(수) 13:00 ~
+						<br/>
+						2026년 11월 13일(금) 17:00
+		
+					</td>
+					<td style="font-size:0.9em">2026년 11월 28일(토)</td>
+					<td style="font-size:0.9em" class="no_b_right">2026년 12월 11일(금)</td>
+				</tr>
+	
+			</tbody>
+		</table>
+		<p class="mt_5">
+			<span style="color:red;font-weight: 700;font-size:1.2em">※ 제79회 시험은 토요근무자 등의 편의를 위해 일요일에 실시</span>
+		</p>
+		<p class="mt_5">
+			<span style="color:red;font-weight: 700;font-size:1.2em">※ '27년 9급 공무원 공채 시험 한국사 과목의 한국사능력검정시험 대체 예정에 따른 응시자 수 증가<br>&nbsp;&nbsp;&nbsp;&nbsp; 대응을 위해, '26년에 한하여 1회 증회 편성/운영</span>
+		</p>
+		<p class="mt_5">
+			<span style="color:red;font-weight: 700;font-size:1.2em">※ 2026년 제78회(5.23 토), 제80회(10.17 토), 제81회(11.28 토) 시험은 심화만 시행</span>
+		</p>
+		<p class="mt_5"><span style="font-size:10px">▶</span> 취소좌석 접수는 접수 잔여석에 한함</p>
+	
+		<p class="mt_5"><span style="font-size:10px">▶</span> 합격자발표 방법 : 응시자가 홈페이지에 직접 접속하여 성적 조회 및 인증서 출력(정부24 가능)</p>
+		
+		<h4 class="r_stit tabtop">원서 수정 기간 및 수험표 출력 일정 안내</h4>
+		<table cellspacing="0" cellpadding="0" width="100%" summary="평가내용" class="tabtop">
+			<caption>평가내용</caption>
+			<colgroup>
+				<col width="8%" />
+				<col width="30%" />
+				<col width="33%" />
+				<col width="29%" />				
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="col">구분</th>
+					<th scope="col">권역 및 시험장 변경 기간</th>	
+					<th scope="col">사진 수정 기간</th>
+					<th scope="col" class="no_b_right">수험표 출력일</th>					
+				</tr>
+
+	
+	
+	
+	
+	
+	
+				<tr>
+					<td>제77회</td>
+					<td style="line-height:22px;">
+	
+	
+						2026년 1월 14일(수) 10:00 ~
+	
+						<br />
+	
+	
+						2026년 1월 30일(금) 17:00
+	
+					</td>
+					<td style="line-height:22px;">
+	
+	
+						2026년 1월 14일(수) 10:00 ~
+	
+						<br />
+	
+	
+						2026년 2월 7일(토) 10:00
+	
+					</td>
+					<td class="no_b_right">2026년 2월 3일(화) 10:00~</td>
+				</tr>
+
+	
+	
+	
+	
+	
+	
+				<tr>
+					<td>제78회</td>
+					<td style="line-height:22px;">
+	
+	
+						2026년 4월 29일(수) 10:00 ~
+	
+						<br />
+	
+	
+						2026년 5월 15일(금) 17:00
+	
+					</td>
+					<td style="line-height:22px;">
+	
+	
+						2026년 4월 29일(수) 10:00 ~
+	
+						<br />
+	
+	
+						2026년 5월 23일(토) 10:00
+	
+					</td>
+					<td class="no_b_right">2026년 5월 19일(화) 10:00~</td>
+				</tr>
+
+	
+	
+	
+	
+	
+	
+				<tr>
+					<td>제79회</td>
+					<td style="line-height:22px;">
+	
+	
+						2026년 7월 15일(수) 10:00 ~
+	
+						<br />
+	
+	
+						2026년 7월 31일(금) 17:00
+	
+					</td>
+					<td style="line-height:22px;">
+	
+	
+						2026년 7월 15일(수) 10:00 ~
+	
+						<br />
+	
+	
+						2026년 8월 9일(일) 10:00
+	
+					</td>
+					<td class="no_b_right">2026년 8월 4일(화) 10:00~</td>
+				</tr>
+
+	
+	
+	
+	
+	
+	
+				<tr>
+					<td>제80회</td>
+					<td style="line-height:22px;">
+	
+	
+						2026년 9월 23일(수) 10:00 ~
+	
+						<br />
+	
+	
+						2026년 10월 9일(금) 17:00
+	
+					</td>
+					<td style="line-height:22px;">
+	
+	
+						2026년 9월 23일(수) 10:00 ~
+	
+						<br />
+	
+	
+						2026년 10월 17일(토) 10:00
+	
+					</td>
+					<td class="no_b_right">2026년 10월 13일(화) 10:00~</td>
+				</tr>
+
+	
+	
+	
+	
+	
+	
+				<tr>
+					<td>제81회</td>
+					<td style="line-height:22px;">
+	
+	
+						2026년 11월 11일(수) 10:00 ~
+	
+						<br />
+	
+	
+						2026년 11월 20일(금) 17:00
+	
+					</td>
+					<td style="line-height:22px;">
+	
+	
+						2026년 11월 11일(수) 10:00 ~
+	
+						<br />
+	
+	
+						2026년 11월 28일(토) 10:00
+	
+					</td>
+					<td class="no_b_right">2026년 11월 24일(화) 10:00~</td>
+				</tr>
+
+			</tbody>
+		</table>
+		
+		<h4 class="r_stit tabtop">접수 취소 기간 및 취소시 환불안내</h4>
+
+
+		<table cellspacing="0" cellpadding="0" width="100%" summary="평가내용" class="tabtop">
+			<caption>평가내용</caption>
+			<colgroup>
+				<col width="10%" />
+				<col width="45%" />
+				<col width="45%" />
+			</colgroup>
+			<tbody>
+				<tr>
+					<th rowspan="2" scope="col">구분</th>
+					<th colspan="2" scope="col" class="no_b_right">접수 취소 기간</th>	
+				</tr>
+				<tr>
+					<th scope="col">100% 환불</th>
+					<th scope="col" class="no_b_right">50% 환불</th>	
+				</tr>
+	
+		
+		
+		
+		
+				<tr>
+					<td>제77회</td>
+					<td style="line-height:22px">
+						2026년 1월 6일(화) 10:00 ~
+						<br/>
+						2026년 1월 23일(금) 17:00
+					</td>
+					<td class="no_b_right" style="line-height:22px">
+						2026년 1월 24일(토) 10:00 ~
+						<br />
+						2026년 1월 30일(금) 17:00
+					</td>
+				</tr>
+	
+		
+		
+		
+		
+				<tr>
+					<td>제78회</td>
+					<td style="line-height:22px">
+						2026년 4월 21일(화) 10:00 ~
+						<br/>
+						2026년 5월 8일(금) 17:00
+					</td>
+					<td class="no_b_right" style="line-height:22px">
+						2026년 5월 9일(토) 10:00 ~
+						<br />
+						2026년 5월 15일(금) 17:00
+					</td>
+				</tr>
+	
+		
+		
+		
+		
+				<tr>
+					<td>제79회</td>
+					<td style="line-height:22px">
+						2026년 7월 7일(화) 10:00 ~
+						<br/>
+						2026년 7월 24일(금) 17:00
+					</td>
+					<td class="no_b_right" style="line-height:22px">
+						2026년 7월 25일(토) 10:00 ~
+						<br />
+						2026년 7월 31일(금) 17:00
+					</td>
+				</tr>
+	
+		
+		
+		
+		
+				<tr>
+					<td>제80회</td>
+					<td style="line-height:22px">
+						2026년 9월 15일(화) 10:00 ~
+						<br/>
+						2026년 10월 2일(금) 17:00
+					</td>
+					<td class="no_b_right" style="line-height:22px">
+						2026년 10월 3일(토) 10:00 ~
+						<br />
+						2026년 10월 9일(금) 17:00
+					</td>
+				</tr>
+	
+		
+		
+		
+		
+				<tr>
+					<td>제81회</td>
+					<td style="line-height:22px">
+						2026년 11월 3일(화) 10:00 ~
+						<br/>
+						2026년 11월 17일(화) 17:00
+					</td>
+					<td class="no_b_right" style="line-height:22px">
+						2026년 11월 18일(수) 10:00 ~
+						<br />
+						2026년 11월 20일(금) 17:00
+					</td>
+				</tr>
+	
+			</tbody>
+		</table>
+
+		<p class="mt_5">* 입금 및 환불은 은행 마감 시간 전까지 가능합니다.</p>
+		<p class="mt_5">&nbsp;&nbsp;&nbsp;은행 마감 시간은 각 은행별로 다를 수 있습니다.</p>
+	</div>
+</div>
+
+</div>
+<!-- 컨텐츠 메인 -->
+<div id="footer_warp">
+
+<div class="footer_warp_bt">	
+	<div class="sublogo"><img src="/images/common/main_47.jpg" alt='국사편찬위원회 한국사능력검정시험' class="서브로고" /></div>
+	<div class="copy">
+		<p>
+			<a href="javascript:void(0);" onclick="fnNetFunnelAction('/etcPageLink.do?link=prsnlInfo', 'etcService')" class="first" style="text-decoration:underline">개인정보처리방침</a>
+			<a href="javascript:void(0);" onclick="fnNetFunnelAction('/etcPageLink.do?link=emlCollect', 'etcService')" style="font-weight: normal;">이메일무단수집거부 </a>
+		</p>
+		
+		<p class="copy_un">
+			경기도 과천시 교육원로86  전화 : 1577-8322(유료) 팩스 : 0502-0813-8230<br/>
+			Copyright <span>National Institute of Korean History</span>. ALL RIGHTS RESERVED.
+		</p>
+	</div>
+</div>
+<style type="text/css">
+#container{width:40%; height:60%; top:10%; left:30%; padding: 10px;background:#fff; color:#fff;position:absolute; z-index: 1; overFlow: auto;}
+.lay_pop_wrap{position:fixed;_position:absolute;top:0;left:0;z-index:10000;width:100%;height:100%}
+.lay_pop_wrap.open{display:block}
+.lay_pop_wrap .bg{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;opacity:.5;filter:alpha(opacity=50)}
+</style></div>
+
+<script type="text/javascript" src="/js/netfunnel.js?lastMD=202408"></script>
+<script type="text/javascript">
+
+function fnNetFunnelAction(_url, _aid){
+	if ( _aid == undefined ){
+		_aid = "load";
+	}
+	NetFunnel_Action({action_id:_aid}, {
+		//진입 성공 시 호출되는 수행
+		success:function(ev,ret){
+			if ( _url.indexOf('?') > -1 ){
+				_url = _url + "&";
+			}
+			else {
+				_url = _url + "?";
+			}
+			location.href = _url + "netfunnel_key=" + ret.data.key;// 암호화된 넷퍼넬 키;
+		},
+		//넷퍼넬 서버에 의해 Block 처리될 때 수행
+		block:function(ev,ret){
+			//alert(NetFunnel.TS_BLOCK_MSG);
+			if ( _aid === "step01" ){
+				NetFunnel.PopupSetup("alert", ret, "blockSkin");
+			}
+			else if ( _aid === "bbsDat" ){	//시험자료실
+				NetFunnel.PopupSetup("alert", ret, "blockSkin2");
+			}
+			else {
+				alert("원서접수 기간이 아닙니다.");
+				//location.href = "/";
+			}
+			return false;
+		}/*,
+		//진입 대기 시 대기창을 보여주지 않고 백그라운드 대기 루틴 수행
+		continued:function(ev,ret){
+		},
+		//대기창의 [중ए] 버튼 누를 경우 수행
+		stop:function(ev,ret){
+		},
+		//넷퍼넬 API 실행 간 error 발생 시 수행
+		error:function(ev,ret){
+		},
+		//넷퍼넬 서버가 Bypass 설정으로 진입 시 수행
+		bypass:function(ev,ret){
+		},
+		//넷퍼넬 서버߾서 IP Block 처리가 되었을 때 수행
+		ipblock:function(ev,ret){
+		},
+		//넷퍼넬 서버에 등록된 우회 사용࢕의 Bypass 진입 시 수행
+		expressnumber:function(ev,ret){
+		}
+		*/
+	});
+}
+</script>
+
+
+<style>
+#chatbot{
+/*position:absolute;*/
+position:fixed;
+z-index: 100;
+bottom: 120px;
+left: 50%;
+margin-left: 500px;
+width:200px;
+height:122px;
+font-size:0;
+background: url(/images/chatbot/chatbot.svg) no-repeat center / contain;
+}
+</style>
+<a id="chatbot" href="javascript:void(0);" onclick="fn_openChatbotPop()">한국사능력검정시험 정보 상담 서비스</a>
+<script type="text/javascript">
+function fn_openChatbotPop() {
+	var _frm = document.createElement('form');
+	var _objs;
+	_objs = document.createElement('input');
+	_objs.setAttribute('type', 'hidden');
+	_objs.setAttribute('name', 'bnrId');
+	_objs.setAttribute('value', 'pKOV7zWG0ckcXZk');
+	_frm.appendChild(_objs);
+	_frm.setAttribute('method', 'post');
+	_frm.setAttribute('action', 'https://chatbot.ips.go.kr/chatbotPop.ndo');
+	_frm.setAttribute('target', 'chatbot_popup');
+	document.body.appendChild(_frm);
+	window.open("", "chatbot_popup", "width=10,height=10");
+	_frm.submit();
+}
+</script>
+
+</body>
+</html>
