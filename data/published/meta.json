@@ -1,50 +1,60 @@
 {
-  "fetchedAt": "2026-08-13T08:02:37.132Z",
+  "fetchedAt": "2026-08-13T08:48:01.000Z",
   "year": 2026,
-  "examCount": 51,
+  "examCount": 54,
   "qnetExamCount": 47,
-  "groupCount": 11,
-  "sessionCount": 169,
-  "eventCount": 744,
+  "groupCount": 14,
+  "sessionCount": 179,
+  "eventCount": 780,
   "tbdCount": 0,
-  "staleCount": 0,
+  "staleCount": 102,
   "contradictionCount": 0,
   "groupSplitCount": 0,
   "groupSplits": [],
-  "sessionsBeforeFold": 499,
+  "sessionsBeforeFold": 0,
   "sources": {
     "qnet": {
-      "health": "ok",
+      "health": "stale",
       "method": "api",
       "fetchedAt": "2026-08-13T08:02:37.132Z",
-      "sessionCount": 102
+      "sessionCount": 102,
+      "reason": "거절 22 일일 요청제한 횟수 초과"
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-13T08:02:37.132Z",
+      "fetchedAt": "2026-08-13T08:48:01.000Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-13T08:02:37.132Z",
+      "fetchedAt": "2026-08-13T08:48:01.000Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-13T08:02:37.132Z",
+      "fetchedAt": "2026-08-13T08:48:01.000Z",
       "sessionCount": 45
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-13T08:02:37.132Z",
+      "fetchedAt": "2026-08-13T08:48:01.000Z",
       "sessionCount": 6
+    },
+    "dataq-csv": {
+      "health": "ok",
+      "method": "csv",
+      "fetchedAt": "2026-01-06T00:00:00.000Z",
+      "sessionCount": 10,
+      "staleAfterDays": 400
     }
   },
   "archive": null,
-  "notes": [],
+  "notes": [
+    "qnet 실패 — 이전 102회차를 유지하고 stale 로 표시했다 (거절 22 일일 요청제한 횟수 초과)"
+  ],
   "failed": []
 }

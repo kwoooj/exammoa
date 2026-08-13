@@ -77,6 +77,14 @@ export interface SourceHealth {
    */
   fetchedAt: string | null;
   sessionCount: number;
+  /**
+   * 이 소스가 며칠 지나면 낡은 것인가. 없으면 기본 임계(3일)를 쓴다.
+   *
+   * 소스마다 갱신 주기가 다르다. 매일 도는 크롤이 4일 됐으면 이상하지만, 연 1회
+   * 발행되는 공공데이터 CSV 가 219일 된 것은 정상이다. 하나의 임계로 재면 후자가
+   * 매일 거짓 경고를 낸다.
+   */
+  staleAfterDays?: number;
   reason?: string;
 }
 

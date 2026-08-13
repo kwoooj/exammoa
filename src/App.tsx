@@ -208,8 +208,12 @@ npm run publish:data`}</pre>
 
       <footer>
         <p>
-          최종 확인 {dotted(data.meta.fetchedAt.slice(0, 10))} ({agoLabel(fresh.worstDays)}) · 종목{' '}
-          {data.meta.examCount}개 · 시행그룹 {data.meta.groupCount}개
+          {/* 날짜와 (N일 전) 을 붙여 쓰면 안 된다. 앞은 이번 수집 시각, 뒤는 가장 오래된
+              소스의 나이라서 "2026.08.13 (219일 전)" 처럼 서로 어긋난다. */}
+          최종 확인 {dotted(data.meta.fetchedAt.slice(0, 10))}
+          {fresh.worstDays !== null && fresh.worstDays > 0
+            ? ` · 가장 오래된 값 ${agoLabel(fresh.worstDays)}`
+            : ''} · 종목 {data.meta.examCount}개 · 시행그룹 {data.meta.groupCount}개
         </p>
         {Object.entries(data.meta.sources).map(([id, src]) => (
           <p key={id}>
