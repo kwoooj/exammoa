@@ -153,15 +153,28 @@ test('상시시험 그룹은 행을 만들지 않는다', () => {
   assert.deepEqual(rows, []);
 });
 
-test('이벤트가 많으면 밴드로 바꾼다', () => {
-  // 회차마다 이벤트 2개씩, 임계를 넘도록 만든다
-  const many: Session[] = Array.from({ length: DENSE_THRESHOLD + 2 }, (_, i) => ({
-    id: `daily-${i}`, groupId: 'daily', year: 2026, seq: i + 1, label: null,
-    mode: 'scheduled' as const, status: 'confirmed' as const,
-    events: [ev('exam', 'single', `2026-09-${String((i % 28) + 1).padStart(2, '0')}`, `2026-09-${String((i % 28) + 1).padStart(2, '0')}`, 1, '시험')],
-  }));
+test('고른 회차만 그린다 — 다른 회차는 otherCount 로만 알린다', () => {
+  const s2 = { ...hrdk, id: 'hrdk-regular-2026-2', seq: 2 };
+  const rows = buildRows([plan()], [hrdk, s2], [group('hrdk-regular')], nameOf, w);
+  assert.equal(rows[0]!.otherCount, 1, '안 그린 회차 수를 알려야 한다');
+  // 고른 회차(3회) 의 이벤트만 그린다
+  assert.ok(rows[0]!.bars.length > 0);
+  assert.equal(rows[0]!.dense, false, '고른 회차만 그리면 뭉개지지 않는다');
+});
+
+test('고른 회차가 창 밖이면 그룹 전체로 물러나고, 그때 많으면 밴드가 된다', () => {
+  // 회차마다 이벤트 1개씩, 임계를 넘도록. 계획은 창 밖의 회차를 가리킨다.
+  const many: Session[] = Array.from({ length: DENSE_THRESHOLD + 2 }, (_, i) => {
+    const day = `2026-09-${String((i % 28) + 1).padStart(2, '0')}`;
+    return {
+      id: `daily-${i}`, groupId: 'daily', year: 2026, seq: i + 1, label: null,
+      mode: 'scheduled' as const, status: 'confirmed' as const,
+      events: [ev('exam', 'single', day, day, 1, '시험')],
+    };
+  });
   const rows = buildRows(
-    [{ examSlug: '지게차운전기능사', groupId: 'daily', sessionId: 'daily-0', phase: 'single' }],
+    // 창(2026-08-13 시작) 밖의 회차를 계획으로 잡는다
+    [{ examSlug: '지게차운전기능사', groupId: 'daily', sessionId: '없는회차', phase: 'single' }],
     many, [group('daily', 'frequent')], nameOf, w,
   );
   assert.equal(rows[0]!.dense, true);
