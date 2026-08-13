@@ -16,6 +16,26 @@ export const groupId = 'kbs-korean';
 
 export const EXPECT_HEADERS = ['시험회차', '접수기간', '추가 접수기간', '시험일시', '성적발표일'];
 
+/**
+ * 아카이브 해시에서 지울 휘발성 조각. 저장되는 바이트는 그대로다.
+ *
+ * 실측: 같은 날 122KB 스냅샷 3건이 쌓였고 두 파일의 차이가 **딱 한 군데**였다.
+ *
+ *   SERVER_NOW:"2026/08/13 16:12:42"
+ *   SERVER_NOW:"2026/08/13 17:02:45"
+ *
+ * Nuxt SSR 페이로드(`window.__NUXT__`)에 서버 시각이 박혀 나온다. 같은 페이로드의
+ * `D_DAY` 는 서버가 계산한 카운트다운이라 날이 바뀌면 반드시 달라진다 — 오늘 안에서는
+ * 같았지만 하루 뒤에는 다르다. 둘 다 우리가 쓰는 값이 아니다.
+ *
+ * 일정 값(`EXAM_DT`·`APPLY_START_DT`·`GRADE_NOTICE_DATE`)은 절대 지우지 말 것.
+ * 그게 바뀌었을 때 스냅샷이 남는 것이 이 아카이브의 유일한 용도다.
+ */
+export const volatile = [
+  /SERVER_NOW:"[^"]*"/g,
+  /D_DAY:-?\d+/g,
+];
+
 export function parse(html, { year }) {
   const picked = tableByHeader(readTables(html), EXPECT_HEADERS);
   if (!picked) {
