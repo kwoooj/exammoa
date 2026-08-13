@@ -11,6 +11,7 @@
 
 import { readFile } from 'node:fs/promises';
 import { readPrevious, mergeStale, writeAll, archive, PUBLISHED } from './lib/store.mjs';
+import { classifyResponse, rejectionMessage, sourceHealth } from './lib/qnet.mjs';
 import * as historyExam from './sources/history-exam.mjs';
 import * as kbsKorean from './sources/kbs-korean.mjs';
 import { toeic, toeicSpeaking } from './sources/ybm.mjs';
@@ -147,6 +148,9 @@ function resultMessage(parsed, text) {
 
 /** resultCode 가 성공을 뜻하지 않으면 사유 문자열, 성공이면 null */
 function errorOf(parsed, text) {
+  // 거절(cmmMsgHeader)이 먼저다. header/resultCode 구조가 아니라서 아래 검사를 통과해 버린다.
+  const rejected = rejectionMessage(parsed, text);
+  if (rejected) return rejected;
   const h = headerOf(parsed);
   if (!h) return parsed ? null : `JSON 파싱 실패 — ${text.slice(0, 200)}`;
   const code = String(h.resultCode ?? '');
@@ -548,19 +552,25 @@ async function collect(seed, groupSeed) {
   const raw = {};
   const crawlRaw = {};
 
+  // 계정 단위로 막혔을 때 채운다. 채워지면 남은 종목을 호출하지 않는다.
+  let sourceFailure = null;
+
   for (const exam of exams) {
     try {
       const r = await call({ implYy: YEAR, jmCd: exam.jmCd });
       const { items, parsed } = extractItems(r.text);
-      const apiError = errorOf(parsed, r.text);
-      if (apiError) {
-        failed.push({ slug: exam.slug, jmCd: exam.jmCd, reason: `API 오류 ${apiError}` });
-        console.log(`  !! ${exam.slug} (${exam.jmCd}) ${apiError}`);
-        continue;
+      const verdict = classifyResponse({ status: r.status, text: r.text, parsed, items });
+
+      if (verdict.kind === 'source-failed') {
+        // 한도 초과·키 문제는 계정 단위다. 남은 종목을 두드려도 같은 답이 온다.
+        sourceFailure = verdict.reason;
+        console.log(`  !! ${exam.slug} (${exam.jmCd}) ${verdict.reason}`);
+        console.log(`\n⛔ 계정 단위 거절이다. 남은 ${exams.length - exams.indexOf(exam) - 1}종목을 호출하지 않는다.`);
+        break;
       }
-      if (!items?.length) {
-        failed.push({ slug: exam.slug, jmCd: exam.jmCd, reason: '레코드 없음' });
-        console.log(`  -  ${exam.slug} (${exam.jmCd}) 없음`);
+      if (verdict.kind === 'exam-failed') {
+        failed.push({ slug: exam.slug, jmCd: exam.jmCd, reason: verdict.reason });
+        console.log(`  ${verdict.reason === '레코드 없음' ? '- ' : '!!'} ${exam.slug} (${exam.jmCd}) ${verdict.reason}`);
         continue;
       }
       // 과거 연도 조회가 불가하므로 원본을 남긴다. 지금 받은 것을 잃으면 복구할 수 없다.
@@ -595,15 +605,21 @@ async function collect(seed, groupSeed) {
   const now = new Date().toISOString();
   const stamp = now.slice(0, 10);
 
-  // 종목을 하나도 못 받았으면 소스 실패다. 일부 실패는 성공으로 본다 (FR-DAT-06).
-  const qnetOk = perExam.length > 0;
+  // 종목 실패를 소스 건강도에 반영한다.
+  //
+  // 전에는 `perExam.length > 0` 이면 ok 였다. 그래서 29/47 이 실패한 실행이 health:'ok'
+  // 로 남고, stale 폴백이 작동하지 않아 그룹 3개와 회차 49건이 조용히 사라졌다 (#18).
+  // 일부 실패는 여전히 통과시킨다 (FR-DAT-06) — 허용치는 qnet.mjs 가 정한다.
+  const health = sourceHealth({ total: exams.length, failed: failed.length, sourceFailure });
+  const qnetOk = health.ok;
   const harvests = [{
     id: 'qnet',
     method: 'api',
     ok: qnetOk,
     sessions: folded,
-    error: qnetOk ? null : `${exams.length}종목 전부 실패`,
+    error: health.error,
   }];
+  if (!qnetOk) console.log(`\n⚠ qnet 소스 실패 — ${health.error}`);
 
   // ---- 크롤 소스 ----
   // robots 를 먼저 확인하고 금지면 요청하지 않는다. 어댑터가 늘어도 이 게이트를
