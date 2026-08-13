@@ -646,9 +646,20 @@ async function collect(seed, groupSeed) {
   if (arch.written) console.log(`  ${arch.path}`);
 
   // 크롤 원본도 남긴다. 사이트가 개편되면 그날 바이트가 유일한 단서다.
+  //
+  // 어댑터가 선언한 volatile 패턴은 **해시에만** 적용된다. 이게 없으면 KBS 처럼
+  // 페이지에 서버 시각이 박힌 사이트가 실행마다 122KB 를 쌓는다.
   const crawlArchives = [];
   for (const [srcId, html] of Object.entries(crawlRaw)) {
-    const a = await archive({ year: YEAR, sourceId: srcId, body: html, stamp });
+    const src = CRAWL_SOURCES.find(s => s.id === srcId);
+    const a = await archive({
+      year: YEAR,
+      sourceId: srcId,
+      body: html,
+      volatile: src?.volatile ?? [],
+      ext: 'html',
+      stamp,
+    });
     if (a.written) crawlArchives.push(a.path);
   }
   if (crawlArchives.length) console.log(`  크롤 원본 ${crawlArchives.length}건 저장`);
