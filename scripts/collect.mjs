@@ -11,6 +11,63 @@
 
 import { readFile } from 'node:fs/promises';
 import { readPrevious, mergeStale, writeAll, archive, PUBLISHED } from './lib/store.mjs';
+import * as historyExam from './sources/history-exam.mjs';
+
+/** 크롤 어댑터 목록. 여기 없는 사이트는 요청되지 않는다. */
+const CRAWL_SOURCES = [historyExam];
+
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36';
+
+/** robots.txt 를 확인하고 허용되면 페이지를 받아 파싱한다. 금지면 요청하지 않는다. */
+async function harvestCrawl(src, url, year) {
+  const base = { id: src.id, method: src.method, sessions: [] };
+  try {
+    const origin = new URL(url).origin;
+    const rob = await fetch(`${origin}/robots.txt`, {
+      headers: { 'User-Agent': UA },
+      signal: AbortSignal.timeout(10000),
+    });
+    // RFC 9309 — 4xx(429 제외)는 robots.txt 없음과 같다. 429·5xx 는 일시적 전면 금지.
+    if (rob.status === 429 || rob.status >= 500) {
+      return { ...base, ok: false, error: `robots.txt HTTP ${rob.status} → 보류` };
+    }
+    if (rob.status < 400) {
+      const txt = await rob.text();
+      // 전체 금지만 본다. 세밀한 판정은 probe-crawl.mjs 가 담당하고,
+      // 여기서는 '금지된 곳을 절대 받지 않는다' 만 보장한다.
+      if (/^\s*user-agent:\s*\*/im.test(txt) && /^\s*disallow:\s*\/\s*$/im.test(txt)) {
+        return { ...base, ok: false, error: 'robots.txt 전체 금지 → 요청하지 않음' };
+      }
+    }
+
+    const res = await fetch(url, {
+      headers: { 'User-Agent': UA, Accept: 'text/html,*/*', 'Accept-Language': 'ko-KR,ko;q=0.9' },
+      redirect: 'follow',
+      signal: AbortSignal.timeout(20000),
+    });
+    if (!res.ok) return { ...base, ok: false, error: `HTTP ${res.status}` };
+    const html = await res.text();
+
+    const { sessions, diagnostics } = src.parse(html, { year });
+    if (!diagnostics.headerMatch) {
+      // 헤더가 사라진 것은 개편 신호다. 빈 결과를 조용히 게시하지 않는다.
+      return { ...base, ok: false, error: '기대한 표 헤더를 찾지 못했다 (사이트 개편 가능)', rawHtml: html };
+    }
+    if (!sessions.length) {
+      return { ...base, ok: false, error: '회차를 하나도 뽑지 못했다', rawHtml: html };
+    }
+    if (diagnostics.failures.length) {
+      console.log(`     ⚠ ${src.id} 날짜 파싱 실패 ${diagnostics.failures.length}건:`);
+      for (const f of diagnostics.failures.slice(0, 5)) {
+        console.log(`       ${f.seq}회 ${f.label} — ${f.reason} ${JSON.stringify(f.raw)}`);
+      }
+    }
+    return { ...base, ok: true, sessions, error: null, rawHtml: html, diagnostics };
+  } catch (e) {
+    const why = e.name === 'TimeoutError' ? '타임아웃' : String(e.message).slice(0, 80);
+    return { ...base, ok: false, error: why };
+  }
+}
 
 const ENDPOINT = 'https://apis.data.go.kr/B490007/qualExamSchd/getQualExamSchdList';
 const KEY = process.env.QNET_KEY;
@@ -487,6 +544,7 @@ async function collect(seed, groupSeed) {
   const perExam = [];
   const failed = [];
   const raw = {};
+  const crawlRaw = {};
 
   for (const exam of exams) {
     try {
@@ -532,8 +590,6 @@ async function collect(seed, groupSeed) {
   }
 
   // ---- 소스 단위 병합 ----
-  // 지금은 소스가 qnet 하나뿐이다. 크롤러를 붙이기 전에 이 구조를 깔아두는 이유는,
-  // 안전망 없이 어댑터를 추가하면 그 소스가 죽는 날 해당 그룹이 화면에서 사라지기 때문이다.
   const now = new Date().toISOString();
   const stamp = now.slice(0, 10);
 
@@ -546,6 +602,26 @@ async function collect(seed, groupSeed) {
     sessions: folded,
     error: qnetOk ? null : `${exams.length}종목 전부 실패`,
   }];
+
+  // ---- 크롤 소스 ----
+  // robots 를 먼저 확인하고 금지면 요청하지 않는다. 어댑터가 늘어도 이 게이트를
+  // 반드시 통과해야 하므로, 금지 사이트를 실수로 추가하는 것이 구조적으로 어려워진다.
+  for (const src of CRAWL_SOURCES) {
+    const group = groupSeed.groups.find(g => g.id === src.groupId);
+    const url = group?.sourceUrl;
+    if (!url) {
+      console.log(`  -  ${src.id} groups.seed.json 에 sourceUrl 이 없어 건너뜀`);
+      continue;
+    }
+    const h = await harvestCrawl(src, url, YEAR);
+    harvests.push(h);
+    console.log(
+      h.ok
+        ? `  ok ${src.id} ${h.sessions.length}회차 · 이벤트 ${h.sessions.reduce((s, x) => s + x.events.length, 0)}개`
+        : `  !! ${src.id} ${h.error}`,
+    );
+    if (h.rawHtml) crawlRaw[src.id] = h.rawHtml;
+  }
 
   const prev = await readPrevious();
   if (!prev) {
@@ -567,10 +643,27 @@ async function collect(seed, groupSeed) {
   console.log(`\n아카이브: ${arch.written ? '저장' : '생략'} — ${arch.reason}`);
   if (arch.written) console.log(`  ${arch.path}`);
 
+  // 크롤 원본도 남긴다. 사이트가 개편되면 그날 바이트가 유일한 단서다.
+  const crawlArchives = [];
+  for (const [srcId, html] of Object.entries(crawlRaw)) {
+    const a = await archive({ year: YEAR, sourceId: srcId, body: html, stamp });
+    if (a.written) crawlArchives.push(a.path);
+  }
+  if (crawlArchives.length) console.log(`  크롤 원본 ${crawlArchives.length}건 저장`);
+
+  // 화면에 노출할 종목: **일정이 실제로 들어온 그룹의 종목**만.
+  // API 종목만 내보내면 한능검·토익처럼 크롤로 들어온 종목을 고를 수 없다.
+  // 반대로 시드 전체를 내보내면 일정 없는 종목이 빈 카드로 뜬다.
+  const withSessions = new Set(merged.sessions.map(s => s.groupId));
+  const publishedExams = seed.exams.filter(e => withSessions.has(e.groupId));
+  console.log(`\n화면 노출 종목 ${publishedExams.length}개 (일정이 있는 그룹 ${withSessions.size}개)`);
+
   const meta = {
     fetchedAt: now,
     year: YEAR,
-    examCount: exams.length,
+    examCount: publishedExams.length,
+    /** Q-Net API 로 받은 종목 수. examCount 와 다르면 크롤·CSV 가 붙은 것이다 */
+    qnetExamCount: exams.length,
     groupCount: new Set(merged.sessions.map(s => s.groupId)).size,
     sessionCount: merged.sessions.length,
     eventCount: merged.sessions.reduce((s, x) => s + x.events.length, 0),
@@ -590,7 +683,7 @@ async function collect(seed, groupSeed) {
     year: YEAR,
     sessions: merged.sessions,
     groups,
-    exams,
+    exams: publishedExams,
     categories: seed.categories,
     links: seed.links,
     meta,

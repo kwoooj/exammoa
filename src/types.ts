@@ -203,6 +203,8 @@ export interface MetaFile {
   fetchedAt: string;
   year: number;
   examCount: number;
+  /** Q-Net API 로 받은 종목 수. examCount 와 다르면 크롤·CSV 가 붙은 것이다 */
+  qnetExamCount: number;
   /** 타임라인 행 수와 같다. 종목 수가 아니다 */
   groupCount: number;
   sessionCount: number;
