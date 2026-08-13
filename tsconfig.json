@@ -4,6 +4,9 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
+    // 테스트를 node --test 로 직접 돌린다. Node ESM 은 확장자를 생략할 수 없어
+    // 내부 import 에 .ts / .tsx 를 붙인다. vite 는 그대로 처리한다.
+    "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
     "strict": true,
     "noUnusedLocals": true,
