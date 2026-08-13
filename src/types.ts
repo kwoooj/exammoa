@@ -43,6 +43,41 @@ export interface Session {
    * 여기 담지 않는다. 조용히 하나를 버리지 않기 위해 남긴다.
    */
   contradictions?: { kind: string; phase: string; ranges: [string, string][] }[];
+
+  /** 이 회차를 만든 소스 id. meta.sources[src] 로 조인해 갱신 시각을 얻는다 */
+  src?: string;
+  conf?: Confidence;
+  /** 이번 실행에서 소스가 실패해 이전 값을 재게시한 경우에만 true */
+  stale?: boolean;
+}
+
+/**
+ * 이 일정을 얼마나 믿을 수 있는가. 화면 표기가 달라지므로 정의를 흐리지 않는다.
+ *
+ * 해시·최초 관측 시각 같은 검증 메타데이터는 `provenance.json` 에만 두고 클라이언트
+ * 페이로드에는 넣지 않는다. 해시는 무작위 문자열이라 압축이 되지 않는다.
+ */
+export type Confidence =
+  /** 기관이 기계 판독용으로 발행 (Q-Net API, 공공데이터 CSV). 배지 없음 */
+  | 'verified'
+  /** HTML 에서 추출. 사이트 개편으로 조용히 틀릴 수 있어 출처 링크를 노출한다 */
+  | 'parsed'
+  /** 사람이 입력. 갱신 책임이 사람이므로 확인 날짜를 함께 보여준다 */
+  | 'manual'
+  /** 소스가 실패해 이전 값을 재게시. "최종 확인 N일 전" 경고 */
+  | 'stale';
+
+/** 소스 하나의 이번 실행 결과 */
+export interface SourceHealth {
+  health: 'ok' | 'stale' | 'failed';
+  method: string;
+  /**
+   * 마지막 **성공** 시각. 실패했을 때 지금으로 갱신하지 않는다 —
+   * 갱신하면 화면이 "방금 확인했다" 고 거짓말한다. 계승할 값도 없으면 null.
+   */
+  fetchedAt: string | null;
+  sessionCount: number;
+  reason?: string;
 }
 
 /** 시행 주기. 타임라인 표현과 판정 방식을 결정한다 */
@@ -180,11 +215,16 @@ export interface MetaFile {
   sessionCount: number;
   eventCount: number;
   tbdCount: number;
+  /** 소스 실패로 이전 값을 재게시한 회차 수 */
+  staleCount: number;
   contradictionCount: number;
   groupSplitCount: number;
   groupSplits: GroupSplit[];
   /** 접기 전 종목별 회차 총합. groupCount 대비 중복률을 보는 값 */
   sessionsBeforeFold: number;
-  rawArchive: string;
+  sources: Record<string, SourceHealth>;
+  /** 이번 실행에서 원본을 새로 저장했으면 경로, 내용이 같아 생략했으면 null */
+  archive: string | null;
+  notes: string[];
   failed: { slug: string; jmCd: string; reason: string }[];
 }

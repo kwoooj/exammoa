@@ -1,0 +1,25 @@
+{
+  "fetchedAt": "2026-08-13T05:40:11.540Z",
+  "year": 2026,
+  "examCount": 47,
+  "groupCount": 7,
+  "sessionCount": 102,
+  "eventCount": 521,
+  "tbdCount": 0,
+  "staleCount": 0,
+  "contradictionCount": 0,
+  "groupSplitCount": 0,
+  "groupSplits": [],
+  "sessionsBeforeFold": 499,
+  "sources": {
+    "qnet": {
+      "health": "ok",
+      "method": "api",
+      "fetchedAt": "2026-08-13T05:40:11.540Z",
+      "sessionCount": 102
+    }
+  },
+  "archive": null,
+  "notes": [],
+  "failed": []
+}

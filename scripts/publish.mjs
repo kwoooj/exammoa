@@ -1,18 +1,19 @@
 #!/usr/bin/env node
-// build/*.json → public/data/ 로 복사한다. 의존성 없음.
+// data/published/*.json → public/data/ 로 복사한다. 의존성 없음.
 //
 // App.tsx 가 /data/*.json 을 fetch 하므로 vite 가 public/ 을 정적 서빙하는 경로에
 // 산출물이 있어야 한다. cp -r 은 Windows 에서 동작이 갈리므로 node 로 쓴다.
 //
-//   node scripts/publish.mjs        build → public/data
+//   node scripts/publish.mjs        data/published → public/data
 //   npm run dev                     이 스크립트를 먼저 돌린다 (predev)
 
 import { readdir, mkdir, copyFile, stat } from 'node:fs/promises';
 
-const FROM = 'build';
+const FROM = 'data/published';
 const TO = 'public/data';
 
-// 클라이언트가 받을 파일만 복사한다. api-coverage/crawl-report 는 진단용이라 제외한다.
+// provenance.json 은 복사하지 않는다. 해시가 무작위 문자열이라 압축이 안 되고
+// 클라이언트가 쓰지 않는다. 변경 감지는 빌드 시점에만 필요하다.
 const WANTED = ['exams.json', 'groups.json', 'sessions.json', 'meta.json'];
 
 try {
