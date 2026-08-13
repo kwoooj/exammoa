@@ -14,6 +14,7 @@
     "collect": "node scripts/collect.mjs",
     "publish:data": "node scripts/publish.mjs",
     "typecheck": "tsc --noEmit",
+    "check": "npm test && npm run typecheck && node scripts/ci-gate.mjs --pr",
     "test": "node --test \"scripts/**/*.test.mjs\" \"src/**/*.test.ts\""
   },
   "dependencies": {
