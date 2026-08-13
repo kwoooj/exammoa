@@ -13,7 +13,8 @@
     "probe:crawl": "node scripts/probe-crawl.mjs",
     "collect": "node scripts/collect.mjs",
     "publish:data": "node scripts/publish.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test scripts/*.test.mjs"
   },
   "dependencies": {
     "react": "^19.1.0",
