@@ -58,14 +58,15 @@ export function overlaps(aStart: string, aEnd: string, bStart: string, bEnd: str
   return aStart <= bEnd && bStart <= aEnd;
 }
 
-/** 구간 [start, end] 를 [from, to] 범위 안의 0~1 위치로. 타임라인 좌표 계산용 */
-export function toRatio(start: string, end: string, from: string, to: string) {
-  const total = diffDays(to, from);
-  if (total <= 0) return { left: 0, width: 0 };
-  const left = diffDays(start, from) / total;
-  const width = (diffDays(end, start) + 1) / total;
-  return { left, width };
-}
+/*
+ * `toRatio` 가 여기 있었다. 가로 타임라인이 구간을 0~1 비율로 바꿔 쓰던 함수인데
+ * 타임라인과 함께 지웠다.
+ *
+ * 월간 격자는 비율을 쓰지 않는다. `monthbars.ts` 가 정수 열 번호와 span 을 내고
+ * CSS 그리드가 그대로 받는다 — 퍼센트 폭은 `minmax(0, 1fr)` 칸 안에서 한 열마다
+ * 1px 씩 어긋나 390px 에서 막대와 날짜 숫자가 어긋난다. 소수 기하 헬퍼를 격자
+ * 렌더러 옆에 남겨 두면 다시 쓰게 되므로 지운다.
+ */
 
 const MD = new Intl.DateTimeFormat('ko-KR', { month: 'long', day: 'numeric', timeZone: 'UTC' });
 
