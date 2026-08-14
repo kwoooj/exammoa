@@ -1,0 +1,116 @@
+// node --test scripts/sources/kacpta-tax.test.mjs
+
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { normalizeTilde, parse } from './kacpta-tax.mjs';
+
+/** 실측 표 그대로. 구분자가 `~` 가 아니라 `∼`(U+223C) 다. */
+const ROWS = [
+  ['01.02 ∼ 01.08', '01.26 ∼ 01.31', '01.31(토)', '02.26(목)'],
+  ['03.05 ∼ 03.11', '03.30 ∼ 04.04', '04.04(토)', '04.23(목)'],
+  ['04.30 ∼ 05.07', '06.01 ∼ 06.06', '06.06(토)', '06.25(목)'],
+  ['07.02∼ 07.08', '07.27 ∼ 08.01', '08.01(토)', '08.20(목)'],
+  ['08.27 ∼ 09.02', '09.28 ∼ 10.03', '10.03(토)', '10.29(목)'],
+  ['11.05 ∼11.11', '11. 30 ∼12.05', '12.05(토)', '12.24(목)'],
+  ['', '', '', ''],
+];
+
+const HEAD = ['원서접수', '장소공고 수험표출력', '시험일자', '발표'];
+const td = (cells, tag = 'td') => `<tr>${cells.map(c => `<${tag}>${c}</${tag}>`).join('')}</tr>`;
+// 실제 페이지에는 표가 16개다. 앞에 관계없는 표를 두어 헤더로 고르는지 본다.
+const page = (rows = ROWS) => `<html><body>
+<table><tr><td>공지사항</td><td>2026-07-15</td></tr></table>
+<table>${td(HEAD, 'th')}${rows.map(r => td(r)).join('')}</table>
+</body></html>`;
+
+const run = (rows, year = 2026) => parse(page(rows), { year });
+
+// ---- 물결표 ----------------------------------------------------------
+
+test('U+223C 물결표를 파서가 아는 형태로 바꾼다', () => {
+  assert.equal(normalizeTilde('01.02 ∼ 01.08'), '01.02 ~ 01.08');
+  assert.equal(normalizeTilde('01.02 〜 01.08'), '01.02 ~ 01.08');
+  assert.equal(normalizeTilde('01.02 ～ 01.08'), '01.02 ~ 01.08');
+  assert.equal(normalizeTilde(null), '');
+});
+
+// ---- 표 고르기 --------------------------------------------------------
+
+test('16개 표 중 헤더로 고른다 — 인덱스로 고르면 개편 때 다른 표를 읽는다', () => {
+  const r = run();
+  assert.equal(r.diagnostics.headerMatch, true);
+  assert.equal(r.sessions.length, 6, '연 6회');
+});
+
+test('헤더가 사라지면 실패한다', () => {
+  const r = parse('<html><body><table><tr><th>가</th></tr><tr><td>1</td></tr></table></body></html>', { year: 2026 });
+  assert.equal(r.diagnostics.headerMatch, false);
+  assert.deepEqual(r.sessions, []);
+});
+
+// ---- 날짜 -----------------------------------------------------------
+
+test('첫 회차 날짜가 사이트와 일치한다', () => {
+  const s = run().sessions[0];
+  const pick = (kind) => s.events.find(e => e.kind === kind);
+  assert.deepEqual([pick('reg').start, pick('reg').end], ['2026-01-02', '2026-01-08']);
+  assert.equal(pick('exam').start, '2026-01-31');
+  assert.equal(pick('exam').end, '2026-01-31', '시험은 하루짜리다');
+  assert.equal(pick('result').start, '2026-02-26');
+});
+
+test('공백이 끼어 있어도 읽는다 — `07.02∼ 07.08`·`11. 30 ∼12.05`', () => {
+  const sessions = run().sessions;
+  const reg4 = sessions[3].events.find(e => e.kind === 'reg');
+  assert.deepEqual([reg4.start, reg4.end], ['2026-07-02', '2026-07-08']);
+  assert.equal(sessions[5].events.find(e => e.kind === 'exam').start, '2026-12-05');
+});
+
+test('빈 행을 회차로 만들지 않는다', () => {
+  const r = run();
+  assert.equal(r.diagnostics.rows, 7);
+  assert.equal(r.sessions.length, 6);
+  assert.equal(r.diagnostics.failures.length, 0, '빈 행은 파싱 실패가 아니다');
+});
+
+// ---- 장소공고 칸 ------------------------------------------------------
+
+test('장소공고·수험표출력을 접수로 만들지 않는다 — 추가접수와 성격이 다르다', () => {
+  for (const s of run().sessions) {
+    const regs = s.events.filter(e => e.kind === 'reg');
+    assert.equal(regs.length, 1, `${s.label} 에 접수가 2건이면 D-Day 가 거짓이 된다`);
+  }
+  // 01.26 은 장소공고 시작일이다. 어떤 이벤트로도 들어오면 안 된다.
+  const all = run().sessions.flatMap(s => s.events).map(e => e.start);
+  assert.ok(!all.includes('2026-01-26'), '장소공고 날짜가 이벤트가 됐다');
+});
+
+// ---- 회차 번호 -------------------------------------------------------
+
+test('회차 번호를 지어내지 않고 시험일로 라벨을 붙인다', () => {
+  const labels = run().sessions.map(s => s.label);
+  assert.deepEqual(labels, ['01.31 시행', '04.04 시행', '06.06 시행', '08.01 시행', '10.03 시행', '12.05 시행']);
+  assert.ok(!labels.some(l => /제\d+회/.test(l)), '표에 없는 회차 번호를 붙이면 안 된다');
+});
+
+test('seq 는 시험일 순서다 — sessionId 가 흔들리면 저장된 계획이 깨진다', () => {
+  const r = run([ROWS[2], ROWS[0], ROWS[1]]); // 순서를 섞어 넣는다
+  assert.deepEqual(r.sessions.map(s => s.seq), [1, 2, 3]);
+  assert.equal(r.sessions[0].id, 'kacpta-tax-2026-1');
+  assert.equal(r.sessions[0].events.find(e => e.kind === 'exam').start, '2026-01-31');
+});
+
+// ---- 단계 -----------------------------------------------------------
+
+test('단일 단계라 phase 는 single 이다', () => {
+  for (const s of run().sessions) {
+    assert.ok(s.events.every(e => e.phase === 'single'), s.label);
+  }
+});
+
+test('이벤트가 날짜순으로 정렬된다', () => {
+  for (const s of run().sessions) {
+    const starts = s.events.map(e => e.start);
+    assert.deepEqual(starts, [...starts].sort(), s.label);
+  }
+});
