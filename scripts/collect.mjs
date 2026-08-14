@@ -9,8 +9,9 @@
 //   PowerShell:  $env:QNET_KEY="발급받은키"; node scripts/collect.mjs --probe
 //   bash:        QNET_KEY="발급받은키" node scripts/collect.mjs --probe
 
-import { readFile } from 'node:fs/promises';
-import { readPrevious, mergeStale, writeAll, archive, PUBLISHED } from './lib/store.mjs';
+import { readFile, readdir } from 'node:fs/promises';
+import { readPrevious, readHistory, writeHistory, mergeStale, writeAll, archive, PUBLISHED, ARCHIVE } from './lib/store.mjs';
+import { appendRun, baselines, detectDrift, driftLine, runRecord } from './lib/drift.mjs';
 import { classifyResponse, rejectionMessage, sourceHealth } from './lib/qnet.mjs';
 import * as historyExam from './sources/history-exam.mjs';
 import * as kbsKorean from './sources/kbs-korean.mjs';
@@ -107,8 +108,11 @@ const DUMP = (process.argv.find(a => a.startsWith('--dump')) ?? '').split('=')[1
 // 기본은 제한 없음. --limit= 는 디버깅용 오버라이드다.
 // 예전 기본값 20 이 필터를 통과한 23종목을 다시 자르고 있었다 (3종목이 이유 없이 누락).
 const LIMIT = Number((process.argv.find(a => a.startsWith('--limit=')) ?? '').split('=')[1] || Infinity);
+/** `--replay=YYYY-MM-DD` — 그날 보존한 원본 바이트에 지금 파서를 다시 돌린다 */
+const REPLAY = (process.argv.find(a => a.startsWith('--replay=')) ?? '').split('=')[1] ?? null;
 
-if (!KEY) {
+// 재생은 네트워크를 타지 않으므로 키가 필요 없다.
+if (!KEY && !REPLAY) {
   console.error('QNET_KEY 환경변수가 없습니다.');
   process.exit(1);
 }
@@ -757,6 +761,41 @@ async function collect(seed, groupSeed) {
   if (!prev) {
     console.log(`\n※ ${PUBLISHED}/ 에 이전 결과가 없다. 첫 실행이므로 폴백 대상이 없다.`);
   }
+
+  // ---- 드리프트 감지 ----
+  //
+  // 크롤링은 터지지 않고 어긋난다. 헤더 검사를 통과했는데 행 구조만 바뀌면 회차가
+  // 6건에서 1건으로 줄어도 조용히 성공한다. **그 0건을 게시하는 것이 가장 위험한 실패다.**
+  //
+  // 여기서 실패로 돌리면 mergeStale 이 직전 값을 계승한다 — 화면에서 그룹이 사라지지
+  // 않고, 대신 '낡았다' 고 표시된다.
+  const history = await readHistory();
+  const base = baselines(history.runs);
+  const drifted = [];
+  console.log('\n드리프트:');
+  for (const h of harvests) {
+    if (!h.ok) continue;
+    const nowCounts = {
+      sessions: (h.sessions ?? []).length,
+      events: (h.sessions ?? []).reduce((n, s) => n + (s.events?.length ?? 0), 0),
+    };
+    const verdict = detectDrift(nowCounts, base[h.id]);
+    console.log(`  ${driftLine(h.id, nowCounts, base[h.id], verdict)}`);
+    if (verdict.drift) {
+      h.ok = false;
+      h.error = `드리프트 — ${verdict.reason}`;
+      drifted.push(h.id);
+    }
+  }
+  if (drifted.length) {
+    console.log(`\n⚠ 드리프트 ${drifted.length}건: ${drifted.join(', ')} — 직전 값을 유지한다`);
+    console.log(`  원인을 가르려면: npm run collect -- --replay=<날짜>`);
+  }
+
+  // 이력에는 **이번에 성공한 소스만** 담는다. 실패한 소스의 계승 값을 넣으면
+  // 기준선에 stale 이 섞여 다음 판정이 무뎌진다.
+  await writeHistory(appendRun(history, runRecord(harvests, now)));
+
   const merged = mergeStale(harvests, prev, { now });
   for (const n of merged.notes) console.log(`  · ${n}`);
 
@@ -841,7 +880,69 @@ async function collect(seed, groupSeed) {
 
 // ---- 실행 -------------------------------------------------------------
 
+/**
+ * 보존한 원본 바이트에 지금 파서를 다시 돌린다.
+ *
+ * 드리프트가 터졌을 때 물어야 하는 질문은 하나다 — **사이트가 바뀐 건가, 내 파서가
+ * 바뀐 건가.** 오늘 응답으로는 못 가른다. 그날 바이트에 오늘 파서를 돌려서
+ *
+ *   그날 바이트 + 오늘 파서 = 그날 결과   → 파서는 그대로다. 사이트가 바뀌었다.
+ *   그날 바이트 + 오늘 파서 ≠ 그날 결과   → 내가 파서를 깨뜨렸다.
+ *
+ * 네트워크를 타지 않고 아무것도 쓰지 않는다. 진단 전용이다.
+ */
+async function replay(date) {
+  const year = Number(date.slice(0, 4));
+  const dir = `${ARCHIVE}/${year}`;
+  let files;
+  try {
+    files = (await readdir(dir)).filter(f => f.includes(`.${date}.`));
+  } catch {
+    console.error(`${dir} 를 읽지 못했다. 보존된 원본이 없다.`);
+    process.exit(1);
+  }
+  if (!files.length) {
+    console.error(`${date} 자 원본이 없다. 있는 날짜:`);
+    const all = await readdir(dir).catch(() => []);
+    const dates = [...new Set(all.map(f => f.split('.')[1]))].sort();
+    for (const d of dates) console.error(`  ${d}`);
+    process.exit(1);
+  }
+
+  console.log(`${date} 원본 ${files.length}건에 지금 파서를 재실행한다 (네트워크 없음)\n`);
+  const byId = new Map(CRAWL_SOURCES.map(s => [s.id, s]));
+
+  for (const file of files.sort()) {
+    const id = file.split('.')[0];
+    const src = byId.get(id);
+    if (!src) {
+      // qnet 원본은 파서가 아니라 정규화 경로를 타므로 여기서는 건드리지 않는다.
+      console.log(`  -  ${id} — 크롤 어댑터가 아니라 건너뛴다 (${file})`);
+      continue;
+    }
+    const html = await readFile(`${dir}/${file}`, 'utf8');
+    try {
+      const { sessions, diagnostics } = src.parse(html, { year });
+      const events = sessions.reduce((n, s) => n + s.events.length, 0);
+      const fails = (diagnostics.failures ?? []).length;
+      console.log(
+        `  ${diagnostics.headerMatch ? 'ok' : '!!'} ${id.padEnd(16)} 회차 ${String(sessions.length).padStart(3)}건 · 이벤트 ${String(events).padStart(3)}개`
+        + `${fails ? ` · 파싱 실패 ${fails}건` : ''}${diagnostics.headerMatch ? '' : ' · 헤더 불일치'}`,
+      );
+      for (const f of (diagnostics.failures ?? []).slice(0, 3)) {
+        console.log(`       ${f.label ?? ''} ${f.reason} ${JSON.stringify(f.raw ?? '')}`);
+      }
+    } catch (err) {
+      console.log(`  !! ${id} — 파서가 던졌다: ${err.message ?? err}`);
+    }
+  }
+
+  console.log('\n이 숫자가 그날 산출물과 같으면 파서는 그대로다 — 사이트가 바뀐 것이다.');
+  console.log('다르면 파서 쪽이 바뀐 것이다.');
+}
+
 const seed = JSON.parse(await readFile('data/exams.seed.json', 'utf8'));
-if (DUMP) await dump(DUMP);
+if (REPLAY) await replay(REPLAY);
+else if (DUMP) await dump(DUMP);
 else if (PROBE) await probe(seed);
 else await collect(seed, JSON.parse(await readFile('data/groups.seed.json', 'utf8')));

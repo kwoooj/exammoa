@@ -46,6 +46,21 @@ export async function readPrevious(dir = PUBLISHED) {
   return { sessions, groups, meta, provenance: provenance ?? {} };
 }
 
+/**
+ * 드리프트 판정용 실행 이력.
+ *
+ * `meta.json` 은 직전 1회만 담는다. 직전과 비교하면 직전이 이미 깨져 있었을 때 깨진
+ * 값이 정상으로 승격되므로 별도 파일에 최근 이력을 쌓는다. 숫자 몇 개씩이라 작다.
+ */
+export async function readHistory(dir = PUBLISHED) {
+  return (await readJson(`${dir}/history.json`)) ?? { runs: [] };
+}
+
+export async function writeHistory(history, dir = PUBLISHED) {
+  await mkdir(dir, { recursive: true });
+  await writeFile(`${dir}/history.json`, JSON.stringify(history, null, 0), 'utf8');
+}
+
 // ---- 병합 -------------------------------------------------------------
 
 /**
