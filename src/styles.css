@@ -120,6 +120,72 @@ body {
   outline-offset: 2px;
 }
 
+/* ---- 헤더 ---- */
+
+.hdr {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--canvas) 82%, transparent);
+  backdrop-filter: saturate(180%) blur(12px);
+}
+
+/* color-mix·backdrop-filter 를 모르는 브라우저에서는 그냥 불투명하게 둔다 */
+@supports not (backdrop-filter: blur(1px)) {
+  .hdr { background: var(--canvas); }
+}
+
+.hdr__inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  min-height: 52px;
+  padding: 0 var(--s8);
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+
+@media (max-width: 640px) {
+  .hdr__inner { padding: 0 12px 0 20px; }
+}
+
+.hdr__logo { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+.hdr__count { margin-left: auto; font-size: 13px; color: var(--ink-secondary); }
+
+.iconbtn {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--r2);
+  background: none;
+  color: var(--ink-secondary);
+  cursor: pointer;
+}
+
+.iconbtn:hover { background: var(--accent-tint); color: var(--accent); }
+
+/* ---- 토스트 ----
+   복사 결과처럼 되돌릴 것이 없는 알림만 여기로 낸다. */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--s6);
+  transform: translateX(-50%);
+  z-index: 60;
+  max-width: calc(100vw - 40px);
+  padding: 10px var(--s4);
+  border-radius: var(--r3);
+  background: var(--ink);
+  color: var(--canvas);
+  font-size: 13px;
+  box-shadow: var(--elev);
+}
+
 /* ---- 타이포 ----
    굵기는 400·500 두 단계만. 크기 스케일도 5단계로 고정한다. */
 
@@ -133,7 +199,16 @@ h2 { font-size: 17px; line-height: 1.41; font-weight: 500; margin: 0; letter-spa
 
 a { color: var(--accent); text-underline-offset: 2px; }
 
+.hero { padding: var(--s12) 0 var(--s6); max-width: 26em; }
+
+@media (max-width: 640px) {
+  .hero { padding: var(--s8) 0 var(--s4); }
+  h1 { font-size: 26px; }
+}
+
 .section { margin: var(--s8) 0 0; }
+/* 첫 섹션은 헤더 바로 아래라 위 여백이 덜 필요하다 */
+.section--lead { margin-top: var(--s6); }
 
 .section__head {
   display: flex;
@@ -287,6 +362,63 @@ input[type='date'] {
   font-size: 14px;
 }
 
+/* ---- D-Day 카드 ----
+   화면에서 가장 먼저 읽혀야 하는 값이다. 숫자만 30px 로 키우고 나머지는 전부 낮춘다. */
+
+.ddcards {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--s3);
+  margin: 0 0 var(--s4);
+  padding: 0;
+  list-style: none;
+}
+
+.ddcard {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: var(--s4);
+  border: 1px solid var(--line);
+  border-radius: var(--r3);
+  background: var(--surface);
+}
+
+/* 가장 급한 한 장만 액센트를 쓴다. 넉 장 모두 파랗게 하면 급한 것이 없어진다. */
+.ddcard--lead { border-color: var(--accent); }
+.ddcard--lead .ddcard__num { color: var(--accent); }
+
+.ddcard__exam { font-size: 15px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ddcard__kind { font-size: 13px; color: var(--ink-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.ddcard__num {
+  margin-top: var(--s2);
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.ddcard__date { font-size: 11px; color: var(--ink-muted); }
+
+@media (max-width: 640px) {
+  /* 이 서비스에서 가로 스크롤을 쓰는 유일한 곳이다. 타임라인에는 쓰지 않는다. */
+  .ddcards {
+    grid-auto-columns: 148px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    margin-inline: -20px;
+    padding: 0 20px var(--s2);
+    scrollbar-width: none;
+  }
+
+  .ddcards::-webkit-scrollbar { display: none; }
+  .ddcard { scroll-snap-align: start; padding: var(--s3); }
+  .ddcard__num { font-size: 26px; }
+}
+
 /* ---- 다가오는 일정 리스트 ---- */
 
 .dday { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
@@ -323,6 +455,55 @@ input[type='date'] {
 
 footer { margin-top: var(--s12); padding-top: var(--s4); border-top: 1px solid var(--line); }
 footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
+
+.sources { margin-top: var(--s3); }
+.sources > summary { font-size: 13px; color: var(--ink-muted); cursor: pointer; min-height: 24px; }
+.sources p { margin-top: var(--s1); }
+
+/* ---- 하단 액션 바 ----
+   고르는 중에만 뜬다. 고른 것과 되돌아갈 길을 화면 안에 붙들어 둔다. */
+
+.actionbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  border-top: 1px solid var(--line);
+  background: color-mix(in srgb, var(--canvas) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(12px);
+  box-shadow: var(--elev);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .actionbar { background: var(--canvas); }
+}
+
+.actionbar__inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: var(--s3) var(--s8);
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+
+@media (max-width: 640px) {
+  .actionbar__inner { padding: var(--s2) 20px; }
+}
+
+.actionbar__list {
+  min-width: 0;
+  flex: 1 1 auto;
+  font-size: 13px;
+  color: var(--ink-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icon { flex: none; }
 
 /* ---- 접기 ---- */
 
