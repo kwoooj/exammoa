@@ -14,8 +14,9 @@
     "collect": "node --env-file-if-exists=.env scripts/collect.mjs",
     "publish:data": "node scripts/publish.mjs",
     "typecheck": "tsc --noEmit",
-    "check": "npm test && npm run typecheck && node scripts/ci-gate.mjs --pr",
-    "test": "node --test \"scripts/**/*.test.mjs\" \"src/**/*.test.ts\""
+    "check": "npm run check:seed && npm test && npm run typecheck && node scripts/ci-gate.mjs --pr",
+    "test": "node --test \"scripts/**/*.test.mjs\" \"src/**/*.test.ts\"",
+    "check:seed": "node scripts/check-seed.mjs"
   },
   "dependencies": {
     "react": "^19.1.0",
