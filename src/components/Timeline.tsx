@@ -34,28 +34,22 @@ export function Timeline({ plans, sessions, groups, nameOf, today, onPickBar }: 
   const ticks = monthTicks(w);
   const nowLeft = todayLeft(today, w);
 
-  /**
-   * 창이 오늘부터 시작하므로 오늘 선은 거의 항상 왼쪽 끝이고, 거기에는 첫 월 라벨이
-   * 이미 서 있다. 둘을 겹쳐 찍으면 '오늘8월' 로 읽힌다 (실측). 겹치는 월 라벨은
-   * `오늘` 로 바꿔 달고, 겹칠 라벨이 없을 때만 따로 하나 세운다.
-   */
-  const nowTick = ticks.find(t => Math.abs(Math.max(t.left, 0) - nowLeft) < 0.05);
-
   return (
     <div className="tl">
+      {/*
+        축에는 월 이름만 쓴다. 오늘 자리에 `오늘` 라벨을 세워 봤더니, 창이 오늘부터
+        시작하므로 그 자리에는 첫 월 라벨이 이미 서 있어 '오늘8월' 로 겹쳤다. 월
+        라벨을 `오늘` 로 바꿔 다는 방법도 바로 옆 `9월` 과 1px 간격으로 붙었다
+        (390px 실측). 오늘은 액센트 세로선과 범례가 이미 말한다.
+      */}
       <div className="tl__axis" aria-hidden="true">
         <div className="tl__label" />
         <div className="tl__track tl__track--axis">
           {ticks.map(t => (
-            <span
-              key={t.month}
-              className={`tl__tick ${t === nowTick ? 'tl__tick--now' : ''}`}
-              style={{ left: pct(Math.max(t.left, 0)) }}
-            >
-              {t === nowTick ? '오늘' : t.label}
+            <span key={t.month} className="tl__tick" style={{ left: pct(Math.max(t.left, 0)) }}>
+              {t.label}
             </span>
           ))}
-          {!nowTick && <span className="tl__nowLabel" style={{ left: pct(nowLeft) }}>오늘</span>}
         </div>
       </div>
 
@@ -147,44 +141,44 @@ function TimelineTable({ rows, today }: { rows: Row[]; today: string }) {
     // 감추는 클래스는 바깥 div 가 쓴다. table 에 직접 걸면 width:1px 를 무시하고
     // 내용 크기(실측 393×530)로 부풀어 클릭을 가로챌 수 있다.
     <div className="sr-only">
-    <table>
-      <caption>오늘({dotted(today)})부터 6개월간의 일정</caption>
-      <thead>
-        <tr>
-          <th scope="col">시행그룹</th>
-          <th scope="col">이벤트</th>
-          <th scope="col">기간</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map(row =>
-          row.dense ? (
-            <tr key={row.groupId}>
-              <th scope="row">{row.label}</th>
-              <td>6개월 중 {row.sessionCount}회 시행</td>
-              <td>회차를 고르면 일정이 나옵니다</td>
-            </tr>
-          ) : (
-            <Fragment key={row.groupId}>
-              {row.bars.map(b => (
-                <tr key={b.key}>
-                  <th scope="row">{row.label}</th>
-                  <td>{b.label || KIND_LABEL[b.kind]}</td>
-                  <td>{b.start === b.end ? dotted(b.start) : `${dotted(b.start)} ~ ${dotted(b.end)}`}</td>
-                </tr>
-              ))}
-              {row.markers.map(m => (
-                <tr key={m.key}>
-                  <th scope="row">{row.label}</th>
-                  <td>응시 예정</td>
-                  <td>{m.label}</td>
-                </tr>
-              ))}
-            </Fragment>
-          ),
-        )}
-      </tbody>
-    </table>
+      <table>
+        <caption>오늘({dotted(today)})부터 6개월간의 일정</caption>
+        <thead>
+          <tr>
+            <th scope="col">시행그룹</th>
+            <th scope="col">이벤트</th>
+            <th scope="col">기간</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(row =>
+            row.dense ? (
+              <tr key={row.groupId}>
+                <th scope="row">{row.label}</th>
+                <td>6개월 중 {row.sessionCount}회 시행</td>
+                <td>회차를 고르면 일정이 나옵니다</td>
+              </tr>
+            ) : (
+              <Fragment key={row.groupId}>
+                {row.bars.map(b => (
+                  <tr key={b.key}>
+                    <th scope="row">{row.label}</th>
+                    <td>{b.label || KIND_LABEL[b.kind]}</td>
+                    <td>{b.start === b.end ? dotted(b.start) : `${dotted(b.start)} ~ ${dotted(b.end)}`}</td>
+                  </tr>
+                ))}
+                {row.markers.map(m => (
+                  <tr key={m.key}>
+                    <th scope="row">{row.label}</th>
+                    <td>응시 예정</td>
+                    <td>{m.label}</td>
+                  </tr>
+                ))}
+              </Fragment>
+            ),
+          )}
+        </tbody>
+      </table>
     </div>
   );
 }

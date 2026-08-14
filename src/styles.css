@@ -99,6 +99,9 @@ body {
   .wrap { padding: var(--s4) 20px var(--s12); }
 }
 
+/* 하단 바가 떠 있는 동안에는 마지막 내용이 그 뒤로 숨지 않게 자리를 비운다 */
+.wrap--barred { padding-bottom: 96px; }
+
 /* ---- 공용 ---- */
 
 /* 화면에서는 감추고 스크린리더에는 남긴다 (타임라인 표 대체 표현 등) */
@@ -206,7 +209,8 @@ a { color: var(--accent); text-underline-offset: 2px; }
   h1 { font-size: 26px; }
 }
 
-.section { margin: var(--s8) 0 0; }
+/* 고정 헤더가 52px 다. 앵커로 뛰면 제목이 그 아래로 들어가 버린다 */
+.section { margin: var(--s8) 0 0; scroll-margin-top: 64px; }
 /* 첫 섹션은 헤더 바로 아래라 위 여백이 덜 필요하다 */
 .section--lead { margin-top: var(--s6); }
 
@@ -524,6 +528,9 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
   .actionbar__inner { padding: var(--s2) 20px; }
 }
 
+/* 버튼은 줄이지 않는다. 265px 에서 '일정 보/기' 로 쪼개졌다 */
+.actionbar .btn { flex: none; white-space: nowrap; }
+
 .actionbar__list {
   min-width: 0;
   flex: 1 1 auto;
@@ -802,17 +809,6 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 
 .tl__gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); }
 .tl__now { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--accent); }
-
-.tl__tick--now { color: var(--accent); }
-
-.tl__nowLabel {
-  position: absolute;
-  top: 0;
-  font-size: 11px;
-  color: var(--accent);
-  white-space: nowrap;
-  transform: translateX(-50%);
-}
 
 /* 접수 = 속 빈 막대 / 시험 = 채운 막대 / 발표 = 속 빈 점 */
 .tl__bar { position: absolute; top: 50%; height: 10px; transform: translateY(-50%); border-radius: 3px; }

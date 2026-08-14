@@ -71,7 +71,16 @@ export default function App() {
 
   async function copyLink() {
     if (!data) return;
-    const ok = await copyText(planUrl(plans, data.sessions.sessions));
+    const url = planUrl(plans, data.sessions.sessions);
+    /**
+     * 복사하기 전에 주소창부터 맞춘다.
+     *
+     * 클립보드는 권한·포커스 문제로 거절될 수 있고, 그때 안내는 "주소창의 주소를
+     * 복사해 주세요" 다. 그런데 localStorage 로 복원한 첫 화면에는 ?p= 가 없어서
+     * (persist 가 아직 돌지 않았다) 안내대로 해도 계획이 빠진 링크가 나간다.
+     */
+    window.history.replaceState(null, '', url);
+    const ok = await copyText(url);
     setToast({
       id: Date.now(),
       text: ok ? '링크를 복사했어요' : '복사하지 못했어요. 주소창의 주소를 복사해 주세요',
@@ -218,7 +227,7 @@ npm run publish:data`}</pre>
     <>
       <AppHeader pickedCount={picked.size} onCopy={copyLink} />
 
-      <main className="wrap">
+      <main className={`wrap ${hasPlans && pickerOpen ? 'wrap--barred' : ''}`}>
         {fresh.message && (
           <p className="notice" role="status">
             <WarnIcon />
