@@ -251,7 +251,8 @@
       "collect": "manual",
       "agencyUrl": "https://license.korcham.net",
       "applyUrl": "https://license.korcham.net/ex/dailyExam_join.do",
-      "note": "확정 일정이 없다. 2026 달력은 /kor/images/.../img_2026_examschedule01.png 이미지뿐이고 그 경로는 robots.txt Disallow: /kor/ 다. PNG·PDF 를 요청하지 않는다 (FR-DAT-11)"
+      "note": "확정 일정이 없다. 2026 달력은 /kor/images/.../img_2026_examschedule01.png 이미지뿐이고 그 경로는 robots.txt Disallow: /kor/ 다. PNG·PDF 를 요청하지 않는다 (FR-DAT-11)",
+      "ruleCheckedAt": "2026-08-13"
     },
     {
       "id": "korcham-acct",
@@ -276,7 +277,8 @@
       ],
       "collect": "manual",
       "agencyUrl": "https://www.opic.or.kr",
-      "note": "opic.or.kr 은 robots.txt Disallow: / → 크롤링 안 함. 상시시험이라 막대를 그리지 않으므로 실질 손해가 없다"
+      "note": "opic.or.kr 은 robots.txt Disallow: / → 크롤링 안 함. 상시시험이라 막대를 그리지 않으므로 실질 손해가 없다",
+      "ruleCheckedAt": "2026-08-13"
     },
     {
       "id": "kait-linux",
@@ -314,7 +316,8 @@
       ],
       "collect": "manual",
       "agencyUrl": "https://license.kpc.or.kr",
-      "note": "매월 시행이라 막대 대신 규칙 카드. 페이지는 크롤링 가능하지만(robots 허용) 상시이므로 우선순위가 낮다"
+      "note": "매월 시행이라 막대 대신 규칙 카드. 페이지는 크롤링 가능하지만(robots 허용) 상시이므로 우선순위가 낮다",
+      "ruleCheckedAt": "2026-08-13"
     }
   ]
 }

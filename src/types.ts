@@ -110,6 +110,14 @@ export interface ScheduleGroup {
   agency: string;
   cadence: Cadence;
   rollingRule?: string;
+  /**
+   * 상시시험 규칙을 사람이 마지막으로 확인한 날 (YYYY-MM-DD).
+   *
+   * 규칙은 기관이 조용히 바꾼다. 크롤러가 죽으면 빨간불이 켜지지만 수기 규칙이 낡는
+   * 것은 아무도 알림을 받지 못한다 — 그래서 확인 날짜를 데이터로 들고 있다가 화면이
+   * "마지막 확인 N일 전" 으로 말한다.
+   */
+  ruleCheckedAt?: string;
   /** 이 그룹의 일정을 따르는 종목들 */
   examSlugs: string[];
   /** 수집 경로. 'none' 은 v0 대상 아님 */
