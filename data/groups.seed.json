@@ -151,6 +151,8 @@
       ],
       "collect": "crawl",
       "sourceUrl": "https://www.historyexam.go.kr/pageLink.do?link=examSchedule",
+      "agencyUrl": "https://www.historyexam.go.kr/pageLink.do?link=examSchedule",
+      "applyUrl": "https://www.historyexam.go.kr/pageLink.do?link=rceptInfo",
       "note": "연 6회. 심화(1~3급)와 기본(4~6급)이 같은 날 시행"
     },
     {
@@ -163,6 +165,7 @@
       ],
       "collect": "crawl",
       "sourceUrl": "https://exam.toeic.co.kr/receipt/examSchList.php",
+      "agencyUrl": "https://exam.toeic.co.kr/receipt/examSchList.php",
       "note": "월 2회 내외. 정기접수 + 추가접수 2세트 → reg seq 1·2"
     },
     {
@@ -175,6 +178,7 @@
       ],
       "collect": "crawl",
       "sourceUrl": "https://www.toeicswt.co.kr/receipt/examSchList.php",
+      "agencyUrl": "https://www.toeicswt.co.kr/receipt/examSchList.php",
       "note": "toeic 과 같은 파서로 도메인만 교체하면 된다"
     },
     {
@@ -187,6 +191,7 @@
       ],
       "collect": "crawl",
       "sourceUrl": "https://www.kbskorean.org/klt/exam-apply/list",
+      "agencyUrl": "https://www.kbskorean.org/klt/exam-apply/list",
       "note": "연 4~6회. 접수·추가접수·시험·발표가 개별 컬럼이라 매핑이 단순하다"
     },
     {
@@ -290,6 +295,7 @@
       ],
       "collect": "crawl",
       "sourceUrl": "https://www.ihd.or.kr/guidecert1.do",
+      "agencyUrl": "https://www.ihd.or.kr/guidecert1.do",
       "note": "연 4회. 1차 필기 + 2차 실기. 루트(ihd.or.kr)는 meta refresh 셸이라 /guidecert1.do 가 정본이다"
     },
     {
@@ -303,7 +309,8 @@
       ],
       "collect": "crawl",
       "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
-      "note": "연 6회. license.kacpta.or.kr 은 kacta.or.kr 로 302 후 frameset 이라 본문 프레임이 정본이다"
+      "agencyUrl": "https://license.kacpta.or.kr",
+      "note": "연 6회. license.kacpta.or.kr 은 kacta.or.kr 로 302 후 frameset 이라 본문 프레임이 정본이다. 사람이 클릭할 agencyUrl 은 프레임셋 입구여야 한다 — 본문 프레임만 열면 기관 내비게이션 없이 표 하나만 뜬다"
     },
     {
       "id": "kpc-itq",
