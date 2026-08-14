@@ -101,6 +101,21 @@ async function main() {
   // 호스트 관례. 404/index.html 과 별개로 루트에도 둔다.
   await writeFile(join(DIST, '404.html'), await readFile(join(DIST, '404', 'index.html'), 'utf8'), 'utf8');
 
+  /**
+   * robots.txt 를 여기서 만든다. `public/` 에 정적 파일로 두면 Sitemap 주소가
+   * 하드코딩되어 SITE_ORIGIN 과 어긋난다 — 배포 주소를 바꾼 날 아무도 모른다.
+   */
+  const robots = [
+    '# 시험모아 — 여러 기관의 공개 일정을 모아 보여주는 정적 사이트',
+    '# 막을 것이 없다. 수집이 금지된 기관도 링크로만 나가므로 여기와 무관하다.',
+    'User-agent: *',
+    'Allow: /',
+    '',
+    `Sitemap: ${ORIGIN}/sitemap.xml`,
+    '',
+  ].join('\n');
+  await writeFile(join(DIST, 'robots.txt'), robots, 'utf8');
+
   await writeFile(
     join(DIST, 'sitemap.xml'),
     sitemapXml(ORIGIN, paths.filter(p => p !== '/404'), data.buildDate),
