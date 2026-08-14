@@ -2,7 +2,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decodeKorean, parseCsv, readCsv } from './csv.mjs';
+import { decodeKorean, decodeResponse, parseCsv, readCsv } from './csv.mjs';
 
 // ---- 파싱 -------------------------------------------------------------
 
@@ -70,6 +70,63 @@ test('expect 가 안 보이면 다른 인코딩으로 재시도한다', () => {
 
 test('expect 없이도 동작한다', () => {
   assert.equal(decodeKorean(Buffer.from('a,b', 'utf8')), 'a,b');
+});
+
+// ---- HTTP 응답 디코딩 --------------------------------------------------
+
+/** `<html><body>원서접수 시험일자</body></html>` 를 EUC-KR 로 */
+const euckrPage = () => {
+  // 원서접수 시험일자 (EUC-KR 바이트)
+  const korean = Buffer.from([0xbf, 0xf8, 0xbc, 0xad, 0xc1, 0xa2, 0xbc, 0xf6, 0x20, 0xbd, 0xc3, 0xc7, 0xe8, 0xc0, 0xcf, 0xc0, 0xda]);
+  return Buffer.concat([Buffer.from('<html><body>', 'latin1'), korean, Buffer.from('</body></html>', 'latin1')]);
+};
+
+const fakeRes = (buf, contentType) => new Response(buf, { headers: contentType ? { 'content-type': contentType } : {} });
+
+test('res.text() 는 charset 을 무시한다 — 그래서 이 함수가 있다', async () => {
+  const buf = euckrPage();
+  const viaText = await fakeRes(buf, 'text/html; charset=euc-kr').text();
+  assert.ok(!viaText.includes('원서접수'), 'res.text() 가 euc-kr 을 읽었다면 이 함수가 필요 없다');
+
+  const { text, encoding } = await decodeResponse(fakeRes(buf, 'text/html; charset=euc-kr'), { expect: '원서접수' });
+  assert.ok(text.includes('원서접수'));
+  assert.ok(text.includes('시험일자'));
+  assert.equal(encoding, 'euc-kr');
+});
+
+test('선언 이름의 표기 흔들림을 흡수한다', async () => {
+  for (const ct of ['text/html; charset=EUC-KR', 'text/html;charset=ks_c_5601-1987', 'text/html; charset=cp949']) {
+    const { text } = await decodeResponse(fakeRes(euckrPage(), ct), { expect: '원서접수' });
+    assert.ok(text.includes('원서접수'), ct);
+  }
+});
+
+test('선언이 없으면 meta charset 을 본다', async () => {
+  const buf = Buffer.concat([
+    Buffer.from('<html><head><meta charset="euc-kr"></head><body>', 'latin1'),
+    Buffer.from([0xbf, 0xf8, 0xbc, 0xad, 0xc1, 0xa2, 0xbc, 0xf6]),
+    Buffer.from('</body></html>', 'latin1'),
+  ]);
+  const { text } = await decodeResponse(fakeRes(buf), { expect: '원서접수' });
+  assert.ok(text.includes('원서접수'));
+});
+
+test('선언이 틀렸으면 내용으로 판별한다', async () => {
+  // utf-8 이라고 선언했지만 실제로는 euc-kr
+  const { text } = await decodeResponse(fakeRes(euckrPage(), 'text/html; charset=utf-8'), { expect: '원서접수' });
+  assert.ok(text.includes('원서접수'), '선언을 맹신하면 표 헤더를 못 찾는다');
+});
+
+test('UTF-8 페이지는 그대로 읽는다', async () => {
+  const buf = Buffer.from('<html><body>접수일자 시험일자</body></html>', 'utf8');
+  const { text, encoding } = await decodeResponse(fakeRes(buf, 'text/html;charset=UTF-8'), { expect: '접수일자' });
+  assert.ok(text.includes('접수일자'));
+  assert.equal(encoding, 'utf-8');
+});
+
+test('expect 없이도 동작한다 — 기대 문자열을 모르는 소스도 있다', async () => {
+  const { text } = await decodeResponse(fakeRes(Buffer.from('<p>hello</p>', 'utf8'), 'text/html'));
+  assert.equal(text, '<p>hello</p>');
 });
 
 // ---- 실제 파일 --------------------------------------------------------

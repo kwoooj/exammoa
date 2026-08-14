@@ -61,6 +61,10 @@ export function parseCsv(text) {
  * 바이트 판별만으로는 부족하다 — EUC-KR 바이트가 우연히 유효한 UTF-8 인 경우가 있고,
  * 그때 조용히 깨진 문자열이 나온다. 그래서 `expect` 문자열이 보이는지까지 확인한다.
  *
+ * CSV 전용이 아니다. `Response.text()` 는 Fetch 명세상 **항상 UTF-8 로 디코드하고
+ * `Content-Type` 의 charset 을 무시한다** — 그래서 EUC-KR 로 내려오는 기관 페이지도
+ * 여기를 거쳐야 한다 (`decodeResponse`).
+ *
  * @param {Buffer|Uint8Array} buf
  * @param {string} expect 헤더에 반드시 있어야 하는 문자열
  */
@@ -78,6 +82,50 @@ export function decodeKorean(buf, expect = '') {
     ?? tryDecode('euc-kr', false)
     // 둘 다 `expect` 를 못 찾았으면 파일이 바뀐 것이다. 호출부가 헤더 검사로 실패시킨다.
     ?? new TextDecoder('utf-8').decode(buf);
+}
+
+/** 한국 기관 페이지가 실제로 쓰는 인코딩 이름 → TextDecoder 이름 */
+const ENCODING_ALIAS = new Map([
+  ['euc-kr', 'euc-kr'],
+  ['euckr', 'euc-kr'],
+  ['ks_c_5601-1987', 'euc-kr'],
+  ['ksc5601', 'euc-kr'],
+  ['cp949', 'euc-kr'],
+  ['windows-949', 'euc-kr'],
+  ['ms949', 'euc-kr'],
+  ['utf-8', 'utf-8'],
+  ['utf8', 'utf-8'],
+]);
+
+/**
+ * HTTP 응답을 선언된 charset 으로 디코드한다.
+ *
+ * **`res.text()` 를 쓰면 안 된다.** Fetch 명세상 `text()` 는 언제나 UTF-8 로 디코드하고
+ * `Content-Type: text/html; charset=euc-kr` 을 무시한다. 실측: 한국세무사회 페이지가
+ * 헤더로 euc-kr 을 선언하는데 `res.text()` 로 읽으면 표 헤더가 통째로 깨져
+ * `tableByHeader()` 가 아무것도 못 찾는다.
+ *
+ * 선언을 우선 믿되, 선언이 틀렸을 때를 대비해 `expect` 로 검산한다. 선언이 없으면
+ * `<meta charset>` 을 보고, 그것도 없으면 UTF-8 → EUC-KR 순으로 시도한다.
+ *
+ * @param {Response} res
+ * @param {{expect?:string}} opts `expect` 가 결과에 없으면 다른 인코딩으로 재시도한다
+ */
+export async function decodeResponse(res, { expect = '' } = {}) {
+  const buf = new Uint8Array(await res.arrayBuffer());
+  const declared = (res.headers.get('content-type') ?? '').match(/charset\s*=\s*["']?([\w-]+)/i)?.[1];
+  // <meta charset> 은 ASCII 범위라 latin1 로 훑어도 안전하다
+  const metaSniff = new TextDecoder('latin1').decode(buf.subarray(0, 4096))
+    .match(/charset\s*=\s*["']?([\w-]+)/i)?.[1];
+
+  for (const name of [declared, metaSniff]) {
+    const enc = ENCODING_ALIAS.get(String(name ?? '').toLowerCase());
+    if (!enc) continue;
+    const text = new TextDecoder(enc).decode(buf);
+    if (!expect || text.includes(expect)) return { text, encoding: enc, declared: name };
+  }
+  // 선언이 없거나 틀렸다. 내용으로 판별한다.
+  return { text: decodeKorean(buf, expect), encoding: 'sniffed', declared: declared ?? metaSniff ?? null };
 }
 
 /**
