@@ -32,6 +32,29 @@
 
   --overlay: rgba(10, 10, 10, 0.32);
 
+  /* 캘린더 막대. 색이 아니라 모양으로 구분하므로 값은 잉크 계열뿐이다.
+     지난 막대에 opacity 를 쓰지 않고 전용 토큰을 두는 이유는 다크 모드다 —
+     밝은 잉크에 opacity .35 를 걸면 대비가 AA 아래로 떨어져 글자가 안 읽힌다. */
+  --bar-fill: var(--ink);
+  --bar-line: var(--line-strong);
+  --bar-past: #9a978f;      /* 흰 배경 위 흰 글자 3.1:1 — 10px 굵은 글씨는 AA Large */
+  --bar-past-line: var(--line);
+
+  /* 종목 구분 색 6가지. 액센트(코발트)와 경고(앰버)는 이미 다른 뜻을 갖고 있어
+     팔레트에 넣지 않는다. 흰 배경에서 흰 글자를 얹어도 4.5:1 을 넘는 값들이다.
+
+     이 색은 **일정 종류가 아니라 어느 시험인지**를 말한다. 종류는 모양이 맡는다 —
+     색으로 종류를 구분하면 색맹 사용자와 흑백 인쇄에서 접수와 시험이 같아진다. */
+  --cat-1: #6d40b8;  /* 보라 5.9:1 */
+  --cat-2: #0e6c6c;  /* 청록 5.2:1 */
+  --cat-3: #b03a5b;  /* 자주 5.0:1 */
+  --cat-4: #3b7a3b;  /* 초록 4.6:1 */
+  --cat-5: #8a5a00;  /* 황토 5.1:1 */
+  --cat-6: #8b3a72;  /* 자두 6.1:1 */
+  --cat-on: #fff;
+  /* 틴트는 막대가 흰 칸에서 사라지지 않게 하는 최소한의 바탕이다 */
+  --cat-tint: 10%;
+
   --s1: 4px;
   --s2: 8px;
   --s3: 12px;
@@ -73,6 +96,21 @@
 
     --overlay: rgba(0, 0, 0, 0.6);
     --elev: 0 12px 32px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+
+    /* 어두운 배경에서는 지난 막대를 더 어둡게 눕힌다. 밝게 두면 살아 있는
+       막대보다 눈에 띄어 "지났다" 가 "중요하다" 로 읽힌다. */
+    --bar-past: #56565e;
+    --bar-past-line: #3a3a41;
+
+    /* 같은 여섯 색을 어두운 배경용으로 올린다. 채운 막대의 글자는 어두운 색이 된다 */
+    --cat-1: #b79cf5;
+    --cat-2: #5cc9c3;
+    --cat-3: #f096ad;
+    --cat-4: #86c98a;
+    --cat-5: #dfae5e;
+    --cat-6: #e79ad0;
+    --cat-on: #14121a;
+    --cat-tint: 16%;
   }
 }
 
@@ -183,6 +221,35 @@ body {
 
 /* 버튼과 링크를 한 줄에 늘어놓을 때 */
 .row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); }
+
+/* 링크만 늘어놓는 목록. 관련 시험·일정이 같은 시험 (§7.10) */
+.linklist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2) var(--s4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---- 상태 배지 (§3.2) ----
+   색상만으로 상태를 구분하지 않는다. 배지는 언제나 글자를 담고, 액센트는
+   접수 중·접수 D-N 에만 붙는다 — 나머지는 중립색이다. */
+
+.badge {
+  display: inline-block;
+  padding: 2px var(--s2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r1);
+  font-size: 13px;
+  color: var(--ink-secondary);
+  white-space: nowrap;
+}
+
+.badge--accent { border-color: var(--accent); color: var(--accent); font-weight: 500; }
+
+.detail__status { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin: var(--s3) 0; }
+.detail__event { font-size: 14px; color: var(--ink-secondary); }
 
 .iconbtn {
   width: 44px;
@@ -690,21 +757,32 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 .cal__navBtn:disabled:hover { background: none; }
 
 /* ---- 월간 캘린더 ----
-   시험일은 채움, 접수 마감은 테두리만. 색을 쓰지 않는다 — 액센트 예산은 타임라인이 쓴다. */
+   화면정의 §7.5 · §8.5. 기간 이벤트를 7열 격자에서 주 경계를 넘어 이어지는 것처럼
+   그린다.
+
+   기법: **주마다 별도의 CSS 그리드**를 두고 막대를 grid-column 으로 놓는다.
+   절대 위치 오버레이도, 월 전체 7열 그리드 하나도 아니다.
+     - 오버레이는 칸 높이를 미리 알아야 하는데, 레인 수는 주마다 다르다.
+     - 월 전체 그리드 하나로는 막대가 주 경계를 넘을 방법이 없다.
+     - 퍼센트 폭은 minmax(0,1fr) 칸 안에서 한 열마다 1px 씩 어긋나 390px 에서
+       막대와 날짜 숫자가 어긋난다. 그래서 정수 열 번호만 쓴다.
+
+   레인 수는 --lanes 로 **주마다** 준다. 달 최대치로 주면 붐비는 달에 모든 주가
+   최악의 주만큼 높아져 나머지가 화면 밖으로 밀린다. */
 
 .cal { display: block; }
 
 .cal__title { font-size: 15px; font-weight: 500; color: var(--ink); margin: 0; }
 
-.cal__grid {
+/* 요일 머리 줄. 격자와 같은 7열이어야 칸이 어긋나지 않는다 */
+.cal__wds {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   border: 1px solid var(--line);
-  border-right: 0;
   border-bottom: 0;
-  border-radius: var(--r3);
+  border-radius: var(--r3) var(--r3) 0 0;
   overflow: hidden;
-  background: var(--surface);
+  background: var(--canvas);
 }
 
 .cal__wd {
@@ -712,56 +790,241 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
   color: var(--ink-muted);
   text-align: center;
   padding: var(--s1) 0;
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: var(--canvas);
 }
 
 .cal__wd--weekend { color: var(--ink-secondary); }
 
-.cal__day {
-  min-height: 62px;
-  padding: 3px;
+.cal__week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  /* 첫 줄은 날짜 숫자, 그다음이 레인, 마지막은 남는 높이를 먹는 신축 줄이다.
+     grid-row: 1 / -1 이 명시적 행 수에 기대므로 repeat 를 반드시 적어 준다.
+
+     신축 줄이 없으면 44px 터치 타깃과 고정 행 높이가 싸운다 — 막대가 없는 주는
+     18px 밖에 안 되는데 날짜 칸에 min-height: 44px 를 주면 칸이 트랙 밖으로
+     흘러넘쳐 **다음 주의 날짜 숫자를 덮는다.** 실제로 그렇게 그려졌다.
+     높이는 주 전체(.cal__week)에 주고 남는 만큼을 마지막 줄이 흡수한다. */
+  grid-template-rows: 18px repeat(var(--lanes, 0), 18px) minmax(4px, 1fr);
+  min-height: 48px;
+  row-gap: 2px;
+  padding-bottom: 4px;
+  border-left: 1px solid var(--line);
   border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  overflow: hidden;
+  background: var(--surface);
 }
 
-.cal__num { font-size: 11px; color: var(--ink-secondary); }
+.cal__week:last-child {
+  border-bottom: 1px solid var(--line);
+  border-radius: 0 0 var(--r3) var(--r3);
+}
+
+/* 날짜 칸이 주 행 전체를 덮는다. 모바일에서는 이것이 터치 타깃이다 (§8.13) —
+   막대는 18px 이라 44×44 를 만들 수 없고, 빗맞은 탭도 그 날짜를 열어 줘야 한다.
+   막대는 이 버튼의 자식이 아니라 형제다. 중첩 버튼은 무효 HTML 이고 AT 가 깨진다. */
+.cal__day {
+  grid-row: 1 / -1;
+  min-height: 0;
+  padding: 2px 3px;
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  background: none;
+  text-align: left;
+  /*
+     버튼은 내용을 세로 가운데로 밀어 넣는다. block 으로 바꿔도 그렇다.
+     그래서 날짜 숫자가 칸 한가운데 — 정확히 첫 레인 자리 — 에 앉아 막대에 덮였다.
+     flex + flex-start 로 위쪽에 못 박는다.
+  */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.cal__day:last-child { border-right: 0; }
+.cal__day:disabled { cursor: default; }
+.cal__day:not(:disabled):hover { background: var(--accent-tint); }
+
+.cal__num { font-size: 11px; color: var(--ink-secondary); font-variant-numeric: tabular-nums; }
 .cal__day--out { background: var(--canvas); }
 .cal__day--out .cal__num { color: var(--ink-muted); }
 
-.cal__day--today { box-shadow: inset 0 0 0 2px var(--ink); }
-.cal__day--today .cal__num { font-weight: 500; color: var(--ink); }
+/* 액센트 예산 2번 자리 */
+.cal__day--today { box-shadow: inset 0 0 0 2px var(--accent); }
+.cal__day--today .cal__num { font-weight: 600; color: var(--accent); }
+.cal__day--selected { background: var(--accent-tint); }
 
-.cal__mark {
-  display: block;
-  font-size: 10px;
-  line-height: 1.35;
-  padding: 1px 3px;
-  border-radius: 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* ---- 막대 ----
+   두 채널을 겹치지 않게 나눈다.
+
+     모양 = 일정 종류 (접수 테두리 · 추가접수 점선 · 시험 채움 · 발표 점선)
+     색   = 어느 시험의 일정인가
+
+   색으로 종류를 구분하면 §3.2 의 "색상만으로 상태를 구분하지 않는다" 를 어기게 되고
+   색맹 사용자와 흑백 인쇄에서 접수와 시험이 같아진다.
+
+   바탕을 반드시 칠한다. 흰 칸 위의 흰 막대에 1.5px 테두리만 두르면 달력에서
+   막대가 사라진다 — 참고 구현에서 실제로 그랬다. 접수 계열도 옅은 틴트를 깔아
+   "여기 무언가 있다" 가 먼저 보이게 한다. */
+
+.cal__bar {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  height: 20px;
+  align-self: center;
+  margin: 0 1px;
+  padding: 0 5px;
+  border: 0;
+  border-radius: 3px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: left;
   white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.cal__mark--exam { background: var(--ink); color: var(--surface); }
-.cal__mark--reg { border: 1px solid var(--line-strong); color: var(--ink-secondary); }
+.cal__bar:disabled { cursor: default; }
+.cal__barText { overflow: hidden; text-overflow: ellipsis; display: block; }
 
-.cal__markKind { opacity: 0.75; }
+/* 기본(중립) — 시험 상세처럼 그룹이 하나뿐이라 색이 아무것도 구분하지 않을 때 */
+.cal__bar--reg {
+  border: 1.5px solid var(--bar-line);
+  background: color-mix(in srgb, var(--ink) 6%, var(--surface));
+  color: var(--ink-secondary);
+  line-height: 15px;
+}
 
-.cal__legend { display: flex; align-items: center; gap: var(--s2); margin: var(--s2) 0 0; }
-.cal__mark--sample { width: 22px; height: 11px; padding: 0; }
+.cal__bar--exam { background: var(--bar-fill); color: var(--surface); }
+
+.cal__bar--result {
+  border: 1.5px dashed var(--bar-line);
+  background: var(--surface);
+  color: var(--ink-secondary);
+  line-height: 15px;
+}
+
+/* 추가접수·빈자리접수·취소좌석. 정기접수와 눈으로 갈라야 남은 기회를 놓치지 않는다 */
+.cal__bar--extra { border-style: dashed; }
+
+/* 하루짜리는 칸 하나 폭이라 글자가 안 들어간다. 점으로 만든다 */
+.cal__bar--point {
+  width: 14px;
+  min-width: 14px;
+  height: 14px;
+  padding: 0;
+  border-radius: 50%;
+  justify-self: center;
+  margin: 0;
+}
+
+/* 진행 중인 막대는 굵기로도 말한다 (§7.5) */
+.cal__bar--ongoing { height: 22px; line-height: 20px; box-shadow: inset 0 0 0 1px var(--surface); }
+.cal__bar--reg.cal__bar--ongoing,
+.cal__bar--result.cal__bar--ongoing { line-height: 17px; }
+
+/* 과거는 숨기지 않고 채도만 낮춘다 (§7.5).
+   opacity 로 흐리면 다크 모드에서 대비가 AA 아래로 떨어지므로 전용 토큰을 쓴다. */
+.cal__bar--past { background: var(--bar-past); border-color: var(--bar-past-line); color: var(--surface); }
+.cal__bar--reg.cal__bar--past,
+.cal__bar--result.cal__bar--past { background: var(--surface); color: var(--ink-muted); }
+
+.cal__bar--selected { box-shadow: 0 0 0 2px var(--accent); }
+.cal__bar:not(:disabled):hover { box-shadow: 0 0 0 2px var(--accent-line); }
+
+/* 주 경계를 넘는 막대. 모서리를 각지게 하고 홑화살표로 "계속된다" 를 말한다 —
+   색이 아니라 형태와 글자다 (§3.2). */
+.cal__bar--openL { border-top-left-radius: 0; border-bottom-left-radius: 0; margin-left: 0; }
+.cal__bar--openR { border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: 0; }
+.cal__bar--openL::before { content: '‹'; opacity: 0.75; margin-right: 2px; }
+.cal__bar--openR::after { content: '›'; opacity: 0.75; float: right; }
+
+/* ---- 종목 색 ----
+   그룹이 둘 이상일 때만 붙는다 (lib/calcolors.ts). 모양 규칙은 위에서 이미
+   정해졌고 여기서는 색만 덮어쓴다. 지난 막대는 색을 잃는다 — 색은 "어느 시험" 을
+   말하는 채널인데, 끝난 일정에서까지 그것이 눈에 띌 이유가 없다. */
+
+.cal__bar--c1 { --cat: var(--cat-1); }
+.cal__bar--c2 { --cat: var(--cat-2); }
+.cal__bar--c3 { --cat: var(--cat-3); }
+.cal__bar--c4 { --cat: var(--cat-4); }
+.cal__bar--c5 { --cat: var(--cat-5); }
+.cal__bar--c6 { --cat: var(--cat-6); }
+
+.cal__bar[class*='cal__bar--c']:not(.cal__bar--past).cal__bar--exam {
+  background: var(--cat);
+  color: var(--cat-on);
+}
+
+.cal__bar[class*='cal__bar--c']:not(.cal__bar--past).cal__bar--reg,
+.cal__bar[class*='cal__bar--c']:not(.cal__bar--past).cal__bar--result {
+  border-color: var(--cat);
+  background: color-mix(in srgb, var(--cat) var(--cat-tint), var(--surface));
+  color: var(--cat);
+}
+
+/* color-mix 를 모르는 브라우저에서는 그냥 흰 바탕으로 둔다. 테두리 색은 남는다. */
+@supports not (background: color-mix(in srgb, red 10%, blue)) {
+  .cal__bar--reg { background: var(--surface); }
+  .cal__bar[class*='cal__bar--c']:not(.cal__bar--past).cal__bar--reg,
+  .cal__bar[class*='cal__bar--c']:not(.cal__bar--past).cal__bar--result { background: var(--surface); }
+}
+
+
+/* ---- 범례 ---- */
+
+.cal__legend { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); margin: var(--s2) 0 0; }
+.cal__legendItem { display: inline-flex; align-items: center; gap: var(--s1); }
+.cal__bar--sample { position: static; width: 20px; height: 10px; min-width: 0; margin: 0; padding: 0; pointer-events: none; }
+.cal__bar--result.cal__bar--sample { width: 10px; height: 10px; }
+
+/* ---- 상세 패널 ---- */
+
+.cal__panel {
+  margin-top: var(--s4);
+  padding: var(--s4);
+  border: 1px solid var(--line);
+  border-radius: var(--r3);
+  background: var(--surface);
+}
+
+.evt + .evt { margin-top: var(--s4); padding-top: var(--s4); border-top: 1px solid var(--line); }
+.evt__session { margin: 0; }
+.evt__date,
+.evt__name { margin: 2px 0 0; font-size: 17px; font-weight: 500; }
+.evt__when { margin: var(--s1) 0 0; font-size: 14px; color: var(--ink-secondary); }
+.evt__state { color: var(--ink); }
+.evt__folded { margin-top: var(--s2); }
+.evt__folded > summary { cursor: pointer; color: var(--ink-secondary); min-height: 24px; }
+.evt__list { margin: var(--s1) 0 0; padding-left: 1.2em; }
+.cal__panel .row { margin-top: var(--s3); }
+
+/* ---- 날짜순 일정표 (§8.10) ---- */
+
+.sched { width: 100%; border-collapse: collapse; font-size: 13px; }
+.sched th,
+.sched td { text-align: left; padding: var(--s2) var(--s2) var(--s2) 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.sched th { font-weight: 500; color: var(--ink-secondary); font-size: 12px; }
+.sched__row--past td { color: var(--ink-muted); }
 
 @media (max-width: 640px) {
-  /* 390px 에서 7열이 들어가야 한다. 칸을 줄이고 라벨은 종목명만 남긴다. */
-  .cal__day { min-height: 52px; padding: 2px; }
-  .cal__mark { font-size: 9px; padding: 0 2px; }
-  .cal__markKind { display: none; }
+  /* 390px 에서 7열을 유지한다. 칸을 줄이고 막대 글자는 종목 약칭만 남긴다.
+     주 높이는 44px 아래로 내리지 않는다 — 여기서 날짜 칸이 터치 타깃이다 (§8.13) */
+  .cal__day { padding: 2px; }
+  .cal__bar { font-size: 9px; padding: 0 2px; }
+  /* 주 높이에서 padding-bottom 4px 를 뺀 만큼이 날짜 칸이다. 44px 을 채우려면
+     주가 48px 이어야 한다 — 46px 로 두었더니 칸이 42px 로 떨어졌다 (§12.3). */
+  .cal__week { grid-template-rows: 16px repeat(var(--lanes, 0), 16px) minmax(4px, 1fr); min-height: 48px; }
+  .cal__bar { height: 14px; line-height: 14px; }
+  .cal__bar--ongoing { height: 16px; line-height: 16px; }
+  .sched { font-size: 12px; }
 }
+
 
 /* ---- 좁은 화면 넘침 방지 ----
    flex·grid 자식은 min-width 가 auto 라서, 내용의 고유 폭이 칸보다 크면 칸을 밀어낸다.
