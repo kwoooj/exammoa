@@ -18,9 +18,16 @@ interface Props {
 export function MonthCalendar({ items, today }: Props) {
   const [month, setMonth] = useState(() => ym(today));
   const byDate = groupByDate(items);
+  const cells = monthGrid(month).flat();
 
-  // 이 달에 표시할 것이 있는지. 없으면 그 사실을 말해 준다.
-  const marksThisMonth = items.filter(i => ym(i.date) === month).length;
+  /**
+   * 화면에 실제로 그려진 표시가 있는가.
+   *
+   * `ym(i.date) === month` 로 세면 안 된다. 격자는 앞뒤 달의 날짜도 그리고 거기에도
+   * 칩이 붙는다 — 9/2 칩이 8월 격자 끝에 보이는데 "이 달에는 표시할 일정이 없어요"
+   * 가 함께 뜬다 (실측). 안내문이 눈에 보이는 것과 어긋나면 안 된다.
+   */
+  const visibleMarks = cells.reduce((n, c) => n + (byDate.get(c.date)?.length ?? 0), 0);
   const isCurrent = month === ym(today);
 
   return (
@@ -46,7 +53,7 @@ export function MonthCalendar({ items, today }: Props) {
             {wd}
           </div>
         ))}
-        {monthGrid(month).flat().map(cell => {
+        {cells.map(cell => {
           const marks = byDate.get(cell.date) ?? [];
           const classes = [
             'cal__day',
@@ -76,7 +83,7 @@ export function MonthCalendar({ items, today }: Props) {
       <p className="cal__legend small muted">
         <span className="cal__mark cal__mark--exam cal__mark--sample" /> 시험일
         <span className="cal__mark cal__mark--reg cal__mark--sample" /> 원서접수 마감
-        {marksThisMonth === 0 && <span className="cal__none">이 달에는 표시할 일정이 없어요</span>}
+        {visibleMarks === 0 && <span className="cal__none">이 달에는 표시할 일정이 없어요</span>}
       </p>
     </div>
   );
