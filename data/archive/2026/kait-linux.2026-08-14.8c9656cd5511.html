@@ -1,0 +1,680 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta name="description" content="다양한 종목의 자격검정">
+	<meta name="keywords" content="자격검정, kait, 카이트">
+	<title>KAIT 자격검정</title>
+
+	
+
+<!-- taglib -->
+
+
+
+
+
+
+
+
+ <!-- 공용 클래스 -->
+
+
+
+
+
+<!-- js -->
+<!-- <script type="text/javascript" src="/common2/js/jquery/jquery-1.9.1.min.js"></script> -->
+<!-- <script type="text/javascript" src="/common/js/lib/jquery-1.10.2.min.js"></script> -->
+
+	<meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=EDGE" />
+<script type="text/javascript" src="/common/js/common.js"></script>
+<script type="text/javascript" src="/common2/js/jquery/jquery-ui-1.10.3.custom.min.js"></script>
+
+<script type="text/javascript" src="/common2/js/jquery/jquery.pager.js"></script>
+<script type="text/javascript" src="/common2/js/jquery/jquery.validate.js"></script>
+
+<script type="text/javascript" src="/common2/js/jquery/common.js"></script>
+<!-- <script type="text/javascript" src="/common2/js/jquery/jquery.treeview.js"></script> 주석처리하면 메인 슬라이드 됨 -->
+<!-- <script type="text/javascript" src="/common2/js/jquery/security.js"></script> -->
+<script type="text/javascript" src="/common2/js/jquery/jquery.autocomplete.js"></script>
+
+<script type="text/javascript" src="/common2/js/jquery/zipcode.js"></script>
+<script type="text/javascript" src="/common2/js/jquery/jquery.form.js"></script>
+<!-- 달력 -->
+<script type="text/javascript" src="/common2/js/jquery/jquery.ui.datepicker-ko.js"></script>
+<script type="text/javascript" src="/common2/js/jquery/jquery.ui.monthpicker-ko.js"></script>
+<link type="text/css" rel="stylesheet" href="/common2/css/jquery-ui-1.10.3.custom.css" />
+<!-- <link type="text/css" rel="stylesheet" href="/common2/css/common.css" charset="utf-8" /> -->
+
+
+
+
+	<link rel="stylesheet" type='text/css' href="/common/css/common.css" />
+	<link rel="stylesheet" type='text/css' href="/common/css/style_common.css" />
+	<link rel="stylesheet" type='text/css' href="/common/css/style_sub.css" />
+	<script type="text/javascript" src="/common/js/gnb.js"></script>
+	<script>
+		$(window).load(function() {
+			$('#loadingWrap').hide();
+		});
+	</script>
+	
+	
+	
+	
+	
+	<script src="/common/js/mlits/common_mlits.js"></script>
+	 <!--[if lt IE 9]>
+	<link rel="stylesheet" type='text/css' href="/css/ie8.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+	<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js">IE7_PNG_SUFFIX=".png";</script>
+
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<script src="/common/js/lib/selectivizr-min.js"></script>
+	<![endif]-->
+
+ </head>
+ <body>
+	<!-- WRAP -->
+	<div class="wrap">
+		<div id="loadingWrap">
+			<div class="loading">
+				<img src="/common2/examHome/image/common/loading2.gif" alt="처리중입니다">
+			</div>
+		</div>
+		<!-- skipMENU -->
+		<div id="skipToContent" style="top: -62px; height: 62px; display: block;">
+			<a href="#contents">본문 바로가기</a>
+			<a href="#tm">대메뉴 바로가기</a>
+		</div>
+		<!-- //skipMENU -->
+		<!-- HEADER -->
+		<header class="header">
+			<div class="hd_wrap clearfix">
+				
+				<a href="main.do" class="logo"><img src="/common/images/common/kait_logo3.jpg" alt="메인로고 클릭시 메인으로 이동합니다" /></a>
+				<div class="tnb">
+					 <a href="/">홈</a>
+					 
+					 	<a href="examlogin.do">로그인</a>
+					 	<a href="memjoin.do">회원가입</a>
+					 
+					 
+				</div>
+			</div>
+			<div class="navWrap" id="tm">
+				<nav class="gnb clearfix">
+					<span class="menu"><a href="introducesubject.do" >자격안내</a></span>
+					<span class="menu"><a href="memacceptguide.do" >시험접수</a></span>
+					<span class="menu"><a href="memgrade.do" >합격발표</a></span>
+					<span class="menu"><a href="memapplylicense.do" >자격증 발급</a></span>
+					<span class="menu"><a href="noticelist.do" >고객지원</a></span>
+					<span class="menu"><a href="memmyacceptlist.do" >마이페이지</a></span>
+				</nav>
+				<div class="subWrap clearfix">
+					<div class="subArea">
+						<!-- 자격안내 -->
+						<div class="sub sub01">
+							
+							<a href="introducesubject.do">자격안내</a>
+							<a href="guidecert.do">시험일정</a>
+							<a href="acceptnotice.do">응시자 유의사항</a>
+							
+							<a href="memapplicationcurrent.do">자격활용현황</a>
+							<a href="guidetextbook.do">교재안내</a>
+							<a href="abolision.do">폐지자격 안내</a>
+						</div>
+						<!-- 시험접수 -->
+						<div class="sub sub02">
+							<a href="memacceptguide.do">시험접수안내</a>
+							<a href="memaccept1.do">시험접수신청 </a>
+							<a href="memconfirm.do">시험접수현황 </a>
+							<a href="memsitecheck.do">시험장 확인 </a>
+							<a href="memprint.do">수험표 출력</a>
+							<a href="memrefund.do">연기 및 환불</a>
+						</div>
+						<!-- 합격발표 -->
+						<div class="sub sub03">
+							<a href="memgrade.do">성적확인</a>
+							<a href="guidequestion.do">문제공개</a>
+							<a href="memappeallist.do">이의신청</a>
+						</div>
+						<!-- 자격증 발급 -->
+						<div class="sub sub04">
+							
+							<a href="memapplylicense.do">자격증발급</a>
+							<a href="memconfirmationinfo.do">합격확인서발급</a>
+							<a href="memapplydiatskill.do">KAIT스킬인증/공인강사</a>
+
+						</div>
+						<!-- 고객지원 -->
+						<div class="sub sub05">
+							<a href="noticelist.do">공지사항</a>
+							<a href="questionlist.do">자주하는질문</a>
+							<!-- <a href="#customer02.html">보도자료</a> -->
+							<a href="onlinelecturelibrary4.do">온라인 강의교안</a>
+							
+							
+							<a href="guideheadquarter.do">지역본부안내</a>
+
+						</div>
+						<!-- 마이페이지 -->
+						<div class="sub sub06">
+							<a href="memmyacceptlist.do">시험접수 현황</a>
+							<a href="memgetcertificatelist.do">자격취득 현황</a>
+							
+							<a href="memapplylicenselist.do" onclick="loading();">자격증발급 현황</a>
+							<a href="memapplydiatskilllist.do">KAIT스킬인증/공인강사 현황</a>
+							<a href="counselingcenterlist.do">1:1상담내역</a>
+							
+							
+							<a href="memphoto.do">사진관리</a>
+							<a href="exameditmyinfopwd.do">회원정보수정</a>
+							<a href="memwithdraw.do">회원탈퇴 </a>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+			
+			<style>
+				.logoinLink {display: none; margin: 10px 25px 10px 10px; text-align: right; float: right;}
+				.logoinLink a{display: inline-block; width: 88px; margin-left: 10px; line-height: 30px; border-radius: 5px; border: 1px solid #D9D9D9; background-color: #8dc63f; text-align: center; font-size: 14px; color: #fff;}
+				.logoinLink img{vertical-align: middle; padding-right:5px;}
+				/*mobile start*/
+				@media screen and (max-width: 1024px){
+					/* main top icon */
+					.logoinLink {display: block;}
+				}
+			</style>
+
+			<!-- mobile GNB -->
+			<div class="m_header clearfix">
+				<!-- <a href="/main.do" class="logo_m"><img src="/common/images/common/kait_logo_m.png" alt="메인로고 클릭시 메인으로 이동합니다" /></a> -->
+				<a href="/main.do" class="logo_m"><img src="/common/images/common/kait_logo3.jpg" alt="메인로고 클릭시 메인으로 이동합니다" /></a>
+				
+				<span class="toggle_open"><img src="/common/images/common/toggle_open.png" alt="모바일 메뉴 열기"></span>
+				
+				<div class="logoinLink clearfix">
+					
+						<a href="examlogin.do"><img src="/common/images/main/topicon01.png">로그인</a>
+						<a href="memjoin.do"><img src="/common/images/main/topicon02.png">회원가입</a>
+					
+					
+				</div>
+			</div>
+			<div class="mobile_menu">
+				<div class="m_tnb clearfix">
+					<a href="/main.do" class="goToHome"><img src="/common/images/common/m_home.png" alt="메인으로 이동합니다"></a>
+					<span class="toggle_close"><img src="/common/images/common/toggle_close.png" alt="모바일 메뉴 닫기"></span>
+				</div>
+				
+				<div class="mobile_m mm02">
+					<div class="m_mTit">시험접수</div>
+					<div class="m_sub">
+						<a href="memacceptguide.do">시험접수안내</a>
+						<a href="memaccept1.do">시험접수신청 </a>
+						<a href="memconfirm.do">시험접수현황 </a>
+						<a href="memsitecheck.do">시험장 확인 </a>
+						<a href="memprint.do">수험표 출력</a>
+						<a href="memrefund.do">연기 및 환불</a>
+					</div>
+				</div>
+				<div class="mobile_m mm03">
+					<div class="m_mTit">자격안내</div>
+					<div class="m_sub">
+						<a href="introducesubject.do">자격안내</a>
+						<a href="introducesubject.do">종목안내</a>
+						<a href="guidecert.do">시험일정</a>
+						<a href="acceptnotice.do">응시자 유의사항</a>
+						
+						<a href="memapplicationcurrent.do">자격활용현황</a>
+						<a href="guidetextbook.do">교재안내</a>
+					</div>
+				</div>
+				<div class="mobile_m mm04">
+					<div class="m_mTit">합격발표</div>
+					<div class="m_sub">
+						<a href="memgrade.do">성적확인</a>
+						<a href="guidequestion.do">문제공개</a>
+						<a href="memappeallist.do">이의신청</a>
+					</div>
+				</div>
+				<div class="mobile_m mm05">
+					<div class="m_mTit">자격증발급</div>
+					<div class="m_sub">
+						<a href="memapplylicense.do">자격증발급</a>
+						<a href="memconfirmationinfo.do">합격확인서발급</a>
+						<a href="memapplydiatskill.do">KAIT스킬인증/공인강사</a>
+					</div>
+				</div>
+				<div class="mobile_m mm06">
+					<div class="m_mTit">고객지원</div>
+					<div class="m_sub">
+						<a href="noticelist.do">공지사항</a>
+						<!-- <a href="#customer02.html">보도자료</a> -->
+						<a href="abolision.do">폐지자격 안내</a>
+						<a href="questionlist.do">자주하는질문</a>
+						<a href="onlinelecturelibrary4.do">온라인 강의교안</a>
+						
+						<a href="guideheadquarter.do">지역본부안내</a>
+					</div>
+				</div>
+				
+				
+				
+					<div class="mobile_m mm08">
+						<div class="m_mTit">로그인</div>
+						<div class="m_sub">
+							<a href="examlogin.do">로그인</a>
+							<a href="memjoin.do">회원가입</a>
+							<a href="memfindid.do">아이디찾기</a>
+							<a href="memfindpwd.do">비밀번호찾기</a>
+						</div>
+					</div>
+				
+
+			</div>
+			<div class="dim"></div>
+			<!-- // mobile GNB -->
+		</header>
+		<!-- //HEADER -->
+
+	<div class="con_wrap">
+			<div class="con_layout clearfix">
+				
+
+<script type="text/javascript">
+jQuery(function($){
+	var menu = "U0140";
+	if(menu==null||menu=="" || menu.length < 2){ menu = "U0110";  } // 변수초기화
+	menugroup = menu.substring(0,3);
+
+	var src = $("#"+menu + " > a").css("background-image");
+	if(src != null && src != ''){
+		src = src.split('.');
+		$("#"+menu + " > a").css("background-image", src[0] + '_over.' + src[1]);
+	}
+
+	$("li[group="+menugroup+"]").show();
+	$("#"+menu).addClass('sel');
+
+	if(menu == "U0140"){
+		$(".vNav").css("display","block");
+
+	}
+});
+</script>
+
+			<!-- left nav bar -->
+			<section class="lnb subBg01 mt_70">
+				<div class="lnbBor">
+				
+					
+					
+						<div class="lnbTop" style="padding:34px 35px 43px;">
+							<span class="lnbTit">자격안내</span>
+							<p class="lnbText"><strong>공정하고 신뢰하는 KAIT</strong></p>
+							<p class="lnbText" style="padding-top:5px; font-size:12px;">AI·디지털기술자격검정은 <br/> ICT자격분야의 가치를 전해드립니다.</p>
+						</div>
+						<div class="lnbList">
+							<ul>
+								
+								
+									
+									
+										<li group="U01" id="U0130"><a href="introducesubject.do">자격안내<span class="lnbArrow"></span></a></li>
+									
+								
+								
+									
+										<li group="U01" id="U0140"><a href="guidecert.do" class="on">시험일정<span class="lnbArrow"></span></a></li>
+									
+									
+								
+								
+									
+									
+										<li group="U01" id="U0170"><a href="acceptnotice.do">응시자 유의사항<span class="lnbArrow"></span></a></li>
+									
+								
+								<!-- <li group="U01" id="U0140"><a href="#">취득혜택<span class="lnbArrow"></span></a></li> -->
+								
+								
+									
+									
+										<li group="U04" id="U0450"><a href="memapplicationcurrent.do">자격활용현황<span class="lnbArrow"></span></a></li>
+									
+								
+								
+									
+									
+										<li group="U04" id="U0470"><a href="guidetextbook.do">교재안내<span class="lnbArrow"></span></a></li>
+									
+								
+								
+									
+									
+										<li group="U04" id="U0480"><a href="abolision.do">폐지자격 안내<span class="lnbArrow"></span></a></li>
+									
+								
+							</ul>
+						</div>
+	                
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+
+
+					
+
+
+
+					
+					
+
+
+					
+				
+				</div>
+			</section>
+			<!--// left nav bar -->
+
+			<!-- contents -->
+			<section class="contents clearfix mt_70" id="contents">
+				<!-- page title area -->
+				<div class="pageNaviWrap clearfix">
+					<h1 class="pageTitle">시험일정</h1>
+					<div class="pageNavi">
+						<span class="pagePath pageP01"><img src="/common2/images/common/sub_home.jpg" alt="홈"></span>
+						<span class="pagePath pageP02">자격안내</span>
+						<span class="pagePath pageP03">시험일정</span>
+					</div>
+				</div>
+				<!--// page title area -->
+				<!-- content -->
+				<div class="field_wrap">
+					
+
+<!DOCTYPE html>
+<html>
+<body>
+	<div class="linkBox clearfix">
+		<a href="guidecert.do" class="">디지털정보활용능력</a>
+		<a href="guidecert1.do" class="on">리눅스마스터</a>
+		<!-- <a href="guidecert2.do">인터넷정보관리사</a> -->
+	<!--<a href="guidecert3.do">컴퓨터프로그래머</a> -->
+	
+	<!--<a href="guidecert4.do">모바일앱개발전문가</a>-->
+		<a href="guidecert5.do" class="">검색광고마케터</a>
+		<!-- <a href="guidecert6.do">디지털영상편집</a> -->
+		<!-- <a href="guidecert7.do">인터넷정보관리사(3급)</a> -->
+		<!-- <a href="guidecert9.do" class="">파이썬마스터</a> -->
+		<a href="guidecert10.do" class="">SNS광고마케터</a>
+		<a href="guidecert8.do" class="">코딩활용능력</a>
+		<a href="guidecert11.do" class="">AI활용능력</a>
+		
+		
+	</div>
+</body>
+</html>
+
+					<!-- <div class="fieldPL15"><h2 class="field_title01 mt_20 mb_35">리눅스마스터</h2></div> -->
+					<div class="fieldPL15"><h2 class="mt_20 mb_35"><img src="/common/images/sub/bi_linux.png" alt="리눅스마스터"></h2></div>					
+					<div class="tabBtn">
+						<a href="#tab01" class="on">시험일정</a>
+					</div>
+					<div class="tabBox" id="tab01" style="display: block;">
+						<div class="fieldPL40 muchPadding">
+							<h3 class="field_subTit mb_15">정기검정 일정</h3>
+							<div class="table_wrap">
+								<table>
+									<caption>정기검정 일정</caption>
+									<colgroup>
+								        <col style="width:14%">
+								        <col style="width:8%">
+								        <col style="width:10%">
+								        <col style="width:8%">
+								        <col style="width:22%">
+								        <col style="width:19%">
+								        <col style="width:19%">
+								    </colgroup>
+								    <thead>
+								        <tr>
+								            <th scope="col">종목</th>
+								            <th scope="col">등급</th>
+								            <th scope="col">회차</th>
+								            <th scope="col">차수</th>
+								            <th scope="col">접수일자</th>
+								            <th scope="col">시험일자</th>
+								            <th scope="col">합격자 발표</th>
+								        </tr>
+								    </thead>
+									<tbody>
+										 <!-- ================= 1급 ================= -->
+								        <tr>
+								            <td rowspan="12">리눅스마스터</td>
+								            <td rowspan="4">1급</td>
+								            <td rowspan="2">2601회</td>
+								            <td>1차</td>
+								            <td>01.26.(월) ~ 02.06.(금)</td>
+								            <td>03.14.(토)</td>
+								            <td>04.03.(금)</td>
+								        </tr>
+								        <tr>
+								            <td>2차</td>
+								            <td>04.06.(월) ~ 04.17.(금)</td>
+								            <td>05.09.(토)</td>
+								            <td>05.29.(금)</td>
+								        </tr>
+								        <tr>
+								            <td rowspan="2">2602회</td>
+								            <td>1차</td>
+								            <td>07.27.(월) ~ 08.07.(금)</td>
+								            <td>09.12.(토)</td>
+								            <td>10.02.(금)</td>
+								        </tr>
+								        <tr>
+								            <td>2차</td>
+								            <td>10.05.(월) ~ 10.16.(금)</td>
+								            <td>11.14.(토)</td>
+								            <td>12.04.(금)</td>
+								        </tr>
+								
+								        <!-- ================= 2급 ================= -->
+								        <tr>
+								            <td rowspan="8">2급</td>
+								            <td rowspan="2">2601회</td>
+								            <td>1차</td>
+								            <td>01.26.(월) ~ 02.04.(수)</td>
+								            <td>01.27.(화) ~ 02.05.(목)</td>
+								            <td>시험종료 즉시</td>
+								        </tr>
+								        <tr>
+								            <td>2차</td>
+								            <td>01.27.(화) ~ 02.06.(금)</td>
+								            <td>03.14.(토)</td>
+								            <td>04.03.(금)</td>
+								        </tr>
+								
+								        <tr>
+								            <td rowspan="2">2602회</td>
+								            <td>1차</td>
+								            <td>04.06.(월) ~ 04.17.(금)</td>
+								            <td>05.02.(토)</td>
+								            <td>시험종료 즉시</td>
+								        </tr>
+								        <tr>
+								            <td>2차</td>
+								            <td>04.28.(화) ~ 05.08.(금)</td>
+								            <td>06.13.(토)</td>
+								            <td>07.03.(금)</td>
+								        </tr>
+								
+								        <tr>
+								            <td rowspan="2">2603회</td>
+								            <td>1차</td>
+								            <td>07.06.(월) ~ 07.17.(금)</td>
+								            <td>08.01.(토)</td>
+								            <td>08.05.(수)</td>
+								        </tr>
+								        <tr>
+								            <td>2차</td>
+								            <td>07.28.(화) ~ 08.07.(금)</td>
+								            <td>09.12.(토)</td>
+								            <td>10.02.(금)</td>
+								        </tr>
+								
+								        <tr>
+								            <td rowspan="2">2604회</td>
+								            <td>1차</td>
+								            <td>10.05.(월) ~ 10.16.(금)</td>
+								            <td>10.31.(토)</td>
+								            <td>11.04.(수)</td>
+								        </tr>
+								        <tr>
+								            <td>2차</td>
+								            <td>10.27.(화) ~ 11.06.(금)</td>
+								            <td>12.12.(토)</td>
+								            <td>12.31.(목)</td>
+								        </tr>
+								    </tbody>
+								</table>
+								
+								<p class="pType02">
+									※ 수험표출력 : 시험일자로부터 5일전
+								</p>
+							</div>
+						</div> <!-- //first field -->
+						<div class="fieldPL40 muchPadding mt_30">
+							<h3 class="field_subTit mb_15">입실 및 시험시간</h3>
+							<div class="table_wrap w70">
+								<table>
+								    <caption>입실 및 시험시간</caption>
+								    <colgroup>
+								        <col style="width:30%;">
+								        <col style="width:15%;">
+								        <col style="width:20%;">
+								        <col style="width:35%;">
+								    </colgroup>
+								    <thead>
+								        <tr>
+								            <th scope="col" colspan="2">급수</th>
+								            <th scope="col">입실완료시간</th>
+								            <th scope="col">시험시간</th>
+								        </tr>
+								    </thead>
+								    <tbody>
+								        <tr>
+								            <th scope="row" rowspan="2">1급</th>
+								            <th scope="row">1차</th>
+								            <td rowspan="4">13:50</td>
+								            <td>14:00 ~ 15:40 (100분)</td>
+								        </tr>
+								        <tr>
+								            <th scope="row">2차</th>
+								            <td>14:00 ~ 15:40 (100분)</td>
+								        </tr>
+								        <tr>
+								            <th scope="row" rowspan="2">2급</th>
+								            <th scope="row">1차</th>
+								            <td>14:00 ~ 15:00 (60분)</td>
+								        </tr>
+								        <tr>
+								            <th scope="row">2차</th>
+								            <td>14:00 ~ 15:40 (100분)</td>
+								        </tr>
+								    </tbody>
+								</table>
+								<p class="pType01"><span class="pointBl">* 입실완료시간 이후 절대 입실불가</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--// content -->
+
+			</section>
+			<!--// contents wrapper-->
+		</div>
+
+	</div>
+	<!-- // con Wrap -->
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+
+				
+		<!-- FOOTER -->
+		<footer class="footer">
+			<div class="fWrap clearfix">
+				<a class="f_logo" href="http://www.kait.or.kr/"><img src="/common/images/common/footerLogo_260330.jpg" alt=" " /></a>
+				<div class="f_con">
+					<div class="fnb">
+						<a href="emailextractionprevention.do">이메일추출방지</a>
+						<a href="guidepersionalinfomation.do"><b>개인정보처리방침</b></a>
+						<a href="guideservice.do">서비스이용약관</a>
+						<a href="guidemap.do">찾아오는길</a>
+					</div>
+					<p class="copyright">
+						(우) 06242 서울특별시 강남구 역삼로 111 (역삼동)<br />
+						운영책임자 : 장기영 <span class="fbar"></span> 사업자번호: 211-82-11990 <span class="fbar"></span> TEL: 1899-0628 <br /> Copyright ⓒKorea Association for AI & ICT promotion. All Right reserved.
+					</p>
+				</div>
+				<!-- <div class="f_call">
+					<dl>
+						<dt style="font-size:13px;">자격검정 고객지원센터<span class="f_place"></span>1899-0628</dt>
+						<dd>평<span class="f_place"></span>일   09:00 ~ 06:00<span class="fbar"></span>점심시간 AM 12:00 ~ PM 13:00</dd>
+						<dd class="smFont">*토, 일, 공휴일은 휴무입니다.</dd>
+					</dl>
+				</div> -->
+				<!-- <div class="fam_site">
+					<span class="famTit clearfix">유사기관 <span class="fam_arrow"></span></span>
+					<ul class="familySite">
+						<li><a href="http://www.kait.or.kr/" target="_blank">한국정보통신진흥협회</a></li>
+						<li><a href="http://www.msit.go.kr/" target="_blank">과학기술정보통신부</a></li>
+						<li><a href="http://www.kcc.go.kr/" target="_blank">방송통신위원회</a></li>
+					</ul>
+				</div> -->
+			</div>
+		</footer>
+		<!-- //FOOTER -->
+	</div>
+ 	<!-- //WRAP -->
+</body>
+</html>
+<script>
+	$(document).ready(function(){
+		//familySite
+		$('.famTit').click(function(){
+
+			if( $(".familySite").css("display") != "none"){
+				$('.familySite').fadeOut(500);
+			} else{
+
+				$('.familySite').show();;
+			}
+
+			return false;
+		})
+
+		$('.familySite').on('mouseleave', function(){
+			$(this).fadeOut(500);
+		})
+
+	})
+</script>
