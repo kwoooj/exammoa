@@ -3,6 +3,11 @@ dist/
 *.log
 .DS_Store
 
+# tsc -b 의 증분 캐시. noEmit: true 여도 빌드 모드는 이걸 남긴다
+# (npm run typecheck 는 tsc --noEmit 이라 안 남긴다 — 그래서 여태 안 걸렸다).
+# 산출물을 의도적으로 추적하는 저장소라 git status 가 깨끗한지가 실제 신호다.
+*.tsbuildinfo
+
 # 비밀값. QNET_KEY 가 들어있다. 절대 커밋하지 않는다.
 .env
 .env.local
