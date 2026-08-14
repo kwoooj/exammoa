@@ -19,6 +19,7 @@ import * as dataqCsv from './sources/dataq-csv.mjs';
 import * as kaitLinux from './sources/kait-linux.mjs';
 import * as kacptaTax from './sources/kacpta-tax.mjs';
 import { decodeResponse } from './lib/csv.mjs';
+import { checkSeeds, formatProblems } from './lib/seed-check.mjs';
 
 /** 크롤 어댑터 목록. 여기 없는 사이트는 요청되지 않는다. */
 const CRAWL_SOURCES = [historyExam, toeic, toeicSpeaking, kbsKorean, kaitLinux, kacptaTax];
@@ -563,14 +564,18 @@ function pickExams(seed) {
 }
 
 async function collect(seed, groupSeed) {
-  const exams = pickExams(seed);
-  const declared = new Set(groupSeed.groups.map(g => g.id));
-  const orphans = exams.filter(e => !e.groupId || !declared.has(e.groupId));
-  if (orphans.length) {
-    console.error(`groupId 가 없거나 groups.seed.json 에 없는 종목 ${orphans.length}건:`);
-    for (const e of orphans) console.error(`  ${e.slug} → ${e.groupId ?? '(없음)'}`);
+  // 시드가 깨진 채로 47번 호출할 이유가 없다. 네트워크 앞에서 막는다.
+  //
+  // 전에는 `pickExams()` 를 통과한 종목의 groupId 만 봤다. 그러면 **한 방향만** 검사된다 —
+  // 그룹이 없는 종목을 가리키는 반대쪽 구멍은 아무도 보지 않았고, 같은 형태를 네 번
+  // 손으로 찾았다. seed-check.mjs 가 양쪽을 본다.
+  const seedCheck = checkSeeds(seed, groupSeed);
+  if (!seedCheck.ok) {
+    console.error(formatProblems(seedCheck.problems));
     process.exit(1);
   }
+
+  const exams = pickExams(seed);
 
   console.log(`${exams.length}종목 수집 (${YEAR}년) · 선언된 그룹 ${new Set(exams.map(e => e.groupId)).size}개\n`);
   // 종목당 1회 호출을 유지한다. 응답에 종목 식별자가 없어 일괄 조회로는 귀속이 불가능하고,

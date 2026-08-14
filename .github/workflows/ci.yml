@@ -34,6 +34,10 @@ jobs:
 
       - run: npm ci
 
+      # 사람이 고치는 파일이라 가장 자주 깨진다. 네트워크를 타지 않아 제일 빠르기도 하다.
+      - name: 시드 무결성
+        run: npm run check:seed
+
       # 테스트를 먼저 돌린다 — 가장 빠르고 가장 많이 잡는다
       - name: 테스트
         run: npm test

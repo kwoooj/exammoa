@@ -14,7 +14,8 @@ npm run publish:data   # data/published/ → public/data/  (화면이 읽는 경
 npm run dev            # predev 가 publish:data 를 먼저 돌린다
 npm test               # node --test. scripts/**/*.test.mjs + src/**/*.test.ts
 npm run typecheck      # 오류 0 을 유지한다
-npm run check          # PR 전 체크 한 방 = test + typecheck + 산출물 점검
+npm run check:seed     # 시드 양방향 무결성 (네트워크 없음, 제일 빠름)
+npm run check          # PR 전 체크 한 방 = 시드 + test + typecheck + 산출물 점검
 npm run probe          # Q-Net API 진단
 npm run probe:crawl    # 기관 페이지 크롤링 가능성 진단
 ```
@@ -46,6 +47,8 @@ npm run probe:crawl    # 기관 페이지 크롤링 가능성 진단
 
 **6. 사람이 고치는 파일과 기계가 쓰는 파일을 섞지 않는다.**
 `data/*.seed.json` · `data/manual-schedules.json` 은 사람. `data/published/` · `data/archive/` 는 기계(하루 1회 배치가 커밋한다). 수집 결과를 시드에 자동 커밋하면 cron 이 사람의 수정을 덮는다.
+
+**시드 두 개는 서로를 가리키므로 양방향으로 검사한다** (`npm run check:seed`). 한 방향만 보면 반대쪽 구멍이 조용히 남는다 — 그룹만 있고 종목이 없으면 화면에 아무것도 안 나오는데 수집은 성공하고 게이트는 초록이다. 이 형태를 **네 번** 손으로 찾은 뒤에야 코드로 막았다.
 
 **7. 부분 실패로 전체를 멈추지 않는다.**
 소스 하나가 죽어도 나머지로 빌드가 성공해야 한다 (FR-DAT-06). 산출물을 먼저 쓰고 그다음 종료코드로 알린다. 낡은 데이터를 **낡았다고 밝히면서** 보여주는 것이 사라지는 것보다 낫다 (FR-DAT-07).
