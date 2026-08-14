@@ -356,6 +356,24 @@
       "note": "2026-08-13 실측: qualExamSchdList 응답 없음. Q-Net API로 일정 수집 불가"
     },
     {
+      "slug": "ITQ",
+      "name": "ITQ 정보기술자격",
+      "short": "ITQ",
+      "groupId": "kpc-itq",
+      "jmCd": null,
+      "qualgbCd": null,
+      "series": null,
+      "category": "office",
+      "tier": "T4",
+      "priority": 3,
+      "agency": "한국생산성본부",
+      "agencyUrl": "https://license.kpc.or.kr",
+      "collect": "manual",
+      "rolling": true,
+      "rollingRule": "매월 시행. 접수는 시험일 약 3주 전까지",
+      "note": "매월 시행이라 확정 회차가 없다. 막대 대신 규칙 카드 (규칙 5)"
+    },
+    {
       "slug": "전산회계1급",
       "name": "전산회계 1급",
       "short": "전산회계1급",

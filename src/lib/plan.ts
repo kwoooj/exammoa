@@ -73,15 +73,39 @@ export interface ResolvedPlan {
   /** 지정한 날짜가 시행 기간을 벗어났다 (데이터가 바뀌면 생길 수 있다) */
   outOfRange: boolean;
   regDeadline: string | null;
+  /** 상시시험 — 확정 일정이 없어 사용자가 예약한 날짜가 유일한 사실이다 */
+  rolling: boolean;
 }
 
 export function resolvePlan(plan: ExamPlan, sessions: Session[]): ResolvedPlan {
   const key = planKey(plan);
   const session = sessions.find(s => s.id === plan.sessionId) ?? null;
+
+  /**
+   * 상시시험. 기관이 공지한 회차가 없으므로 고를 후보도 없다.
+   *
+   * 그렇다고 D-Day 를 못 주는 것은 아니다. 사용자는 자기가 예약한 날을 안다 — 그 날짜는
+   * **사용자의 사실**이지 우리가 추측한 값이 아니다. 범위 검사를 하지 않는 이유도 같다.
+   * 기관 규칙에서 접수 마감을 계산하지도 않는다("약 3주 전"을 날짜로 바꾸면 규칙 4 위반).
+   */
+  if (session?.mode === 'rolling') {
+    return {
+      key, plan, session, option: null,
+      examDate: plan.date ?? null,
+      needsPick: !plan.date,
+      outOfRange: false,
+      regDeadline: null,
+      rolling: true,
+    };
+  }
+
   const option = session ? (examOptions(session).find(o => o.phase === plan.phase) ?? null) : null;
 
   if (!option) {
-    return { key, plan, session, option: null, examDate: null, needsPick: false, outOfRange: false, regDeadline: null };
+    return {
+      key, plan, session, option: null, examDate: null,
+      needsPick: false, outOfRange: false, regDeadline: null, rolling: false,
+    };
   }
 
   // 하루짜리는 고를 것이 없다. 지정값이 있어도 실제 시험일을 쓴다.
@@ -92,6 +116,7 @@ export function resolvePlan(plan: ExamPlan, sessions: Session[]): ResolvedPlan {
       needsPick: false,
       outOfRange: false,
       regDeadline: option.regDeadline,
+      rolling: false,
     };
   }
 
@@ -103,6 +128,7 @@ export function resolvePlan(plan: ExamPlan, sessions: Session[]): ResolvedPlan {
     needsPick: picked === null,
     outOfRange,
     regDeadline: option.regDeadline,
+    rolling: false,
   };
 }
 
@@ -144,7 +170,8 @@ export function ddayItems(
   const out: DDayItem[] = [];
 
   for (const r of resolvePlans(plans, sessions)) {
-    if (!r.option) continue;
+    // 상시시험은 고를 후보(option)가 없지만 사용자가 예약한 날짜는 있다.
+    if (!r.option && !r.rolling) continue;
     const examName = nameOf(r.plan.examSlug);
 
     if (r.regDeadline) {
@@ -172,7 +199,7 @@ export function ddayItems(
           date: r.examDate,
           dday: d,
           examName,
-          label: r.option.label,
+          label: r.option?.label ?? '시험',
         });
       }
     }
@@ -208,9 +235,10 @@ export function occupantsOn(
   nameOf: (slug: string) => string,
   excludeKey?: PlanKey,
 ): Occupant[] {
+  // 상시시험도 센다. 사용자가 그날 컴활을 예약해 뒀다면 그건 진짜로 그날의 일정이다.
   return resolvePlans(plans, sessions)
-    .filter(r => r.examDate === date && r.key !== excludeKey && r.option)
-    .map(r => ({ planKey: r.key, examName: nameOf(r.plan.examSlug), label: r.option!.label }));
+    .filter(r => r.examDate === date && r.key !== excludeKey && (r.option || r.rolling))
+    .map(r => ({ planKey: r.key, examName: nameOf(r.plan.examSlug), label: r.option?.label ?? '시험' }));
 }
 
 /** `이미 2026.10.11에는 정보처리기사 실기시험이 있습니다` */

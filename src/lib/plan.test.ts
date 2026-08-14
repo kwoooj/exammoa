@@ -237,3 +237,86 @@ test('비어 있으면 안내 문구가 없다', () => {
 test('같은 종목의 필기와 실기는 다른 계획이다', () => {
   assert.notEqual(planKey(plan()), planKey(plan({ phase: 'practical' })));
 });
+
+// ---- 상시시험 ---------------------------------------------------------
+//
+// 확정 회차가 없어 막대를 그리지 않는다 (규칙 5). 그렇다고 D-Day 를 못 주는 것은
+// 아니다 — 사용자는 자기가 예약한 날을 안다.
+
+const rollPlan = (over: Partial<ExamPlan> = {}): ExamPlan => ({
+  examSlug: '컴퓨터활용능력1급',
+  groupId: 'korcham-rolling',
+  sessionId: rolling.id,
+  phase: 'single',
+  ...over,
+});
+
+test('상시시험은 고를 후보가 없다', () => {
+  assert.deepEqual(examOptions(rolling), []);
+  assert.equal(resolvePlan(rollPlan(), sessions).option, null);
+});
+
+test('상시시험도 rolling 으로 표시된다 — option 이 null 이라고 다 같은 것이 아니다', () => {
+  assert.equal(resolvePlan(rollPlan(), sessions).rolling, true);
+  assert.equal(resolvePlan(plan(), sessions).rolling, false);
+  // 없는 회차를 가리키는 계획은 상시시험이 아니다
+  assert.equal(resolvePlan(plan({ sessionId: '없음' }), sessions).rolling, false);
+});
+
+test('예약한 날짜가 그대로 응시일이 된다 — 우리가 추측한 값이 아니다', () => {
+  const r = resolvePlan(rollPlan({ date: '2026-09-25' }), sessions);
+  assert.equal(r.examDate, '2026-09-25');
+  assert.equal(r.needsPick, false);
+  assert.equal(r.outOfRange, false);
+});
+
+test('상시시험에는 범위 검사를 하지 않는다 — 기관이 정한 기간이 없다', () => {
+  const r = resolvePlan(rollPlan({ date: '2027-03-01' }), sessions);
+  assert.equal(r.outOfRange, false);
+  assert.equal(r.examDate, '2027-03-01', '먼 날짜라도 사용자가 그렇게 예약했다면 그것이 사실이다');
+});
+
+test('날짜를 안 넣으면 정할 것이 남아 있다고 말한다', () => {
+  const r = resolvePlan(rollPlan(), sessions);
+  assert.equal(r.examDate, null);
+  assert.equal(r.needsPick, true);
+});
+
+test('접수 마감을 만들지 않는다 — "약 3주 전" 을 날짜로 바꾸면 규칙 4 위반이다', () => {
+  assert.equal(resolvePlan(rollPlan({ date: '2026-09-25' }), sessions).regDeadline, null);
+  const items = ddayItems([rollPlan({ date: '2026-09-25' })], sessions, nameOf, '2026-08-14');
+  assert.equal(items.filter(i => i.kind === 'reg-deadline').length, 0);
+});
+
+test('D-Day 가 생긴다', () => {
+  const items = ddayItems([rollPlan({ date: '2026-09-25' })], sessions, nameOf, '2026-08-14');
+  assert.equal(items.length, 1);
+  assert.equal(items[0]!.kind, 'exam');
+  assert.equal(items[0]!.dday, 42);
+  assert.equal(items[0]!.label, '시험');
+});
+
+test('날짜가 없으면 D-Day 도 없다', () => {
+  assert.deepEqual(ddayItems([rollPlan()], sessions, nameOf, '2026-08-14'), []);
+});
+
+test('지난 날짜는 담지 않는다', () => {
+  assert.deepEqual(ddayItems([rollPlan({ date: '2026-08-13' })], sessions, nameOf, '2026-08-14'), []);
+});
+
+test('상시시험도 같은 날 안내에 걸린다 — 그날 예약해 뒀으면 진짜 그날의 일정이다', () => {
+  const p = rollPlan({ date: '2026-08-20' });
+  const other = plan({ date: '2026-08-20' });
+  const occ = occupantsOn('2026-08-20', [p, other], sessions, nameOf, planKey(other));
+  assert.equal(occ.length, 1);
+  assert.equal(occ[0]!.examName, '컴퓨터활용능력1급');
+  assert.match(sameDayMessage('2026-08-20', occ)!, /컴퓨터활용능력1급/);
+});
+
+test('미공고 회차는 상시시험과 다르다 — 둘 다 events 가 비지만 완전히 다른 정보다', () => {
+  const r = resolvePlan(plan({ sessionId: 'tbd-1', phase: 'single' }), sessions);
+  assert.equal(r.rolling, false);
+  assert.equal(r.examDate, null);
+  assert.deepEqual(ddayItems([plan({ sessionId: 'tbd-1', phase: 'single', date: '2026-09-25' })], sessions, nameOf, '2026-08-14'), [],
+    '미공고 회차에 사용자가 날짜를 넣어도 D-Day 를 만들지 않는다');
+});

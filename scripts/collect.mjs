@@ -707,6 +707,47 @@ async function collect(seed, groupSeed) {
     if ((d.failures ?? []).length > 5) console.log(`     · … 외 ${d.failures.length - 5}건`);
   }
 
+  // ---- 상시시험 ----
+  //
+  // 확정 회차가 없으므로 막대를 그리지 않는다 (규칙 5). 그런데 **계획이 가리킬 자리는
+  // 있어야 한다** — `ExamPlan.sessionId` 가 없으면 사용자가 예약한 응시일을 저장할 수도,
+  // 링크로 공유할 수도 없다. 그래서 그룹마다 이벤트 없는 회차 하나를 만든다.
+  //
+  // `seq: null` 이라 `?p=` 인코딩에서 `x` 가 되고, 그룹당 하나뿐이라 복원이 유일하다.
+  //
+  // 날짜를 만들지 않으므로 규칙 4 와 충돌하지 않는다. 여기서 나오는 유일한 사실은
+  // 기관이 공지한 **규칙 텍스트**이고, 그것을 사람이 마지막으로 확인한 날이 `ruleCheckedAt` 이다.
+  const rollingGroups = groupSeed.groups.filter(g => g.cadence === 'rolling');
+  const ruleDates = rollingGroups.map(g => g.ruleCheckedAt).filter(Boolean).sort();
+  const missingRule = rollingGroups.filter(g => !g.rollingRule);
+  harvests.push({
+    id: 'rolling-rules',
+    method: 'manual',
+    ok: rollingGroups.length > 0 && missingRule.length === 0,
+    sessions: rollingGroups.map(g => ({
+      id: `${g.id}-${YEAR}-rolling`,
+      groupId: g.id,
+      year: YEAR,
+      seq: null,
+      label: null,
+      mode: 'rolling',
+      status: 'confirmed',
+      events: [],
+    })),
+    // 규칙을 오늘 확인한 것이 아니다. 가장 오래된 확인일을 쓴다.
+    observedAt: ruleDates[0] ? `${ruleDates[0]}T00:00:00.000Z` : null,
+    // 규칙은 기관이 조용히 바꾼다. 반년이면 사람이 다시 볼 때다.
+    staleAfterDays: 180,
+    error: missingRule.length
+      ? `rollingRule 이 없는 그룹: ${missingRule.map(g => g.id).join(', ')}`
+      : (rollingGroups.length ? null : '상시시험 그룹이 없다'),
+  });
+  console.log(
+    missingRule.length
+      ? `  !! rolling-rules ${missingRule.map(g => g.id).join(', ')} 에 규칙이 없다`
+      : `  ok rolling-rules ${rollingGroups.length}그룹 (규칙 카드, 막대 없음)`,
+  );
+
   const prev = await readPrevious();
   if (!prev) {
     console.log(`\n※ ${PUBLISHED}/ 에 이전 결과가 없다. 첫 실행이므로 폴백 대상이 없다.`);
