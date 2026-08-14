@@ -882,22 +882,28 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
   font: inherit;
   font-size: 11px;
   font-weight: 500;
-  line-height: 18px;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
   cursor: pointer;
+  /*
+     flex 여야 한다. block 으로 두면 이어짐 표시(::before 의 '‹')가 인라인이고
+     라벨은 블록이라 라벨이 **다음 줄로 밀려 overflow 에 잘린다.** 실제로 주를
+     넘는 접수 막대가 통째로 이름 없는 줄무늬가 됐다.
+  */
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
 .cal__bar:disabled { cursor: default; }
-.cal__barText { overflow: hidden; text-overflow: ellipsis; display: block; }
+.cal__barText { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 
 /* 기본(중립) — 시험 상세처럼 그룹이 하나뿐이라 색이 아무것도 구분하지 않을 때 */
 .cal__bar--reg {
   border: 1.5px solid var(--bar-line);
   background: color-mix(in srgb, var(--ink) 6%, var(--surface));
   color: var(--ink-secondary);
-  line-height: 15px;
 }
 
 .cal__bar--exam { background: var(--bar-fill); color: var(--surface); }
@@ -906,7 +912,6 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
   border: 1.5px dashed var(--bar-line);
   background: var(--surface);
   color: var(--ink-secondary);
-  line-height: 15px;
 }
 
 /* 추가접수·빈자리접수·취소좌석. 정기접수와 눈으로 갈라야 남은 기회를 놓치지 않는다 */
@@ -924,9 +929,7 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 }
 
 /* 진행 중인 막대는 굵기로도 말한다 (§7.5) */
-.cal__bar--ongoing { height: 22px; line-height: 20px; box-shadow: inset 0 0 0 1px var(--surface); }
-.cal__bar--reg.cal__bar--ongoing,
-.cal__bar--result.cal__bar--ongoing { line-height: 17px; }
+.cal__bar--ongoing { height: 22px; box-shadow: inset 0 0 0 1px var(--surface); }
 
 /* 과거는 숨기지 않고 채도만 낮춘다 (§7.5).
    opacity 로 흐리면 다크 모드에서 대비가 AA 아래로 떨어지므로 전용 토큰을 쓴다. */
@@ -941,8 +944,8 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
    색이 아니라 형태와 글자다 (§3.2). */
 .cal__bar--openL { border-top-left-radius: 0; border-bottom-left-radius: 0; margin-left: 0; }
 .cal__bar--openR { border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: 0; }
-.cal__bar--openL::before { content: '‹'; opacity: 0.75; margin-right: 2px; }
-.cal__bar--openR::after { content: '›'; opacity: 0.75; float: right; }
+.cal__bar--openL::before { content: '‹'; opacity: 0.75; }
+.cal__bar--openR::after { content: '›'; opacity: 0.75; margin-left: auto; }
 
 /* ---- 종목 색 ----
    그룹이 둘 이상일 때만 붙는다 (lib/calcolors.ts). 모양 규칙은 위에서 이미
@@ -976,6 +979,31 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 }
 
 
+/* 접힌 일정 (§8.9). span 이 아니라 button 이다 — 키보드로 닿는 유일한 길이다.
+   막대처럼 보이면 안 된다. 이것은 일정이 아니라 "여기 더 있다" 는 안내다. */
+.cal__more {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  margin: 0 1px;
+  padding: 0 3px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 10px;
+  line-height: 1;
+  color: var(--ink-muted);
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.cal__more:not(:disabled):hover { color: var(--accent); text-decoration: underline; }
+.cal__more:disabled { cursor: default; }
+
 /* ---- 범례 ---- */
 
 .cal__legend { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); margin: var(--s2) 0 0; }
@@ -1004,6 +1032,163 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 .evt__list { margin: var(--s1) 0 0; padding-left: 1.2em; }
 .cal__panel .row { margin-top: var(--s3); }
 
+/* ---- 통합 캘린더 배치 (§8.4 · §8.6 · §8.13) ----
+   데스크톱은 격자 + 우측 상세 패널 2열. 태블릿부터는 패널이 격자 아래로 내려가고,
+   모바일에서는 하단 시트가 된다. */
+
+.callayout { display: grid; gap: var(--s4); }
+
+@media (min-width: 900px) {
+  .callayout--open { grid-template-columns: minmax(0, 1fr) 300px; align-items: start; }
+}
+
+.callayout__grid { min-width: 0; }
+
+.callayout__panel { position: relative; min-width: 0; }
+.callayout__panel .cal__panel { margin-top: 0; }
+
+.callayout__close {
+  position: absolute;
+  top: var(--s2);
+  right: var(--s2);
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: var(--r2);
+  background: none;
+  color: var(--ink-muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.callayout__close:hover { background: var(--accent-tint); color: var(--accent); }
+
+@media (max-width: 640px) {
+  /*
+     하단 시트. <dialog> 가 아니다 — 포커스 트랩이 없어야 Tab 이 격자로 자연히
+     돌아가고, 포커스 관리 구현을 한 벌 더 정확히 유지할 필요가 없다 (§8.6).
+  */
+  .callayout__panel {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 50;
+    max-height: 70vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    border-radius: var(--r3) var(--r3) 0 0;
+    box-shadow: var(--elev);
+    padding: var(--s2);
+  }
+
+  .callayout__panel .cal__panel { border: 0; border-radius: 0; }
+  /* 시트가 마지막 내용을 가리지 않게 자리를 비운다 */
+  .callayout--open { padding-bottom: 40vh; }
+}
+
+/* ---- 선택한 시험 칩 (§8.4) ----
+   달력에서는 같은 시행그룹이 한 막대로 접히므로(§8.8) 여기서는 접지 않는다.
+   여기까지 접으면 고른 것을 확인할 데가 한 곳도 없어진다. */
+
+.picked { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin: var(--s3) 0; }
+.picked__chips { display: flex; flex-wrap: wrap; gap: var(--s2); margin: 0; padding: 0; list-style: none; }
+
+.chip--picked {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  min-height: 32px;
+  padding: 0 var(--s1) 0 var(--s2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r2);
+  background: var(--surface);
+  font-size: 13px;
+}
+
+.chip__x {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: var(--r1);
+  background: none;
+  color: var(--ink-muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.chip__x:hover { background: var(--accent-tint); color: var(--accent); }
+
+/* 색 견본. 칩과 막대를 눈으로 잇는다 */
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--bar-fill);
+  flex: none;
+}
+
+.swatch--c1 { background: var(--cat-1); }
+.swatch--c2 { background: var(--cat-2); }
+.swatch--c3 { background: var(--cat-3); }
+.swatch--c4 { background: var(--cat-4); }
+.swatch--c5 { background: var(--cat-5); }
+.swatch--c6 { background: var(--cat-6); }
+
+/* ---- 시험 추가 ---- */
+
+.picker { position: relative; }
+.picker > summary { list-style: none; cursor: pointer; }
+.picker > summary::-webkit-details-marker { display: none; }
+
+.picker__body {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 4px);
+  left: 0;
+  width: min(340px, calc(100vw - 40px));
+  padding: var(--s3);
+  border: 1px solid var(--line);
+  border-radius: var(--r3);
+  background: var(--surface);
+  box-shadow: var(--elev);
+}
+
+.picker__list { max-height: 260px; overflow-y: auto; margin: var(--s2) 0 0; padding: 0; list-style: none; }
+
+.picker__item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s2);
+  width: 100%;
+  min-height: 40px;
+  padding: var(--s1) var(--s2);
+  border: 0;
+  border-radius: var(--r2);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.picker__item:hover:not(:disabled) { background: var(--accent-tint); }
+.picker__item:disabled { color: var(--ink-muted); cursor: not-allowed; }
+
+/* ---- 필터 (§8.4) ---- */
+
+.filters { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); margin: var(--s3) 0; }
+.filters__field { display: inline-flex; align-items: center; gap: var(--s2); font-size: 13px; color: var(--ink-secondary); }
+.filters__field select { min-width: 0; max-width: 200px; }
+
+.filters__kinds { display: inline-flex; align-items: center; gap: var(--s3); border: 0; margin: 0; padding: 0; }
+.filters__check { display: inline-flex; align-items: center; gap: var(--s1); font-size: 13px; color: var(--ink-secondary); min-height: 32px; }
+
+.rule__name { margin: 0; font-size: 17px; font-weight: 500; }
+
+
 /* ---- 날짜순 일정표 (§8.10) ---- */
 
 .sched { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -1016,7 +1201,7 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
   /* 390px 에서 7열을 유지한다. 칸을 줄이고 막대 글자는 종목 약칭만 남긴다.
      주 높이는 44px 아래로 내리지 않는다 — 여기서 날짜 칸이 터치 타깃이다 (§8.13) */
   .cal__day { padding: 2px; }
-  .cal__bar { font-size: 9px; padding: 0 2px; }
+  .cal__bar { font-size: 10px; padding: 0 3px; }
   /* 주 높이에서 padding-bottom 4px 를 뺀 만큼이 날짜 칸이다. 44px 을 채우려면
      주가 48px 이어야 한다 — 46px 로 두었더니 칸이 42px 로 떨어졌다 (§12.3). */
   .cal__week { grid-template-rows: 16px repeat(var(--lanes, 0), 16px) minmax(4px, 1fr); min-height: 48px; }
