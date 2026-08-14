@@ -154,7 +154,12 @@ export interface Exam {
   qualgbCd: 'T' | 'C' | 'W' | 'S' | null;
   series: string | null;
   category: string;
-  tier: 'T1' | 'T2' | 'T3' | 'T4';
+  /**
+   * 수집 경로 등급. 정의는 `exams.seed.json` 의 `tiers` 에 있고 그것이 정본이다.
+   * `X` 가 빠져 있었는데 시드는 예전부터 쓰고 있었다 — 화면에 안 나오는 종목이라
+   * 런타임에서 안 걸렸을 뿐 계약 위반이었다.
+   */
+  tier: 'T1' | 'T2' | 'T3' | 'T4' | 'X';
   priority: number;
   agency?: string;
   /**
