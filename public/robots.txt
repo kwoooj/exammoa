@@ -1,0 +1,9 @@
+# 시험모아
+#
+# 우리는 여러 기관의 공개 일정을 모아 보여주는 정적 사이트다. 막을 것이 없다.
+# Sitemap 주소는 scripts/prerender.mjs 가 SITE_ORIGIN 으로 만드는 값과 같아야 한다.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://exammoa.example/sitemap.xml

@@ -3,11 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>exammoa — 시험 일정 D-Day</title>
-    <meta name="description" content="준비하는 시험을 고르고 응시일을 정하면 원서접수 마감과 시험일까지 남은 날짜를 가까운 순으로 모아 보여줍니다." />
+    <!--
+      head:start 와 head:end 사이를 scripts/prerender.mjs 가 라우트별 머리말로
+      갈아 끼운다. 정규식으로 HTML 을 훑지 않기 위한 경계다. 개발 서버는 아래
+      기본값을 그대로 쓴다.
+
+      root 안의 app 표시 자리에는 사전 렌더한 본문이 들어간다. 그 표시를 이
+      주석 안에 적지 않는다 — HTML 주석은 중첩되지 않아서 주석이 먼저 닫히고,
+      prerender 가 엉뚱한 자리를 갈아 끼운다.
+    -->
+    <!--head:start-->
+    <title>시험모아 — 흩어진 시험 일정을 한곳에서</title>
+    <meta name="description" content="여러 기관의 원서접수·시험·발표 일정을 모아 보여줍니다. 로그인 없이 접수 상태를 확인하고 공식 접수처로 바로 이동하세요." />
+    <!--head:end-->
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--app--></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
