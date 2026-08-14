@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import type { Exam, ExamPlan, ExamsFile, GroupsFile, MetaFile, Session, SessionsFile } from './types.ts';
+import type { EventPhase, Exam, ExamPlan, ExamsFile, GroupsFile, MetaFile, Session, SessionsFile } from './types.ts';
 import { dotted, today } from './lib/dates.ts';
 import { agoLabel, daysSince, freshnessOf } from './lib/freshness.ts';
 import { ddayItems, examOptions, planKey } from './lib/plan.ts';
@@ -11,6 +11,7 @@ import { PlanCard } from './components/PlanCard.tsx';
 import { DDaySection } from './components/DDayList.tsx';
 import { MonthCalendar } from './components/MonthCalendar.tsx';
 import { Timeline } from './components/Timeline.tsx';
+import { DatePickSheet, type PickTarget } from './components/DatePickSheet.tsx';
 import { WarnIcon } from './components/icons.tsx';
 
 type Data = { exams: ExamsFile; groups: GroupsFile; sessions: SessionsFile; meta: MetaFile };
@@ -21,6 +22,7 @@ export default function App() {
   const [plans, setPlans] = useState<ExamPlan[]>([]);
   const [query, setQuery] = useState('');
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [pickTarget, setPickTarget] = useState<PickTarget | null>(null);
   // id 를 함께 담는다. 같은 문구를 두 번 복사해도 타이머가 다시 돌아야 한다.
   const [toast, setToast] = useState<{ id: number; text: string } | null>(null);
   const now = today();
@@ -158,6 +160,48 @@ npm run publish:data`}</pre>
     setPlans(ps => ps.map(p => (planKey(p) === key ? { ...p, date } : p)));
   }
 
+  /**
+   * 계획 하나를 시트가 다룰 형태로 옮긴다.
+   *
+   * 기간·규칙을 어디서 읽는지는 여기 한 곳에만 둔다. 카드와 타임라인이 각자 계산하면
+   * 두 경로가 조용히 어긋난다 — 같은 시험인데 카드에서는 고를 수 있고 타임라인에서는
+   * 못 고르는 식이다.
+   */
+  function pickTargetFor(plan: ExamPlan): PickTarget | null {
+    const exam = examBySlug.get(plan.examSlug);
+    const examName = exam?.name ?? plan.examSlug;
+    const key = planKey(plan);
+    const session = sessions.find(s => s.id === plan.sessionId);
+    const option = session ? examOptions(session).find(o => o.phase === plan.phase) : undefined;
+
+    if (!option) {
+      // 상시시험 — 고를 기간이 없다. 사용자가 예약한 날짜만 받는다.
+      const group = exam ? groupById.get(exam.groupId) : undefined;
+      return {
+        key,
+        examName,
+        label: '응시일',
+        range: null,
+        date: plan.date,
+        rule: exam?.rollingRule ?? group?.rollingRule ?? null,
+      };
+    }
+    // 하루짜리 시행은 고를 것이 없다. 시트를 열지 않는다.
+    if (!option.isRange) return null;
+    return { key, examName, label: option.label, range: { start: option.start, end: option.end }, date: plan.date };
+  }
+
+  function openPick(plan: ExamPlan) {
+    const target = pickTargetFor(plan);
+    if (target) setPickTarget(target);
+  }
+
+  /** 타임라인 막대에서 열기. 그 그룹·회차·단계에 해당하는 계획을 찾아 같은 시트로 보낸다 */
+  function openPickFromBar(groupId: string, sessionId: string, phase: EventPhase) {
+    const plan = plans.find(p => p.groupId === groupId && p.sessionId === sessionId && p.phase === phase);
+    if (plan) openPick(plan);
+  }
+
   const picker = (
     <ExamPicker
       exams={exams}
@@ -222,7 +266,14 @@ npm run publish:data`}</pre>
                 <h2 id="tl-h">6개월 일정</h2>
                 <p className="section__hint">한 줄이 시행그룹 하나예요</p>
               </div>
-              <Timeline plans={plans} sessions={sessions} groups={groups} nameOf={nameOf} today={now} />
+              <Timeline
+                plans={plans}
+                sessions={sessions}
+                groups={groups}
+                nameOf={nameOf}
+                today={now}
+                onPickBar={openPickFromBar}
+              />
             </section>
 
             {pickedExams.length > 0 && (
@@ -243,7 +294,7 @@ npm run publish:data`}</pre>
                       nameOf={nameOf}
                       today={now}
                       onSession={changeSession}
-                      onDate={setDate}
+                      onPick={openPick}
                       onRemove={toggleExam}
                     />
                   ))}
@@ -320,6 +371,16 @@ npm run publish:data`}</pre>
           </div>
         </div>
       )}
+
+      <DatePickSheet
+        target={pickTarget}
+        plans={plans}
+        sessions={sessions}
+        nameOf={nameOf}
+        today={now}
+        onSubmit={setDate}
+        onClose={() => setPickTarget(null)}
+      />
 
       {toast && (
         <p className="toast" role="status" key={toast.id}>{toast.text}</p>

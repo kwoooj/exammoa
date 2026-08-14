@@ -349,6 +349,35 @@ a { color: var(--accent); text-underline-offset: 2px; }
 .card__agency { font-size: 11px; color: var(--ink-muted); }
 .card__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-top: var(--s3); }
 .card__label { font-size: 13px; color: var(--ink-secondary); min-width: 68px; }
+/* 라벨을 뺀 나머지를 한 덩어리로 묶는다. 줄바꿈이 나도 라벨 아래로 정렬된다 */
+.card__field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.card__notice { margin: var(--s2) 0 0 68px; }
+.card__link { margin: var(--s2) 0 0 68px; }
+
+/* 응시일을 여는 버튼. 값이 없으면 할 일을 말하고, 있으면 값을 보여준다. */
+.pickbtn {
+  min-height: 36px;
+  padding: 0 var(--s3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r2);
+  background: var(--surface);
+  color: var(--ink-secondary);
+  font: inherit;
+  font-size: 14px;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
+.pickbtn:hover { border-color: var(--ink-secondary); color: var(--ink); }
+.pickbtn--set { color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
 
 select,
 input[type='date'] {
@@ -525,6 +554,85 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 .fold[open] > summary::after { content: '⌃'; }
 .fold__body { padding: var(--s2) 0 var(--s4); }
 
+/* ---- 응시일 지정 시트 ----
+   <dialog> 를 쓴다. 포커스 가두기·Esc·백드롭이 브라우저에서 온다. */
+
+.sheet {
+  width: 420px;
+  max-width: calc(100vw - 32px);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r3);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--elev);
+}
+
+.sheet::backdrop { background: var(--overlay); }
+
+@media (max-width: 640px) {
+  /* 하단 시트. 엄지에서 가장 가까운 자리에 붙인다 */
+  .sheet {
+    width: 100%;
+    max-width: 100%;
+    margin: auto auto 0;
+    border-radius: 12px 12px 0 0;
+    border-bottom: 0;
+  }
+}
+
+.sheet__body { padding: var(--s5); }
+.sheet__title { font-size: 17px; font-weight: 500; margin: 0; letter-spacing: -0.01em; }
+.sheet__sub { font-size: 13px; color: var(--ink-secondary); margin: var(--s1) 0 0; }
+
+.sheet__foot {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: var(--s3) var(--s5);
+  border-top: 1px solid var(--line);
+  padding-bottom: calc(var(--s3) + env(safe-area-inset-bottom));
+}
+
+.sheet__spacer { flex: 1 1 auto; }
+
+/* 시트 안 월 선택기. 화면의 월간 달력(.cal)과 목적이 다르다 —
+   저쪽은 '이 날짜에 뭐가 있나', 여기는 '이 기간 중 하루 고르기'. */
+
+.mcal { margin-top: var(--s4); }
+.mcal__nav { display: flex; align-items: center; gap: var(--s2); margin-bottom: var(--s2); }
+.mcal__title { font-size: 15px; font-weight: 500; }
+.mcal__grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; }
+.mcal__wd { font-size: 11px; color: var(--ink-muted); text-align: center; padding: var(--s1) 0; }
+
+.mcal__day {
+  height: 40px;
+  border: 0;
+  border-radius: var(--r2);
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.mcal__day:hover:not(:disabled) { background: var(--accent-tint); }
+.mcal__day--out { color: var(--ink-muted); }
+.mcal__day:disabled { color: var(--ink-muted); opacity: 0.4; cursor: not-allowed; }
+.mcal__day--today { box-shadow: inset 0 0 0 1px var(--line-strong); }
+
+.mcal__day--on,
+.mcal__day--on:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 500;
+  border-radius: 50%;
+}
+
+.cal__navBtn:disabled { color: var(--ink-muted); opacity: 0.4; cursor: not-allowed; }
+.cal__navBtn:disabled:hover { background: none; }
+
 /* ---- 월간 캘린더 ----
    시험일은 채움, 접수 마감은 테두리만. 색을 쓰지 않는다 — 액센트 예산은 타임라인이 쓴다. */
 
@@ -693,6 +801,8 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 .tl__gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); }
 .tl__now { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--accent); }
 
+.tl__tick--now { color: var(--accent); }
+
 .tl__nowLabel {
   position: absolute;
   top: 0;
@@ -712,6 +822,12 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 .tl__bar--past { opacity: 0.35; }
 /* 응시일을 지정하면 원래 기간 막대는 배경으로 물러난다 */
 .tl__bar--superseded { opacity: 0.25; }
+
+/* 누를 수 있는 막대. 실제 높이는 10px 라 손가락에 작다 —
+   보이는 크기는 두고 ::after 로 24px 짜리 히트 영역을 덮는다. */
+.tl__bar--pick { border: 0; padding: 0; cursor: pointer; }
+.tl__bar--pick::after { content: ''; position: absolute; inset: -7px -2px; }
+.tl__bar--pick:hover { opacity: 1; box-shadow: 0 0 0 2px var(--accent-line); }
 
 .tl__marker {
   position: absolute;

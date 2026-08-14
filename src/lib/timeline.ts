@@ -8,7 +8,7 @@
  * 같은 막대가 29줄 반복된다.
  */
 
-import type { EventKind, ExamPlan, ScheduleGroup, Session } from '../types.ts';
+import type { EventKind, EventPhase, ExamPlan, ScheduleGroup, Session } from '../types.ts';
 import { addMonths, diffDays } from './dates.ts';
 import { monthsBetween, firstOfMonth, monthLabel } from './calendar.ts';
 import { resolvePlans } from './plan.ts';
@@ -58,9 +58,15 @@ export function monthTicks(w: Window): { month: string; label: string; left: num
 export interface Bar {
   key: string;
   kind: EventKind;
+  /** 이 막대를 만든 회차와 단계. 막대를 눌러 응시일 시트를 열 때 쓴다 */
+  sessionId: string;
+  phase: EventPhase;
   left: number;
   width: number;
   label: string;
+  /** 시작과 끝이 다른 시행. 하루짜리는 고를 것이 없다 */
+  start: string;
+  end: string;
   /** 하루짜리 — 막대가 아니라 점으로 그린다 */
   isPoint: boolean;
   /** 이미 지난 이벤트 */
@@ -150,9 +156,13 @@ export function buildRows(
       return [{
         key: `${session.id}|${e.kind}|${e.phase}|${e.start}|${e.seq}`,
         kind: e.kind,
+        sessionId: session.id,
+        phase: e.phase,
         left: c.left,
         width: c.width,
         label: e.label,
+        start: e.start,
+        end: e.end,
         isPoint: e.start === e.end,
         past: e.end < w.from,
         superseded: e.kind === 'exam' && supersededPhases.has(`${session.id}|${e.phase}`),

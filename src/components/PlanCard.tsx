@@ -13,7 +13,8 @@ interface Props {
   nameOf: (slug: string) => string;
   today: string;
   onSession: (examSlug: string, sessionId: string) => void;
-  onDate: (key: string, date: string | undefined) => void;
+  /** 응시일 지정 시트를 연다. 어떤 기간을 고를 수 있는지는 App 이 계산한다 */
+  onPick: (plan: ExamPlan) => void;
   onRemove: (examSlug: string) => void;
 }
 
@@ -21,7 +22,7 @@ interface Props {
 const MAX_SESSION_OPTIONS = 8;
 
 export function PlanCard({
-  exam, group, groupSessions, allPlans, allSessions, nameOf, today, onSession, onDate, onRemove,
+  exam, group, groupSessions, allPlans, allSessions, nameOf, today, onSession, onPick, onRemove,
 }: Props) {
   const mine = allPlans.filter(p => p.examSlug === exam.slug);
   const currentId = mine[0]?.sessionId;
@@ -57,7 +58,7 @@ export function PlanCard({
           allPlans={allPlans}
           allSessions={allSessions}
           nameOf={nameOf}
-          onDate={onDate}
+          onPick={onPick}
         />
       ) : !upcoming.length ? (
         <p className="small muted" style={{ marginTop: 8 }}>남은 회차가 없어요.</p>
@@ -101,32 +102,21 @@ export function PlanCard({
               <div key={opt.phase}>
                 <div className="card__row">
                   <span className="card__label">{opt.label}</span>
-                  <input
-                    type="date"
-                    value={plan.date ?? ''}
-                    min={opt.start}
-                    max={opt.end}
-                    onChange={e => onDate(key, e.target.value || undefined)}
-                    aria-label={`${exam.name} ${opt.label} 응시일`}
-                  />
-                  <span className="small muted mono">
-                    {dotted(opt.start)} ~ {dotted(opt.end)} 중
-                  </span>
-                  {plan.date && (
-                    <button type="button" className="linkbtn" onClick={() => onDate(key, undefined)}>
-                      지우기
+                  <span className="card__field">
+                    <button
+                      type="button"
+                      className={`pickbtn ${plan.date ? 'pickbtn--set' : ''}`}
+                      onClick={() => onPick(plan)}
+                    >
+                      {plan.date ? dotted(plan.date) : '응시일 정하기'}
                     </button>
-                  )}
+                    <span className="small muted mono">
+                      {dotted(opt.start)} ~ {dotted(opt.end)} 중
+                    </span>
+                  </span>
                 </div>
-                {!plan.date && (
-                  <p className="small muted" style={{ margin: '0 0 0 68px' }}>
-                    기간 중 응시일을 정하면 D-Day가 생겨요.
-                  </p>
-                )}
                 {notice && (
-                  <p className="notice notice--strong" style={{ margin: '8px 0 0 68px' }}>
-                    {notice}
-                  </p>
+                  <p className="notice card__notice">{notice}</p>
                 )}
               </div>
             );
@@ -150,7 +140,7 @@ export function PlanCard({
  * 기관 링크를 주고 사용자가 판단하게 둔다.
  */
 function RollingCard({
-  exam, group, plan, allPlans, allSessions, nameOf, onDate,
+  exam, group, plan, allPlans, allSessions, nameOf, onPick,
 }: {
   exam: Exam;
   group: ScheduleGroup | undefined;
@@ -158,9 +148,10 @@ function RollingCard({
   allPlans: ExamPlan[];
   allSessions: Session[];
   nameOf: (slug: string) => string;
-  onDate: (key: string, date: string | undefined) => void;
+  onPick: (plan: ExamPlan) => void;
 }) {
-  const rule = exam.rollingRule ?? group?.rollingRule ?? null;
+  // 태그가 이미 '상시시험' 이라고 말한다. 규칙 원문이 같은 말로 시작하면 두 번 읽힌다.
+  const rule = (exam.rollingRule ?? group?.rollingRule ?? null)?.replace(/^상시시험[.·:\s]*/, '') || null;
   const link = group?.applyUrl ?? group?.agencyUrl ?? null;
   if (!plan) return null;
 
@@ -177,31 +168,18 @@ function RollingCard({
 
       <div className="card__row">
         <span className="card__label">응시일</span>
-        <input
-          type="date"
-          value={plan.date ?? ''}
-          onChange={e => onDate(key, e.target.value || undefined)}
-          aria-label={`${exam.name} 응시일`}
-        />
-        {plan.date && (
-          <button type="button" className="linkbtn" onClick={() => onDate(key, undefined)}>
-            지우기
-          </button>
-        )}
+        <button
+          type="button"
+          className={`pickbtn ${plan.date ? 'pickbtn--set' : ''}`}
+          onClick={() => onPick(plan)}
+        >
+          {plan.date ? dotted(plan.date) : '예약한 날짜 넣기'}
+        </button>
       </div>
 
-      {!plan.date && (
-        <p className="small muted" style={{ margin: '0 0 0 68px' }}>
-          예약한 날짜를 넣으면 D-Day가 생겨요.
-        </p>
-      )}
-      {notice && (
-        <p className="notice notice--strong" style={{ margin: '8px 0 0 68px' }}>
-          {notice}
-        </p>
-      )}
+      {notice && <p className="notice card__notice">{notice}</p>}
       {link && (
-        <p className="small" style={{ margin: '8px 0 0 68px' }}>
+        <p className="small card__link">
           <a href={link} target="_blank" rel="noreferrer noopener">
             {group?.agency ?? exam.agency}에서 접수하기
           </a>
