@@ -345,6 +345,8 @@ a { color: var(--accent); text-underline-offset: 2px; }
 }
 
 .card__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); }
+/* 265px 에서 '빼기' 가 '빼/기' 로 쪼개졌다. 두 글자짜리 버튼은 줄이지 않는다 */
+.card__head > .linkbtn { flex: none; white-space: nowrap; }
 .card__name { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
 .card__agency { font-size: 11px; color: var(--ink-muted); }
 .card__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-top: var(--s3); }

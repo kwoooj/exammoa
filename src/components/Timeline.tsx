@@ -144,7 +144,10 @@ export function Timeline({ plans, sessions, groups, nameOf, today, onPickBar }: 
  */
 function TimelineTable({ rows, today }: { rows: Row[]; today: string }) {
   return (
-    <table className="sr-only">
+    // 감추는 클래스는 바깥 div 가 쓴다. table 에 직접 걸면 width:1px 를 무시하고
+    // 내용 크기(실측 393×530)로 부풀어 클릭을 가로챌 수 있다.
+    <div className="sr-only">
+    <table>
       <caption>오늘({dotted(today)})부터 6개월간의 일정</caption>
       <thead>
         <tr>
@@ -182,5 +185,6 @@ function TimelineTable({ rows, today }: { rows: Row[]; today: string }) {
         )}
       </tbody>
     </table>
+    </div>
   );
 }
