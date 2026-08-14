@@ -328,13 +328,25 @@ a:hover { text-decoration-color: currentColor; }
 /* 첫 섹션은 헤더 바로 아래라 위 여백이 덜 필요하다 */
 .section--lead { margin-top: var(--s6); }
 
+/*
+   섹션 제목을 가로줄 위에 올린다. 전부 같은 무게로 흐르면 페이지가 평평해서
+   어디가 새 이야기인지 읽히지 않는다 — 카드로 감싸는 대신 선 하나로 나눈다 (§13.1).
+*/
 .section__head {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: var(--s1) var(--s3);
-  margin: 0 0 var(--s3);
+  margin: 0 0 var(--s4);
+  padding-bottom: var(--s2);
+  border-bottom: 1px solid var(--line);
 }
+
+/* 우측으로 밀어내는 보조 요소 — 전체 보기, 정렬, 링크 복사 */
+.section__head > :last-child:not(h1):not(h2) { margin-left: auto; }
+
+.section { margin-top: var(--s12); }
+.section--lead { margin-top: var(--s6); }
 
 .section__hint { margin: 0; font-size: 13px; color: var(--ink-muted); }
 
@@ -396,20 +408,48 @@ a:hover { text-decoration-color: currentColor; }
 
 /* ---- 검색 ---- */
 
+/*
+   아래 여백을 두지 않는다. 검색창은 히어로에서는 단독으로, 헤더와 시험 추가에서는
+   버튼과 같은 flex 행에 선다 — 컨트롤이 자기 바깥 여백을 들고 다니면 놓이는 자리마다
+   어긋난다. 여백은 감싸는 쪽이 준다.
+*/
 .search {
   width: 100%;
-  max-width: 360px;
-  height: 44px;
+  height: 40px;
   padding: 0 var(--s3);
   border: 1px solid var(--line-strong);
   border-radius: var(--r2);
   background: var(--surface);
   color: var(--ink);
   font: inherit;
-  margin: 0 0 var(--s6);
+  margin: 0;
 }
 
 .search::placeholder { color: var(--ink-muted); }
+
+/*
+   select 도 같은 높이·같은 테두리를 쓴다. 기본 화살표는 OS 마다 크기와 색이
+   달라 같은 줄의 버튼과 어긋나 보이므로 직접 그린다.
+*/
+select {
+  height: 40px;
+  padding: 0 30px 0 var(--s3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r2);
+  background-color: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right 14px center, right 9px center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+select:hover { border-color: var(--ink-secondary); }
 .search:focus-visible { border-color: var(--accent); outline-offset: 0; }
 
 /* ---- 버튼 ---- */
@@ -419,14 +459,14 @@ a:hover { text-decoration-color: currentColor; }
   align-items: center;
   justify-content: center;
   gap: var(--s2);
-  min-height: 44px;
+  min-height: 40px;
   padding: 0 var(--s4);
   border: 1px solid var(--line-strong);
   border-radius: var(--r2);
   background: var(--surface);
   color: var(--ink);
   font: inherit;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: inherit;
   cursor: pointer;
@@ -451,155 +491,6 @@ a:hover { text-decoration-color: currentColor; }
 
 .linkbtn:hover { color: var(--ink); }
 
-/* ---- 계획 카드 ---- */
-
-.cards { display: grid; gap: var(--s3); margin: 0; padding: 0; list-style: none; }
-
-.card {
-  border: 1px solid var(--line);
-  border-radius: var(--r3);
-  background: var(--surface);
-  padding: var(--s4);
-}
-
-.card__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); }
-/* 265px 에서 '빼기' 가 '빼/기' 로 쪼개졌다. 두 글자짜리 버튼은 줄이지 않는다 */
-.card__head > .linkbtn { flex: none; white-space: nowrap; }
-.card__name { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
-.card__agency { font-size: 11px; color: var(--ink-muted); }
-.card__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-top: var(--s3); }
-.card__label { font-size: 13px; color: var(--ink-secondary); min-width: 68px; }
-/* 라벨을 뺀 나머지를 한 덩어리로 묶는다. 줄바꿈이 나도 라벨 아래로 정렬된다 */
-.card__field {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--s2);
-  min-width: 0;
-  flex: 1 1 auto;
-}
-
-.card__notice { margin: var(--s2) 0 0 68px; }
-.card__link { margin: var(--s2) 0 0 68px; }
-
-/* 응시일을 여는 버튼. 값이 없으면 할 일을 말하고, 있으면 값을 보여준다. */
-.pickbtn {
-  min-height: 36px;
-  padding: 0 var(--s3);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r2);
-  background: var(--surface);
-  color: var(--ink-secondary);
-  font: inherit;
-  font-size: 14px;
-  letter-spacing: inherit;
-  cursor: pointer;
-}
-
-.pickbtn:hover { border-color: var(--ink-secondary); color: var(--ink); }
-.pickbtn--set { color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
-
-select,
-input[type='date'] {
-  height: 36px;
-  padding: 0 var(--s2);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r2);
-  background: var(--surface);
-  color: var(--ink);
-  font: inherit;
-  font-size: 14px;
-}
-
-/* ---- D-Day 카드 ----
-   화면에서 가장 먼저 읽혀야 하는 값이다. 숫자만 30px 로 키우고 나머지는 전부 낮춘다. */
-
-.ddcards {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(0, 1fr);
-  gap: var(--s3);
-  margin: 0 0 var(--s4);
-  padding: 0;
-  list-style: none;
-}
-
-.ddcard {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-  padding: var(--s4);
-  border: 1px solid var(--line);
-  border-radius: var(--r3);
-  background: var(--surface);
-}
-
-/* 가장 급한 한 장만 액센트를 쓴다. 넉 장 모두 파랗게 하면 급한 것이 없어진다. */
-.ddcard--lead { border-color: var(--accent); }
-.ddcard--lead .ddcard__num { color: var(--accent); }
-
-.ddcard__exam { font-size: 15px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.ddcard__kind { font-size: 13px; color: var(--ink-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-.ddcard__num {
-  margin-top: var(--s2);
-  font-size: 30px;
-  line-height: 1.2;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-
-.ddcard__date { font-size: 11px; color: var(--ink-muted); }
-
-@media (max-width: 640px) {
-  /* 이 서비스에서 가로 스크롤을 쓰는 유일한 곳이다. 타임라인에는 쓰지 않는다. */
-  .ddcards {
-    grid-auto-columns: 148px;
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    margin-inline: -20px;
-    padding: 0 20px var(--s2);
-    scrollbar-width: none;
-  }
-
-  .ddcards::-webkit-scrollbar { display: none; }
-  .ddcard { scroll-snap-align: start; padding: var(--s3); }
-  .ddcard__num { font-size: 26px; }
-}
-
-/* ---- 다가오는 일정 리스트 ---- */
-
-.dday { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
-
-.dday__item {
-  display: grid;
-  grid-template-columns: 64px 1fr auto;
-  align-items: baseline;
-  gap: var(--s3);
-  padding: var(--s3) 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.dday__num { font-size: 15px; font-weight: 500; }
-.dday__what { min-width: 0; }
-.dday__exam { font-weight: 500; }
-.dday__kind { font-size: 13px; color: var(--ink-secondary); }
-.dday__date { font-size: 13px; color: var(--ink-muted); }
-
-/* 접수 마감은 시험보다 한 단계 약하게. 색이 아니라 굵기와 왼쪽 선으로 구분한다 (NFR-A11Y-01) */
-.dday__item--reg .dday__num { font-weight: 400; color: var(--ink-secondary); }
-.dday__item--exam { border-left: 2px solid var(--ink); padding-left: var(--s3); }
-
-.empty {
-  border: 1px dashed var(--line-strong);
-  border-radius: var(--r3);
-  padding: var(--s6);
-  text-align: center;
-  color: var(--ink-secondary);
-  font-size: 14px;
-}
-
 /* ---- 푸터 ---- */
 
 footer { margin-top: var(--s12); padding-top: var(--s4); border-top: 1px solid var(--line); }
@@ -608,54 +499,6 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 .sources { margin-top: var(--s3); }
 .sources > summary { font-size: 13px; color: var(--ink-muted); cursor: pointer; min-height: 24px; }
 .sources p { margin-top: var(--s1); }
-
-/* ---- 하단 액션 바 ----
-   고르는 중에만 뜬다. 고른 것과 되돌아갈 길을 화면 안에 붙들어 둔다. */
-
-.actionbar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 30;
-  border-top: 1px solid var(--line);
-  background: color-mix(in srgb, var(--canvas) 88%, transparent);
-  backdrop-filter: saturate(180%) blur(12px);
-  box-shadow: var(--elev);
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-@supports not (backdrop-filter: blur(1px)) {
-  .actionbar { background: var(--canvas); }
-}
-
-.actionbar__inner {
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: var(--s3) var(--s8);
-  display: flex;
-  align-items: center;
-  gap: var(--s3);
-}
-
-@media (max-width: 640px) {
-  .actionbar__inner { padding: var(--s2) 20px; }
-}
-
-/* 버튼은 줄이지 않는다. 265px 에서 '일정 보/기' 로 쪼개졌다 */
-.actionbar .btn { flex: none; white-space: nowrap; }
-
-.actionbar__list {
-  min-width: 0;
-  flex: 1 1 auto;
-  font-size: 13px;
-  color: var(--ink-secondary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.icon { flex: none; }
 
 /* ---- 접기 ---- */
 
@@ -859,26 +702,30 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 /* ---- 막대 ----
    두 채널을 겹치지 않게 나눈다.
 
-     모양 = 일정 종류 (접수 테두리 · 추가접수 점선 · 시험 채움 · 발표 점선)
-     색   = 어느 시험의 일정인가
+     좌측 세로 막대의 색 = 어느 시험인가
+     테두리와 바탕의 형태 = 일정 종류 (접수 실선 · 추가접수 점선 · 시험 진한 바탕)
 
-   색으로 종류를 구분하면 §3.2 의 "색상만으로 상태를 구분하지 않는다" 를 어기게 되고
+   색으로 종류를 구분하면 §3.2 의 "색상만으로 상태를 구분하지 않는다" 를 어기고
    색맹 사용자와 흑백 인쇄에서 접수와 시험이 같아진다.
 
-   바탕을 반드시 칠한다. 흰 칸 위의 흰 막대에 1.5px 테두리만 두르면 달력에서
-   막대가 사라진다 — 참고 구현에서 실제로 그랬다. 접수 계열도 옅은 틴트를 깔아
-   "여기 무언가 있다" 가 먼저 보이게 한다. */
+   **진한 단색 채움을 쓰지 않는다.** 여섯 색이 나란히 꽉 찬 막대로 서면 달력이
+   색종이가 되고, 정작 읽어야 할 날짜 숫자가 묻힌다. 옅은 바탕에 좌측 3px 색
+   막대를 세우고 글자를 진하게 두면 같은 구분이 훨씬 조용하게 된다. */
 
 .cal__bar {
   position: relative;
   z-index: 1;
   min-width: 0;
-  height: 20px;
+  height: 19px;
   align-self: center;
   margin: 0 1px;
-  padding: 0 5px;
-  border: 0;
-  border-radius: 3px;
+  padding: 0 4px;
+  border: 1px solid var(--bar-line);
+  /* 좌측 색 막대. 종목을 말하는 유일한 자리다 */
+  border-left: 3px solid var(--cat, var(--ink));
+  border-radius: 2px;
+  background: var(--surface);
+  color: var(--ink);
   font: inherit;
   font-size: 11px;
   font-weight: 500;
@@ -886,11 +733,8 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
   white-space: nowrap;
   overflow: hidden;
   cursor: pointer;
-  /*
-     flex 여야 한다. block 으로 두면 이어짐 표시(::before 의 '‹')가 인라인이고
-     라벨은 블록이라 라벨이 **다음 줄로 밀려 overflow 에 잘린다.** 실제로 주를
-     넘는 접수 막대가 통째로 이름 없는 줄무늬가 됐다.
-  */
+  /* flex 여야 이어짐 표시(::before)와 라벨이 한 줄에 선다. block 이면 라벨이
+     다음 줄로 밀려 overflow 에 잘린다 — 실제로 그렇게 사라졌다. */
   display: flex;
   align-items: center;
   gap: 2px;
@@ -899,58 +743,61 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 .cal__bar:disabled { cursor: default; }
 .cal__barText { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 
-/* 기본(중립) — 시험 상세처럼 그룹이 하나뿐이라 색이 아무것도 구분하지 않을 때 */
-.cal__bar--reg {
-  border: 1.5px solid var(--bar-line);
-  background: color-mix(in srgb, var(--ink) 6%, var(--surface));
-  color: var(--ink-secondary);
+/* 접수 — 옅은 바탕 */
+.cal__bar--reg { background: color-mix(in srgb, var(--cat, var(--ink)) 7%, var(--surface)); }
+
+/* 추가접수·빈자리·취소좌석 — 점선. 정기접수와 눈으로 갈라야 남은 기회를 놓치지 않는다 */
+.cal__bar--extra { border-style: dashed; border-left-style: solid; background: var(--surface); }
+
+/* 시험 — 진한 바탕. 이 달력에서 가장 중요한 하루다 */
+.cal__bar--exam {
+  background: color-mix(in srgb, var(--cat, var(--ink)) 18%, var(--surface));
+  border-color: color-mix(in srgb, var(--cat, var(--ink)) 35%, var(--surface));
 }
 
-.cal__bar--exam { background: var(--bar-fill); color: var(--surface); }
-
+/* 발표 — 기본에서는 꺼져 있다. 켜면 조용한 회색 한 줄 */
 .cal__bar--result {
-  border: 1.5px dashed var(--bar-line);
   background: var(--surface);
+  border-style: dotted;
+  border-left-width: 2px;
   color: var(--ink-secondary);
+  font-weight: 400;
 }
 
-/* 추가접수·빈자리접수·취소좌석. 정기접수와 눈으로 갈라야 남은 기회를 놓치지 않는다 */
-.cal__bar--extra { border-style: dashed; }
-
-/* 하루짜리는 칸 하나 폭이라 글자가 안 들어간다. 점으로 만든다 */
-.cal__bar--point {
-  width: 14px;
-  min-width: 14px;
-  height: 14px;
-  padding: 0;
-  border-radius: 50%;
-  justify-self: center;
-  margin: 0;
-}
-
-/* 진행 중인 막대는 굵기로도 말한다 (§7.5) */
-.cal__bar--ongoing { height: 22px; box-shadow: inset 0 0 0 1px var(--surface); }
+/* 진행 중인 막대는 굵기와 좌측 막대로 말한다 (§7.5) */
+.cal__bar--ongoing { height: 21px; border-left-width: 5px; font-weight: 600; }
 
 /* 과거는 숨기지 않고 채도만 낮춘다 (§7.5).
-   opacity 로 흐리면 다크 모드에서 대비가 AA 아래로 떨어지므로 전용 토큰을 쓴다. */
-.cal__bar--past { background: var(--bar-past); border-color: var(--bar-past-line); color: var(--surface); }
-.cal__bar--reg.cal__bar--past,
-.cal__bar--result.cal__bar--past { background: var(--surface); color: var(--ink-muted); }
+   opacity 로 흐리면 다크 모드에서 대비가 AA 아래로 떨어지므로 색을 직접 바꾼다. */
+.cal__bar--past {
+  background: var(--surface);
+  border-color: var(--bar-past-line);
+  border-left-color: var(--bar-past);
+  color: var(--ink-muted);
+  font-weight: 400;
+}
 
 .cal__bar--selected { box-shadow: 0 0 0 2px var(--accent); }
 .cal__bar:not(:disabled):hover { box-shadow: 0 0 0 2px var(--accent-line); }
 
 /* 주 경계를 넘는 막대. 모서리를 각지게 하고 홑화살표로 "계속된다" 를 말한다 —
-   색이 아니라 형태와 글자다 (§3.2). */
-.cal__bar--openL { border-top-left-radius: 0; border-bottom-left-radius: 0; margin-left: 0; }
+   색이 아니라 형태와 글자다 (§3.2). 왼쪽으로 이어질 때는 좌측 색 막대를 없앤다:
+   그것은 "여기서 시작한다" 는 표시라 중간 토막마다 있으면 거짓말이 된다. */
+.cal__bar--openL {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 1px;
+  border-left-color: var(--bar-line);
+  margin-left: 0;
+}
 .cal__bar--openR { border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: 0; }
-.cal__bar--openL::before { content: '‹'; opacity: 0.75; }
-.cal__bar--openR::after { content: '›'; opacity: 0.75; margin-left: auto; }
+.cal__bar--openL::before { content: '‹'; opacity: 0.75; color: var(--ink-muted); }
+.cal__bar--openR::after { content: '›'; opacity: 0.75; color: var(--ink-muted); }
 
 /* ---- 종목 색 ----
-   그룹이 둘 이상일 때만 붙는다 (lib/calcolors.ts). 모양 규칙은 위에서 이미
-   정해졌고 여기서는 색만 덮어쓴다. 지난 막대는 색을 잃는다 — 색은 "어느 시험" 을
-   말하는 채널인데, 끝난 일정에서까지 그것이 눈에 띌 이유가 없다. */
+   그룹이 둘 이상일 때만 붙는다 (lib/calcolors.ts). 위 규칙이 --cat 을 읽으므로
+   여기서는 변수만 정한다. 지난 막대는 색을 잃는다 — 색은 "어느 시험" 을 말하는
+   채널인데 끝난 일정에서까지 그것이 눈에 띌 이유가 없다. */
 
 .cal__bar--c1 { --cat: var(--cat-1); }
 .cal__bar--c2 { --cat: var(--cat-2); }
@@ -959,23 +806,12 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 .cal__bar--c5 { --cat: var(--cat-5); }
 .cal__bar--c6 { --cat: var(--cat-6); }
 
-.cal__bar[class*='cal__bar--c']:not(.cal__bar--past).cal__bar--exam {
-  background: var(--cat);
-  color: var(--cat-on);
-}
+.cal__bar--past { --cat: var(--bar-past); }
 
-.cal__bar[class*='cal__bar--c']:not(.cal__bar--past).cal__bar--reg,
-.cal__bar[class*='cal__bar--c']:not(.cal__bar--past).cal__bar--result {
-  border-color: var(--cat);
-  background: color-mix(in srgb, var(--cat) var(--cat-tint), var(--surface));
-  color: var(--cat);
-}
-
-/* color-mix 를 모르는 브라우저에서는 그냥 흰 바탕으로 둔다. 테두리 색은 남는다. */
+/* color-mix 를 모르는 브라우저에서는 흰 바탕으로 둔다. 좌측 색 막대는 남는다. */
 @supports not (background: color-mix(in srgb, red 10%, blue)) {
-  .cal__bar--reg { background: var(--surface); }
-  .cal__bar[class*='cal__bar--c']:not(.cal__bar--past).cal__bar--reg,
-  .cal__bar[class*='cal__bar--c']:not(.cal__bar--past).cal__bar--result { background: var(--surface); }
+  .cal__bar--reg,
+  .cal__bar--exam { background: var(--surface); }
 }
 
 
@@ -1009,7 +845,7 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 .cal__legend { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); margin: var(--s2) 0 0; }
 .cal__legendItem { display: inline-flex; align-items: center; gap: var(--s1); }
 .cal__bar--sample { position: static; width: 20px; height: 10px; min-width: 0; margin: 0; padding: 0; pointer-events: none; }
-.cal__bar--result.cal__bar--sample { width: 10px; height: 10px; }
+
 
 /* ---- 상세 패널 ---- */
 
@@ -1087,7 +923,13 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 /* 라벨 폭을 맞춰 날짜가 세로로 정렬되게 한다. 날짜가 들쭉날쭉하면 비교가 안 된다 */
 .exrow__what { flex: none; min-width: 92px; color: var(--ink-muted); }
 
-.exrow__go { display: flex; flex-direction: column; gap: var(--s2); align-items: stretch; min-width: 116px; }
+/*
+   강조 버튼은 행마다 하나다. 예전에는 '상세 일정' 과 '원서접수' 가 나란히 서서
+   둘 다 눌러야 할 것처럼 보였다 — §13.2 가 금지한 강조 경쟁이다. 상세는 시험명
+   링크로도 갈 수 있으므로 여기서는 조용한 글자로 낮춘다.
+*/
+.exrow__go { display: flex; flex-direction: column; gap: var(--s1); align-items: stretch; min-width: 128px; }
+.exrow__more { font-size: 13px; color: var(--ink-secondary); text-align: center; min-height: 32px; display: inline-flex; align-items: center; justify-content: center; }
 
 @media (max-width: 640px) {
   /* §6.8 — 시험명·상태·다음 접수일·공식 링크가 첫 화면에 보여야 한다 */
@@ -1374,9 +1216,29 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 
 /* ---- 필터 (§8.4) ---- */
 
-.filters { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); margin: var(--s3) 0; }
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2) var(--s3);
+  margin: var(--s4) 0;
+  padding: var(--s3);
+  border: 1px solid var(--line);
+  border-radius: var(--r3);
+  background: var(--surface);
+}
 .filters__field { display: inline-flex; align-items: center; gap: var(--s2); font-size: 13px; color: var(--ink-secondary); }
-.filters__field select { min-width: 0; max-width: 200px; }
+.filters__field select { min-width: 0; max-width: 190px; }
+
+/* 일정 종류 체크박스는 필터 묶음 안에서 한 덩어리로 보이게 왼쪽에 선을 둔다 */
+.filters__kinds { padding-left: var(--s3); border-left: 1px solid var(--line); }
+
+@media (max-width: 640px) {
+  .filters { gap: var(--s2); }
+  .filters__field { flex: 1 1 140px; }
+  .filters__field select { flex: 1 1 auto; max-width: none; }
+  .filters__kinds { flex-basis: 100%; padding-left: 0; border-left: 0; padding-top: var(--s2); border-top: 1px solid var(--line); }
+}
 
 .filters__kinds { display: inline-flex; align-items: center; gap: var(--s3); border: 0; margin: 0; padding: 0; }
 .filters__check { display: inline-flex; align-items: center; gap: var(--s1); font-size: 13px; color: var(--ink-secondary); min-height: 32px; }
@@ -1414,23 +1276,23 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 
 .cards,
 .card,
-.card__row,
-.card__head,
-.dday__item,
-.dday__what {
+.exrow,
+.exrow__body,
+.exrow__when,
+.filters,
+.filters__field {
   min-width: 0;
 }
 
-.card__row > select,
-.card__row > input[type='date'] {
+.filters__field > select {
   min-width: 0;
   max-width: 100%;
   flex: 1 1 auto;
 }
 
-/* 종목명이 길면 줄바꿈보다 줄임표가 낫다. 카드 폭이 흔들리지 않는다. */
-.dday__exam,
-.card__name {
+/* 종목명이 길면 줄바꿈보다 줄임표가 낫다. 행 폭이 흔들리지 않는다. */
+.exrow__name,
+.evt__name {
   overflow-wrap: anywhere;
 }
 
