@@ -2,7 +2,6 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
 import { followTarget, readTables, rowsAsObjects, tableByHeader } from './html.mjs';
 
 test('단순 표를 격자로 만든다', () => {
@@ -105,17 +104,41 @@ test('meta refresh 와 frameset', () => {
 
 // ---- 실제 픽스처 ------------------------------------------------------
 
-test('한능검 실측 HTML 에서 일정표를 고른다', async () => {
-  let html;
-  try {
-    html = await readFile('build/crawl/history-exam.html', 'utf8');
-  } catch {
-    return; // 픽스처가 없는 환경에서는 건너뛴다 (build/ 는 git 추적 대상이 아니다)
-  }
-  const picked = tableByHeader(readTables(html), ['구분', '원서접수', '취소좌석 접수', '시험일시', '합격자발표']);
+/**
+ * 한능검 실측 표를 그대로 옮긴 것 (`data/archive/2026/history-exam.*.html`).
+ *
+ * 전에는 `build/crawl/history-exam.html` 을 읽고 없으면 `return` 했는데, 그 경로가
+ * `.gitignore` 대상이라 **CI 에서는 파일이 없어 조용히 통과했다.**
+ */
+const HISTORY_HEADERS = ['구분', '원서접수', '취소좌석 접수', '시험일시', '합격자발표'];
+const HISTORY_ROWS = [
+  ['제77회', '2026년 1월 6일(화) 10:00 ~ 2026년 1월 13일(화) 17:00', '2026년 1월 20일(화) 10:00 ~ 2026년 1월 23일(금) 17:00', '2026년 2월 7일(토)', '2026년 2월 20일(금)'],
+  ['제78회', '2026년 4월 21일(화) 10:00 ~ 2026년 4월 28일(화) 17:00', '2026년 5월 5일(화) 10:00 ~ 2026년 5월 8일(금) 17:00', '2026년 5월 23일(토)', '2026년 6월 5일(금)'],
+  ['제79회', '2026년 7월 7일(화) 10:00 ~ 2026년 7월 14일(화) 17:00', '2026년 7월 21일(화) 10:00 ~ 2026년 7월 24일(금) 17:00', '2026년 8월 9일(일)', '2026년 8월 21일(금)'],
+  ['제80회', '2026년 9월 15일(화) 10:00 ~ 2026년 9월 22일(화) 17:00', '2026년 9월 29일(화) 10:00 ~ 2026년 10월 2일(금) 17:00', '2026년 10월 17일(토)', '2026년 10월 30일(금)'],
+  ['제81회', '2026년 11월 3일(화) 10:00 ~ 2026년 11월 10일(화) 17:00', '2026년 11월 11일(수) 13:00 ~ 2026년 11월 13일(금) 17:00', '2026년 11월 28일(토)', '2026년 12월 11일(금)'],
+];
+
+// 실제 페이지에는 앞에 공지 표가 있다. 인덱스가 아니라 헤더로 골라야 한다는 것을 확인한다.
+const historyPage = () => {
+  const head = `<tr>${HISTORY_HEADERS.map(c => `<th>${c}</th>`).join('')}</tr>`;
+  const body = HISTORY_ROWS.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('');
+  return '<html><body>'
+    + '<table><tr><th>공지</th></tr><tr><td>안내문</td></tr></table>'
+    + `<table>${head}${body}</table>`
+    + '</body></html>';
+};
+
+test('한능검 표를 헤더로 고른다 — 앞의 공지 표를 읽지 않는다', () => {
+  const picked = tableByHeader(readTables(historyPage()), HISTORY_HEADERS);
   assert.ok(picked, '일정표를 찾지 못했다');
   const rows = rowsAsObjects(picked).filter(r => /제\d+회/.test(r['구분']));
   assert.equal(rows.length, 5, `회차가 5개여야 한다 (실제 ${rows.length})`);
   assert.match(rows[0]['구분'], /제77회/);
   assert.match(rows[0]['시험일시'], /2026년 2월 7일/);
+});
+
+test('헤더가 하나라도 없으면 그 표를 고르지 않는다', () => {
+  const picked = tableByHeader(readTables(historyPage()), [...HISTORY_HEADERS, '없는칸']);
+  assert.equal(picked, null, '헤더가 어긋나면 조용히 다른 표를 읽지 않는다');
 });
