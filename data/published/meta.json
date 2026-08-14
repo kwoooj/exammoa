@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-08-14T00:11:57.942Z",
+  "fetchedAt": "2026-08-14T00:35:55.072Z",
   "year": 2026,
-  "examCount": 57,
+  "examCount": 62,
   "qnetExamCount": 47,
-  "groupCount": 16,
-  "sessionCount": 188,
+  "groupCount": 19,
+  "sessionCount": 191,
   "eventCount": 817,
   "tbdCount": 0,
   "staleCount": 0,
@@ -16,43 +16,43 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-14T00:11:57.942Z",
+      "fetchedAt": "2026-08-14T00:35:55.072Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:11:57.942Z",
+      "fetchedAt": "2026-08-14T00:35:55.072Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:11:57.942Z",
+      "fetchedAt": "2026-08-14T00:35:55.072Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:11:57.942Z",
+      "fetchedAt": "2026-08-14T00:35:55.072Z",
       "sessionCount": 44
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:11:57.942Z",
+      "fetchedAt": "2026-08-14T00:35:55.072Z",
       "sessionCount": 6
     },
     "kait-linux": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:11:57.942Z",
+      "fetchedAt": "2026-08-14T00:35:55.072Z",
       "sessionCount": 4
     },
     "kacpta-tax": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:11:57.942Z",
+      "fetchedAt": "2026-08-14T00:35:55.072Z",
       "sessionCount": 6
     },
     "dataq-csv": {
@@ -61,9 +61,16 @@
       "fetchedAt": "2026-01-06T00:00:00.000Z",
       "sessionCount": 10,
       "staleAfterDays": 400
+    },
+    "rolling-rules": {
+      "health": "ok",
+      "method": "manual",
+      "fetchedAt": "2026-08-13T00:00:00.000Z",
+      "sessionCount": 3,
+      "staleAfterDays": 180
     }
   },
-  "archive": null,
+  "archive": "data/archive/2026/qnet.2026-08-14.40b352b0eaeb.json",
   "notes": [],
   "failed": []
 }
