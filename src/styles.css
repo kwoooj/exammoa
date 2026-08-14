@@ -1032,6 +1032,201 @@ footer p { margin: 0 0 var(--s1); font-size: 13px; color: var(--ink-muted); }
 .evt__list { margin: var(--s1) 0 0; padding-left: 1.2em; }
 .cal__panel .row { margin-top: var(--s3); }
 
+/* ---- 공용 목록 항목 (§4) ----
+   한 행 안에서 시험명 · 핵심 날짜 · 공식 CTA 가 한눈에 연결되어야 한다 (§12.1).
+   카드로 감싸지 않고 구분선으로 나눈다 — §13.1 이 "카드보다 구분선·간격·타이포" 다. */
+
+.exrows { list-style: none; margin: 0; padding: 0; }
+.exgroup { list-style: none; }
+
+.exrow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--s3);
+  padding: var(--s4) 0;
+  border-top: 1px solid var(--line);
+}
+
+.exrows > .exrow:first-child { border-top: 0; }
+
+/*
+   열을 명시한다. 체크박스는 화면에 따라 있기도 없기도 한데(§6.6 은 탐색에만 둔다),
+   자동 배치에 맡기면 자식이 둘일 때 CTA 가 1fr 자리로 올라가 행의 3분의 2를
+   먹는다. 실제로 홈에서 그렇게 그려졌다.
+*/
+.exrow__pick { grid-column: 1; width: 18px; height: 18px; margin: 4px 0 0; flex: none; }
+.exrow__body { grid-column: 2; min-width: 0; }
+.exrow__go { grid-column: 3; }
+
+.exrow__head { display: flex; flex-wrap: wrap; gap: var(--s2); margin: 0 0 var(--s2); }
+
+.exrow__name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s2);
+  margin: 0 0 var(--s2);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.exrow__agency { font-size: 12px; font-weight: 400; color: var(--ink-muted); }
+
+.exrow__when {
+  display: flex;
+  gap: var(--s2);
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--ink-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 라벨 폭을 맞춰 날짜가 세로로 정렬되게 한다. 날짜가 들쭉날쭉하면 비교가 안 된다 */
+.exrow__what { flex: none; min-width: 92px; color: var(--ink-muted); }
+
+.exrow__go { display: flex; flex-direction: column; gap: var(--s2); align-items: stretch; min-width: 116px; }
+
+@media (max-width: 640px) {
+  /* §6.8 — 시험명·상태·다음 접수일·공식 링크가 첫 화면에 보여야 한다 */
+  .exrow { grid-template-columns: auto minmax(0, 1fr); }
+  .exrow__go { grid-column: 1 / -1; flex-direction: row; min-width: 0; }
+  .exrow__go > * { flex: 1 1 0; text-align: center; }
+  .exrow__what { min-width: 76px; }
+}
+
+/* 낡은 소스 경고는 그 항목 안에서만 (§2.4) */
+.badge--warn { border-color: var(--warn); color: var(--warn); }
+
+/* ---- 통합 검색 (§2.2) ---- */
+
+.sbox { position: relative; }
+.sbox form { display: flex; gap: var(--s2); }
+.sbox .search { flex: 1 1 auto; min-width: 0; }
+
+.sbox--hero { margin: var(--s4) 0 var(--s3); max-width: 34em; }
+.sbox--hero .search { height: 48px; font-size: 16px; }
+
+.sbox__pop {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  padding: var(--s1);
+  border: 1px solid var(--line);
+  border-radius: var(--r3);
+  background: var(--surface);
+  box-shadow: var(--elev);
+}
+
+.sbox__list { list-style: none; margin: 0; padding: 0; max-height: 320px; overflow-y: auto; }
+
+.sbox__item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: var(--s2);
+  border-radius: var(--r2);
+  text-decoration: none;
+  min-height: 44px;
+  justify-content: center;
+}
+
+.sbox__item:hover { background: var(--accent-tint); }
+.sbox__name { font-size: 15px; }
+.sbox__none { padding: var(--s2); margin: 0; color: var(--ink-muted); }
+
+.sbox__all {
+  width: 100%;
+  min-height: 40px;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.linkbtn {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--accent);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.hdr__search { flex: 1 1 auto; min-width: 0; max-width: 380px; }
+
+@media (max-width: 860px) {
+  /* 좁아지면 헤더 검색을 접는다. 워드마크와 메뉴가 먼저다 (§2.1) */
+  .hdr__search { display: none; }
+}
+
+/* ---- 홈 (§5) ---- */
+
+.shortcuts { display: flex; flex-wrap: wrap; gap: var(--s2); margin: var(--s4) 0 0; }
+
+@media (max-width: 640px) {
+  /* §5.5 — 2열 버튼 */
+  .shortcuts { display: grid; grid-template-columns: 1fr 1fr; }
+  .shortcuts > * { text-align: center; }
+}
+
+.catlist { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+
+@media (min-width: 720px) {
+  .catlist { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3) var(--s8); }
+}
+
+.catlist__item { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s2); padding-bottom: var(--s3); border-bottom: 1px solid var(--line); }
+.catlist__name { font-size: 16px; font-weight: 500; }
+.catlist__examples { flex-basis: 100%; margin: 0; }
+
+/* 홈 미리보기는 칸을 낮춘다. 하루 두 건까지만 그린다 */
+.cal--compact .cal__week { min-height: 42px; }
+.cal--compact .cal__day { min-height: 0; }
+
+/* ---- 결과 요약과 선택 바 (§6.7) ---- */
+
+.results { margin: 0; font-size: 14px; color: var(--ink-secondary); }
+
+.pickbar {
+  position: sticky;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+  margin-top: var(--s6);
+  padding: var(--s3) var(--s4);
+  border: 1px solid var(--line);
+  border-radius: var(--r3);
+  background: var(--surface);
+  box-shadow: var(--elev);
+}
+
+.pickbar__count { margin: 0 auto 0 0; font-size: 14px; }
+
+/* 데스크톱에서는 sticky 라 자리를 차지하므로 스페이서가 필요 없다 */
+.pickbar__spacer { display: none; }
+
+@media (max-width: 640px) {
+  .pickbar { position: fixed; inset: auto 20px 12px; margin: 0; }
+  .pickbar__spacer { display: block; height: 84px; }
+}
+
+/* ---- 빈 상태 (§15.2) ---- */
+
+.empty p { margin: 0 0 var(--s2); }
+
+
 /* ---- 통합 캘린더 배치 (§8.4 · §8.6 · §8.13) ----
    데스크톱은 격자 + 우측 상세 패널 2열. 태블릿부터는 패널이 격자 아래로 내려가고,
    모바일에서는 하단 시트가 된다. */

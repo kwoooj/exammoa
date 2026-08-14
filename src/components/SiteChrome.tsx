@@ -12,12 +12,27 @@ import { agoLabel, daysSince, freshnessOf } from '../lib/freshness.ts';
 import { dotted } from '../lib/dates.ts';
 import { ROUTE_PATHS } from '../lib/routes.ts';
 import { Link } from '../router/Link.tsx';
+import { useRoute } from '../router/Router.tsx';
+import { SearchBox } from './SearchBox.tsx';
 
 export function SiteHeader() {
+  const { data } = useDataState();
+  const today = useToday();
+  const route = useRoute();
+
   return (
     <header className="hdr">
       <div className="hdr__inner">
         <Link to={ROUTE_PATHS.home} className="hdr__logo">시험모아</Link>
+        {/*
+          홈에는 히어로 검색이 이미 있다. 같은 화면에 검색창을 둘 두면 어느 쪽이
+          진짜인지 헷갈리고 §13.2 가 경계한 "강조 요소 경쟁" 이 된다 (§2.1).
+        */}
+        {data && route.id !== 'home' && (
+          <div className="hdr__search">
+            <SearchBox data={data} today={today} />
+          </div>
+        )}
         <nav className="hdr__nav" aria-label="주요 메뉴">
           <Link to={ROUTE_PATHS.exams}>일정 찾기</Link>
           <Link to={ROUTE_PATHS.calendar}>캘린더</Link>
