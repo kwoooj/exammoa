@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-14T00:46:36.588Z",
+  "fetchedAt": "2026-08-14T00:55:45.144Z",
   "year": 2026,
   "examCount": 62,
   "qnetExamCount": 47,
@@ -16,43 +16,43 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-14T00:46:36.588Z",
+      "fetchedAt": "2026-08-14T00:55:45.144Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:46:36.588Z",
+      "fetchedAt": "2026-08-14T00:55:45.144Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:46:36.588Z",
+      "fetchedAt": "2026-08-14T00:55:45.144Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:46:36.588Z",
+      "fetchedAt": "2026-08-14T00:55:45.144Z",
       "sessionCount": 44
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:46:36.588Z",
+      "fetchedAt": "2026-08-14T00:55:45.144Z",
       "sessionCount": 6
     },
     "kait-linux": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:46:36.588Z",
+      "fetchedAt": "2026-08-14T00:55:45.144Z",
       "sessionCount": 4
     },
     "kacpta-tax": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T00:46:36.588Z",
+      "fetchedAt": "2026-08-14T00:55:45.144Z",
       "sessionCount": 6
     },
     "dataq-csv": {
