@@ -166,6 +166,14 @@ export interface Exam {
    * 수집 대상 URL 은 여기 두지 않는다. ScheduleGroup.sourceUrl 이 정본이다 —
    * 종목에 두었더니 실제로 그룹과 어긋났다 (한국사능력검정시험).
    */
+  /**
+   * 사용자 클릭용 기관 링크. 그룹의 것보다 우선한다 — 한 그룹이 여러 기관의
+   * 종목을 담는 경우(ITQ 등)가 있어서다. 수집 대상이 아니므로 sourceUrl 과 달리
+   * robots.txt 의 제약을 받지 않는다.
+   *
+   * 게시 데이터에 4건 있는데 계약에는 없었다. 아무도 읽지 않아 안 걸렸을 뿐이다.
+   */
+  agencyUrl?: string;
   /** true 면 확정 일정이 없다. 타임라인에 막대를 그리지 않는다 */
   rolling?: boolean;
   rollingRule?: string;
@@ -214,10 +222,44 @@ export interface GroupsFile {
   groups: ScheduleGroup[];
 }
 
+/** 값 하나를 끼워 넣어 공식 URL 을 만드는 규칙 */
+export interface LinkPattern {
+  /** `{jmCd}` 같은 치환 자리를 가진 주소 */
+  template: string;
+  appliesTo?: string;
+  /** 사람이 실제로 열어 확인했는가. false·없음이면 조립하지 않는다 */
+  verified?: boolean;
+  note?: string;
+}
+
+/**
+ * 공식 링크 조립 규칙. `exams.json` 에 함께 실려 나오고 정본은 `exams.seed.json` 이다.
+ *
+ * 전부 선택적으로 둔다. 이 블록이 통째로 없어도 화면은 group.applyUrl·agencyUrl 로
+ * 동작해야 한다 — 링크 규칙 하나가 빠졌다고 62개 상세 페이지가 죽으면 안 된다.
+ *
+ * 여기 있는 것만 타입에 적는다. JSON 에는 korcham·toeic 패턴도 있지만 화면이
+ * 읽지 않으므로 계약에 넣지 않는다. 쓰기 시작할 때 추가한다.
+ */
+export interface LinksFile {
+  patterns?: {
+    /**
+     * `{jmCd}` 를 끼워 Q-Net 종목 상세를 만든다.
+     * **잘못된 코드는 오류 없이 엉뚱한 종목을 보여준다** — 화이트리스트로만 조립한다.
+     */
+    qnetDetail?: LinkPattern;
+  };
+  common?: {
+    /** 비로그인으로 열리는 원서접수 안내. rcv202.do 는 로그인을 요구해 부적합하다 */
+    qnetApplyGuide?: string;
+    qnetExamList?: string;
+  };
+}
+
 export interface ExamsFile {
   exams: Exam[];
   categories: Category[];
-  links?: unknown;
+  links?: LinksFile;
 }
 
 export interface MetaFile {
