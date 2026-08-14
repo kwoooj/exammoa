@@ -22,6 +22,7 @@ import './styles.css';
 export const PAYLOAD_ID = '__exammoa';
 
 interface Payload {
+  path: string;
   buildDate: string;
   scope: Scope;
   data: RawData;
@@ -52,7 +53,13 @@ if (payload) {
 function Tree({ children }: { children: ReactNode }) {
   return (
     <StrictMode>
-      <RouterProvider initialHref={window.location.href}>
+      {/*
+        첫 렌더의 주소는 **사전 렌더가 쓴 경로**여야 한다. 서버는 /exams 를 쿼리 없이
+        찍는데 클라이언트가 /exams?status=open 으로 시작하면 필터 초기화 버튼 하나가
+        서버 HTML 에 없어서 하이드레이션이 깨진다. useSyncExternalStore 가 하이드레이션
+        직후 진짜 주소로 한 번 더 그려 주므로 결과는 같고 불일치만 사라진다.
+      */}
+      <RouterProvider initialHref={payload ? new URL(payload.path, window.location.origin).href : window.location.href}>
         {/*
           첫 렌더의 '오늘' 은 반드시 서버가 쓴 값이어야 한다. 진짜 오늘로 시작하면
           사흘 지난 빌드에서 상태 배지가 전부 어긋나고 React 가 트리를 통째로 버린다.

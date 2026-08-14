@@ -30,6 +30,11 @@ export type { AppData, JsonReader, RawData };
 
 /** 페이지에 심는 봉투. 클라이언트가 이걸로 하이드레이션한다 */
 export interface Payload {
+  /**
+   * 사전 렌더가 쓴 경로. 쿼리는 없다 — 라우트마다 파일 하나이므로 필터 조합을
+   * 미리 찍지 않는다. 클라이언트가 첫 렌더에서 이 값을 써야 하이드레이션이 맞는다.
+   */
+  path: string;
   buildDate: string;
   scope: Scope;
   data: RawData;
@@ -90,6 +95,6 @@ export function renderPage(path: string, data: AppData, origin: string): Rendere
     path,
     html,
     head: headOf(match, data, origin),
-    payload: { buildDate: data.buildDate, scope, data: slice },
+    payload: { path, buildDate: data.buildDate, scope, data: slice },
   };
 }
