@@ -132,7 +132,7 @@ scripts/
 npm run collect -- --replay=2026-08-13   # 그날 바이트에 지금 파서를 재실행 (네트워크·키 없음)
 ```
 
-남은 것: 크롤 테스트 3개가 `build/crawl/*.html` 을 읽는데 그 경로가 `.gitignore` 대상이라 **CI 에서 조용히 통과한다**. 새 어댑터처럼 고정 데이터로 옮겨야 한다.
+테스트는 전부 고정 데이터로 돈다. 예전에는 크롤 테스트 16건이 `build/crawl/*.html` 을 읽고 없으면 넘어가서 **CI 에서 조용히 통과했다** — 로컬에는 파일이 있어 아무도 눈치채지 못했다. 지금은 `scripts/lib/test-hygiene.test.mjs` 가 그 관용구를 막는다.
 
 알려진 빚: `history-exam`·`ybm`·`kbs-korean` 테스트는 `build/crawl/*.html` 을 읽는데 그 경로가 `.gitignore` 대상이라 **CI 에서는 조용히 통과한다.** 새 어댑터 둘은 고정 데이터를 테스트 안에 두어 실제로 돈다.
 
