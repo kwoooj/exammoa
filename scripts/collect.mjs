@@ -16,9 +16,12 @@ import * as historyExam from './sources/history-exam.mjs';
 import * as kbsKorean from './sources/kbs-korean.mjs';
 import { toeic, toeicSpeaking } from './sources/ybm.mjs';
 import * as dataqCsv from './sources/dataq-csv.mjs';
+import * as kaitLinux from './sources/kait-linux.mjs';
+import * as kacptaTax from './sources/kacpta-tax.mjs';
+import { decodeResponse } from './lib/csv.mjs';
 
 /** 크롤 어댑터 목록. 여기 없는 사이트는 요청되지 않는다. */
-const CRAWL_SOURCES = [historyExam, toeic, toeicSpeaking, kbsKorean];
+const CRAWL_SOURCES = [historyExam, toeic, toeicSpeaking, kbsKorean, kaitLinux, kacptaTax];
 
 /**
  * 파일 소스. 네트워크를 타지 않는다.
@@ -70,7 +73,9 @@ async function harvestCrawl(src, url, year) {
       signal: AbortSignal.timeout(20000),
     });
     if (!res.ok) return { ...base, ok: false, error: `HTTP ${res.status}` };
-    const html = await res.text();
+    // res.text() 를 쓰지 않는다. Fetch 명세상 언제나 UTF-8 로 디코드하고
+    // `Content-Type: charset=euc-kr` 을 무시한다 — 한국세무사회 페이지가 그렇게 깨졌다.
+    const { text: html } = await decodeResponse(res, { expect: src.EXPECT_HEADERS?.[0] });
 
     const { sessions, diagnostics } = src.parse(html, { year });
     if (!diagnostics.headerMatch) {

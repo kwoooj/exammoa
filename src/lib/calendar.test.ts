@@ -74,6 +74,15 @@ test('앞뒤로 딸려온 날은 inMonth 가 false 다', () => {
   assert.equal(weeks[0]![5]!.inMonth, true);
 });
 
+test('격자는 다음 달 날짜도 담는다 — "이 달에 일정 없음" 을 ym 으로 세면 거짓말이 된다', () => {
+  // 실측: 9/2 접수마감 칩이 8월 격자 끝에 보이는데 "이 달에는 표시할 일정이 없어요"
+  // 가 함께 떴다. 안내문은 격자에 실제로 그려진 것을 세야 한다.
+  const dates = monthGrid('2026-08').flat().map(c => c.date);
+  assert.ok(dates.includes('2026-09-02'), '9월 초가 8월 격자에 딸려온다');
+  assert.ok(dates.includes('2026-07-27'), '7월 말도 딸려온다');
+  assert.ok(dates.filter(d => !d.startsWith('2026-08')).length > 0);
+});
+
 test('마지막 날이 든 주까지 그리고 멈춘다', () => {
   const weeks = monthGrid('2026-08');
   assert.ok(weeks.flat().some(c => c.date === '2026-08-31'));
