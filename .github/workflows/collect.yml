@@ -12,9 +12,15 @@ name: 수집
 
 on:
   schedule:
-    # 19:10 UTC = 04:10 KST. docs/데이터-수집-활용.md §2 가 잡은 시각이다.
-    # 정시(:00)는 러너 대기열이 길어 10분 밀어 둔다.
-    - cron: '10 19 * * *'
+    # 22:10 UTC = 07:10 KST.
+    #
+    # 04:10 KST 였다가 옮겼다. 첫 스케줄 실행(04:58 KST)에서 apis.data.go.kr 이 47종목
+    # 전부 `fetch failed`, historyexam.go.kr 이 타임아웃이었는데 **상용 도메인
+    # (toeic·kbskorean)은 멀쩡했다.** 11시간 전 수동 실행(17:02 KST)에서는 둘 다 정상.
+    # `.go.kr` 두 곳만 새벽에 동시에 죽는 시간대는 이유가 무엇이든 배치를 돌릴 때가 아니다.
+    #
+    # GitHub 스케줄은 30~60분 밀리는 일이 흔하므로 실제로는 07:40~08:10 KST 쯤 돈다.
+    - cron: '10 22 * * *'
   workflow_dispatch:
     inputs:
       branch:

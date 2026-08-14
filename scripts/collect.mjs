@@ -126,7 +126,9 @@ async function call({ implYy, jmCd, qualgbCd, rows = MAX_ROWS, page = 1, format 
   if (jmCd) p.jmCd = jmCd;
   if (qualgbCd) p.qualgbCd = qualgbCd;
   const url = buildUrl(p);
-  const res = await fetch(url, { headers: { Accept: '*/*' } });
+  // 크롤 경로와 같은 수준의 타임아웃. 없으면 엔드포인트가 죽은 날 종목마다 OS 연결
+  // 타임아웃(약 10.6초)을 다 기다려 47종목에 8분 48초가 걸린다 (실측).
+  const res = await fetch(url, { headers: { Accept: '*/*' }, signal: AbortSignal.timeout(10000) });
   const text = await res.text();
   return { status: res.status, text, url: url.replace(KEY, '***') };
 }
@@ -575,10 +577,20 @@ async function collect(seed, groupSeed) {
 
   // 계정 단위로 막혔을 때 채운다. 채워지면 남은 종목을 호출하지 않는다.
   let sourceFailure = null;
+  /**
+   * 연속 네트워크 실패. 엔드포인트가 통째로 죽은 날을 종목별 실패로 세지 않는다.
+   *
+   * 실측: 정부 도메인 점검 시간에 걸린 배치가 47종목 전부 `fetch failed` 를 받고
+   * 종목마다 타임아웃을 기다려 8분 48초를 썼다. 죽은 서버를 47번 두드리는 것은
+   * 무의미하고 무례하다. 계정 단위 거절(#18)과 같은 판단이되 신호가 다르다.
+   */
+  let consecutiveNetworkErrors = 0;
+  const NETWORK_GIVE_UP = 5;
 
   for (const exam of exams) {
     try {
       const r = await call({ implYy: YEAR, jmCd: exam.jmCd });
+      consecutiveNetworkErrors = 0;
       const { items, parsed } = extractItems(r.text);
       const verdict = classifyResponse({ status: r.status, text: r.text, parsed, items });
 
@@ -603,8 +615,17 @@ async function collect(seed, groupSeed) {
       const warn = normalized.some(s => s.contradictions) ? ' ⚠모순' : '';
       console.log(`  ok ${exam.slug} (${exam.jmCd}) 레코드 ${items.length} → ${normalized.length}회차 · 이벤트 ${n}개${warn}`);
     } catch (err) {
-      failed.push({ slug: exam.slug, jmCd: exam.jmCd, reason: String(err.message ?? err) });
-      console.log(`  !! ${exam.slug} (${exam.jmCd}) ${err.message ?? err}`);
+      const reason = String(err.message ?? err);
+      failed.push({ slug: exam.slug, jmCd: exam.jmCd, reason });
+      console.log(`  !! ${exam.slug} (${exam.jmCd}) ${reason}`);
+
+      // 네트워크가 통째로 죽었으면 나머지를 두드리지 않는다
+      if (++consecutiveNetworkErrors >= NETWORK_GIVE_UP) {
+        sourceFailure = `연속 ${consecutiveNetworkErrors}종목 네트워크 실패 — ${reason}`;
+        const left = exams.length - exams.indexOf(exam) - 1;
+        console.log(`\n⛔ 엔드포인트가 응답하지 않는다. 남은 ${left}종목을 호출하지 않는다.`);
+        break;
+      }
     }
     await new Promise(r => setTimeout(r, 120)); // 호출 간 간격
   }
