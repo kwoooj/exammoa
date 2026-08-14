@@ -78,3 +78,23 @@ export function monthDay(iso: string): string {
 export function dotted(iso: string): string {
   return iso.replaceAll('-', '.');
 }
+
+/**
+ * 날짜 하나 또는 기간을 화면 문구로. 화면정의 §16.2.
+ *
+ * 뒤쪽에서 연도를 반복하지 않는다 — `2026.09.21 ~ 2026.10.19` 는 같은 정보를 두 번
+ * 읽게 하고, 목록에서는 그 폭 때문에 시험명이 밀린다.
+ *
+ * `spoken` 은 스크린리더용이다. `09.21 ~ 10.19` 를 그대로 읽으면 "영구점이일" 처럼
+ * 나와 날짜로 들리지 않는다.
+ */
+export function rangeLabel(start: string, end: string, style: 'full' | 'short' | 'spoken' = 'full'): string {
+  if (style === 'spoken') {
+    return start === end ? monthDay(start) : `${monthDay(start)}부터 ${monthDay(end)}까지`;
+  }
+  const head = style === 'short' ? dotted(start).slice(5) : dotted(start);
+  if (start === end) return head;
+  // 연도가 같으면 뒤에서 생략한다. 해를 넘기는 기간은 전부 적어야 뜻이 통한다.
+  const tail = start.slice(0, 4) === end.slice(0, 4) ? dotted(end).slice(5) : dotted(end);
+  return `${head} ~ ${tail}`;
+}
