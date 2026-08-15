@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-14T19:53:00.761Z",
+  "fetchedAt": "2026-08-15T22:33:33.431Z",
   "year": 2026,
   "examCount": 62,
   "qnetExamCount": 47,
@@ -7,46 +7,48 @@
   "sessionCount": 191,
   "eventCount": 817,
   "tbdCount": 0,
-  "staleCount": 6,
+  "staleCount": 113,
   "contradictionCount": 0,
   "groupSplitCount": 0,
   "groupSplits": [],
-  "sessionsBeforeFold": 499,
+  "sessionsBeforeFold": 0,
   "sources": {
     "qnet": {
-      "health": "ok",
+      "health": "stale",
       "method": "api",
       "fetchedAt": "2026-08-14T19:53:00.761Z",
-      "sessionCount": 102
+      "sessionCount": 102,
+      "reason": "연속 5종목 네트워크 실패 — The operation was aborted due to timeout"
     },
     "history-exam": {
-      "health": "ok",
+      "health": "stale",
       "method": "crawl",
       "fetchedAt": "2026-08-14T19:53:00.761Z",
-      "sessionCount": 5
+      "sessionCount": 5,
+      "reason": "타임아웃"
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T19:53:00.761Z",
+      "fetchedAt": "2026-08-15T22:33:33.431Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T19:53:00.761Z",
+      "fetchedAt": "2026-08-15T22:33:33.431Z",
       "sessionCount": 44
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T19:53:00.761Z",
+      "fetchedAt": "2026-08-15T22:33:33.431Z",
       "sessionCount": 6
     },
     "kait-linux": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T19:53:00.761Z",
+      "fetchedAt": "2026-08-15T22:33:33.431Z",
       "sessionCount": 4
     },
     "kacpta-tax": {
@@ -73,7 +75,35 @@
   },
   "archive": null,
   "notes": [
+    "qnet 실패 — 이전 102회차를 유지하고 stale 로 표시했다 (연속 5종목 네트워크 실패 — The operation was aborted due to timeout)",
+    "history-exam 실패 — 이전 5회차를 유지하고 stale 로 표시했다 (타임아웃)",
     "kacpta-tax 실패 — 이전 6회차를 유지하고 stale 로 표시했다 (타임아웃)"
   ],
-  "failed": []
+  "failed": [
+    {
+      "slug": "전기기사",
+      "jmCd": "1150",
+      "reason": "The operation was aborted due to timeout"
+    },
+    {
+      "slug": "전기산업기사",
+      "jmCd": "2140",
+      "reason": "The operation was aborted due to timeout"
+    },
+    {
+      "slug": "정보처리기사",
+      "jmCd": "1320",
+      "reason": "The operation was aborted due to timeout"
+    },
+    {
+      "slug": "산업안전기사",
+      "jmCd": "1431",
+      "reason": "The operation was aborted due to timeout"
+    },
+    {
+      "slug": "위험물산업기사",
+      "jmCd": "2121",
+      "reason": "The operation was aborted due to timeout"
+    }
+  ]
 }
