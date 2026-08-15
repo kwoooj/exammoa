@@ -163,17 +163,35 @@ src/
 
 | 설정 | 값 |
 |---|---|
+| 저장소 연결 | Git 연동. 프로덕션 브랜치 `mvp` |
 | 빌드 명령 | `npm run build` |
 | 출력 디렉터리 | `dist` |
-| 환경변수 | `SITE_ORIGIN` = 실제 배포 주소 (예: `https://exammoa.pages.dev`) |
-| Node 버전 | `NODE_VERSION` = `24` |
+| 환경변수 (**Production 만**) | `SITE_ORIGIN` = `https://exammoa.pages.dev` |
+| Node 버전 | 설정하지 않는다 — `.nvmrc` 를 읽는다 |
+
+`SITE_ORIGIN` 을 **Preview 환경에는 넣지 않는다.** 넣으면 미리보기 배포가 프로덕션 주소를 canonical 로 주장해서 같은 내용이 두 주소로 색인된다. 비워 두면 `CF_PAGES_URL` 로 떨어져 자기 주소를 쓰고, 프로덕션 브랜치가 아니므로 `robots.txt` 가 `Disallow: /` 로 나간다.
 
 호스트에 필요한 동작은 둘인데 Cloudflare Pages 는 **기본으로 둘 다 한다.**
 
 1. **디렉터리 index 서빙** — `/exams` 요청에 `/exams/index.html` 을 준다
 2. **없는 경로는 `404.html` 로 (HTTP 404 와 함께)** — 루트로 되돌리는 SPA 폴백을 쓰면 없는 시험 주소가 홈을 200 으로 돌려주고 검색엔진이 그것을 색인한다. `_redirects` 에 `/* /index.html 200` 을 **넣지 말 것.**
 
-`SITE_ORIGIN` 이 canonical · sitemap · robots.txt 의 절대 주소를 만든다. 기본값은 `https://exammoa.example` 이라 **배포 전에 반드시 바꾼다.** 안 바꾸면 검색엔진에 존재하지 않는 도메인이 canonical 로 올라간다.
+### 배포 주소는 빌드 산출물에 박힌다
+
+`SITE_ORIGIN` 이 canonical · `og:url` · JSON-LD · sitemap 67건 · `robots.txt` 의 절대 주소를 만든다. 실측으로 **71개 파일 351군데**다.
+
+없으면 `https://exammoa.example` 로 떨어지는데, **배포 맥락(`CI` 또는 `CF_PAGES`)에서는 빌드가 종료코드 1 로 선다** (`scripts/lib/prerender-html.mjs` 의 `resolveOrigin`). 예전에는 조용히 폴백해서 존재하지 않는 도메인이 정본으로 색인될 수 있었다 — 빌드는 성공하고 자기 검사도 통과하는데 산출물만 틀린 형태였다.
+
+로컬에서 실제 주소로 확인하려면:
+
+```bash
+SITE_ORIGIN=https://exammoa.pages.dev npm run build
+grep -ro "exammoa.example" dist | wc -l    # 0 이어야 한다
+```
+
+`.github/workflows/ci.yml` 도 같은 값을 넣어 빌드한다. CI 는 배포하지 않지만, 진짜 주소로 빌드해야 **자리표시자 유출 검사가 실제로 돈다** — 자리표시자로 빌드하면 그 검사는 스스로를 건너뛴다.
+
+**커스텀 도메인으로 옮길 때**: Cloudflare 에서 도메인을 붙이고 `SITE_ORIGIN` 을 새 주소로 바꿔 재배포한다. **`ci.yml` 의 값도 함께 옮긴다** — 주소가 적힌 곳은 이 둘뿐이다. `pages.dev` 주소는 살려 둔다 — 새 canonical 이 옛 주소에서도 새 주소를 가리키므로 검색엔진이 스스로 옮겨 간다. 정적 호스트라 301 을 낼 수 없어서 이것이 유일한 이전 경로다.
 
 `public/_headers` 가 캐시를 나눈다. 해시 붙은 자산은 영원히, HTML 과 `/data/*.json` 은 캐시하지 않는다 — 일정 데이터가 캐시에 갇히면 화면이 어제 일정을 "최종 확인 오늘" 이라고 말한다.
 

@@ -10,12 +10,16 @@ import {
   APP_MARK,
   HEAD_START,
   PAYLOAD_ID,
+  PLACEHOLDER_ORIGIN,
   PrerenderError,
   checkPage,
   headTags,
   injectApp,
   injectHead,
+  isIndexable,
   outPathFor,
+  resolveOrigin,
+  robotsTxt,
   serializeJson,
   sitemapXml,
 } from './prerender-html.mjs';
@@ -249,4 +253,89 @@ test('본문에 있어야 할 글자가 없으면 잡는다', () => {
   // 이 검사가 없으면 "성공적으로 렌더된 빈 페이지" 를 통과시킨다.
   const problems = checkPage({ path: '/exam/토익', html: filled, mustContain: ['토익'] });
   assert.ok(problems.some(p => p.includes('토익')), problems.join('\n'));
+});
+
+// ---- resolveOrigin -----------------------------------------------------
+//
+// 이 함수가 이 파일에서 가장 중요하다. 없을 때 빌드가 종료코드 0 을 내면서
+// 존재하지 않는 도메인을 351군데에 박았다.
+
+test('SITE_ORIGIN 이 있으면 그 값을 쓴다', () => {
+  const r = resolveOrigin({ SITE_ORIGIN: 'https://exammoa.pages.dev' });
+  assert.equal(r.origin, 'https://exammoa.pages.dev');
+  assert.equal(r.source, 'SITE_ORIGIN');
+});
+
+test('끝 슬래시와 앞뒤 공백을 흡수한다', () => {
+  // 대시보드 입력칸에서 흔히 붙어 온다. 두 겹 슬래시가 canonical 에 남으면
+  // 검색엔진이 같은 페이지를 다른 주소로 본다.
+  assert.equal(resolveOrigin({ SITE_ORIGIN: '  https://exammoa.pages.dev/  ' }).origin,
+    'https://exammoa.pages.dev');
+});
+
+test('경로가 붙은 SITE_ORIGIN 은 거부한다', () => {
+  // GitHub Pages 프로젝트 사이트 습관으로 /exammoa 를 붙이면 sitemap 이
+  // .../exammoa/exams 가 아니라 .../exammoa 뒤에 또 경로를 잇는다.
+  assert.throws(() => resolveOrigin({ SITE_ORIGIN: 'https://kwoooj.github.io/exammoa' }), PrerenderError);
+  assert.throws(() => resolveOrigin({ SITE_ORIGIN: 'https://a.dev/?x=1' }), PrerenderError);
+});
+
+test('https 가 아니면 거부한다 — localhost 만 예외', () => {
+  assert.throws(() => resolveOrigin({ SITE_ORIGIN: 'http://exammoa.pages.dev' }), PrerenderError);
+  assert.equal(resolveOrigin({ SITE_ORIGIN: 'http://localhost:4173' }).origin, 'http://localhost:4173');
+});
+
+test('주소로 읽히지 않으면 거부한다', () => {
+  assert.throws(() => resolveOrigin({ SITE_ORIGIN: 'exammoa.pages.dev' }), PrerenderError);
+});
+
+test('SITE_ORIGIN 없이 Cloudflare 면 배포 주소로 떨어진다', () => {
+  // 미리보기 배포가 자기 주소를 canonical 로 갖는다. 프로덕션 주소를 주장하면
+  // 같은 내용이 두 주소로 잡힌다.
+  const r = resolveOrigin({ CF_PAGES: '1', CF_PAGES_URL: 'https://abc123.exammoa.pages.dev' });
+  assert.equal(r.origin, 'https://abc123.exammoa.pages.dev');
+  assert.equal(r.source, 'CF_PAGES_URL');
+});
+
+test('SITE_ORIGIN 은 CF_PAGES_URL 을 이긴다', () => {
+  const r = resolveOrigin({ SITE_ORIGIN: 'https://exammoa.pages.dev', CF_PAGES: '1', CF_PAGES_URL: 'https://x.dev' });
+  assert.equal(r.origin, 'https://exammoa.pages.dev');
+});
+
+test('배포 맥락에서 자리표시자로 떨어지지 않고 실패한다', () => {
+  // **이 테스트가 이 기능의 이유다.** 이것이 없으면 빌드가 성공하면서
+  // 검색엔진에 존재하지 않는 도메인을 정본으로 준다.
+  assert.throws(() => resolveOrigin({ CI: 'true' }), PrerenderError);
+  assert.throws(() => resolveOrigin({ CF_PAGES: '1' }), PrerenderError);
+  assert.throws(() => resolveOrigin({ SITE_ORIGIN: '   ', CI: 'true' }), PrerenderError);
+});
+
+test('로컬 빌드에서만 자리표시자를 쓴다', () => {
+  const r = resolveOrigin({});
+  assert.equal(r.origin, PLACEHOLDER_ORIGIN);
+  assert.equal(r.source, 'placeholder');
+});
+
+// ---- robots ------------------------------------------------------------
+
+test('프로덕션 robots 는 sitemap 을 가리키고 막지 않는다', () => {
+  const txt = robotsTxt({ origin: 'https://exammoa.pages.dev', indexable: true });
+  assert.ok(txt.includes('Sitemap: https://exammoa.pages.dev/sitemap.xml'));
+  assert.ok(txt.includes('Allow: /'));
+  assert.ok(!txt.includes('Disallow'));
+});
+
+test('미리보기 robots 는 전부 막는다', () => {
+  const txt = robotsTxt({ origin: 'https://abc.exammoa.pages.dev', indexable: false });
+  assert.ok(txt.includes('Disallow: /'));
+  // sitemap 을 내주면 막아 놓고 목록을 건네는 셈이다
+  assert.ok(!txt.includes('Sitemap:'), txt);
+});
+
+test('프로덕션 브랜치의 Cloudflare 빌드만 색인한다', () => {
+  assert.equal(isIndexable({ CF_PAGES: '1', CF_PAGES_BRANCH: 'mvp' }), true);
+  assert.equal(isIndexable({ CF_PAGES: '1', CF_PAGES_BRANCH: 'fix/56-site-origin' }), false);
+  assert.equal(isIndexable({ CF_PAGES: '1' }), false);
+  // 로컬·CI 빌드는 공개되지 않으므로 막을 이유가 없다
+  assert.equal(isIndexable({}), true);
 });

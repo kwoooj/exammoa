@@ -18,17 +18,20 @@ import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
+  PLACEHOLDER_ORIGIN,
   checkPage,
   injectApp,
   injectHead,
+  isIndexable,
   outPathFor,
+  resolveOrigin,
+  robotsTxt,
   sitemapXml,
 } from './lib/prerender-html.mjs';
 
 const DIST = 'dist';
 const SERVER_DIR = join(DIST, 'server');
 const DATA_DIR = join(DIST, 'data');
-const ORIGIN = (process.env.SITE_ORIGIN ?? 'https://exammoa.example').replace(/\/+$/, '');
 
 /** 종목 페이지가 이보다 작으면 내용이 안 들어간 것이다 */
 const MIN_BYTES = 2000;
@@ -66,6 +69,14 @@ async function verifyName(outPath) {
 }
 
 async function main() {
+  /*
+    판단은 lib 에 있고 테스트가 붙어 있다 (규칙 12 의 스크립트 판본). 여기서는
+    환경만 넘긴다. main 안에서 부르는 이유는 모듈 최상단에서 던지면 아래
+    catch 가 못 잡아 사용자가 안내문 대신 스택 트레이스를 보기 때문이다.
+  */
+  const { origin: ORIGIN, source: ORIGIN_SOURCE } = resolveOrigin(process.env);
+  const INDEXABLE = isIndexable(process.env);
+
   const entry = await loadEntry();
 
   const template = await readFile(join(DIST, 'index.html'), 'utf8');
@@ -88,6 +99,12 @@ async function main() {
 
     problems.push(...checkPage({ path, html, mustContain, minBytes: MIN_BYTES }));
 
+    // 자리표시자로 빌드한 것이 아닌데 산출물에 남아 있다면 어딘가 주소가
+    // 하드코딩된 것이다. 351군데를 눈으로 찾는 대신 여기서 잡는다.
+    if (ORIGIN_SOURCE !== 'placeholder' && html.includes(PLACEHOLDER_ORIGIN)) {
+      problems.push(`${path}: ${PLACEHOLDER_ORIGIN} 이 남아 있습니다`);
+    }
+
     const outPath = outPathFor(path);
     const full = join(DIST, outPath);
     await mkdir(dirname(full), { recursive: true });
@@ -101,20 +118,7 @@ async function main() {
   // 호스트 관례. 404/index.html 과 별개로 루트에도 둔다.
   await writeFile(join(DIST, '404.html'), await readFile(join(DIST, '404', 'index.html'), 'utf8'), 'utf8');
 
-  /**
-   * robots.txt 를 여기서 만든다. `public/` 에 정적 파일로 두면 Sitemap 주소가
-   * 하드코딩되어 SITE_ORIGIN 과 어긋난다 — 배포 주소를 바꾼 날 아무도 모른다.
-   */
-  const robots = [
-    '# 시험모아 — 여러 기관의 공개 일정을 모아 보여주는 정적 사이트',
-    '# 막을 것이 없다. 수집이 금지된 기관도 링크로만 나가므로 여기와 무관하다.',
-    'User-agent: *',
-    'Allow: /',
-    '',
-    `Sitemap: ${ORIGIN}/sitemap.xml`,
-    '',
-  ].join('\n');
-  await writeFile(join(DIST, 'robots.txt'), robots, 'utf8');
+  await writeFile(join(DIST, 'robots.txt'), robotsTxt({ origin: ORIGIN, indexable: INDEXABLE }), 'utf8');
 
   await writeFile(
     join(DIST, 'sitemap.xml'),
@@ -143,7 +147,8 @@ async function main() {
   await rm(SERVER_DIR, { recursive: true, force: true });
 
   console.log(
-    `사전 렌더 ${written}개 페이지 · 종목 ${examPages}개 · 최대 ${Math.round(biggest / 1024)}KB · origin ${ORIGIN}`,
+    `사전 렌더 ${written}개 페이지 · 종목 ${examPages}개 · 최대 ${Math.round(biggest / 1024)}KB\n` +
+    `origin ${ORIGIN} (${ORIGIN_SOURCE})${INDEXABLE ? '' : ' · 미리보기라 색인 차단'}`,
   );
 }
 
