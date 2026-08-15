@@ -70,17 +70,6 @@ export function Exams({ data, today }: ScreenProps) {
   );
 }
 
-export function Calendar({ data, today }: ScreenProps) {
-  void today;
-  return (
-    <section className="section">
-      <h1>시험 일정 캘린더</h1>
-      <p className="small muted">{data.meta.groupCount}개 시행그룹의 공식 일정</p>
-      <Pending what="월간 격자와 시험 선택" />
-    </section>
-  );
-}
-
 export function About({ data, today }: ScreenProps) {
   return (
     <section className="section">
@@ -124,5 +113,6 @@ export function Privacy() {
   );
 }
 
+export { Calendar } from './Calendar.tsx';
 export { ExamDetail } from './ExamDetail.tsx';
 export { NotFound } from './NotFound.tsx';
