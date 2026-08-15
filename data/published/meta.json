@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-14T05:44:50.361Z",
+  "fetchedAt": "2026-08-14T19:53:00.761Z",
   "year": 2026,
   "examCount": 62,
   "qnetExamCount": 47,
@@ -7,7 +7,7 @@
   "sessionCount": 191,
   "eventCount": 817,
   "tbdCount": 0,
-  "staleCount": 0,
+  "staleCount": 6,
   "contradictionCount": 0,
   "groupSplitCount": 0,
   "groupSplits": [],
@@ -16,44 +16,45 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-14T05:44:50.361Z",
+      "fetchedAt": "2026-08-14T19:53:00.761Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T05:44:50.361Z",
+      "fetchedAt": "2026-08-14T19:53:00.761Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T05:44:50.361Z",
+      "fetchedAt": "2026-08-14T19:53:00.761Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T05:44:50.361Z",
+      "fetchedAt": "2026-08-14T19:53:00.761Z",
       "sessionCount": 44
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T05:44:50.361Z",
+      "fetchedAt": "2026-08-14T19:53:00.761Z",
       "sessionCount": 6
     },
     "kait-linux": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T05:44:50.361Z",
+      "fetchedAt": "2026-08-14T19:53:00.761Z",
       "sessionCount": 4
     },
     "kacpta-tax": {
-      "health": "ok",
+      "health": "stale",
       "method": "crawl",
-      "fetchedAt": "2026-08-14T05:44:50.361Z",
-      "sessionCount": 6
+      "fetchedAt": "2026-08-14T00:55:45.144Z",
+      "sessionCount": 6,
+      "reason": "타임아웃"
     },
     "dataq-csv": {
       "health": "ok",
@@ -71,6 +72,8 @@
     }
   },
   "archive": null,
-  "notes": [],
+  "notes": [
+    "kacpta-tax 실패 — 이전 6회차를 유지하고 stale 로 표시했다 (타임아웃)"
+  ],
   "failed": []
 }
