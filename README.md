@@ -189,7 +189,9 @@ SITE_ORIGIN=https://exammoa.pages.dev npm run build
 grep -ro "exammoa.example" dist | wc -l    # 0 이어야 한다
 ```
 
-**커스텀 도메인으로 옮길 때**: Cloudflare 에서 도메인을 붙이고 `SITE_ORIGIN` 을 새 주소로 바꿔 재배포한다. `pages.dev` 주소는 살려 둔다 — 새 canonical 이 옛 주소에서도 새 주소를 가리키므로 검색엔진이 스스로 옮겨 간다. 정적 호스트라 301 을 낼 수 없어서 이것이 유일한 이전 경로다.
+`.github/workflows/ci.yml` 도 같은 값을 넣어 빌드한다. CI 는 배포하지 않지만, 진짜 주소로 빌드해야 **자리표시자 유출 검사가 실제로 돈다** — 자리표시자로 빌드하면 그 검사는 스스로를 건너뛴다.
+
+**커스텀 도메인으로 옮길 때**: Cloudflare 에서 도메인을 붙이고 `SITE_ORIGIN` 을 새 주소로 바꿔 재배포한다. **`ci.yml` 의 값도 함께 옮긴다** — 주소가 적힌 곳은 이 둘뿐이다. `pages.dev` 주소는 살려 둔다 — 새 canonical 이 옛 주소에서도 새 주소를 가리키므로 검색엔진이 스스로 옮겨 간다. 정적 호스트라 301 을 낼 수 없어서 이것이 유일한 이전 경로다.
 
 `public/_headers` 가 캐시를 나눈다. 해시 붙은 자산은 영원히, HTML 과 `/data/*.json` 은 캐시하지 않는다 — 일정 데이터가 캐시에 갇히면 화면이 어제 일정을 "최종 확인 오늘" 이라고 말한다.
 
