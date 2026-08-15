@@ -72,6 +72,13 @@ export default defineConfig(({ isPreview }) => ({
    */
   appType: isPreview ? 'mpa' : 'spa',
 
-  // 포트를 고정하지 않는다. 다른 프로젝트의 dev 서버와 충돌하면 도구가 포트를 넘겨준다.
+  /**
+   * 포트를 고정하지 않는다. 다른 프로젝트의 서버와 충돌하면 도구가 `PORT` 로 넘겨준다.
+   *
+   * dev 와 preview 를 **둘 다** 열어 둔다. 사전 렌더를 붙인 뒤로 확인할 것이 preview
+   * 쪽에 몰렸는데(68개 파일이 실제로 서빙되는지, 하이드레이션이 맞는지), 여기가 비어
+   * 있으면 4173 이 물린 날 확인 자체를 못 한다.
+   */
   server: { port: process.env.PORT ? Number(process.env.PORT) : undefined },
+  preview: { port: process.env.PORT ? Number(process.env.PORT) : undefined },
 }));
