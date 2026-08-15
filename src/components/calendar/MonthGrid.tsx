@@ -143,8 +143,13 @@ export function MonthGrid({
                   aria-label={name}
                   aria-pressed={selected}
                 >
-                  {/* 라벨은 이벤트당 한 번만. 이어지는 칸에 이름을 반복하지 않는다 */}
-                  {seg.showLabel && !seg.isPoint && <span className="cal__barText">{seg.text}</span>}
+                  {/*
+                    라벨은 이벤트당 한 번만 — 이어지는 칸에 이름을 반복하지 않는다.
+                    하루짜리라고 점으로 만들지 않는다. 점은 누르기 전까지 무엇인지
+                    알 수 없어서, 시험일이 찍힌 달력이 아니라 얼룩이 된다.
+                    좁으면 글자가 잘리지만 잘린 글자가 없는 글자보다 낫다.
+                  */}
+                  {seg.showLabel && <span className="cal__barText">{seg.text}</span>}
                 </button>
               );
             })}

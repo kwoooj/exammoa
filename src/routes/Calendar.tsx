@@ -35,6 +35,16 @@ import { ExamChips } from '../components/calendar/ExamChips.tsx';
 /** 한 주에 그릴 최대 레인. 넘치면 `외 N건` 으로 접는다 (§8.3) */
 const LANE_CAP = 3;
 
+/**
+ * 기본으로 보여줄 일정 종류.
+ *
+ * 발표를 뺀다. 실측상 발표가 전체 이벤트의 32%이고 하루짜리 360건 중 258건이라,
+ * 켜 두면 달력 절반이 **누르기 전까지 무엇인지 알 수 없는 점**으로 덮인다.
+ * 합격발표는 접수·시험과 달리 놓쳐도 되돌릴 수 없는 일이 아니다 — 필요한 사람만
+ * 켜면 된다. 없애는 것이 아니라 기본값에서 내리는 것이라 체크 한 번이면 돌아온다.
+ */
+const DEFAULT_KINDS: EventKind[] = ['reg', 'exam'];
+
 const KINDS: { value: EventKind; label: string }[] = [
   { value: 'reg', label: '접수' },
   { value: 'exam', label: '시험' },
@@ -75,17 +85,20 @@ export function Calendar({ data, today }: { data: AppData; today: string }) {
     return [];
   }, [query.exams, query.category, data.exams]);
 
+  /** 주소에 종류가 없으면 기본값을 쓴다. 빈 배열을 '전부' 로 읽지 않는다 */
+  const effectiveKinds = query.kinds.length ? query.kinds : DEFAULT_KINDS;
+
   const calendar = useMemo(
     () => buildCalendarData({
       sessions: data.sessions,
       groups: data.groups,
       exams: data.exams,
       selectedSlugs: effectiveSlugs,
-      kinds: query.kinds,
+      kinds: effectiveKinds,
       links: data.links,
       jmCds: data.jmCds,
     }),
-    [data, effectiveSlugs, query.kinds],
+    [data, effectiveSlugs, effectiveKinds],
   );
 
   /**
@@ -170,18 +183,19 @@ export function Calendar({ data, today }: { data: AppData; today: string }) {
           <fieldset className="filters__kinds">
             <legend className="sr-only">일정 종류</legend>
             {KINDS.map(k => {
-              // 아무것도 안 고르면 전부 보여준다. 빈 선택이 "아무것도 안 보임" 이면
-              // 사용자가 실수로 화면을 비우고 이유를 모른다.
-              const on = query.kinds.length === 0 || query.kinds.includes(k.value);
+              const on = effectiveKinds.includes(k.value);
               return (
                 <label key={k.value} className="filters__check">
                   <input
                     type="checkbox"
                     checked={on}
                     onChange={() => {
-                      const base = query.kinds.length === 0 ? KINDS.map(x => x.value) : query.kinds;
-                      const next = on ? base.filter(v => v !== k.value) : [...base, k.value];
-                      update({ kinds: next.length === KINDS.length ? [] : next });
+                      const next = on
+                        ? effectiveKinds.filter(v => v !== k.value)
+                        : [...effectiveKinds, k.value];
+                      // 마지막 하나까지 끄면 빈 달력이 되고 사용자가 이유를 모른다.
+                      // 전부 끄려는 조작은 기본값으로 되돌린다.
+                      update({ kinds: next.length === 0 ? DEFAULT_KINDS : next });
                     }}
                   />
                   {k.label}

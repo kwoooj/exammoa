@@ -81,8 +81,13 @@ export function ExamRow({ row, picked, onPick, pickDisabled }: Props) {
       </div>
 
       <div className="exrow__go">
-        <Link to={examPath(exam.slug)} className="btn">상세 일정</Link>
+        {/*
+          강조 버튼은 행마다 하나다. 둘을 나란히 두면 §13.2 가 금지한 강조 경쟁이
+          되고, 둘 다 눌러야 할 것처럼 보인다. 상세는 위의 시험명 링크로도 가므로
+          여기서는 조용한 글자로 낮춘다.
+        */}
         <OfficialLinkButton link={row.link} className="btn btn--primary" />
+        <Link to={examPath(exam.slug)} className="exrow__more">상세 일정</Link>
       </div>
     </li>
   );
