@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import type { MetaFile, SourceHealth } from '../types.ts';
-import { STALE_WARN_DAYS, agoLabel, daysSince, freshnessOf, limitOf } from './freshness.ts';
+import { STALE_WARN_DAYS, agoLabel, daysSince, freshnessOf, freshnessOfSource, limitOf } from './freshness.ts';
 
 const TODAY = '2026-08-13';
 
@@ -116,4 +116,49 @@ test('소스가 없으면 최악을 알 수 없다', () => {
   const f = freshnessOf(meta({}), TODAY);
   assert.equal(f.worstDays, null);
   assert.equal(f.warn, true);
+});
+
+// ---- 항목 단위 신선도 (§2.4) -------------------------------------------
+
+test('소스 하나의 나이를 그 자리에서 말한다', () => {
+  // 전체 경고만 있으면 토익 하나가 낡았을 때 배너가 뜨고 62종목이 전부
+  // 의심스러워 보인다. 낡은 것이 무엇인지 그 자리에서 말해야 한다.
+  const m = meta({
+    qnet: { health: 'ok', method: 'api', fetchedAt: '2026-08-14T00:00:00.000Z', sessionCount: 102 },
+    toeic: { health: 'ok', method: 'crawl', fetchedAt: '2026-08-09T00:00:00.000Z', sessionCount: 11 },
+  });
+  assert.equal(freshnessOfSource(m, 'qnet', '2026-08-14').label, '마지막 확인 오늘');
+  assert.equal(freshnessOfSource(m, 'toeic', '2026-08-14').label, '마지막 확인 5일 전');
+});
+
+test('소스가 자기 주기를 넘겼을 때만 overdue 다', () => {
+  const m = meta({
+    // 연 1회 발행되는 CSV. 219일이 이 소스의 정상 상태다.
+    'dataq-csv': { health: 'ok', method: 'csv', fetchedAt: '2026-01-06T00:00:00.000Z', sessionCount: 10, staleAfterDays: 400 },
+    toeic: { health: 'ok', method: 'crawl', fetchedAt: '2026-08-09T00:00:00.000Z', sessionCount: 11 },
+  });
+  assert.equal(freshnessOfSource(m, 'dataq-csv', '2026-08-14').overdue, false);
+  assert.equal(freshnessOfSource(m, 'toeic', '2026-08-14').overdue, true);
+});
+
+test('실패한 소스를 낡음과 구분한다', () => {
+  const m = meta({
+    toeic: { health: 'failed', method: 'crawl', fetchedAt: '2026-08-13T00:00:00.000Z', sessionCount: 11, reason: 'fetch failed' },
+  });
+  const f = freshnessOfSource(m, 'toeic', '2026-08-14');
+  assert.equal(f.failed, true);
+  assert.equal(f.overdue, false);
+});
+
+test('출처를 모르면 전체 수집 시각으로 답한다', () => {
+  // 모른다고 침묵하면 화면이 "최종 확인" 을 아예 못 쓴다.
+  const m = meta({ qnet: { health: 'ok', method: 'api', fetchedAt: '2026-08-12T00:00:00.000Z', sessionCount: 102 } });
+  const f = freshnessOfSource(m, undefined, '2026-08-14');
+  assert.equal(f.label, '마지막 확인 어제');
+  assert.equal(f.failed, false);
+});
+
+test('모르는 소스 id 에도 죽지 않는다', () => {
+  const m = meta({ qnet: { health: 'ok', method: 'api', fetchedAt: '2026-08-14T00:00:00.000Z', sessionCount: 102 } });
+  assert.doesNotThrow(() => freshnessOfSource(m, '없는소스', '2026-08-14'));
 });

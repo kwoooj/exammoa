@@ -14,8 +14,16 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
-/** gitignore 대상이라 CI 에 존재하지 않는 경로들 */
-const ABSENT_IN_CI = ['build/', 'public/data/', 'node_modules/.cache'];
+/**
+ * gitignore 대상이라 CI 에 존재하지 않는 경로들.
+ *
+ * `dist/` 는 사전 렌더 산출물이 생기면서 추가됐다. 거기를 읽는 테스트는 로컬에서
+ * `npm run build` 를 돌린 뒤에만 통과하고 CI 에서는 조용히 넘어간다 — 이 파일이
+ * 존재하는 바로 그 실패 형태다. 사전 렌더의 검증은 두 갈래로 나눠 뒀다:
+ * 순수 계산은 `prerender-html.test.mjs` 가 인라인 픽스처로, 산출물 자체는
+ * `scripts/prerender.mjs` 가 빌드 안에서 검사하고 종료코드 1 을 낸다.
+ */
+const ABSENT_IN_CI = ['build/', 'public/data/', 'dist/', 'node_modules/.cache'];
 
 async function testFiles(dir, ext) {
   const out = [];

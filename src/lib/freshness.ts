@@ -48,6 +48,43 @@ export function agoLabel(days: number | null): string {
   return `${days}일 전`;
 }
 
+export interface SourceFreshness {
+  /** 며칠 전에 확인했는가. 확인된 적 없으면 null */
+  days: number | null;
+  /** 이 소스의 자기 주기를 넘겼는가 */
+  overdue: boolean;
+  /** 이번 실행에서 실패했는가 */
+  failed: boolean;
+  /** "마지막 확인 5일 전" (§16.1) */
+  label: string;
+}
+
+/**
+ * 소스 하나의 신선도. 화면정의 §2.4 는 경고를 **항목 단위**로 요구한다 —
+ * "특정 소스가 오래됨 → 해당 시험에만 표시".
+ *
+ * 전체 경고만 있으면 토익 하나가 낡았을 때 화면 맨 위에 배너가 뜨고 62종목이
+ * 전부 의심스러워 보인다. 낡은 것이 무엇인지 그 자리에서 말해야 한다.
+ *
+ * `Session.src` → `meta.sources[src]` 가 조인 키다.
+ */
+export function freshnessOfSource(meta: MetaFile, srcId: string | undefined, from = today()): SourceFreshness {
+  const source = srcId ? meta.sources?.[srcId] : undefined;
+  if (!source) {
+    // 출처를 모르면 전체 수집 시각으로 답한다. 모른다고 침묵하면 화면이
+    // "최종 확인" 을 아예 못 쓴다.
+    const days = daysSince(meta.fetchedAt, from);
+    return { days, overdue: false, failed: false, label: `마지막 확인 ${agoLabel(days)}` };
+  }
+  const days = daysSince(source.fetchedAt, from);
+  return {
+    days,
+    overdue: source.health === 'ok' && days !== null && days >= limitOf(source),
+    failed: source.health !== 'ok',
+    label: `마지막 확인 ${agoLabel(days)}`,
+  };
+}
+
 export function freshnessOf(meta: MetaFile, from = today()): Freshness {
   const entries = Object.entries(meta.sources ?? {});
 
