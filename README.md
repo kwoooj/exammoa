@@ -159,12 +159,25 @@ src/
 
 ## 배포와 운영
 
-정적 파일만 올린다. 호스트에 필요한 것은 둘이다.
+**Cloudflare Pages.** 정적 파일만 올린다.
+
+| 설정 | 값 |
+|---|---|
+| 빌드 명령 | `npm run build` |
+| 출력 디렉터리 | `dist` |
+| 환경변수 | `SITE_ORIGIN` = 실제 배포 주소 (예: `https://exammoa.pages.dev`) |
+| Node 버전 | `NODE_VERSION` = `24` |
+
+호스트에 필요한 동작은 둘인데 Cloudflare Pages 는 **기본으로 둘 다 한다.**
 
 1. **디렉터리 index 서빙** — `/exams` 요청에 `/exams/index.html` 을 준다
-2. **없는 경로는 `404.html` 로 (HTTP 404 와 함께)** — 루트로 되돌리면 없는 시험 주소가 홈을 200 으로 돌려주고 검색엔진이 그것을 색인한다
+2. **없는 경로는 `404.html` 로 (HTTP 404 와 함께)** — 루트로 되돌리는 SPA 폴백을 쓰면 없는 시험 주소가 홈을 200 으로 돌려주고 검색엔진이 그것을 색인한다. `_redirects` 에 `/* /index.html 200` 을 **넣지 말 것.**
 
-`SITE_ORIGIN` 환경변수가 canonical 과 sitemap 의 절대 주소를 만든다. 기본값은 `https://exammoa.example` 이라 배포 전에 반드시 바꾼다.
+`SITE_ORIGIN` 이 canonical · sitemap · robots.txt 의 절대 주소를 만든다. 기본값은 `https://exammoa.example` 이라 **배포 전에 반드시 바꾼다.** 안 바꾸면 검색엔진에 존재하지 않는 도메인이 canonical 로 올라간다.
+
+`public/_headers` 가 캐시를 나눈다. 해시 붙은 자산은 영원히, HTML 과 `/data/*.json` 은 캐시하지 않는다 — 일정 데이터가 캐시에 갇히면 화면이 어제 일정을 "최종 확인 오늘" 이라고 말한다.
+
+> GitHub Pages 를 쓰지 않은 이유: 저장소가 비공개라 무료 플랜에서 Pages 가 안 켜지고, 프로젝트 사이트는 `/exammoa/` 하위 경로라 절대 경로를 전부 고쳐야 한다.
 
 ⚠️ `schedule` 과 `workflow_dispatch` 는 **기본 브랜치의 파일만 발동한다.** `.github/workflows/collect.yml` 이 `main` 에 올라가야 하루 1회 배치가 돌고 수동 실행 버튼도 생긴다.
 
