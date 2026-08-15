@@ -8,13 +8,11 @@
  */
 
 import type { AppData } from '../data/index.ts';
-import { agencyOf, relatedExams, sessionsOf, siblingsOf } from '../data/index.ts';
+import { agencyOf, sessionsOf } from '../data/index.ts';
 import { statusOfExam } from '../lib/status.ts';
-import { applyLink, officialLink } from '../lib/links.ts';
 import { freshnessOfSource } from '../lib/freshness.ts';
-import { rangeLabel } from '../lib/dates.ts';
 import { ROUTE_PATHS, examPath } from '../lib/routes.ts';
-import { Link, OfficialLinkButton } from '../router/Link.tsx';
+import { Link } from '../router/Link.tsx';
 
 interface ScreenProps {
   data: AppData;
@@ -72,93 +70,6 @@ export function Exams({ data, today }: ScreenProps) {
   );
 }
 
-export function ExamDetail({ data, today, slug }: ScreenProps & { slug: string }) {
-  const exam = data.examBySlug.get(slug);
-  // 존재하지 않는 시험을 다른 시험으로 자동 이동시키지 않는다 (§11).
-  if (!exam) return <NotFound />;
-
-  const group = data.groupById.get(exam.groupId);
-  const sessions = sessionsOf(data, exam);
-  const status = statusOfExam(exam, group, sessions, today);
-  const apply = applyLink(exam, group, data.links, data.jmCds);
-  const official = officialLink(exam, group, data.links, data.jmCds);
-  const src = sessions.find(s => s.src)?.src;
-  const fresh = freshnessOfSource(data.meta, src, today);
-  const siblings = siblingsOf(data, exam);
-
-  return (
-    <>
-      <section className="section section--lead">
-        <p className="small muted">
-          <Link to={ROUTE_PATHS.exams}>시험 일정</Link>
-          {' > '}{data.categoryById.get(exam.category)?.name ?? exam.category}
-        </p>
-        <h1>{exam.name}</h1>
-        <p className="small muted">{agencyOf(data, exam)} · {fresh.label}</p>
-
-        <p>
-          <span aria-label={status.a11yLabel}>{status.label}</span>
-          {status.event ? ` · ${status.event.label} ${rangeLabel(status.event.start, status.event.end)}` : ''}
-        </p>
-
-        <p className="row">
-          <OfficialLinkButton link={apply} className="btn btn--primary" />
-          {' '}
-          <OfficialLinkButton link={official} className="btn" />
-        </p>
-      </section>
-
-      <section className="section">
-        <h2>시험 일정</h2>
-        {status.id === 'rolling' ? (
-          <div className="rule">
-            <p>확정된 연간 시험일이 없는 상시시험이에요.</p>
-            {group?.rollingRule ?? exam.rollingRule ? (
-              <p className="small">접수 규칙: {group?.rollingRule ?? exam.rollingRule}</p>
-            ) : null}
-            <p className="small muted">접수와 시험 가능 일자는 공식 사이트에서 확인해 주세요.</p>
-          </div>
-        ) : status.id === 'tbd' ? (
-          // 빈 일정표나 비활성 버튼을 보여주지 않는다 (§7.8).
-          <p>{today.slice(0, 4)}년 일정이 아직 발표되지 않았어요. 공식 기관에 일정이 게시되면 반영됩니다.</p>
-        ) : (
-          <Pending what="월간 캘린더" />
-        )}
-      </section>
-
-      <section className="section">
-        <h2>공식 정보</h2>
-        <p className="small muted">
-          출처 {agencyOf(data, exam)}
-          {src ? ` · 수집 방식 ${data.meta.sources[src]?.method ?? '확인 중'}` : ''}
-          {' · '}{fresh.label}
-        </p>
-        <p className="small">일정은 참고용이며 공식 공고가 우선합니다.</p>
-      </section>
-
-      {siblings.length > 0 && (
-        <section className="section">
-          <h2>일정이 같은 시험</h2>
-          <ul>
-            {siblings.slice(0, 4).map(e => (
-              <li key={e.slug}><Link to={examPath(e.slug)}>{e.name}</Link></li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      <section className="section">
-        <h2>같은 분야의 시험</h2>
-        <ul>
-          {relatedExams(data, exam).map(e => (
-            <li key={e.slug}><Link to={examPath(e.slug)}>{e.name}</Link></li>
-          ))}
-        </ul>
-      </section>
-    </>
-  );
-}
-
 export function Calendar({ data, today }: ScreenProps) {
   void today;
   return (
@@ -213,11 +124,5 @@ export function Privacy() {
   );
 }
 
-export function NotFound() {
-  return (
-    <section className="section">
-      <h1>요청한 시험 정보를 찾지 못했어요</h1>
-      <p><Link to={ROUTE_PATHS.exams}>전체 시험 보기</Link></p>
-    </section>
-  );
-}
+export { ExamDetail } from './ExamDetail.tsx';
+export { NotFound } from './NotFound.tsx';

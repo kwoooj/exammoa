@@ -19,10 +19,11 @@
  * 검색했더니 아무 설명 없는 빈 달력이 나온다.
  */
 
-import type { EventKind, Exam, ScheduleGroup, Session } from '../types.ts';
+import type { EventKind, Exam, LinksFile, ScheduleGroup, Session } from '../types.ts';
 import type { BarEvent } from './monthbars.ts';
 import { summarize } from './monthbars.ts';
 import { rangeLabel } from './dates.ts';
+import { applyLink, officialLink } from './links.ts';
 
 export interface CalendarEvent extends BarEvent {
   groupId: string;
@@ -47,6 +48,14 @@ export interface CalendarEvent extends BarEvent {
   kindLabel: string;
   note: string | null;
   applyUrl?: string;
+  /**
+   * 접수 링크에 쓸 문구. 종목별 접수 페이지면 `원서접수`, 기관의 일반 안내면
+   * `원서접수 안내` 다.
+   *
+   * URL 만 들고 다니면 화면이 전부 "원서접수" 라고 적는다. 실제로 그렇게 나왔고,
+   * 일반 안내 페이지로 보내면서 접수창을 열어 줄 것처럼 읽혔다 (§16).
+   */
+  applyLabel?: string;
   agencyUrl?: string;
 }
 
@@ -60,6 +69,7 @@ export interface RuleCard {
   /** 사람이 규칙을 마지막으로 확인한 날 */
   ruleCheckedAt?: string;
   applyUrl?: string;
+  applyLabel?: string;
   agencyUrl?: string;
 }
 
@@ -90,6 +100,15 @@ export interface CalendarInput {
   kinds?: EventKind[];
   /** 이 구간에 걸치는 것만. 없으면 전부 */
   window?: { from: string; to: string };
+  /**
+   * 공식 링크 조립 규칙. 주면 막대·상세 패널·날짜순 표의 링크가 종목코드 폴백까지
+   * 태운다. 안 주면 그룹에 박힌 주소만 쓴다.
+   *
+   * 이게 없으면 상세 패널이 한국산업인력공단 47종목에 대해 링크를 못 낸다 —
+   * 그 그룹에는 agencyUrl 이 없고 Q-Net 상세는 jmCd 로 조립해야 나오기 때문이다.
+   */
+  links?: LinksFile;
+  jmCds?: ReadonlySet<string>;
 }
 
 const KIND_TEXT: Record<EventKind, string> = { reg: '접수', exam: '시험', result: '발표' };
@@ -160,7 +179,29 @@ export function buildCalendarData(input: CalendarInput): CalendarData {
       const base = first?.short ?? first?.name ?? slugs[0] ?? '';
       return slugs.length > 1 ? `${base} 외 ${slugs.length - 1}` : base;
     })();
-    const agency = examBySlug.get(slugs[0] ?? '')?.agency ?? group?.agency ?? '';
+    const firstExam = examBySlug.get(slugs[0] ?? '');
+    const agency = firstExam?.agency ?? group?.agency ?? '';
+
+    /**
+     * 이 그룹의 공식 주소. 접힌 막대는 종목이 여럿이지만 일정의 주체가 그룹이므로
+     * 대표 종목으로 조립한다 — 그룹 일정 하나에 접수처가 여럿일 수는 없다.
+     */
+    const resolved = (() => {
+      if (input.links && input.jmCds && firstExam) {
+        const a = applyLink(firstExam, group, input.links, input.jmCds);
+        const o = officialLink(firstExam, group, input.links, input.jmCds);
+        return {
+          apply: a.href ?? undefined,
+          applyLabel: a.href ? a.label : undefined,
+          official: o.href ?? undefined,
+        };
+      }
+      return {
+        apply: group?.applyUrl,
+        applyLabel: group?.applyUrl ? '원서접수' : undefined,
+        official: group?.agencyUrl,
+      };
+    })();
 
     // 상시시험. 막대를 만들지 않고 규칙 카드만 낸다.
     const rolling = group?.cadence === 'rolling'
@@ -171,8 +212,8 @@ export function buildCalendarData(input: CalendarInput): CalendarData {
         groupId, name: group?.name ?? displayNameOf(names), agency, examSlugs: slugs,
         rule: group?.rollingRule ?? examBySlug.get(slugs[0] ?? '')?.rollingRule ?? null,
         ...(group?.ruleCheckedAt ? { ruleCheckedAt: group.ruleCheckedAt } : {}),
-        ...(group?.applyUrl ? { applyUrl: group.applyUrl } : {}),
-        ...(group?.agencyUrl ? { agencyUrl: group.agencyUrl } : {}),
+        ...(resolved.apply ? { applyUrl: resolved.apply, applyLabel: resolved.applyLabel } : {}),
+        ...(resolved.official ? { agencyUrl: resolved.official } : {}),
       });
       continue;
     }
@@ -210,8 +251,8 @@ export function buildCalendarData(input: CalendarInput): CalendarData {
           eventLabel: e.label,
           kindLabel: kindLabelOf(e.kind, e.phase, e.seq),
           note: e.note,
-          ...(group?.applyUrl ? { applyUrl: group.applyUrl } : {}),
-          ...(group?.agencyUrl ? { agencyUrl: group.agencyUrl } : {}),
+          ...(resolved.apply ? { applyUrl: resolved.apply, applyLabel: resolved.applyLabel } : {}),
+          ...(resolved.official ? { agencyUrl: resolved.official } : {}),
         });
       }
 
@@ -238,7 +279,8 @@ export function buildCalendarData(input: CalendarInput): CalendarData {
     if (!hasSchedule) {
       tbdNotices.push({
         groupId, name: group?.name ?? displayNameOf(names), agency, examSlugs: slugs,
-        ...(group?.agencyUrl ? { agencyUrl: group.agencyUrl } : {}),
+        // 일정이 없을수록 링크가 중요하다. 여기서 빠지면 막다른 길이 된다.
+        ...(resolved.official ? { agencyUrl: resolved.official } : {}),
       });
     }
   }
@@ -271,6 +313,7 @@ export interface TableRow {
   examSlugs: string[];
   kindLabel: string;
   stateLabel: string;
+  applyLabel?: string;
   state: EventState;
   applyUrl?: string;
   agencyUrl?: string;
@@ -297,7 +340,7 @@ export function scheduleTable(events: CalendarEvent[], today: string): TableRow[
         kindLabel: e.kindLabel,
         stateLabel: STATE_TEXT[state],
         state,
-        ...(e.applyUrl ? { applyUrl: e.applyUrl } : {}),
+        ...(e.applyUrl ? { applyUrl: e.applyUrl, applyLabel: e.applyLabel ?? '원서접수' } : {}),
         ...(e.agencyUrl ? { agencyUrl: e.agencyUrl } : {}),
       };
     });
