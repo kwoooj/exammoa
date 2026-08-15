@@ -127,6 +127,99 @@ export function outPathFor(routePath) {
   return [...segments, 'index.html'].join('/');
 }
 
+/**
+ * 로컬 빌드에서만 쓰는 가짜 주소.
+ *
+ * `.example` 은 RFC 2606 예약 TLD 라 **실재하는 사이트가 될 수 없다.** 자리표시자로는
+ * 이보다 나은 값이 없으므로 그대로 둔다. 고칠 것은 값이 아니라 이 값이 배포까지
+ * 흘러가는 것이다 — `resolveOrigin` 이 그 길을 막는다.
+ */
+export const PLACEHOLDER_ORIGIN = 'https://exammoa.example';
+
+/** Cloudflare Pages 프로덕션 브랜치. 이것 말고는 전부 미리보기 배포다 */
+export const PRODUCTION_BRANCH = 'mvp';
+
+function normalizeOrigin(raw, from) {
+  let url;
+  try {
+    url = new URL(raw);
+  } catch {
+    throw new PrerenderError(`${from} 가 주소로 읽히지 않습니다: ${raw}`);
+  }
+  // 경로가 붙으면 canonical 과 sitemap 이 조용히 두 겹이 된다 (…/exammoa/exams)
+  if (url.pathname !== '/' || url.search || url.hash) {
+    throw new PrerenderError(`${from} 에는 origin 만 넣습니다 (경로·쿼리 없이): ${raw}`);
+  }
+  const local = url.hostname === 'localhost' || url.hostname === '127.0.0.1';
+  if (url.protocol !== 'https:' && !(url.protocol === 'http:' && local)) {
+    throw new PrerenderError(`${from} 는 https 여야 합니다: ${raw}`);
+  }
+  return url.origin;
+}
+
+/**
+ * 사전 렌더가 박을 절대 주소를 정한다.
+ *
+ * **이 함수가 없으면 빌드가 종료코드 0 을 내면서 가짜 도메인을 351군데에 박는다.**
+ * canonical·og:url·JSON-LD·sitemap·robots 가 전부 이 값으로 만들어지는데, 자기
+ * 검사는 파일 수와 종목 수만 세느라 origin 을 아무도 안 봤다. 규칙 10 이 크롤링에서
+ * 기록한 형태 그대로다 — 위험한 실패는 크래시가 아니라 성공적으로 잘못된 산출물이다.
+ *
+ * 배포 맥락에서 자리표시자로 흘러가느니 빌드를 세운다. 색인은 지우는 것보다
+ * 안 만드는 것이 싸다.
+ */
+export function resolveOrigin(env = {}) {
+  const explicit = (env.SITE_ORIGIN ?? '').trim();
+  if (explicit) return { origin: normalizeOrigin(explicit, 'SITE_ORIGIN'), source: 'SITE_ORIGIN' };
+
+  // 미리보기 배포는 자기 주소를 갖는다. 프로덕션은 SITE_ORIGIN 을 명시하므로
+  // 여기 값이 무엇인지에 계획이 걸리지 않는다.
+  const cfUrl = (env.CF_PAGES_URL ?? '').trim();
+  if (env.CF_PAGES && cfUrl) return { origin: normalizeOrigin(cfUrl, 'CF_PAGES_URL'), source: 'CF_PAGES_URL' };
+
+  if (env.CF_PAGES || env.CI) {
+    throw new PrerenderError(
+      'SITE_ORIGIN 이 없습니다. 배포 환경에서는 자리표시자로 빌드하지 않습니다 —\n' +
+      `그대로 나가면 검색엔진이 ${PLACEHOLDER_ORIGIN} 을 정본으로 색인합니다.\n` +
+      'Cloudflare Pages 라면 Production 환경변수에 SITE_ORIGIN 을 넣으세요.',
+    );
+  }
+
+  return { origin: PLACEHOLDER_ORIGIN, source: 'placeholder' };
+}
+
+/** 이 빌드가 색인돼도 되는가. 미리보기 배포는 안 된다 — 같은 내용이 여러 주소로 잡힌다 */
+export function isIndexable(env = {}) {
+  if (!env.CF_PAGES) return true; // 로컬·CI 빌드는 공개되지 않는다
+  return env.CF_PAGES_BRANCH === PRODUCTION_BRANCH;
+}
+
+/**
+ * robots.txt 를 만든다.
+ *
+ * `public/` 에 정적 파일로 두지 않는다. Sitemap 주소가 하드코딩되어 SITE_ORIGIN 과
+ * 어긋나고, 배포 주소를 바꾼 날 그 한 줄만 옛것으로 남는다.
+ */
+export function robotsTxt({ origin, indexable = true }) {
+  if (!indexable) {
+    return [
+      '# 미리보기 배포. 프로덕션과 같은 내용이 다른 주소로 색인되면 안 된다.',
+      'User-agent: *',
+      'Disallow: /',
+      '',
+    ].join('\n');
+  }
+  return [
+    '# 시험모아 — 여러 기관의 공개 일정을 모아 보여주는 정적 사이트',
+    '# 막을 것이 없다. 수집이 금지된 기관도 링크로만 나가므로 여기와 무관하다.',
+    'User-agent: *',
+    'Allow: /',
+    '',
+    `Sitemap: ${origin}/sitemap.xml`,
+    '',
+  ].join('\n');
+}
+
 /** 사이트맵 */
 export function sitemapXml(origin, paths, lastmod) {
   const base = origin.replace(/\/+$/, '');
