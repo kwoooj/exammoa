@@ -1,11 +1,11 @@
 {
-  "fetchedAt": "2026-08-16T22:31:22.816Z",
+  "fetchedAt": "2026-08-17T22:34:05.399Z",
   "year": 2026,
   "examCount": 62,
   "qnetExamCount": 47,
   "groupCount": 19,
-  "sessionCount": 191,
-  "eventCount": 817,
+  "sessionCount": 190,
+  "eventCount": 814,
   "tbdCount": 0,
   "staleCount": 10,
   "contradictionCount": 0,
@@ -16,31 +16,31 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-16T22:31:22.816Z",
+      "fetchedAt": "2026-08-17T22:34:05.399Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-16T22:31:22.816Z",
+      "fetchedAt": "2026-08-17T22:34:05.399Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-16T22:31:22.816Z",
+      "fetchedAt": "2026-08-17T22:34:05.399Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-16T22:31:22.816Z",
-      "sessionCount": 44
+      "fetchedAt": "2026-08-17T22:34:05.399Z",
+      "sessionCount": 43
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-16T22:31:22.816Z",
+      "fetchedAt": "2026-08-17T22:34:05.399Z",
       "sessionCount": 6
     },
     "kait-linux": {
