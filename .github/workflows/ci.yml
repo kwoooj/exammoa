@@ -59,8 +59,8 @@ jobs:
       #  2. 진짜 주소로 빌드해야 **자리표시자 유출 검사가 실제로 돈다.**
       #     자리표시자로 빌드하면 그 검사는 스스로를 건너뛴다.
       #
-      # 배포 주소를 바꾸면 여기와 Cloudflare Production 환경변수를 함께 옮긴다.
+      # 배포 주소를 바꾸면 여기와 Cloudflare Workers Builds 의 SITE_ORIGIN 을 함께 옮긴다.
       - name: 빌드
         run: npm run build
         env:
-          SITE_ORIGIN: https://exammoa.pages.dev
+          SITE_ORIGIN: https://all.exammoa.workers.dev
