@@ -1,55 +1,54 @@
 {
-  "fetchedAt": "2026-08-18T22:35:39.758Z",
+  "fetchedAt": "2026-08-19T22:34:49.500Z",
   "year": 2026,
   "examCount": 62,
   "qnetExamCount": 47,
   "groupCount": 19,
-  "sessionCount": 191,
-  "eventCount": 817,
+  "sessionCount": 190,
+  "eventCount": 814,
   "tbdCount": 0,
-  "staleCount": 113,
+  "staleCount": 10,
   "contradictionCount": 0,
   "groupSplitCount": 0,
   "groupSplits": [],
-  "sessionsBeforeFold": 0,
+  "sessionsBeforeFold": 499,
   "sources": {
     "qnet": {
-      "health": "stale",
+      "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-17T22:34:05.399Z",
-      "sessionCount": 102,
-      "reason": "연속 5종목 네트워크 실패 — The operation was aborted due to timeout"
+      "fetchedAt": "2026-08-19T22:34:49.500Z",
+      "sessionCount": 102
     },
     "history-exam": {
-      "health": "stale",
+      "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-17T22:34:05.399Z",
-      "sessionCount": 5,
-      "reason": "타임아웃"
+      "fetchedAt": "2026-08-19T22:34:49.500Z",
+      "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-18T22:35:39.758Z",
+      "fetchedAt": "2026-08-19T22:34:49.500Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-18T22:35:39.758Z",
-      "sessionCount": 44
+      "fetchedAt": "2026-08-19T22:34:49.500Z",
+      "sessionCount": 43
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-18T22:35:39.758Z",
+      "fetchedAt": "2026-08-19T22:34:49.500Z",
       "sessionCount": 6
     },
     "kait-linux": {
-      "health": "ok",
+      "health": "stale",
       "method": "crawl",
       "fetchedAt": "2026-08-18T22:35:39.758Z",
-      "sessionCount": 4
+      "sessionCount": 4,
+      "reason": "타임아웃"
     },
     "kacpta-tax": {
       "health": "stale",
@@ -73,37 +72,10 @@
       "staleAfterDays": 180
     }
   },
-  "archive": null,
+  "archive": "data/archive/2026/qnet.2026-08-19.ecb84d8c3d5c.json",
   "notes": [
-    "qnet 실패 — 이전 102회차를 유지하고 stale 로 표시했다 (연속 5종목 네트워크 실패 — The operation was aborted due to timeout)",
-    "history-exam 실패 — 이전 5회차를 유지하고 stale 로 표시했다 (타임아웃)",
+    "kait-linux 실패 — 이전 4회차를 유지하고 stale 로 표시했다 (타임아웃)",
     "kacpta-tax 실패 — 이전 6회차를 유지하고 stale 로 표시했다 (타임아웃)"
   ],
-  "failed": [
-    {
-      "slug": "전기기사",
-      "jmCd": "1150",
-      "reason": "The operation was aborted due to timeout"
-    },
-    {
-      "slug": "전기산업기사",
-      "jmCd": "2140",
-      "reason": "fetch failed"
-    },
-    {
-      "slug": "정보처리기사",
-      "jmCd": "1320",
-      "reason": "The operation was aborted due to timeout"
-    },
-    {
-      "slug": "산업안전기사",
-      "jmCd": "1431",
-      "reason": "The operation was aborted due to timeout"
-    },
-    {
-      "slug": "위험물산업기사",
-      "jmCd": "2121",
-      "reason": "The operation was aborted due to timeout"
-    }
-  ]
+  "failed": []
 }
