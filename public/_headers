@@ -1,4 +1,4 @@
-# Cloudflare Pages 캐시 규칙.
+# Cloudflare Workers Static Assets 캐시 규칙.
 #
 # 해시가 붙은 자산은 영원히 캐시하고, HTML 과 데이터는 캐시하지 않는다.
 # 일정 데이터는 하루 1회 바뀌는데 그것이 캐시에 갇히면 화면이 어제 일정을
@@ -15,3 +15,8 @@
 
 /
   Cache-Control: public, max-age=0, must-revalidate
+
+# Workers Preview URL 은 <version-or-branch>-all.exammoa.workers.dev 형태다.
+# robots.txt 와 함께 HTTP 응답 헤더에서도 색인을 막는다.
+https://:preview-all.exammoa.workers.dev/*
+  X-Robots-Tag: noindex

@@ -8,7 +8,7 @@ import react from '@vitejs/plugin-react';
  *
  * 사전 렌더를 붙이면서 이 사이트는 **여러 개의 진짜 HTML 파일**이 됐다. 그런데
  * `vite preview` 는 확장자 없는 경로(`/exams`)를 디렉터리 index 로 이어 주지 않아서
- * 404 가 난다. 실제 정적 호스트(Netlify·Cloudflare Pages·GitHub Pages)는 이어 준다.
+ * 404 가 난다. 실제 정적 호스트(Netlify·Cloudflare Workers·GitHub Pages)는 이어 준다.
  *
  * 그 차이를 그대로 두면 **로컬에서 확인할 수 없는 것을 배포에서 확인하게 된다.**
  * 여기서 호스트 동작을 흉내 내어, 배포 전에 68개 페이지를 눈으로 볼 수 있게 한다.
