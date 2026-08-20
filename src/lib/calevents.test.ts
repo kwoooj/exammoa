@@ -322,6 +322,39 @@ test('막대 접근성 이름에 종목·구분·기간·상태가 모두 들어
   );
 });
 
+test('공식 시각이 캘린더 상세·표·접근성 이름까지 전달된다', () => {
+  const timed: Session = {
+    ...기사3회,
+    events: 기사3회.events.map((e, i) => i === 0 ? {
+      ...e,
+      timing: { start: '10:00', end: '18:00', timezone: 'Asia/Seoul', status: 'confirmed' },
+    } : e),
+  };
+  const data = buildCalendarData({
+    sessions: [timed], groups: [hrdkRegular], exams: 기사종목, selectedSlugs: ['정보처리기사'],
+  });
+  const event = data.events.find(e => e.kind === 'reg' && e.seq === 1)!;
+  assert.equal(event.timing?.start, '10:00');
+  assert.equal(scheduleTable(data.events, '2026-07-21').find(r => r.eventId === event.id)?.timing?.end, '18:00');
+  assert.match(barAriaLabel(event, '2026-07-21'), /10:00부터 18:00까지/);
+});
+
+test('고빈도 접수 마감점에는 시작 시각이 아니라 마감 시각만 붙는다', () => {
+  const timed: Session = {
+    ...토스회차,
+    events: 토스회차.events.map(e => e.kind === 'reg' ? {
+      ...e,
+      timing: { start: '10:00', end: '18:00', timezone: 'Asia/Seoul', status: 'confirmed' },
+    } : e),
+  };
+  const data = buildCalendarData({
+    sessions: [timed], groups: [toeicSpeaking], exams: 토스종목, selectedSlugs: ['토익스피킹'],
+  });
+  const reg = data.events.find(e => e.kind === 'reg')!;
+  assert.equal(reg.start, '2026-11-05');
+  assert.deepEqual(reg.timing, { start: '18:00', timezone: 'Asia/Seoul', status: 'confirmed' });
+});
+
 // ---- 날짜순 표 (§8.10) -------------------------------------------------
 
 test('표가 이벤트 하나도 빠뜨리지 않는다', () => {

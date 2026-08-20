@@ -5,7 +5,7 @@
  * 나온다. 몸통을 한 벌만 두는 이유는 세 곳이 서로 다른 말을 하기 시작하면 어느
  * 쪽이 맞는지 알 수 없기 때문이다.
  *
- * **접힌 종목을 전부 나열한다.** 시행그룹으로 막대를 접으면 사용자가 고른 시험이
+ * **접힌 종목을 전부 나열한다.** 시행그룹으로 막대를 접으면 사용자의 관심 시험이
  * 사라진 것처럼 보인다 (§8.8). `외 3개` 라고 요약해 두고 여기서 다시 요약하면
  * 아무 데서도 확인할 수 없다.
  */
@@ -16,6 +16,7 @@ import { rangeLabel } from '../../lib/dates.ts';
 import { ExternalLink } from '../../router/Link.tsx';
 import { examPath } from '../../lib/routes.ts';
 import { Link } from '../../router/Link.tsx';
+import { EventDateTime } from '../EventDateTime.tsx';
 
 const STATE_TEXT = { past: '종료', ongoing: '진행 중', today: '오늘', upcoming: '예정' } as const;
 
@@ -37,7 +38,7 @@ function OneEvent({ event, today, nameOf }: { event: CalendarEvent; today: strin
       <p className="evt__session small muted">{event.sessionLabel}</p>
       <p className="evt__name">{event.displayName}</p>
       <p className="evt__when">
-        {event.kindLabel} · {rangeLabel(event.start, event.end)}
+        {event.kindLabel} · <EventDateTime start={event.start} end={event.end} timing={event.timing} />
         {' · '}
         <span className="evt__state">{STATE_TEXT[state]}</span>
       </p>

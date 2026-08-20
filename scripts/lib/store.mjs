@@ -18,7 +18,10 @@ const sha256 = (s) => createHash('sha256').update(s).digest('hex');
 
 /** 이벤트 배열의 내용 해시. 일정이 바뀌었는지 판정하는 유일한 기준 */
 export function hashEvents(events) {
-  return sha256(events.map(e => `${e.kind}:${e.phase}:${e.start}:${e.end}:${e.seq}`).join('|'));
+  return sha256(events.map(e => [
+    e.kind, e.phase, e.start, e.end, e.seq,
+    e.timing ? JSON.stringify(e.timing) : '',
+  ].join(':')).join('|'));
 }
 
 // ---- 읽기 -------------------------------------------------------------
@@ -36,14 +39,15 @@ async function readJson(path) {
  * null 이면 폴백이 불가능하다는 뜻이므로 호출부가 그 사실을 로그로 남겨야 한다.
  */
 export async function readPrevious(dir = PUBLISHED) {
-  const [sessions, groups, meta, provenance] = await Promise.all([
+  const [sessions, groups, exams, meta, provenance] = await Promise.all([
     readJson(`${dir}/sessions.json`),
     readJson(`${dir}/groups.json`),
+    readJson(`${dir}/exams.json`),
     readJson(`${dir}/meta.json`),
     readJson(`${dir}/provenance.json`),
   ]);
   if (!sessions) return null;
-  return { sessions, groups, meta, provenance: provenance ?? {} };
+  return { sessions, groups, exams, meta, provenance: provenance ?? {} };
 }
 
 /**

@@ -5,7 +5,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { addDays, dDay, diffDays, dotted, monthDay, rangeLabel, weekStart } from './dates.ts';
+import { addDays, clockLabel, dDay, diffDays, dotted, monthDay, rangeLabel, timingSpokenLabel, weekStart } from './dates.ts';
 
 // ---- rangeLabel (§16.2) -----------------------------------------------
 
@@ -49,6 +49,20 @@ test('점 표기는 하이픈만 바꾼다', () => {
 test('월일 표기', () => {
   assert.equal(monthDay('2026-10-11'), '10월 11일');
   assert.equal(monthDay('2026-01-01'), '1월 1일');
+});
+
+test('공식 시각을 24시간제 HH:mm 표기로 통일한다', () => {
+  assert.equal(clockLabel('00:00'), '00:00');
+  assert.equal(clockLabel('9:20'), '09:20');
+  assert.equal(clockLabel('12:00'), '12:00');
+  assert.equal(clockLabel('18:00'), '18:00');
+  assert.equal(clockLabel('23:59'), '23:59');
+});
+
+test('시간 접근성 문구는 확정·가변 상태를 구분한다', () => {
+  assert.equal(timingSpokenLabel({ start: '09:00', end: '18:00', timezone: 'Asia/Seoul', status: 'confirmed' }), '09:00부터 18:00까지');
+  assert.equal(timingSpokenLabel({ timezone: 'Asia/Seoul', status: 'varies' }), '시험장별 시간 상이');
+  assert.equal(timingSpokenLabel(undefined), null);
 });
 
 test('D-Day 는 미래가 양수다', () => {

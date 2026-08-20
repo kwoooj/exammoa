@@ -12,16 +12,15 @@
  */
 
 import type { ExamRow as Row } from '../lib/browse.ts';
-import { rangeLabel } from '../lib/dates.ts';
+import { CaretRight } from '@phosphor-icons/react';
+import { feeLabel } from '../lib/fees.ts';
 import { examPath } from '../lib/routes.ts';
 import { Link, OfficialLinkButton } from '../router/Link.tsx';
+import { EventDateTime } from './EventDateTime.tsx';
+import { FavoriteButton } from './FavoriteButton.tsx';
 
 interface Props {
   row: Row;
-  /** 캘린더에 담기 (§6.6). 없으면 체크박스를 그리지 않는다 */
-  picked?: boolean;
-  onPick?: (slug: string, next: boolean) => void;
-  pickDisabled?: boolean;
 }
 
 function EventLine({ label, event }: { label: string; event: Row['nextReg'] }) {
@@ -29,27 +28,17 @@ function EventLine({ label, event }: { label: string; event: Row['nextReg'] }) {
   return (
     <p className="exrow__when">
       <span className="exrow__what">{event.label || label}</span>
-      <time dateTime={event.start}>{rangeLabel(event.start, event.end, 'short')}</time>
+      <EventDateTime start={event.start} end={event.end} timing={event.timing} style="short" />
     </p>
   );
 }
 
-export function ExamRow({ row, picked, onPick, pickDisabled }: Props) {
+export function ExamRow({ row }: Props) {
   const { exam, status } = row;
 
   return (
     <li className="exrow">
-      {onPick && (
-        <input
-          type="checkbox"
-          className="exrow__pick"
-          checked={picked ?? false}
-          // 상한에 걸렸을 때 이미 고른 것은 풀 수 있어야 한다
-          disabled={pickDisabled && !picked}
-          onChange={e => onPick(exam.slug, e.target.checked)}
-          aria-label={`${exam.name} 캘린더에 담기`}
-        />
-      )}
+      <FavoriteButton slug={exam.slug} name={exam.name} className="exrow__favorite" />
 
       <div className="exrow__body">
         <p className="exrow__head">
@@ -57,11 +46,6 @@ export function ExamRow({ row, picked, onPick, pickDisabled }: Props) {
           <span className={status.emphasis ? 'badge badge--accent' : 'badge'} aria-label={status.a11yLabel}>
             {status.label}
           </span>
-          {row.freshness.overdue && (
-            <span className="badge badge--warn" title="공식 사이트에서 다시 확인해 주세요">
-              {row.freshness.label}
-            </span>
-          )}
         </p>
 
         <p className="exrow__name">
@@ -71,6 +55,10 @@ export function ExamRow({ row, picked, onPick, pickDisabled }: Props) {
 
         <EventLine label="원서접수" event={row.nextReg} />
         <EventLine label="시험" event={row.nextExam} />
+        <p className="exrow__when exrow__fee">
+          <span className="exrow__what">응시료</span>
+          <span>{feeLabel(exam) ?? '공식 사이트에서 확인'}</span>
+        </p>
 
         {status.id === 'rolling' && (
           <p className="exrow__when"><span className="exrow__what">상시시험</span>확정 회차 없음</p>
@@ -87,7 +75,9 @@ export function ExamRow({ row, picked, onPick, pickDisabled }: Props) {
           여기서는 조용한 글자로 낮춘다.
         */}
         <OfficialLinkButton link={row.link} className="btn btn--primary" />
-        <Link to={examPath(exam.slug)} className="exrow__more">상세 일정</Link>
+        <Link to={examPath(exam.slug)} className="exrow__more">
+          상세 일정 <CaretRight size={15} aria-hidden="true" />
+        </Link>
       </div>
     </li>
   );

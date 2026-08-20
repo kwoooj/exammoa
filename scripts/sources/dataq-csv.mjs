@@ -22,6 +22,7 @@
 // 접수 기간도 각각 따로 있다.
 
 import { readCsv } from '../lib/csv.mjs';
+import { parseClock } from '../lib/kdate.mjs';
 
 export const id = 'dataq-csv';
 export const method = 'csv';
@@ -90,10 +91,11 @@ function eventsOf(row, phase, failures) {
   const regStart = row['접수시작일'];
   const regEnd = row['접수마감일'];
   const examDt = row['시험일'];
+  const examClock = parseClock(row['시험시작시간']);
   const resultDt = row['합격자발표일'];
 
-  const bad = (label, value) => failures.push({
-    name: row['시험명'], seq: row['회차'], label, reason: '날짜 형식 아님', raw: value,
+  const bad = (label, value, reason = '날짜 형식 아님') => failures.push({
+    name: row['시험명'], seq: row['회차'], label, reason, raw: value,
   });
 
   if (isIso(regStart) && isIso(regEnd)) out.push({
@@ -103,8 +105,11 @@ function eventsOf(row, phase, failures) {
 
   if (isIso(examDt)) out.push({
     kind: 'exam', phase, start: examDt, end: examDt, seq: 1, label: L.exam, note: null,
+    ...(examClock ? { timing: { start: examClock, timezone: 'Asia/Seoul', status: 'confirmed' } } : {}),
   });
   else if (examDt) bad(L.exam, examDt);
+
+  if (row['시험시작시간'] && !examClock) bad(`${L.exam} 시작시간`, row['시험시작시간'], '시각 형식 아님');
 
   if (isIso(resultDt)) out.push({
     kind: 'result', phase, start: resultDt, end: resultDt, seq: 1, label: L.result, note: null,

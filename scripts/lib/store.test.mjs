@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readdir, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { archive, forHashing } from './store.mjs';
+import { archive, forHashing, hashEvents } from './store.mjs';
 import { volatile as kbsVolatile } from '../sources/kbs-korean.mjs';
 
 /** 실측 스냅샷에서 잘라온 조각. 두 파일의 차이가 SERVER_NOW 딱 한 군데였다. */
@@ -58,6 +58,13 @@ test('같은 정규식을 반복 적용해도 결과가 같다 — lastIndex 가
   const c = forHashing(page('z', 3), kbsVolatile);
   assert.equal(a, b);
   assert.equal(b, c);
+});
+
+test('이벤트 해시는 날짜뿐 아니라 공식 시각 변경도 감지한다', () => {
+  const base = { kind: 'exam', phase: 'single', start: '2026-08-23', end: '2026-08-23', seq: 1 };
+  const before = hashEvents([{ ...base, timing: { start: '09:00', timezone: 'Asia/Seoul', status: 'confirmed' } }]);
+  const after = hashEvents([{ ...base, timing: { start: '10:00', timezone: 'Asia/Seoul', status: 'confirmed' } }]);
+  assert.notEqual(before, after);
 });
 
 // ---- archive ----------------------------------------------------------

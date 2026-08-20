@@ -20,6 +20,7 @@ import { statusOfExam } from '../lib/status.ts';
 import { applyLink, officialLink } from '../lib/links.ts';
 import { freshnessOfSource } from '../lib/freshness.ts';
 import { addDays, rangeLabel } from '../lib/dates.ts';
+import { feeCheckedLabel, feeLabel } from '../lib/fees.ts';
 import { ym } from '../lib/calendar.ts';
 import { layoutMonth } from '../lib/monthbars.ts';
 import { buildCalendarData } from '../lib/calevents.ts';
@@ -31,7 +32,9 @@ import type { CalendarSelection } from '../components/calendar/MonthGrid.tsx';
 import { CalendarLegend, MonthNav } from '../components/calendar/MonthNav.tsx';
 import { ScheduleTable } from '../components/calendar/ScheduleTable.tsx';
 import { EventDetail } from '../components/calendar/EventDetail.tsx';
+import { EventDateTime } from '../components/EventDateTime.tsx';
 import { NotFound } from './NotFound.tsx';
+import { FavoriteButton } from '../components/FavoriteButton.tsx';
 
 /**
  * 상시시험 규칙을 사람이 확인한 지 이만큼 지나면 "공식 사이트에서 최신 규칙을
@@ -100,6 +103,8 @@ export function ExamDetail({ data, today, slug }: { data: AppData; today: string
   const siblings = siblingsOf(data, exam);
   const related = relatedExams(data, exam);
   const nameOf = (s: string) => data.examBySlug.get(s)?.name ?? s;
+  const fee = feeLabel(exam);
+  const feeChecked = feeCheckedLabel(exam);
 
   const layout = layoutMonth(shownMonth, events, { today, laneCap: Number.POSITIVE_INFINITY });
   const selectedEvent = selection?.kind === 'bar' ? eventById.get(selection.eventId) : undefined;
@@ -118,7 +123,10 @@ export function ExamDetail({ data, today, slug }: { data: AppData; today: string
           {' › '}
           {data.categoryById.get(exam.category)?.name ?? exam.category}
         </p>
-        <h1>{exam.name}</h1>
+        <div className="detailTitle">
+          <h1>{exam.name}</h1>
+          <FavoriteButton slug={exam.slug} name={exam.name} />
+        </div>
         <p className="small muted">
           {agency}
           {group ? ` · ${group.cadence === 'rolling' ? '상시시험' : group.cadence === 'frequent' ? '고빈도 시행' : '정기시험'}` : ''}
@@ -132,10 +140,17 @@ export function ExamDetail({ data, today, slug }: { data: AppData; today: string
           </span>
           {status.event && (
             <span className="detail__event">
-              {status.event.label} · {rangeLabel(status.event.start, status.event.end)}
+              {status.event.label} · <EventDateTime start={status.event.start} end={status.event.end} timing={status.event.timing} />
             </span>
           )}
         </p>
+
+        <div className="detailFee">
+          <span className="detailFee__label">응시료</span>
+          <strong>{fee ?? '공식 사이트에서 확인'}</strong>
+          {feeChecked && <span className="detailFee__checked">{feeChecked}</span>}
+          {exam.fee?.note && <p>{exam.fee.note}</p>}
+        </div>
 
         {/* 공식 CTA 는 데이터가 있을 때만 (§7.4). 모바일에서도 본문 상단에 둔다 (§7.11) */}
         <p className="row">

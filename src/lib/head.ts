@@ -170,7 +170,7 @@ export function headFor(input: HeadInput): HeadMeta {
     case 'calendar':
       return {
         title: `시험 일정 캘린더 | ${SITE_NAME}`,
-        description: `${year}년 시험의 접수 기간과 시험일을 월간 달력에서 비교하세요. 최대 6개 시험을 한 화면에 올릴 수 있습니다.`,
+        description: `${year}년 전체 시험 또는 관심 시험의 접수 기간과 시험일을 월간 달력에서 한눈에 확인하세요.`,
         canonical: absolute(origin, ROUTE_PATHS.calendar),
       };
     case 'about':

@@ -14,7 +14,43 @@
 const TBD = /^(미정|추후\s*공지|별도\s*공고|추후공지|미공고|-|–|—|·|‧|\.|없음|N\/A)?$/i;
 
 /** 시각. 날짜 범위 구분자(~)와 혼동하지 않기 위해 먼저 떼어낸다. */
-const TIME = /\s*(오전|오후)?\s*(\d{1,2}):(\d{2})/g;
+const TIME = /\s*(오전|오후)?\s*(\d{1,2}):(\d{2})(?::\d{2})?/g;
+
+/** 기관 표기의 오전·오후 시각을 24시간제 HH:mm 으로 바꾼다. 추정은 하지 않는다. */
+function clockOf(meridiem, hourText, minuteText) {
+  let hour = Number(hourText);
+  const minute = Number(minuteText);
+  if (!Number.isInteger(hour) || !Number.isInteger(minute) || minute < 0 || minute > 59) return null;
+  if (meridiem) {
+    if (hour < 1 || hour > 12) return null;
+    if (meridiem === '오전' && hour === 12) hour = 0;
+    if (meridiem === '오후' && hour < 12) hour += 12;
+  } else if (hour < 0 || hour > 23) return null;
+  return `${pad(hour)}:${pad(minute)}`;
+}
+
+/** 문자열에서 첫 공식 시각을 읽는다. `09:00:00`처럼 초가 붙어도 분까지만 보존한다. */
+export function parseClock(text) {
+  const match = [...normalizeText(text).matchAll(TIME)][0];
+  return match ? clockOf(match[1], match[2], match[3]) : null;
+}
+
+/**
+ * 날짜 셀에 함께 적힌 공식 시각을 이벤트 메타데이터로 만든다.
+ * 첫 시각은 시작, 둘째 시각은 종료다. 하나뿐이면 시작 시각만 확정한다.
+ */
+export function parseTiming(text) {
+  const clocks = [...normalizeText(text).matchAll(TIME)]
+    .map(m => clockOf(m[1], m[2], m[3]))
+    .filter(Boolean);
+  if (!clocks.length) return null;
+  return {
+    start: clocks[0],
+    ...(clocks[1] ? { end: clocks[1] } : {}),
+    timezone: 'Asia/Seoul',
+    status: 'confirmed',
+  };
+}
 
 export function normalizeText(html) {
   return String(html ?? '')

@@ -19,11 +19,26 @@ import { toeic, toeicSpeaking } from './sources/ybm.mjs';
 import * as dataqCsv from './sources/dataq-csv.mjs';
 import * as kaitLinux from './sources/kait-linux.mjs';
 import * as kacptaTax from './sources/kacpta-tax.mjs';
+import * as kbiFinance from './sources/kbi-finance.mjs';
+import * as kofiaInvestment from './sources/kofia-investment.mjs';
+import * as ifpkAfpk from './sources/ifpk-afpk.mjs';
 import { decodeResponse } from './lib/csv.mjs';
 import { checkSeeds, formatProblems } from './lib/seed-check.mjs';
+import { checkFeeSeed, collectFees } from './lib/fees.mjs';
+import { qnetEventTiming } from './lib/event-timing.mjs';
 
 /** 크롤 어댑터 목록. 여기 없는 사이트는 요청되지 않는다. */
-const CRAWL_SOURCES = [historyExam, toeic, toeicSpeaking, kbsKorean, kaitLinux, kacptaTax];
+const CRAWL_SOURCES = [
+  historyExam,
+  toeic,
+  toeicSpeaking,
+  kbsKorean,
+  kaitLinux,
+  kacptaTax,
+  kbiFinance,
+  kofiaInvestment,
+  ifpkAfpk,
+];
 
 /**
  * 파일 소스. 네트워크를 타지 않는다.
@@ -69,23 +84,40 @@ async function harvestCrawl(src, url, year) {
       }
     }
 
-    const res = await fetch(url, {
-      headers: { 'User-Agent': UA, Accept: 'text/html,*/*', 'Accept-Language': 'ko-KR,ko;q=0.9' },
-      redirect: 'follow',
-      signal: AbortSignal.timeout(20000),
-    });
-    if (!res.ok) return { ...base, ok: false, error: `HTTP ${res.status}` };
-    // res.text() 를 쓰지 않는다. Fetch 명세상 언제나 UTF-8 로 디코드하고
-    // `Content-Type: charset=euc-kr` 을 무시한다 — 한국세무사회 페이지가 그렇게 깨졌다.
-    const { text: html } = await decodeResponse(res, { expect: src.EXPECT_HEADERS?.[0] });
-
-    const { sessions, diagnostics } = src.parse(html, { year });
+    let raw;
+    let sessions;
+    let diagnostics;
+    if (typeof src.collect === 'function') {
+      const collected = await src.collect({
+        fetchImpl: fetch,
+        url,
+        year,
+        headers: { 'User-Agent': UA, Accept: 'text/html,*/*', 'Accept-Language': 'ko-KR,ko;q=0.9' },
+      });
+      ({ sessions, diagnostics } = collected);
+      raw = collected.raw;
+    } else {
+      const res = await fetch(url, {
+        headers: { 'User-Agent': UA, Accept: 'text/html,*/*', 'Accept-Language': 'ko-KR,ko;q=0.9' },
+        redirect: 'follow',
+        signal: AbortSignal.timeout(20000),
+      });
+      if (!res.ok) return { ...base, ok: false, error: `HTTP ${res.status}` };
+      // res.text() 를 쓰지 않는다. Fetch 명세상 언제나 UTF-8 로 디코드하고
+      // `Content-Type: charset=euc-kr` 을 무시한다 — 한국세무사회 페이지가 그렇게 깨졌다.
+      const decoded = await decodeResponse(res, { expect: src.EXPECT_HEADERS?.[0] });
+      raw = decoded.text;
+      ({ sessions, diagnostics } = src.parse(raw, { year }));
+    }
     if (!diagnostics.headerMatch) {
       // 헤더가 사라진 것은 개편 신호다. 빈 결과를 조용히 게시하지 않는다.
-      return { ...base, ok: false, error: '기대한 표 헤더를 찾지 못했다 (사이트 개편 가능)', rawHtml: html };
+      return { ...base, ok: false, error: '기대한 일정 구조를 찾지 못했다 (사이트 개편 가능)', rawHtml: raw };
+    }
+    if (diagnostics.timingMatch === false) {
+      return { ...base, ok: false, error: '공식 시험시간 표를 찾지 못했다 (사이트 개편 가능)', rawHtml: raw };
     }
     if (!sessions.length) {
-      return { ...base, ok: false, error: '회차를 하나도 뽑지 못했다', rawHtml: html };
+      return { ...base, ok: false, error: '회차를 하나도 뽑지 못했다', rawHtml: raw };
     }
     if (diagnostics.failures.length) {
       console.log(`     ⚠ ${src.id} 날짜 파싱 실패 ${diagnostics.failures.length}건:`);
@@ -93,7 +125,7 @@ async function harvestCrawl(src, url, year) {
         console.log(`       ${f.seq}회 ${f.label} — ${f.reason} ${JSON.stringify(f.raw)}`);
       }
     }
-    return { ...base, ok: true, sessions, error: null, rawHtml: html, diagnostics };
+    return { ...base, ok: true, sessions, error: null, rawHtml: raw, diagnostics };
   } catch (e) {
     const why = e.name === 'TimeoutError' ? '타임아웃' : String(e.message).slice(0, 80);
     return { ...base, ok: false, error: why };
@@ -202,7 +234,17 @@ function eventsOf(raw) {
   const add = (kind, phase, s, e, label) => {
     const start = toIso(s);
     if (!start) return;
-    out.push({ kind, phase: unified ? 'single' : phase, start, end: toIso(e) ?? start, seq: 1, label, note: null });
+    const timing = qnetEventTiming(kind);
+    out.push({
+      kind,
+      phase: unified ? 'single' : phase,
+      start,
+      end: toIso(e) ?? start,
+      seq: 1,
+      label,
+      note: null,
+      ...(timing ? { timing } : {}),
+    });
   };
   add('reg', 'written', raw.docRegStartDt, raw.docRegEndDt, '필기 원서접수');
   add('exam', 'written', raw.docExamStartDt, raw.docExamEndDt, '필기시험');
@@ -567,7 +609,7 @@ function pickExams(seed) {
     .slice(0, LIMIT);
 }
 
-async function collect(seed, groupSeed) {
+async function collect(seed, groupSeed, feeSeed) {
   // 시드가 깨진 채로 47번 호출할 이유가 없다. 네트워크 앞에서 막는다.
   //
   // 전에는 `pickExams()` 를 통과한 종목의 groupId 만 봤다. 그러면 **한 방향만** 검사된다 —
@@ -576,6 +618,11 @@ async function collect(seed, groupSeed) {
   const seedCheck = checkSeeds(seed, groupSeed);
   if (!seedCheck.ok) {
     console.error(formatProblems(seedCheck.problems));
+    process.exit(1);
+  }
+  const feeCheck = checkFeeSeed(feeSeed, seed.exams);
+  if (!feeCheck.ok) {
+    console.error(formatProblems(feeCheck.problems.map(problem => `응시료: ${problem}`)));
     process.exit(1);
   }
 
@@ -824,7 +871,7 @@ async function collect(seed, groupSeed) {
       sourceId: srcId,
       body: html,
       volatile: src?.volatile ?? [],
-      ext: 'html',
+      ext: src?.archiveExt ?? 'html',
       stamp,
     });
     if (a.written) crawlArchives.push(a.path);
@@ -835,8 +882,28 @@ async function collect(seed, groupSeed) {
   // API 종목만 내보내면 한능검·토익처럼 크롤로 들어온 종목을 고를 수 없다.
   // 반대로 시드 전체를 내보내면 일정 없는 종목이 빈 카드로 뜬다.
   const withSessions = new Set(merged.sessions.map(s => s.groupId));
-  const publishedExams = seed.exams.filter(e => withSessions.has(e.groupId));
-  console.log(`\n화면 노출 종목 ${publishedExams.length}개 (일정이 있는 그룹 ${withSessions.size}개)`);
+  const visibleExams = seed.exams.filter(e => withSessions.has(e.groupId));
+  console.log(`\n화면 노출 종목 ${visibleExams.length}개 (일정이 있는 그룹 ${withSessions.size}개)`);
+
+  // ---- 응시료 재검증 ----
+  // Q-Net은 표의 현재 값을 파싱해 인상분을 자동 반영한다. 다른 기관은 공식 페이지의
+  // 기준 금액 fingerprint를 확인한다. 실패해도 금액을 지우지 않고 직전 게시값을 유지한
+  // 뒤 CI를 빨간불로 만들어 사람이 확인한다.
+  console.log('\n응시료 재검증:');
+  const feeResult = await collectFees(visibleExams, feeSeed, {
+    now,
+    previousExams: prev?.exams?.exams ?? [],
+    delayMs: 100,
+  });
+  const publishedExams = feeResult.exams;
+  console.log(
+    `  전체 ${feeResult.stats.total}종목 · 공식 자동확인 ${feeResult.stats.verified}종목`
+    + ` · 수기 유효 ${feeResult.stats.manual}종목 · 직전값 유지 ${feeResult.stats.fallback}종목`,
+  );
+  for (const change of feeResult.changes) {
+    console.log(`  ↑ ${change.slug} 응시료 변경 감지: ${JSON.stringify(change.before)} → ${JSON.stringify(change.after)}`);
+  }
+  for (const failure of feeResult.failures) console.log(`  !! ${failure.slug} — ${failure.reason}`);
 
   const meta = {
     fetchedAt: now,
@@ -857,6 +924,12 @@ async function collect(seed, groupSeed) {
     archive: arch.written ? arch.path : null,
     notes: merged.notes,
     failed,
+    feeCoverage: feeResult.stats.covered,
+    feeVerifiedCount: feeResult.stats.verified,
+    feeManualCount: feeResult.stats.manual,
+    feeFallbackCount: feeResult.stats.fallback,
+    feeChanges: feeResult.changes,
+    feeFailures: feeResult.failures,
   };
 
   await writeAll({
@@ -875,7 +948,7 @@ async function collect(seed, groupSeed) {
   console.log(`${PUBLISHED}/ sessions·groups·exams·meta·provenance 생성 완료`);
 
   // 산출물을 먼저 쓴 다음에 빨간불을 켠다. 파서 하나가 틀린 것으로 사이트를 얼리지 않는다.
-  if (splits.length || merged.failedSources.length) process.exitCode = 1;
+  if (splits.length || merged.failedSources.length || feeResult.failures.length) process.exitCode = 1;
 }
 
 // ---- 실행 -------------------------------------------------------------
@@ -945,4 +1018,8 @@ const seed = JSON.parse(await readFile('data/exams.seed.json', 'utf8'));
 if (REPLAY) await replay(REPLAY);
 else if (DUMP) await dump(DUMP);
 else if (PROBE) await probe(seed);
-else await collect(seed, JSON.parse(await readFile('data/groups.seed.json', 'utf8')));
+else await collect(
+  seed,
+  JSON.parse(await readFile('data/groups.seed.json', 'utf8')),
+  JSON.parse(await readFile('data/fees.seed.json', 'utf8')),
+);

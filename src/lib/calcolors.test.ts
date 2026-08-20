@@ -2,7 +2,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { NEUTRAL, PALETTE_SIZE, assignColors, colorClass, swatchClass } from './calcolors.ts';
+import { NEUTRAL, PALETTE_SIZE, assignColors, colorClass } from './calcolors.ts';
 
 test('그룹이 하나면 색을 쓰지 않는다', () => {
   // 구분하지 않는 색은 장식이다 (§13.2). 시험 상세가 이 경우다.
@@ -55,9 +55,4 @@ test('클래스 이름은 1부터 센다', () => {
   assert.equal(colorClass(0), 'cal__bar--c1');
   assert.equal(colorClass(5), 'cal__bar--c6');
   assert.equal(colorClass(NEUTRAL), '');
-});
-
-test('견본 클래스도 같은 번호를 쓴다', () => {
-  assert.equal(swatchClass(0), 'swatch swatch--c1');
-  assert.equal(swatchClass(NEUTRAL), 'swatch');
 });

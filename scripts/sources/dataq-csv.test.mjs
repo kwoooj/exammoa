@@ -43,6 +43,18 @@ test('접수·시험·발표가 이벤트가 된다', () => {
     ['exam', 'single', '2026-02-07', '2026-02-07'],
     ['result', 'single', '2026-03-06', '2026-03-06'],
   ]);
+  assert.deepEqual(s.events.find(e => e.kind === 'exam').timing, {
+    start: '09:00', timezone: 'Asia/Seoul', status: 'confirmed',
+  });
+});
+
+test('시험 시작시각이 없거나 잘못되면 추정하지 않는다', () => {
+  const missing = parse([row({ 시험시작시간: '' })]).sessions[0];
+  assert.equal(missing.events.find(e => e.kind === 'exam').timing, undefined);
+
+  const invalid = parse([row({ 시험시작시간: '오전 중' })]);
+  assert.equal(invalid.sessions[0].events.find(e => e.kind === 'exam').timing, undefined);
+  assert.match(invalid.diagnostics.failures[0].reason, /시각 형식/);
 });
 
 test('단일 단계는 phase 가 single 이다', () => {

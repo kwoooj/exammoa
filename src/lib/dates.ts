@@ -80,6 +80,24 @@ export function dotted(iso: string): string {
   return iso.replaceAll('-', '.');
 }
 
+/** 공식 시각을 24시간제 `HH:mm`으로 정규화한다. */
+export function clockLabel(clock: string): string {
+  const [hourText, minute = '00'] = clock.split(':');
+  const hour = Number(hourText);
+  if (!Number.isInteger(hour) || hour < 0 || hour > 23 || !/^\d{2}$/.test(minute)) return clock;
+  return `${String(hour).padStart(2, '0')}:${minute}`;
+}
+
+/** 캘린더 막대의 접근 가능한 이름에 붙일 공식 시각 문구. */
+export function timingSpokenLabel(timing?: import('../types.ts').EventTiming): string | null {
+  if (!timing) return null;
+  if (timing.status === 'varies') return timing.note ?? '시험장별 시간 상이';
+  if (timing.status === 'select-on-booking') return timing.note ?? '접수할 때 시간 선택';
+  if (!timing.start) return timing.note ?? null;
+  const start = clockLabel(timing.start);
+  return timing.end ? `${start}부터 ${clockLabel(timing.end)}까지` : start;
+}
+
 /**
  * 날짜 하나 또는 기간을 화면 문구로. 화면정의 §16.2.
  *

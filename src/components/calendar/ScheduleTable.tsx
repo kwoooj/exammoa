@@ -18,6 +18,7 @@
 import type { CalendarEvent } from '../../lib/calevents.ts';
 import { scheduleTable } from '../../lib/calevents.ts';
 import { ExternalLink } from '../../router/Link.tsx';
+import { EventDateTime } from '../EventDateTime.tsx';
 
 interface Props {
   events: CalendarEvent[];
@@ -49,14 +50,7 @@ export function ScheduleTable({ events, today, caption, defaultOpen }: Props) {
             {rows.map(row => (
               <tr key={row.eventId} className={row.state === 'past' ? 'sched__row--past' : undefined}>
                 <td className="mono">
-                  {/* 기계 판독 가능한 날짜. 스크린리더가 연·월·일을 이해해야 한다 (§14) */}
-                  <time dateTime={row.dateTimes[0]}>{row.dateLabel.split(' ~ ')[0]}</time>
-                  {row.dateTimes.length > 1 && (
-                    <>
-                      {' ~ '}
-                      <time dateTime={row.dateTimes[1]}>{row.dateLabel.split(' ~ ')[1]}</time>
-                    </>
-                  )}
+                  <EventDateTime start={row.start} end={row.end} timing={row.timing} style="short" />
                 </td>
                 <td>{row.examName}</td>
                 <td>{row.kindLabel}</td>

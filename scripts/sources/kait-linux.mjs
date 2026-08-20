@@ -27,7 +27,7 @@
 //
 // **합격자 발표가 `시험종료 즉시` 인 행이 있다.** 날짜가 아니므로 이벤트를 만들지 않는다.
 
-import { tryParseRange } from '../lib/kdate.mjs';
+import { parseClock, parseTiming, tryParseRange } from '../lib/kdate.mjs';
 import { readTables, rowsAsObjects, tableByHeader } from '../lib/html.mjs';
 
 export const id = 'kait-linux';
@@ -36,6 +36,7 @@ export const groupId = 'kait-linux';
 
 /** 이 헤더가 사라지면 사이트가 개편된 것이다. 조용히 다른 표를 읽지 않는다. */
 export const EXPECT_HEADERS = ['종목', '등급', '회차', '차수', '접수일자', '시험일자', '합격자 발표'];
+export const EXPECT_TIME_CAPTION = '입실 및 시험시간';
 
 /** 이 그룹이 담는 등급. 1급은 일정이 달라 같은 그룹에 넣으면 안 된다. */
 export const GRADE = '2급';
@@ -58,6 +59,23 @@ function phaseOf(text) {
   return null;
 }
 
+/** 같은 공식 페이지 하단의 2급 1·2차 입실/시험시간 표를 읽는다. */
+export function parseGrade2Timings(html) {
+  const table = readTables(html).find(t => t.caption?.replace(/\s/g, '').includes(EXPECT_TIME_CAPTION.replace(/\s/g, '')));
+  if (!table) return null;
+
+  const out = {};
+  for (const row of table.grid.slice(1)) {
+    if (!row[0]?.text.includes('2급')) continue;
+    const stage = row[1]?.text;
+    const timing = parseTiming(row[3]?.text);
+    if (!stage || !timing) continue;
+    const admissionDeadline = parseClock(row[2]?.text);
+    out[stage] = { ...timing, ...(admissionDeadline ? { admissionDeadline } : {}) };
+  }
+  return out['1차'] && out['2차'] ? out : null;
+}
+
 export function parse(html, { year }) {
   const picked = tableByHeader(readTables(html), EXPECT_HEADERS);
   if (!picked) {
@@ -65,6 +83,7 @@ export function parse(html, { year }) {
   }
 
   const rows = rowsAsObjects(picked);
+  const grade2Timings = parseGrade2Timings(html);
   const failures = [];
   let otherGrade = 0;
   let otherYear = 0;
@@ -102,9 +121,22 @@ export function parse(html, { year }) {
         return;
       }
       const end = kind === 'result' ? res.value.start : res.value.end;
+      let timing = null;
+      if (kind === 'exam') {
+        if (stage.phase === 'written' && res.value.start !== res.value.end) {
+          timing = {
+            timezone: 'Asia/Seoul',
+            status: 'select-on-booking',
+            note: '온라인 시험 기간 내 응시',
+          };
+        } else {
+          timing = grade2Timings?.[stage.stage] ?? null;
+        }
+      }
       events.push({
         kind, phase: stage.phase, start: res.value.start, end,
         seq: 1, label: `${stage.stage} ${label}`, note: null,
+        ...(timing ? { timing } : {}),
       });
     };
 
@@ -133,6 +165,14 @@ export function parse(html, { year }) {
 
   return {
     sessions,
-    diagnostics: { rows: rows.length, parsed: sessions.length, headerMatch: true, otherGrade, otherYear, failures },
+    diagnostics: {
+      rows: rows.length,
+      parsed: sessions.length,
+      headerMatch: true,
+      timingMatch: grade2Timings !== null,
+      otherGrade,
+      otherYear,
+      failures,
+    },
   };
 }
