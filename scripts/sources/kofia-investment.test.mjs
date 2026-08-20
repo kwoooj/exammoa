@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { parse } from './kofia-investment.mjs';
 
 const payload = JSON.stringify({
@@ -41,7 +42,20 @@ test('다른 자격과 다른 연도는 담지 않는다', () => {
   const decoded = JSON.parse(payload);
   decoded.api.examSchedList.push({ ...decoded.api.examSchedList[0], licenseCd: 'OTHER', timeCnt: 99 });
   decoded.api.examSchedList.push({ ...decoded.api.examSchedList[0], standardY: '2025', timeCnt: 45 });
-  assert.equal(parse(decoded, { year: 2026 }).sessions.length, 1);
+  const result = parse(decoded, { year: 2026 });
+  assert.equal(result.sessions.length, 1);
+  assert.deepEqual(result.diagnostics.coverage.unclassified, ['OTHER|투자자산운용사']);
+});
+
+test('공식 보관 원본의 8개 코드를 전부 수집한다', async () => {
+  const raw = await readFile('data/archive/2026/kofia-investment.2026-08-20.e14b5fcd90c6.json', 'utf8');
+  const { sessions, diagnostics } = parse(raw, { year: 2026 });
+  assert.equal(sessions.length, 19);
+  assert.equal(new Set(sessions.map(session => session.groupId)).size, 8);
+  assert.equal(diagnostics.coverage.discovered, 8);
+  assert.equal(diagnostics.coverage.included, 8);
+  assert.deepEqual(diagnostics.coverage.unclassified, []);
+  assert.deepEqual(diagnostics.coverage.missing, []);
 });
 
 test('공식 API 배열이 사라지면 개편 신호로 실패한다', () => {

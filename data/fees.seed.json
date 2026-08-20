@@ -2,73 +2,1692 @@
   "$comment": "화면에 노출하는 시험 응시료의 기준값과 재검증 경로. Q-Net은 배치가 표를 파싱해 인상분을 자동 반영하고, page는 기준 금액이 사라지면 배치를 실패시킨다. manual은 recheckAfterDays가 지나면 재확인을 요구한다.",
   "version": "1.0.0",
   "fees": [
-    { "slug": "정보처리기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 22600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "정보처리산업기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 20800 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "프로그래밍기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 17200 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "사무자동화산업기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 31000 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "정보기기운용기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 21800 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "정보관리기술사", "items": [{ "label": "필기", "amount": 67800 }, { "label": "실기", "amount": 87100 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "빅데이터분석기사", "items": [{ "label": "필기", "amount": 17800 }, { "label": "실기", "amount": 40800 }], "checkedAt": "2026-08-19", "source": { "kind": "manual", "url": "https://www.dataq.or.kr/www/accept/guide.do", "recheckAfterDays": 90 } },
-    { "slug": "SQLD", "items": [{ "label": "일반", "amount": 50000 }], "checkedAt": "2026-08-19", "source": { "kind": "manual", "url": "https://www.dataq.or.kr/www/accept/guide.do", "recheckAfterDays": 90 } },
-    { "slug": "ADsP", "items": [{ "label": "일반", "amount": 50000 }], "checkedAt": "2026-08-19", "source": { "kind": "manual", "url": "https://www.dataq.or.kr/www/accept/guide.do", "recheckAfterDays": 90 } },
-    { "slug": "컴퓨터활용능력1급", "items": [{ "label": "필기", "amount": 20500 }, { "label": "실기", "amount": 25000 }], "checkedAt": "2026-08-19", "source": { "kind": "page", "url": "https://license.korcham.net/co/examguide.do?cd=0103&mm=202" } },
-    { "slug": "컴퓨터활용능력2급", "items": [{ "label": "필기", "amount": 20500 }, { "label": "실기", "amount": 25000 }], "checkedAt": "2026-08-19", "source": { "kind": "page", "url": "https://license.korcham.net/co/examguide.do?cd=0103&mm=202" } },
-    { "slug": "워드프로세서", "items": [{ "label": "필기", "amount": 19000 }, { "label": "실기", "amount": 22000 }], "checkedAt": "2026-08-19", "source": { "kind": "page", "url": "https://license.korcham.net/co/examguide.do?cd=0102&mm=22" } },
-    { "slug": "ITQ", "items": [{ "label": "1과목", "amount": 22000 }, { "label": "2과목", "amount": 42000 }, { "label": "3과목", "amount": 60000 }], "checkedAt": "2026-08-19", "note": "개인 온라인 접수 시 결제대행수수료 1,000원이 별도 부과됩니다.", "source": { "kind": "page", "url": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectItqinfotchnlgyqc.do?pageKind=announcement" } },
-    { "slug": "전산회계1급", "items": [{ "label": "일반", "amount": 30000 }], "checkedAt": "2026-08-19", "source": { "kind": "manual", "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf", "recheckAfterDays": 90 } },
-    { "slug": "전산세무2급", "items": [{ "label": "일반", "amount": 30000 }], "checkedAt": "2026-08-19", "source": { "kind": "manual", "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf", "recheckAfterDays": 90 } },
-    { "slug": "리눅스마스터2급", "items": [{ "label": "1차", "amount": 22000 }, { "label": "2차", "amount": 44000 }], "checkedAt": "2026-08-19", "source": { "kind": "page", "url": "https://manager.ihd.or.kr/introducesubject1.do", "fingerprints": ["22,000", "44,000"] } },
-    { "slug": "산업안전기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 34600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "산업안전산업기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 34600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "건설안전기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 34600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "건설안전산업기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 34600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "위험물산업기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 20800 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "위험물기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 17200 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "산업위생관리기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 22600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "산업위생관리산업기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 20800 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "품질경영기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 22600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "품질경영산업기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 20800 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "대기환경기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 22600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "수질환경기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 22600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "수질환경산업기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 20800 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "화학분석기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 62900 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "전기기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 22600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "전기산업기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 20800 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "전기기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 106200 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "소방설비기사-전기", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 22600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "소방설비기사-기계", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 22600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "일반기계기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 43400 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "기계설계산업기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 34900 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "전산응용기계제도기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 23300 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "건축기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 22600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "토목기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 22600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "에너지관리기사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 22600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "가스기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 32800 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "피복아크용접기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 40000 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "직업상담사2급", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 20800 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "사회조사분석사2급", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 33900 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "컨벤션기획사2급", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 28900 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "텔레마케팅관리사", "items": [{ "label": "필기", "amount": 19400 }, { "label": "실기", "amount": 20800 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "지게차운전기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 25200 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "굴착기운전기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 27800 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "한식조리기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 26900 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "양식조리기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 29600 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "제과기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 29500 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "제빵기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 33000 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "미용사-일반", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 24900 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "미용사-피부", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 27300 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "미용사-메이크업", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 17200 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "조경기능사", "items": [{ "label": "필기", "amount": 14500 }, { "label": "실기", "amount": 30400 }], "checkedAt": "2026-08-19", "source": { "kind": "qnet" } },
-    { "slug": "토익", "items": [{ "label": "정기접수", "amount": 52500 }], "checkedAt": "2026-08-19", "note": "특별추가접수 응시료는 접수 화면에서 확인해 주세요.", "source": { "kind": "manual", "url": "https://exam.toeic.co.kr/receipt/examSchList.php", "recheckAfterDays": 90 } },
-    { "slug": "토익스피킹", "items": [{ "label": "일반", "amount": 84000 }], "checkedAt": "2026-08-19", "source": { "kind": "page", "url": "https://www.toeicswt.co.kr/common/template/viewContents.php?contentsCode=86" } },
-    { "slug": "오픽", "items": [{ "label": "일반", "amount": 84000 }], "checkedAt": "2026-08-19", "source": { "kind": "manual", "url": "https://www.opic.or.kr/opics/servlet/controller.opic.site.guide.GuideServlet?p_nav=4_1&p_process=move-page-examProGuide", "recheckAfterDays": 90 } },
-    { "slug": "KBS한국어능력시험", "items": [{ "label": "일반", "amount": 33000 }], "checkedAt": "2026-08-19", "note": "자격증 발급 수수료 5,000원은 별도입니다.", "source": { "kind": "page", "url": "https://www.kbskorean.org/klt/helper/exam-process" } },
-    { "slug": "한국사능력검정시험", "items": [{ "label": "심화", "amount": 27000 }, { "label": "기본", "amount": 22000 }], "checkedAt": "2026-08-19", "source": { "kind": "page", "url": "https://www.historyexam.go.kr/pageLink.do?link=apyexmInfo" } },
-    { "slug": "신용분석사", "items": [{ "label": "전과목", "amount": 66000 }], "checkedAt": "2026-08-20", "note": "부분응시: 1부 28,000원, 2부 39,000원", "source": { "kind": "page", "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=01&pageName=qualInfo", "fingerprints": ["66,000원", "28,000원", "39,000원"] } },
-    { "slug": "자산관리사-FP", "items": [{ "label": "전과목", "amount": 55000 }], "checkedAt": "2026-08-20", "note": "부분응시: 1부 또는 2부 각 28,000원", "source": { "kind": "page", "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=04&pageName=qualInfo", "fingerprints": ["55,000원", "28,000원"] } },
-    { "slug": "외환전문역1종", "items": [{ "label": "전과목", "amount": 55000 }], "checkedAt": "2026-08-20", "source": { "kind": "page", "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=09&pageName=qualInfo", "fingerprints": ["55,000원"] } },
-    { "slug": "외환전문역2종", "items": [{ "label": "전과목", "amount": 55000 }], "checkedAt": "2026-08-20", "source": { "kind": "page", "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=10&pageName=qualInfo", "fingerprints": ["55,000원"] } },
-    { "slug": "투자자산운용사", "items": [{ "label": "일반", "amount": 50000 }], "checkedAt": "2026-08-20", "source": { "kind": "manual", "url": "https://license.kofia.or.kr/resources/etc/PLIO.pdf", "recheckAfterDays": 90 } },
-    { "slug": "AFPK", "items": [{ "label": "전체", "amount": 66000 }, { "label": "모듈별", "amount": 39600 }], "checkedAt": "2026-08-20", "source": { "kind": "page", "url": "https://www.ifpk.org/?mnu_usn=30", "fingerprints": ["66,000원", "39,600원"] } }
+    {
+      "slug": "정보처리기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 22600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "정보처리산업기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 20800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "프로그래밍기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 17200
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "사무자동화산업기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 31000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "정보기기운용기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 21800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "정보관리기술사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 67800
+        },
+        {
+          "label": "실기",
+          "amount": 87100
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "빅데이터분석기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 17800
+        },
+        {
+          "label": "실기",
+          "amount": 40800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.dataq.or.kr/www/accept/guide.do",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "SQLD",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 50000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.dataq.or.kr/www/accept/guide.do",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "ADsP",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 50000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.dataq.or.kr/www/accept/guide.do",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "컴퓨터활용능력1급",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 20500
+        },
+        {
+          "label": "실기",
+          "amount": 25000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "page",
+        "url": "https://license.korcham.net/co/examguide.do?cd=0103&mm=202"
+      }
+    },
+    {
+      "slug": "컴퓨터활용능력2급",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 20500
+        },
+        {
+          "label": "실기",
+          "amount": 25000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "page",
+        "url": "https://license.korcham.net/co/examguide.do?cd=0103&mm=202"
+      }
+    },
+    {
+      "slug": "워드프로세서",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19000
+        },
+        {
+          "label": "실기",
+          "amount": 22000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "page",
+        "url": "https://license.korcham.net/co/examguide.do?cd=0102&mm=22"
+      }
+    },
+    {
+      "slug": "ITQ",
+      "items": [
+        {
+          "label": "1과목",
+          "amount": 22000
+        },
+        {
+          "label": "2과목",
+          "amount": 42000
+        },
+        {
+          "label": "3과목",
+          "amount": 60000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "note": "개인 온라인 접수 시 결제대행수수료 1,000원이 별도 부과됩니다.",
+      "source": {
+        "kind": "page",
+        "url": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectItqinfotchnlgyqc.do?pageKind=announcement"
+      }
+    },
+    {
+      "slug": "전산회계1급",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 30000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "전산세무2급",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 30000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "리눅스마스터2급",
+      "items": [
+        {
+          "label": "1차",
+          "amount": 22000
+        },
+        {
+          "label": "2차",
+          "amount": 44000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "page",
+        "url": "https://manager.ihd.or.kr/introducesubject1.do",
+        "fingerprints": [
+          "22,000",
+          "44,000"
+        ]
+      }
+    },
+    {
+      "slug": "산업안전기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 34600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "산업안전산업기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 34600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "건설안전기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 34600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "건설안전산업기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 34600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "위험물산업기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 20800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "위험물기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 17200
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "산업위생관리기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 22600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "산업위생관리산업기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 20800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "품질경영기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 22600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "품질경영산업기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 20800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "대기환경기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 22600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "수질환경기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 22600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "수질환경산업기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 20800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "화학분석기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 62900
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "전기기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 22600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "전기산업기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 20800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "전기기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 106200
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "소방설비기사-전기",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 22600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "소방설비기사-기계",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 22600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "일반기계기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 43400
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "기계설계산업기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 34900
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "전산응용기계제도기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 23300
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "건축기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 22600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "토목기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 22600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "에너지관리기사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 22600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "가스기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 32800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "피복아크용접기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 40000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "직업상담사2급",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 20800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "사회조사분석사2급",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 33900
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "컨벤션기획사2급",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 28900
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "텔레마케팅관리사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 19400
+        },
+        {
+          "label": "실기",
+          "amount": 20800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "지게차운전기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 25200
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "굴착기운전기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 27800
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "한식조리기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 26900
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "양식조리기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 29600
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "제과기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 29500
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "제빵기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 33000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "미용사-일반",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 24900
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "미용사-피부",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 27300
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "미용사-메이크업",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 17200
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "조경기능사",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 14500
+        },
+        {
+          "label": "실기",
+          "amount": 30400
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "qnet"
+      }
+    },
+    {
+      "slug": "토익",
+      "items": [
+        {
+          "label": "정기접수",
+          "amount": 52500
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "note": "특별추가접수 응시료는 접수 화면에서 확인해 주세요.",
+      "source": {
+        "kind": "manual",
+        "url": "https://exam.toeic.co.kr/receipt/examSchList.php",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "토익스피킹",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 84000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "page",
+        "url": "https://www.toeicswt.co.kr/common/template/viewContents.php?contentsCode=86"
+      }
+    },
+    {
+      "slug": "오픽",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 84000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.opic.or.kr/opics/servlet/controller.opic.site.guide.GuideServlet?p_nav=4_1&p_process=move-page-examProGuide",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "KBS한국어능력시험",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 33000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "note": "자격증 발급 수수료 5,000원은 별도입니다.",
+      "source": {
+        "kind": "page",
+        "url": "https://www.kbskorean.org/klt/helper/exam-process"
+      }
+    },
+    {
+      "slug": "한국사능력검정시험",
+      "items": [
+        {
+          "label": "심화",
+          "amount": 27000
+        },
+        {
+          "label": "기본",
+          "amount": 22000
+        }
+      ],
+      "checkedAt": "2026-08-19",
+      "source": {
+        "kind": "page",
+        "url": "https://www.historyexam.go.kr/pageLink.do?link=apyexmInfo"
+      }
+    },
+    {
+      "slug": "신용분석사",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 66000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "note": "부분응시: 1부 28,000원, 2부 39,000원",
+      "source": {
+        "kind": "page",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=01&pageName=qualInfo",
+        "fingerprints": [
+          "66,000원",
+          "28,000원",
+          "39,000원"
+        ]
+      }
+    },
+    {
+      "slug": "자산관리사-FP",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 55000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "note": "부분응시: 1부 또는 2부 각 28,000원",
+      "source": {
+        "kind": "page",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=04&pageName=qualInfo",
+        "fingerprints": [
+          "55,000원",
+          "28,000원"
+        ]
+      }
+    },
+    {
+      "slug": "외환전문역1종",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 55000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "page",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=09&pageName=qualInfo",
+        "fingerprints": [
+          "55,000원"
+        ]
+      }
+    },
+    {
+      "slug": "외환전문역2종",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 55000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "page",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=10&pageName=qualInfo",
+        "fingerprints": [
+          "55,000원"
+        ]
+      }
+    },
+    {
+      "slug": "투자자산운용사",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 50000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "AFPK",
+      "items": [
+        {
+          "label": "전체",
+          "amount": 66000
+        },
+        {
+          "label": "모듈별",
+          "amount": 39600
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "page",
+        "url": "https://www.ifpk.org/?mnu_usn=30",
+        "fingerprints": [
+          "66,000원",
+          "39,600원"
+        ]
+      }
+    },
+    {
+      "slug": "ADP",
+      "items": [
+        {
+          "label": "필기",
+          "amount": 80000
+        },
+        {
+          "label": "실기",
+          "amount": 70000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.dataq.or.kr/www/accept/guide.do",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "SQLP",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 100000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.dataq.or.kr/www/accept/guide.do",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "DAP",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 100000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.dataq.or.kr/www/accept/guide.do",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "DAsP",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 50000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.dataq.or.kr/www/accept/guide.do",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "여신심사역",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 66000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=02&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "국제금융역",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 66000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=03&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "신용위험분석사-CRA",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 77000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=05&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "은행텔러",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 55000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=07&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "영업점컴플라이언스오피서-은행",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 44000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=14&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "영업점컴플라이언스오피서-보험",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 44000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=15&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "영업점컴플라이언스오피서-증권",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 44000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=16&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "농협은행개인여신전문역",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 25000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=21&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "농협은행중소기업심사역",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 30000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=24&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "프라이빗뱅커",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 110000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=25&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "KBI금융DT테스트",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 44000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=26&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "자금세탁방지업무능력검정시험",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 66000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=28&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "수협은행직무역량평가-SCA",
+      "items": [
+        {
+          "label": "기관 부담",
+          "amount": 0
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "note": "공식 일정 API의 응시료 합계가 0원인 위탁시험입니다.",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=29&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "KBI금융AI리터러시",
+      "items": [
+        {
+          "label": "전과목",
+          "amount": 55000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=30&pageName=qualInfo",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "증권투자권유자문인력",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 50000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "펀드투자권유자문인력",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 50000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "파생상품투자권유자문인력",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 50000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "증권투자권유대행인",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 50000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "펀드투자권유대행인",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 50000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "금융투자분석사",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 50000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "재무위험관리사",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 50000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "전산세무1급",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 30000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "전산회계2급",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 30000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "세무회계1급",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 30000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "세무회계2급",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 30000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "세무회계3급",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 30000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "기업회계1급",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 30000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "기업회계2급",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 30000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "기업회계3급",
+      "items": [
+        {
+          "label": "일반",
+          "amount": 30000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "manual",
+        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "recheckAfterDays": 90
+      }
+    },
+    {
+      "slug": "리눅스마스터1급",
+      "items": [
+        {
+          "label": "1차",
+          "amount": 55000
+        },
+        {
+          "label": "2차",
+          "amount": 77000
+        }
+      ],
+      "checkedAt": "2026-08-20",
+      "source": {
+        "kind": "page",
+        "url": "https://manager.ihd.or.kr/introducesubject1.do",
+        "fingerprints": [
+          "55,000원",
+          "77,000원"
+        ]
+      }
+    }
   ]
 }

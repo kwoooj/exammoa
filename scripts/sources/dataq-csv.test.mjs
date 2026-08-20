@@ -2,7 +2,11 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { NAME_MAP, REQUIRED_GROUPS, collectFile, parseRows } from './dataq-csv.mjs';
+import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { mergeStale } from '../lib/store.mjs';
+import { EXPECT_HEADERS, NAME_MAP, REQUIRED_GROUPS, collectFile, parseRows } from './dataq-csv.mjs';
 
 /** 실측 행을 그대로 옮긴 것 */
 const row = (over = {}) => ({
@@ -23,6 +27,15 @@ const row = (over = {}) => ({
 const BIGDATA_W = row({ 시험명: '빅데이터분석기사-필기', 회차: '12회', 시험유형: '필기', 시험일: '2026-04-04', 접수시작일: '2026-03-03', 접수마감일: '2026-03-09', 합격자발표일: '2026-04-27' });
 const BIGDATA_P = row({ 시험명: '빅데이터분석기사-실기', 회차: '12회', 시험유형: '실기', 시험일: '2026-06-20', 접수시작일: '2026-05-18', 접수마감일: '2026-05-22', 합격자발표일: '2026-07-10' });
 const SQLD = row({ 시험명: 'SQL 개발자(SQLD)', 회차: '60회', 시험일: '2026-03-07', 접수시작일: '2026-02-02', 접수마감일: '2026-02-06', 합격자발표일: '2026-03-27' });
+const ALL_GROUP_ROWS = [
+  row({ 시험명: '데이터분석 전문가(ADP)-필기', 회차: '34회' }),
+  row(),
+  BIGDATA_W,
+  row({ 시험명: '데이터아키텍처 전문가(DAP)', 회차: '66회' }),
+  row({ 시험명: '데이터아키텍처 준전문가(DAsP)', 회차: '66회' }),
+  SQLD,
+  row({ 시험명: 'SQL 전문가(SQLP)', 회차: '54회' }),
+];
 
 const parse = (rows, year = 2026) => parseRows(rows, { year });
 
@@ -120,19 +133,18 @@ test('옛 표기와 새 표기를 모두 같은 그룹으로 읽는다', () => {
   assert.equal(a.groupId, b.groupId);
 });
 
-test('대상 외 종목은 조용히 넘긴다', () => {
+test('과거에 제외하던 전문가·아키텍처 종목도 별도 그룹으로 담는다', () => {
   const r = parse([row({ 시험명: 'SQL 전문가(SQLP)' }), row({ 시험명: '데이터아키텍처 전문가(DAP)' })]);
-  assert.equal(r.sessions.length, 0);
-  assert.equal(r.diagnostics.ignored, 2);
-  assert.equal(r.diagnostics.failures.length, 0, 'seed 에 없는 종목은 실패가 아니다');
+  assert.deepEqual(r.sessions.map(session => session.groupId), ['kdata-dap', 'kdata-sqlp']);
+  assert.equal(r.diagnostics.failures.length, 0);
 });
 
 test('매핑에 없는 새 표기는 실패로 센다 — 조용히 버리면 종목이 사라진다', () => {
   const r = parse([row({ 시험명: '데이터분석 준전문가 (신규표기)' })]);
   assert.equal(r.sessions.length, 0);
-  assert.equal(r.diagnostics.ignored, 0);
   assert.equal(r.diagnostics.failures.length, 1);
   assert.match(r.diagnostics.failures[0].reason, /매핑에 없는/);
+  assert.deepEqual(r.diagnostics.coverage.unclassified, ['unknown:데이터분석 준전문가 (신규표기)']);
 });
 
 test('회차를 못 읽으면 실패로 센다', () => {
@@ -153,13 +165,16 @@ test('특별검정·전환검정은 note 로 남긴다 — 정기 회차와 구�
 
 test('필수 그룹이 비면 missingGroups 에 담긴다', () => {
   const r = parse([row()]); // ADsP 만
-  assert.deepEqual(r.diagnostics.missingGroups.sort(), ['kdata-bigdata', 'kdata-sqld']);
+  assert.deepEqual(r.diagnostics.missingGroups.sort(), REQUIRED_GROUPS.filter(group => group !== 'kdata-adsp').sort());
 });
 
-test('세 그룹이 다 있으면 missingGroups 가 빈다', () => {
-  const r = parse([row(), SQLD, BIGDATA_W, BIGDATA_P]);
+test('공식 7개 자격군이 다 있으면 missingGroups 와 미분류가 빈다', () => {
+  const r = parse(ALL_GROUP_ROWS);
   assert.deepEqual(r.diagnostics.missingGroups, []);
-  assert.equal(r.sessions.length, 3);
+  assert.equal(r.sessions.length, 7);
+  assert.equal(r.diagnostics.coverage.discovered, 7);
+  assert.equal(r.diagnostics.coverage.included, 7);
+  assert.deepEqual(r.diagnostics.coverage.unclassified, []);
 });
 
 test('선언한 필수 그룹이 매핑 대상과 일치한다', () => {
@@ -169,17 +184,28 @@ test('선언한 필수 그룹이 매핑 대상과 일치한다', () => {
 
 // ---- 실제 파일 --------------------------------------------------------
 
-test('커밋된 CSV 에서 10회차가 나온다', async () => {
+test('커밋된 CSV 에서 공식 7개 자격군 18회차가 나온다', async () => {
   const h = await collectFile({ path: 'data/dataq-2026.csv', year: 2026, observedAt: '2026-01-06T00:00:00.000Z' });
   assert.equal(h.ok, true, h.error ?? '');
-  assert.equal(h.sessions.length, 10, 'ADsP 4 · SQLD 4 · 빅분기 2');
+  assert.equal(h.sessions.length, 18, 'ADP 2 · ADsP 4 · SQLD 4 · SQLP 2 · DAP 2 · DAsP 2 · 빅분기 2');
   assert.equal(h.observedAt, '2026-01-06T00:00:00.000Z', '오늘로 갱신하면 화면이 방금 확인했다고 거짓말한다');
   assert.equal(h.diagnostics.failures.length, 0, JSON.stringify(h.diagnostics.failures));
   assert.equal(h.diagnostics.malformed, 0);
 
   const byGroup = {};
   for (const s of h.sessions) byGroup[s.groupId] = (byGroup[s.groupId] ?? 0) + 1;
-  assert.deepEqual(byGroup, { 'kdata-adsp': 4, 'kdata-bigdata': 2, 'kdata-sqld': 4 });
+  assert.deepEqual(byGroup, {
+    'kdata-adp': 2,
+    'kdata-adsp': 4,
+    'kdata-bigdata': 2,
+    'kdata-dap': 2,
+    'kdata-dasp': 2,
+    'kdata-sqld': 4,
+    'kdata-sqlp': 2,
+  });
+  assert.equal(h.diagnostics.coverage.discovered, 7);
+  assert.equal(h.diagnostics.coverage.included, 7);
+  assert.deepEqual(h.diagnostics.coverage.unclassified, []);
 });
 
 test('빅분기 실제 회차에 필기·실기가 다 있다', async () => {
@@ -202,4 +228,35 @@ test('없는 연도를 요구하면 실패다 — 조용히 0회차를 게시하
   const h = await collectFile({ path: 'data/dataq-2026.csv', year: 2099 });
   assert.equal(h.ok, false);
   assert.match(h.error, /2099/);
+});
+
+test('한 행의 부분 파싱 실패도 파일 소스를 실패시키고 직전 세션을 계승한다', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'exammoa-dataq-'));
+  const path = join(dir, 'dataq.csv');
+  const csvCell = value => {
+    const text = String(value ?? '');
+    return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+  };
+  const rows = ALL_GROUP_ROWS.map((item, index) => index === 1 ? { ...item, 합격자발표일: '미정' } : item);
+  const csv = [EXPECT_HEADERS, ...rows.map(item => EXPECT_HEADERS.map(header => item[header] ?? ''))]
+    .map(cells => cells.map(csvCell).join(','))
+    .join('\n');
+
+  try {
+    await writeFile(path, csv, 'utf8');
+    const harvest = await collectFile({ path, year: 2026, observedAt: '2026-01-06T00:00:00.000Z' });
+    assert.equal(harvest.ok, false);
+    assert.match(harvest.error, /일정 파싱 실패 1건/);
+
+    const previous = harvest.sessions.find(session => session.groupId === 'kdata-adsp');
+    const merged = mergeStale([harvest], {
+      sessions: { sessions: [{ ...previous, src: 'dataq-csv', conf: 'verified' }] },
+      provenance: { [previous.id]: { src: 'dataq-csv', hash: 'old', observedAt: '2026-01-06', fetchedAt: '2026-01-06' } },
+      meta: { sources: { 'dataq-csv': { fetchedAt: '2026-01-06' } } },
+    }, { now: '2026-08-20T00:00:00.000Z' });
+    assert.equal(merged.sources['dataq-csv'].health, 'stale');
+    assert.equal(merged.sessions[0].stale, true);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });

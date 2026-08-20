@@ -103,7 +103,7 @@ export function checkSeeds(examSeed, groupSeed) {
       } else {
         for (const item of e.fee.items) {
           if (!item || typeof item.label !== 'string' || !item.label.trim()
-            || !Number.isInteger(item.amount) || item.amount <= 0) {
+            || !Number.isInteger(item.amount) || item.amount < 0) {
             problems.push(problem('bad-fee-item', `${e.slug} 의 응시료 항목이 올바르지 않다`));
           }
         }
@@ -112,6 +112,14 @@ export function checkSeeds(examSeed, groupSeed) {
         problems.push(problem('bad-fee-checked-at',
           `${e.slug}.fee.checkedAt 이 YYYY-MM-DD 가 아니다: ${e.fee.checkedAt ?? ''}`));
       }
+    }
+
+    if (e.eligibility !== undefined
+      && (e.eligibility?.status !== 'restricted'
+        || typeof e.eligibility?.note !== 'string'
+        || !e.eligibility.note.trim())) {
+      problems.push(problem('bad-eligibility',
+        `${e.slug}.eligibility 는 restricted 상태와 비어 있지 않은 안내가 필요하다`));
     }
   }
 

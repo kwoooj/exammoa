@@ -26,6 +26,8 @@ import { decodeResponse } from './lib/csv.mjs';
 import { checkSeeds, formatProblems } from './lib/seed-check.mjs';
 import { checkFeeSeed, collectFees } from './lib/fees.mjs';
 import { qnetEventTiming } from './lib/event-timing.mjs';
+import { coverageLine } from './lib/source-coverage.mjs';
+import { crawlDiagnosticProblem } from './lib/crawl-health.mjs';
 
 /** 크롤 어댑터 목록. 여기 없는 사이트는 요청되지 않는다. */
 const CRAWL_SOURCES = [
@@ -109,21 +111,12 @@ async function harvestCrawl(src, url, year) {
       raw = decoded.text;
       ({ sessions, diagnostics } = src.parse(raw, { year }));
     }
-    if (!diagnostics.headerMatch) {
-      // 헤더가 사라진 것은 개편 신호다. 빈 결과를 조용히 게시하지 않는다.
-      return { ...base, ok: false, error: '기대한 일정 구조를 찾지 못했다 (사이트 개편 가능)', rawHtml: raw };
-    }
-    if (diagnostics.timingMatch === false) {
-      return { ...base, ok: false, error: '공식 시험시간 표를 찾지 못했다 (사이트 개편 가능)', rawHtml: raw };
+    const diagnosticProblem = crawlDiagnosticProblem(diagnostics);
+    if (diagnosticProblem) {
+      return { ...base, ok: false, error: diagnosticProblem, rawHtml: raw, diagnostics };
     }
     if (!sessions.length) {
       return { ...base, ok: false, error: '회차를 하나도 뽑지 못했다', rawHtml: raw };
-    }
-    if (diagnostics.failures.length) {
-      console.log(`     ⚠ ${src.id} 날짜 파싱 실패 ${diagnostics.failures.length}건:`);
-      for (const f of diagnostics.failures.slice(0, 5)) {
-        console.log(`       ${f.seq}회 ${f.label} — ${f.reason} ${JSON.stringify(f.raw)}`);
-      }
     }
     return { ...base, ok: true, sessions, error: null, rawHtml: raw, diagnostics };
   } catch (e) {
@@ -712,7 +705,8 @@ async function collect(seed, groupSeed, feeSeed) {
   //
   // 전에는 `perExam.length > 0` 이면 ok 였다. 그래서 29/47 이 실패한 실행이 health:'ok'
   // 로 남고, stale 폴백이 작동하지 않아 그룹 3개와 회차 49건이 조용히 사라졌다 (#18).
-  // 일부 실패는 여전히 통과시킨다 (FR-DAT-06) — 허용치는 qnet.mjs 가 정한다.
+  // 독립 소스의 부분 성공은 계속 발행한다(FR-DAT-06). 다만 전부 응답한다고 실측된
+  // Q-Net 화이트리스트 안에서 한 종목이라도 실패하면 직전 Q-Net 전체를 계승한다.
   const health = sourceHealth({ total: exams.length, failed: failed.length, sourceFailure });
   const qnetOk = health.ok;
   const harvests = [{
@@ -741,6 +735,7 @@ async function collect(seed, groupSeed, feeSeed) {
         ? `  ok ${src.id} ${h.sessions.length}회차 · 이벤트 ${h.sessions.reduce((s, x) => s + x.events.length, 0)}개`
         : `  !! ${src.id} ${h.error}`,
     );
+    if (h.diagnostics?.coverage) console.log(`     ${coverageLine(h.diagnostics.coverage)}`);
     if (h.rawHtml) crawlRaw[src.id] = h.rawHtml;
   }
 
@@ -753,9 +748,9 @@ async function collect(seed, groupSeed, feeSeed) {
     console.log(
       h.ok
         ? `  ok ${src.id} ${h.sessions.length}회차 · 이벤트 ${h.sessions.reduce((s, x) => s + x.events.length, 0)}개`
-          + `${d.ignored ? ` · 대상 외 ${d.ignored}행 무시` : ''}`
         : `  !! ${src.id} ${h.error}`,
     );
+    if (d.coverage) console.log(`     ${coverageLine(d.coverage)}`);
     // 매핑에 없는 시험명은 표기가 바뀐 것이다. 조용히 넘기지 않고 눈에 보이게 찍는다.
     for (const f of (d.failures ?? []).slice(0, 5)) {
       console.log(`     · ${f.reason}: ${f.name ?? ''} ${f.label ?? ''} ${f.raw ?? ''}`.trimEnd());
@@ -985,6 +980,7 @@ async function replay(date) {
   console.log(`${date} 원본 ${files.length}건에 지금 파서를 재실행한다 (네트워크 없음)\n`);
   const byId = new Map(CRAWL_SOURCES.map(s => [s.id, s]));
 
+  let problems = 0;
   for (const file of files.sort()) {
     const id = file.split('.')[0];
     const src = byId.get(id);
@@ -998,20 +994,24 @@ async function replay(date) {
       const { sessions, diagnostics } = src.parse(html, { year });
       const events = sessions.reduce((n, s) => n + s.events.length, 0);
       const fails = (diagnostics.failures ?? []).length;
+      const problem = crawlDiagnosticProblem(diagnostics);
+      if (problem) problems += 1;
       console.log(
-        `  ${diagnostics.headerMatch ? 'ok' : '!!'} ${id.padEnd(16)} 회차 ${String(sessions.length).padStart(3)}건 · 이벤트 ${String(events).padStart(3)}개`
-        + `${fails ? ` · 파싱 실패 ${fails}건` : ''}${diagnostics.headerMatch ? '' : ' · 헤더 불일치'}`,
+        `  ${problem ? '!!' : 'ok'} ${id.padEnd(16)} 회차 ${String(sessions.length).padStart(3)}건 · 이벤트 ${String(events).padStart(3)}개`
+        + `${fails ? ` · 파싱 실패 ${fails}건` : ''}${problem ? ` · ${problem}` : ''}`,
       );
       for (const f of (diagnostics.failures ?? []).slice(0, 3)) {
         console.log(`       ${f.label ?? ''} ${f.reason} ${JSON.stringify(f.raw ?? '')}`);
       }
     } catch (err) {
+      problems += 1;
       console.log(`  !! ${id} — 파서가 던졌다: ${err.message ?? err}`);
     }
   }
 
   console.log('\n이 숫자가 그날 산출물과 같으면 파서는 그대로다 — 사이트가 바뀐 것이다.');
   console.log('다르면 파서 쪽이 바뀐 것이다.');
+  if (problems) process.exitCode = 1;
 }
 
 const seed = JSON.parse(await readFile('data/exams.seed.json', 'utf8'));

@@ -30,10 +30,27 @@
 
 import { tryParseRange } from '../lib/kdate.mjs';
 import { readTables, rowsAsObjects, tableByHeader } from '../lib/html.mjs';
+import { sourceCoverage } from '../lib/source-coverage.mjs';
 
 export const id = 'kacpta-tax';
 export const method = 'crawl';
-export const groupId = 'kacpta-tax';
+export const archiveExt = 'html';
+// 같은 날짜라도 시험시간이 다르면 같은 시행그룹이 아니다. 첫 그룹은 collect.mjs가
+// sourceUrl을 찾는 대표 그룹이고, 파서는 아래 10개 그룹의 세션을 모두 반환한다.
+export const groupId = 'kacpta-computer-tax-1';
+
+export const TAX_EXAMS = [
+  { slug: '전산세무1급', groupId: 'kacpta-computer-tax-1', name: '전산세무 1급', start: '15:00', end: '16:30' },
+  { slug: '전산세무2급', groupId: 'kacpta-computer-tax-2', name: '전산세무 2급', start: '12:30', end: '14:00' },
+  { slug: '전산회계1급', groupId: 'kacpta-computer-accounting-1', name: '전산회계 1급', start: '15:00', end: '16:00' },
+  { slug: '전산회계2급', groupId: 'kacpta-computer-accounting-2', name: '전산회계 2급', start: '12:30', end: '13:30' },
+  { slug: '세무회계1급', groupId: 'kacpta-tax-accounting-1', name: '세무회계 1급', start: '09:30', end: '11:10' },
+  { slug: '세무회계2급', groupId: 'kacpta-tax-accounting-2', name: '세무회계 2급', start: '09:30', end: '10:50' },
+  { slug: '세무회계3급', groupId: 'kacpta-tax-accounting-3', name: '세무회계 3급', start: '09:30', end: '10:30' },
+  { slug: '기업회계1급', groupId: 'kacpta-corporate-accounting-1', name: '기업회계 1급', start: '09:30', end: '11:10' },
+  { slug: '기업회계2급', groupId: 'kacpta-corporate-accounting-2', name: '기업회계 2급', start: '09:30', end: '10:50' },
+  { slug: '기업회계3급', groupId: 'kacpta-corporate-accounting-3', name: '기업회계 3급', start: '09:30', end: '10:30' },
+];
 
 /** 이 헤더가 사라지면 사이트가 개편된 것이다. 16개 표 중 하나를 고르는 유일한 근거다. */
 export const EXPECT_HEADERS = ['원서접수', '시험일자', '발표'];
@@ -43,12 +60,23 @@ export function normalizeTilde(text) {
   return String(text ?? '').replace(/[∼〜～]/g, '~');
 }
 
-export function parse(html, { year }) {
-  const picked = tableByHeader(readTables(html), EXPECT_HEADERS);
-  if (!picked) {
-    return { sessions: [], diagnostics: { rows: 0, parsed: 0, headerMatch: false, failures: [] } };
-  }
+const compact = text => String(text ?? '').replace(/\s/g, '');
+const targetByName = new Map(TAX_EXAMS.map(target => [compact(target.name), target]));
+const SCHEDULE_FAMILIES = [
+  { id: 'computer', name: '전산세무회계', targets: TAX_EXAMS.filter(target => target.name.startsWith('전산')) },
+  { id: 'tax', name: '세무회계', targets: TAX_EXAMS.filter(target => target.name.startsWith('세무회계')) },
+  { id: 'corporate', name: '기업회계', targets: TAX_EXAMS.filter(target => target.name.startsWith('기업회계')) },
+];
 
+function scheduleFamily(table) {
+  const text = compact(table.grid.flat().map(cell => cell.text).join(' '));
+  if (text.includes('전산세무') || text.includes('전산회계')) return SCHEDULE_FAMILIES[0];
+  if (text.includes('기업회계')) return SCHEDULE_FAMILIES[2];
+  if (text.includes('세무회계')) return SCHEDULE_FAMILIES[1];
+  return null;
+}
+
+function parseSchedule(picked, { year, family }) {
   const rows = rowsAsObjects(picked);
   const failures = [];
   const sessions = [];
@@ -56,9 +84,8 @@ export function parse(html, { year }) {
   for (const row of rows) {
     const examRes = tryParseRange(normalizeTilde(row['시험일자']), { year, requireYear: false });
     if (!examRes.ok) {
-      // 표의 빈 행(위·아래 여백)은 실패가 아니다
       if (examRes.reason !== 'tbd' && examRes.reason !== 'no-match') {
-        failures.push({ label: '시험일자', reason: examRes.reason, raw: examRes.raw });
+        failures.push({ label: `${family.name} 시험일자`, reason: examRes.reason, raw: examRes.raw });
       }
       continue;
     }
@@ -67,7 +94,6 @@ export function parse(html, { year }) {
       kind: 'exam', phase: 'single', start: examRes.value.start, end: examRes.value.end,
       seq: 1, label: '시험', note: null,
     }];
-
     const reg = tryParseRange(normalizeTilde(row['원서접수']), { year, requireYear: false });
     if (reg.ok) {
       events.push({
@@ -75,7 +101,7 @@ export function parse(html, { year }) {
         seq: 1, label: '원서접수', note: null,
       });
     } else if (reg.reason !== 'tbd' && reg.reason !== 'no-match') {
-      failures.push({ label: '원서접수', reason: reg.reason, raw: reg.raw });
+      failures.push({ label: `${family.name} 원서접수`, reason: reg.reason, raw: reg.raw });
     }
 
     const result = tryParseRange(normalizeTilde(row['발표']), { year, requireYear: false });
@@ -85,28 +111,121 @@ export function parse(html, { year }) {
         seq: 1, label: '합격자발표', note: null,
       });
     } else if (result.reason !== 'tbd' && result.reason !== 'no-match') {
-      failures.push({ label: '발표', reason: result.reason, raw: result.raw });
+      failures.push({ label: `${family.name} 발표`, reason: result.reason, raw: result.raw });
     }
 
     events.sort((a, b) => a.start.localeCompare(b.start) || a.seq - b.seq);
     sessions.push({ examDate: examRes.value.start, events });
   }
-
-  // 시험일 순서로 연내 순번을 매긴다. 회차 번호를 지어내지 않는다.
   sessions.sort((a, b) => a.examDate.localeCompare(b.examDate));
-  const out = sessions.map((s, i) => ({
-    id: `${groupId}-${year}-${i + 1}`,
-    groupId,
-    year,
-    seq: i + 1,
-    label: `${s.examDate.slice(5).replace('-', '.')} 시행`,
-    mode: 'scheduled',
-    status: 'confirmed',
-    events: s.events,
-  }));
+  return { rows, sessions, failures };
+}
+
+/** 공식 연간일정의 `시험시간` 표에서 종목과 시각을 직접 읽는다. */
+export function officialExamTimes(tables) {
+  const table = tables.find(candidate => {
+    const firstCells = candidate.grid.slice(0, 5).map(row => compact(row[0]?.text));
+    const all = candidate.grid.flat().map(cell => compact(cell.text));
+    return firstCells.includes('등급')
+      && firstCells.includes('시험시간')
+      && all.includes('전산세무회계')
+      && all.includes('세무회계')
+      && all.includes('기업회계');
+  });
+  if (!table) return { entries: [], tableMatch: false };
+
+  const categoryRow = table.grid.find(row => compact(row[0]?.text) === '종목');
+  const gradeRow = table.grid.find(row => compact(row[0]?.text) === '등급');
+  const timeRow = table.grid.find(row => compact(row[0]?.text) === '시험시간' && row.slice(1).some(cell => /\d{1,2}:\d{2}/.test(cell.text)));
+  if (!categoryRow || !gradeRow || !timeRow) return { entries: [], tableMatch: false };
+
+  const entries = [];
+  const width = Math.max(categoryRow.length, gradeRow.length, timeRow.length);
+  for (let i = 1; i < width; i++) {
+    const category = compact(categoryRow[i]?.text);
+    const grade = compact(gradeRow[i]?.text);
+    const name = category === '전산세무회계' ? grade : `${category}${grade}`;
+    if (!name) continue;
+    const match = normalizeTilde(timeRow[i]?.text).match(/(\d{1,2}:\d{2})\s*~\s*(\d{1,2}:\d{2})/);
+    entries.push({ name, start: match?.[1] ?? null, end: match?.[2] ?? null });
+  }
+  return { entries, tableMatch: true };
+}
+
+export function parse(html, { year }) {
+  const tables = readTables(html);
+  const pickedSchedules = tables
+    .map(table => ({ table, picked: tableByHeader([table], EXPECT_HEADERS) }))
+    .filter(item => item.picked)
+    .map(item => ({ ...item, family: scheduleFamily(item.table) }));
+  const recognized = pickedSchedules.filter(item => item.family);
+  const familyIds = recognized.map(item => item.family.id);
+  const scheduleMatch = pickedSchedules.length === SCHEDULE_FAMILIES.length
+    && familyIds.length === SCHEDULE_FAMILIES.length
+    && new Set(familyIds).size === SCHEDULE_FAMILIES.length;
+
+  const parsedByFamily = new Map();
+  const failures = [];
+  let rowCount = 0;
+  for (const item of recognized) {
+    const parsed = parseSchedule(item.picked, { year, family: item.family });
+    parsedByFamily.set(item.family.id, parsed);
+    rowCount += parsed.rows.length;
+    failures.push(...parsed.failures);
+  }
+
+  // 세 자격군의 일정표를 각각 해당 종목에만 적용한다. 현재 날짜가 같더라도 공식 표가
+  // 갈리는 날을 대비해 첫 번째 표를 10종목에 복제하지 않는다.
+  const out = SCHEDULE_FAMILIES.flatMap(family => {
+    const sessions = parsedByFamily.get(family.id)?.sessions ?? [];
+    return family.targets.flatMap(target => sessions.map((session, index) => ({
+      id: `${target.groupId}-${year}-${index + 1}`,
+      groupId: target.groupId,
+      year,
+      seq: index + 1,
+      label: `${session.examDate.slice(5).replace('-', '.')} 시행`,
+      mode: 'scheduled',
+      status: 'confirmed',
+      events: session.events.map(event => event.kind === 'exam'
+        ? {
+            ...event,
+            timing: {
+              start: target.start,
+              end: target.end,
+              timezone: 'Asia/Seoul',
+              status: 'confirmed',
+            },
+          }
+        : { ...event }),
+    })));
+  });
+  out.sort((a, b) => a.groupId.localeCompare(b.groupId) || a.seq - b.seq);
+
+  const official = officialExamTimes(tables);
+  const officialByName = new Map(official.entries.map(entry => [entry.name, entry]));
+  const expectedNames = TAX_EXAMS.map(target => compact(target.name));
+  const includedNames = official.entries
+    .filter(entry => targetByName.has(entry.name))
+    .map(entry => entry.name);
 
   return {
     sessions: out,
-    diagnostics: { rows: rows.length, parsed: out.length, headerMatch: true, failures },
+    diagnostics: {
+      rows: rowCount,
+      parsed: out.length,
+      headerMatch: scheduleMatch,
+      timingMatch: official.tableMatch && TAX_EXAMS.every(target => {
+        const entry = officialByName.get(compact(target.name));
+        return entry?.start === target.start && entry?.end === target.end;
+      }),
+      coverage: sourceCoverage({
+        discovered: official.entries.map(entry => entry.name),
+        included: includedNames,
+        expected: expectedNames,
+      }),
+      officialTimes: official.entries,
+      scheduleFamilies: familyIds,
+      failures,
+    },
   };
 }

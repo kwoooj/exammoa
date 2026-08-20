@@ -89,14 +89,25 @@ test('categories 에 없는 category 를 잡는다', () => {
   assert.ok(codes([exam({ category: '없음' })], [group()]).includes('unknown-category'));
 });
 
-test('응시료는 양의 정수 금액과 확인 날짜가 있어야 한다', () => {
+test('응시료는 0 이상 정수 금액과 확인 날짜가 있어야 한다', () => {
   const valid = { items: [{ label: '필기', amount: 19400 }], checkedAt: '2026-08-19' };
   assert.ok(!codes([exam({ fee: valid })], [group()]).some(code => code.startsWith('bad-fee')));
+  assert.ok(!codes([exam({ fee: { ...valid, items: [{ label: '기관 부담', amount: 0 }] } })], [group()])
+    .includes('bad-fee-item'));
   assert.ok(codes([exam({ fee: { ...valid, items: [{ label: '', amount: -1 }] } })], [group()])
     .includes('bad-fee-item'));
   assert.ok(codes([exam({ fee: { ...valid, checkedAt: '2026년 8월' } })], [group()])
     .includes('bad-fee-checked-at'));
   assert.ok(codes([exam({ fee: { ...valid, items: [] } })], [group()]).includes('fee-no-items'));
+});
+
+test('제한 시험은 응시자격 안내를 비워 둘 수 없다', () => {
+  assert.ok(!codes([exam({ eligibility: { status: 'restricted', note: '기관 임직원 대상' } })], [group()])
+    .includes('bad-eligibility'));
+  assert.ok(codes([exam({ eligibility: { status: 'restricted', note: '' } })], [group()])
+    .includes('bad-eligibility'));
+  assert.ok(codes([exam({ eligibility: { status: 'unknown', note: '확인' } })], [group()])
+    .includes('bad-eligibility'));
 });
 
 // ---- 화면 필수 표기 ----------------------------------------------------

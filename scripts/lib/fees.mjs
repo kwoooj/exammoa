@@ -58,7 +58,7 @@ export function checkFeeSeed(seed, exams) {
     if (!known.has(record.slug)) problems.push(`시험 시드에 없는 응시료: ${record.slug}`);
     if (!Array.isArray(record.items) || !record.items.length) problems.push(`${record.slug}: items가 비었다.`);
     for (const item of record.items ?? []) {
-      if (!item.label || !Number.isSafeInteger(item.amount) || item.amount <= 0) {
+      if (!item.label || !Number.isSafeInteger(item.amount) || item.amount < 0) {
         problems.push(`${record.slug}: 잘못된 금액 항목 ${JSON.stringify(item)}`);
       }
     }
