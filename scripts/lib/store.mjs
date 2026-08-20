@@ -122,6 +122,7 @@ export function mergeStale(harvests, prev, { now }) {
         method: h.method,
         fetchedAt: seenAt,
         sessionCount: (h.sessions ?? []).length,
+        ...(h.diagnostics?.coverage ? { coverage: h.diagnostics.coverage } : {}),
         // 소스마다 갱신 주기가 다르다. 화면이 하나의 임계로 재면 연 1회 소스가 상시 경고가 된다.
         ...(h.staleAfterDays ? { staleAfterDays: h.staleAfterDays } : {}),
       };
@@ -142,6 +143,7 @@ export function mergeStale(harvests, prev, { now }) {
       fetchedAt: prev?.meta?.sources?.[h.id]?.fetchedAt ?? null,
       sessionCount: inherited.length,
       reason: h.error ?? '알 수 없는 실패',
+      ...(h.diagnostics?.coverage ? { coverage: h.diagnostics.coverage } : {}),
     };
     failedSources.push(h.id);
     notes.push(

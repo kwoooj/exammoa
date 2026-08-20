@@ -26,6 +26,7 @@ import { decodeResponse } from './lib/csv.mjs';
 import { checkSeeds, formatProblems } from './lib/seed-check.mjs';
 import { checkFeeSeed, collectFees } from './lib/fees.mjs';
 import { qnetEventTiming } from './lib/event-timing.mjs';
+import { coverageLine, coverageProblem } from './lib/source-coverage.mjs';
 
 /** 크롤 어댑터 목록. 여기 없는 사이트는 요청되지 않는다. */
 const CRAWL_SOURCES = [
@@ -115,6 +116,10 @@ async function harvestCrawl(src, url, year) {
     }
     if (diagnostics.timingMatch === false) {
       return { ...base, ok: false, error: '공식 시험시간 표를 찾지 못했다 (사이트 개편 가능)', rawHtml: raw };
+    }
+    const scopeProblem = coverageProblem(diagnostics.coverage);
+    if (scopeProblem) {
+      return { ...base, ok: false, error: `공식 원본 전수 분류 실패 — ${scopeProblem}`, rawHtml: raw, diagnostics };
     }
     if (!sessions.length) {
       return { ...base, ok: false, error: '회차를 하나도 뽑지 못했다', rawHtml: raw };
@@ -741,6 +746,7 @@ async function collect(seed, groupSeed, feeSeed) {
         ? `  ok ${src.id} ${h.sessions.length}회차 · 이벤트 ${h.sessions.reduce((s, x) => s + x.events.length, 0)}개`
         : `  !! ${src.id} ${h.error}`,
     );
+    if (h.diagnostics?.coverage) console.log(`     ${coverageLine(h.diagnostics.coverage)}`);
     if (h.rawHtml) crawlRaw[src.id] = h.rawHtml;
   }
 
@@ -753,9 +759,9 @@ async function collect(seed, groupSeed, feeSeed) {
     console.log(
       h.ok
         ? `  ok ${src.id} ${h.sessions.length}회차 · 이벤트 ${h.sessions.reduce((s, x) => s + x.events.length, 0)}개`
-          + `${d.ignored ? ` · 대상 외 ${d.ignored}행 무시` : ''}`
         : `  !! ${src.id} ${h.error}`,
     );
+    if (d.coverage) console.log(`     ${coverageLine(d.coverage)}`);
     // 매핑에 없는 시험명은 표기가 바뀐 것이다. 조용히 넘기지 않고 눈에 보이게 찍는다.
     for (const f of (d.failures ?? []).slice(0, 5)) {
       console.log(`     · ${f.reason}: ${f.name ?? ''} ${f.label ?? ''} ${f.raw ?? ''}`.trimEnd());

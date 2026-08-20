@@ -21,3 +21,9 @@ test('확인하지 않은 응시료는 추정하지 않는다', () => {
   assert.equal(feeLabel(exam()), null);
   assert.equal(feeCheckedLabel(exam()), null);
 });
+
+test('공식 무료 시험은 0원이 아니라 무료로 읽힌다', () => {
+  assert.equal(feeLabel(exam({
+    items: [{ label: '기관 부담', amount: 0 }], checkedAt: '2026-08-20',
+  })), '기관 부담 무료');
+});

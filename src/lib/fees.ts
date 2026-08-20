@@ -6,7 +6,7 @@ const won = new Intl.NumberFormat('ko-KR');
 export function feeLabel(exam: Exam): string | null {
   if (!exam.fee?.items.length) return null;
   return exam.fee.items
-    .map(item => `${item.label} ${won.format(item.amount)}원`)
+    .map(item => item.amount === 0 ? `${item.label} 무료` : `${item.label} ${won.format(item.amount)}원`)
     .join(' · ');
 }
 

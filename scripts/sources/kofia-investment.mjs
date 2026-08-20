@@ -1,11 +1,26 @@
-// 금융투자협회 투자자산운용사 공식 연간일정 API.
+// 금융투자협회 공식 연간일정 API의 8개 자격 전수.
 
-import { parseTiming } from '../lib/kdate.mjs';
+import { normalizeText, parseTiming } from '../lib/kdate.mjs';
+import { sourceCoverage } from '../lib/source-coverage.mjs';
 
 export const id = 'kofia-investment';
 export const method = 'crawl';
 export const groupId = 'kofia-investment-manager';
 export const archiveExt = 'json';
+
+export const TARGETS = {
+  FCS005: { groupId: 'kofia-securities-adviser', name: '증권투자권유자문인력' },
+  FCF008: { groupId: 'kofia-fund-adviser', name: '펀드투자권유자문인력' },
+  FCD006: { groupId: 'kofia-derivatives-adviser', name: '파생상품투자권유자문인력' },
+  SCS003: { groupId: 'kofia-securities-agent', name: '증권투자권유대행인' },
+  SCF003: { groupId: 'kofia-fund-agent', name: '펀드투자권유대행인' },
+  FWM006: { groupId: 'kofia-investment-manager', name: '투자자산운용사' },
+  FWR005: { groupId: 'kofia-financial-analyst', name: '금융투자분석사' },
+  FWD003: { groupId: 'kofia-risk-manager', name: '재무위험관리사' },
+};
+
+const sourceKey = row => `${String(row.licenseCd)}|${normalizeText(row.koreanExamNm)}`;
+const expectedKeys = () => Object.entries(TARGETS).map(([code, target]) => `${code}|${target.name}`);
 
 const dateOf = value => {
   const match = String(value ?? '').match(/^(20\d{2})(\d{2})(\d{2})/);
@@ -35,11 +50,16 @@ export function parse(raw, { year }) {
     return { sessions: [], diagnostics: { rows: 0, parsed: 0, headerMatch: false, failures: [] } };
   }
   const rows = Array.isArray(payload?.api?.examSchedList) ? payload.api.examSchedList : [];
-  const selected = rows.filter(row => row.licenseCd === 'FWM006' && Number(row.standardY) === year);
+  const yearRows = rows.filter(row => Number(row.standardY) === year);
+  const selected = yearRows.filter(row => {
+    const target = TARGETS[String(row.licenseCd)];
+    return target && normalizeText(row.koreanExamNm) === target.name;
+  });
   const failures = [];
   const sessions = [];
 
   for (const row of selected) {
+    const target = TARGETS[String(row.licenseCd)];
     const seq = Number(row.timeCnt);
     const regStart = dateOf(row.receiptSrtDtTm);
     const regEnd = dateOf(row.receiptEndDtTm);
@@ -58,8 +78,8 @@ export function parse(raw, { year }) {
       { kind: 'result', phase: 'single', start: resultDate, end: resultDate, seq: 1, label: '합격자발표', note: null, ...(resultTiming ? { timing: resultTiming } : {}) },
     ].sort((a, b) => a.start.localeCompare(b.start) || a.seq - b.seq);
     sessions.push({
-      id: `${groupId}-${year}-${seq}`,
-      groupId,
+      id: `${target.groupId}-${year}-${seq}`,
+      groupId: target.groupId,
       year,
       seq,
       label: `제${seq}회`,
@@ -69,13 +89,18 @@ export function parse(raw, { year }) {
     });
   }
 
-  sessions.sort((a, b) => a.seq - b.seq);
+  sessions.sort((a, b) => a.groupId.localeCompare(b.groupId) || a.seq - b.seq);
   return {
     sessions,
     diagnostics: {
-      rows: selected.length,
+      rows: yearRows.length,
       parsed: sessions.length,
-      headerMatch: Array.isArray(payload?.api?.examSchedList) && selected.length > 0,
+      headerMatch: Array.isArray(payload?.api?.examSchedList),
+      coverage: sourceCoverage({
+        discovered: yearRows.map(sourceKey),
+        included: selected.map(sourceKey),
+        expected: expectedKeys(),
+      }),
       failures,
     },
   };
