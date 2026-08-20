@@ -2,7 +2,11 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { NAME_MAP, REQUIRED_GROUPS, collectFile, parseRows } from './dataq-csv.mjs';
+import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { mergeStale } from '../lib/store.mjs';
+import { EXPECT_HEADERS, NAME_MAP, REQUIRED_GROUPS, collectFile, parseRows } from './dataq-csv.mjs';
 
 /** 실측 행을 그대로 옮긴 것 */
 const row = (over = {}) => ({
@@ -224,4 +228,35 @@ test('없는 연도를 요구하면 실패다 — 조용히 0회차를 게시하
   const h = await collectFile({ path: 'data/dataq-2026.csv', year: 2099 });
   assert.equal(h.ok, false);
   assert.match(h.error, /2099/);
+});
+
+test('한 행의 부분 파싱 실패도 파일 소스를 실패시키고 직전 세션을 계승한다', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'exammoa-dataq-'));
+  const path = join(dir, 'dataq.csv');
+  const csvCell = value => {
+    const text = String(value ?? '');
+    return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+  };
+  const rows = ALL_GROUP_ROWS.map((item, index) => index === 1 ? { ...item, 합격자발표일: '미정' } : item);
+  const csv = [EXPECT_HEADERS, ...rows.map(item => EXPECT_HEADERS.map(header => item[header] ?? ''))]
+    .map(cells => cells.map(csvCell).join(','))
+    .join('\n');
+
+  try {
+    await writeFile(path, csv, 'utf8');
+    const harvest = await collectFile({ path, year: 2026, observedAt: '2026-01-06T00:00:00.000Z' });
+    assert.equal(harvest.ok, false);
+    assert.match(harvest.error, /일정 파싱 실패 1건/);
+
+    const previous = harvest.sessions.find(session => session.groupId === 'kdata-adsp');
+    const merged = mergeStale([harvest], {
+      sessions: { sessions: [{ ...previous, src: 'dataq-csv', conf: 'verified' }] },
+      provenance: { [previous.id]: { src: 'dataq-csv', hash: 'old', observedAt: '2026-01-06', fetchedAt: '2026-01-06' } },
+      meta: { sources: { 'dataq-csv': { fetchedAt: '2026-01-06' } } },
+    }, { now: '2026-08-20T00:00:00.000Z' });
+    assert.equal(merged.sources['dataq-csv'].health, 'stale');
+    assert.equal(merged.sessions[0].stale, true);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });

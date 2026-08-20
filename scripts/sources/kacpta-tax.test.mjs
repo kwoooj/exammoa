@@ -27,10 +27,18 @@ ${td(['종목', ...entries.map(entry => entry.category)], 'th')}
 ${td(['등급', ...entries.map(entry => entry.grade)])}
 ${td(['시험시간', ...entries.map(entry => entry.time)])}
 </table>`;
+const scheduleTable = (family, rows) => `<table>
+${td([`종목 및 등급 ${family}`, ...HEAD], 'th')}
+${rows.map(r => td(['', ...r])).join('')}
+</table>`;
 // 실제 페이지에는 표가 16개다. 앞에 관계없는 표를 두어 헤더로 고르는지 본다.
-const page = (rows = ROWS, times = OFFICIAL) => `<html><body>
+const page = (rows = ROWS, times = OFFICIAL, schedules = {
+  전산세무회계: rows,
+  세무회계: rows,
+  기업회계: rows,
+}) => `<html><body>
 <table><tr><td>공지사항</td><td>2026-07-15</td></tr></table>
-<table>${td(HEAD, 'th')}${rows.map(r => td(r)).join('')}</table>
+${Object.entries(schedules).map(([family, familyRows]) => scheduleTable(family, familyRows)).join('')}
 ${timingTable(times)}
 </body></html>`;
 
@@ -82,7 +90,7 @@ test('공백이 끼어 있어도 읽는다 — `07.02∼ 07.08`·`11. 30 ∼12.0
 
 test('빈 행을 회차로 만들지 않는다', () => {
   const r = run();
-  assert.equal(r.diagnostics.rows, 7);
+  assert.equal(r.diagnostics.rows, 21);
   assert.equal(r.sessions.length, 60);
   assert.equal(r.diagnostics.failures.length, 0, '빈 행은 파싱 실패가 아니다');
 });
@@ -137,6 +145,28 @@ test('공식 시간표에 새 등급이 생기면 미분류로 감지한다', ()
   assert.deepEqual(r.diagnostics.coverage.unclassified, ['기업회계4급']);
   assert.equal(r.diagnostics.coverage.discovered, 11);
   assert.equal(r.diagnostics.coverage.included, 10);
+});
+
+test('세 자격군의 일정표를 각각 해당 종목에 적용한다', () => {
+  const taxRows = [[...ROWS[0].slice(0, 2), '02.07(토)', '02.26(목)']];
+  const r = parse(page([ROWS[0]], OFFICIAL, {
+    전산세무회계: [ROWS[0]],
+    세무회계: taxRows,
+    기업회계: [ROWS[0]],
+  }), { year: 2026 });
+  const computer = groupSessions(r, 'kacpta-computer-tax-1')[0];
+  const tax = groupSessions(r, 'kacpta-tax-accounting-1')[0];
+  assert.equal(computer.events.find(event => event.kind === 'exam').start, '2026-01-31');
+  assert.equal(tax.events.find(event => event.kind === 'exam').start, '2026-02-07');
+});
+
+test('세 자격군 일정표 중 하나가 사라지면 구조 실패다', () => {
+  const r = parse(page([ROWS[0]], OFFICIAL, {
+    전산세무회계: [ROWS[0]],
+    세무회계: [ROWS[0]],
+  }), { year: 2026 });
+  assert.equal(r.diagnostics.headerMatch, false);
+  assert.deepEqual(r.diagnostics.scheduleFamilies.sort(), ['computer', 'tax']);
 });
 
 // ---- 단계 -----------------------------------------------------------

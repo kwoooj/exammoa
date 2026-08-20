@@ -2,7 +2,8 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { FAILURE_TOLERANCE, classifyResponse, rejectionMessage, sourceHealth } from './qnet.mjs';
+import { classifyResponse, rejectionMessage, sourceHealth } from './qnet.mjs';
+import { mergeStale } from './store.mjs';
 
 /** 실측: HTTP 429 로 온 213 byte 본문 그대로 */
 const QUOTA_BODY = JSON.stringify({
@@ -133,17 +134,32 @@ test('실측 사례 재현 — 47종목 중 29건 실패는 소스 실패다', (
   assert.match(h.error, /29건/);
 });
 
-test('일부 실패는 통과한다 (FR-DAT-06)', () => {
+test('실측 화이트리스트는 한 종목 실패도 소스 실패다 — 단독 그룹 삭제를 막는다', () => {
   assert.equal(sourceHealth({ total: 47, failed: 0 }).ok, true);
-  assert.equal(sourceHealth({ total: 47, failed: 1 }).ok, true);
-  assert.equal(sourceHealth({ total: 47, failed: 15 }).ok, true, '15/47 은 1/3 이하다');
+  const one = sourceHealth({ total: 47, failed: 1 });
+  assert.equal(one.ok, false);
+  assert.match(one.error, /직전 Q-Net 데이터를 유지/);
 });
 
-test('허용치 경계', () => {
-  const total = 30;
-  const edge = Math.floor(total * FAILURE_TOLERANCE);
-  assert.equal(sourceHealth({ total, failed: edge }).ok, true, `${edge}/${total}`);
-  assert.equal(sourceHealth({ total, failed: edge + 1 }).ok, false, `${edge + 1}/${total}`);
+test('1/47 실패 결과를 버리고 실패 종목의 단독 그룹까지 직전 값으로 계승한다', () => {
+  const health = sourceHealth({ total: 47, failed: 1 });
+  const event = { kind: 'exam', phase: 'single', start: '2026-05-01', end: '2026-05-01', seq: 1 };
+  const previousSessions = [
+    { id: 'healthy-2026-1', groupId: 'healthy', seq: 1, events: [event], src: 'qnet' },
+    { id: 'failed-only-2026-1', groupId: 'failed-only', seq: 1, events: [event], src: 'qnet' },
+  ];
+  const merged = mergeStale([{
+    id: 'qnet', method: 'api', ok: health.ok,
+    sessions: [previousSessions[0]], error: health.error,
+  }], {
+    sessions: { sessions: previousSessions },
+    provenance: {},
+    meta: { sources: { qnet: { fetchedAt: '2026-01-01' } } },
+  }, { now: '2026-08-20T00:00:00.000Z' });
+
+  assert.deepEqual(new Set(merged.sessions.map(session => session.groupId)), new Set(['healthy', 'failed-only']));
+  assert.ok(merged.sessions.every(session => session.stale));
+  assert.equal(merged.sources.qnet.health, 'stale');
 });
 
 test('전부 실패와 대상 없음을 구분해 적는다', () => {

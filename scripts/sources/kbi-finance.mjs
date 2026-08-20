@@ -34,6 +34,7 @@ export const TARGETS = {
 };
 
 const withYear = (text, year) => `${year}.${String(text ?? '').trim()}`;
+const isUnannounced = text => !String(text ?? '').replace(/[~∼〜～.\s]/g, '');
 const sourceKey = row => `${String(row.I_QLFN)}|${normalizeText(row.N_QLFN)}`;
 const expectedKeys = () => Object.entries(TARGETS).map(([code, target]) => `${code}|${target.name}`);
 
@@ -92,6 +93,19 @@ export function parse(raw, { year }) {
     add(events, row, 'reg', row.D_INT_ACPT_DT, '원서접수', `${clockMatch?.[1] ?? ''} ~ ${clockMatch?.[2] ?? ''}`);
     add(events, row, 'exam', row.D_OF_APPR, '시험', row.EAXM_PERIOD);
     add(events, row, 'result', row.D_SUCC_ANNO, '합격자발표', row.D_SUCC_ANNO);
+    if (!events.length && [row.D_INT_ACPT_DT, row.D_OF_APPR, row.D_SUCC_ANNO].every(isUnannounced)) {
+      sessions.push({
+        id: `${target.groupId}-${year}-${seq}`,
+        groupId: target.groupId,
+        year,
+        seq,
+        label: `제${seq}회`,
+        mode: 'scheduled',
+        status: 'tbd',
+        events: [],
+      });
+      continue;
+    }
     if (!events.length) continue;
     events.sort((a, b) => a.start.localeCompare(b.start) || a.seq - b.seq);
     sessions.push({

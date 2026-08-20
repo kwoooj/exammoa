@@ -122,19 +122,6 @@ export function classifyResponse({ status, text = '', parsed = null, items = nul
 }
 
 /**
- * 종목 실패가 이 비율을 넘으면 소스가 아픈 것으로 본다.
- *
- * 근거: 47종목이 전부 응답한다고 실측된 화이트리스트다. 일부 실패는 기관이 종목을
- * 내렸을 수 있으니 통과시키되, 대량 실패는 우리 쪽 문제다. 넘으면 직전 값을 stale 로
- * 유지해 화면에서 그룹이 사라지지 않게 한다.
- *
- * `docs/데이터-수집-활용.md` 에서 철회한 "소스 1/3 실패면 아무것도 쓰지 않는다" 와 다르다.
- * 그건 **커밋을 막는** 규칙이라 화면에서 경고를 지웠다. 이건 **health 를 내리는** 규칙이고,
- * 그래야 stale 폴백이 작동한다. 철회문이 옳다고 한 방향이 이쪽이다.
- */
-export const FAILURE_TOLERANCE = 1 / 3;
-
-/**
  * 종목별 결과를 소스 건강도로 접는다.
  *
  * @param {{total:number, failed:number, sourceFailure:string|null}} counts
@@ -144,8 +131,11 @@ export function sourceHealth({ total, failed, sourceFailure = null }) {
   if (sourceFailure) return { ok: false, error: sourceFailure };
   if (total === 0) return { ok: false, error: '수집 대상 종목이 없다' };
   if (failed >= total) return { ok: false, error: `${total}종목 전부 실패` };
-  if (failed / total > FAILURE_TOLERANCE) {
-    return { ok: false, error: `${total}종목 중 ${failed}건 실패 — 허용치(1/3) 초과` };
+  // 화이트리스트 종목은 모두 응답한다고 실측됐다. 한 종목이라도 실패한 부분 결과를
+  // 정상 게시하면 그 종목의 단독 그룹이 사라진다. 소스 전체를 실패시켜 직전 Q-Net
+  // 세션을 stale로 계승하고, 다른 독립 소스의 성공 결과는 그대로 발행한다(FR-DAT-06).
+  if (failed > 0) {
+    return { ok: false, error: `${total}종목 중 ${failed}건 실패 — 직전 Q-Net 데이터를 유지한다` };
   }
   return { ok: true, error: null };
 }

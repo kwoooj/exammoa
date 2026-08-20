@@ -86,6 +86,15 @@ test('종목 행의 회차가 비정상이면 coverage에만 포함하고 조용
   }]);
 });
 
+test('날짜가 전부 미공고인 유효 회차도 tbd 세션으로 보존한다', () => {
+  const target = row('25', 93, '~', '~', '~', '');
+  const { sessions, diagnostics } = parse(payload([target]), { year: 2026 });
+  assert.equal(diagnostics.failures.length, 0);
+  assert.equal(sessions.length, 1);
+  assert.equal(sessions[0].status, 'tbd');
+  assert.deepEqual(sessions[0].events, []);
+});
+
 test('깨진 응답은 던지지 않고 실패한다', () => {
   const result = parse('not-json', { year: 2026 });
   assert.equal(result.diagnostics.headerMatch, false);

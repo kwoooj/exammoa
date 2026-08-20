@@ -247,6 +247,15 @@ export async function collectFile({ path, year, observedAt = null }) {
   if (read.malformed) {
     return { ...base, sessions, diagnostics, error: `칸 수가 안 맞는 행 ${read.malformed}건 — 파서를 확인하라` };
   }
+  if (diagnostics.failures.length) {
+    const first = diagnostics.failures[0];
+    return {
+      ...base,
+      sessions,
+      diagnostics,
+      error: `일정 파싱 실패 ${diagnostics.failures.length}건 — ${first.name ?? ''} ${first.label ?? ''} (${first.reason ?? '원인 미상'})`.trim(),
+    };
+  }
 
   return { ...base, ok: true, sessions, diagnostics };
 }
