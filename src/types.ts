@@ -101,6 +101,13 @@ export interface SourceHealth {
    */
   staleAfterDays?: number;
   reason?: string;
+  /** 공식 원본에서 발견한 종목을 전부 분류했는지 보여주는 배치 진단 */
+  coverage?: {
+    discovered: number;
+    included: number;
+    unclassified: string[];
+    missing: string[];
+  };
 }
 
 /** 시행 주기. 타임라인 표현과 판정 방식을 결정한다 */
@@ -187,6 +194,11 @@ export interface Exam {
     checkedAt: string;
     /** 추가접수·자격증 발급비처럼 한 줄 금액에 포함되지 않는 조건 */
     note?: string;
+  };
+  /** 기관·고용관계 등 공식 응시대상 제한. 제한 종목도 일정에서 제외하지 않는다. */
+  eligibility?: {
+    status: 'restricted';
+    note: string;
   };
   agency?: string;
   /**

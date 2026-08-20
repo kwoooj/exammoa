@@ -23,6 +23,7 @@
 
 import { readCsv } from '../lib/csv.mjs';
 import { parseClock } from '../lib/kdate.mjs';
+import { coverageProblem, sourceCoverage } from '../lib/source-coverage.mjs';
 
 export const id = 'dataq-csv';
 export const method = 'csv';
@@ -36,8 +37,8 @@ export const EXPECT_HEADERS = [
 /**
  * 시험명 → 그룹. 표기가 여러 개라 전부 선언한다.
  *
- * CSV 에는 SQLP·DAP·DAsP·ADP 도 있지만 `exams.seed.json` 에 없으므로 뺀다.
- * 여기 없는 이름은 `ignored` 로 세고, 우리가 원하는 종목이 안 들어오면 실패가 된다.
+ * 공식 CSV의 7개 자격군을 전부 선언한다. 여기 없는 이름은 새 자격이나 표기 변경이므로
+ * 소스를 실패시킨다. `OUT_OF_SCOPE` 같은 무음 제외 목록은 두지 않는다.
  */
 export const NAME_MAP = new Map([
   ['데이터분석 준전문가(ADsP)', 'kdata-adsp'],
@@ -47,18 +48,24 @@ export const NAME_MAP = new Map([
   ['빅데이터분석기사-필기', 'kdata-bigdata'],
   ['빅데이터분석기사-실기', 'kdata-bigdata'],
   ['국가기술 빅데이터분석기사', 'kdata-bigdata'],
+  ['데이터분석 전문가(ADP)-필기', 'kdata-adp'],
+  ['데이터 분석 전문가(ADP)-실기', 'kdata-adp'],
+  ['데이터분석 전문가(ADP)', 'kdata-adp'],
+  ['SQL 전문가(SQLP)', 'kdata-sqlp'],
+  ['SQLP(국가공인 SQL 전문가)', 'kdata-sqlp'],
+  ['데이터아키텍처 전문가(DAP)', 'kdata-dap'],
+  ['DAP(국가공인 데이터아키텍처 전문가)', 'kdata-dap'],
+  ['데이터아키텍처 준전문가(DAsP)', 'kdata-dasp'],
+  ['DAsP(국가공인 데이터아키텍처 준전문가)', 'kdata-dasp'],
 ]);
 
-/** 우리가 읽지 않는 종목. 매핑 누락과 구분하려고 선언한다. */
-export const OUT_OF_SCOPE = [
-  'SQLP', 'SQL 전문가', 'DAP', '데이터아키텍처', 'DAsP', 'ADP', '데이터분석 전문가', '데이터 분석 전문가',
+/** 이 그룹들이 하나라도 비면 소스 실패다. 시드가 가리키는 그룹이기 때문이다. */
+export const REQUIRED_GROUPS = [
+  'kdata-adp', 'kdata-adsp', 'kdata-bigdata', 'kdata-dap', 'kdata-dasp', 'kdata-sqld', 'kdata-sqlp',
 ];
 
-/** 이 그룹들이 하나라도 비면 소스 실패다. 시드가 가리키는 그룹이기 때문이다. */
-export const REQUIRED_GROUPS = ['kdata-adsp', 'kdata-sqld', 'kdata-bigdata'];
-
 /** 필기·실기가 별도 행인 그룹. 같은 회차를 한 Session 으로 합친다. */
-const TWO_PHASE = new Set(['kdata-bigdata']);
+const TWO_PHASE = new Set(['kdata-adp', 'kdata-bigdata']);
 
 const isIso = (v) => /^\d{4}-\d{2}-\d{2}$/.test(String(v ?? '').trim());
 
@@ -127,7 +134,8 @@ function eventsOf(row, phase, failures) {
  */
 export function parseRows(rows, { year }) {
   const failures = [];
-  let ignored = 0;
+  const discovered = [];
+  const included = [];
   /** `groupId|seq` → session */
   const byKey = new Map();
 
@@ -137,12 +145,13 @@ export function parseRows(rows, { year }) {
 
     const name = row['시험명'];
     const groupId = NAME_MAP.get(name);
+    discovered.push(groupId ?? `unknown:${name}`);
     if (!groupId) {
-      if (OUT_OF_SCOPE.some(k => name.includes(k))) { ignored++; continue; }
       // 표기가 바뀐 것이다. 조용히 버리면 종목이 사라진다.
       failures.push({ name, seq: row['회차'], label: '시험명', reason: '매핑에 없는 시험명' });
       continue;
     }
+    included.push(groupId);
 
     const seq = seqOf(row['회차']);
     if (seq == null) {
@@ -193,8 +202,8 @@ export function parseRows(rows, { year }) {
       rows: rows.length,
       parsed: sessions.length,
       headerMatch: true,
-      ignored,
       missingGroups: missing,
+      coverage: sourceCoverage({ discovered, included, expected: REQUIRED_GROUPS }),
       failures,
     },
   };
@@ -230,6 +239,10 @@ export async function collectFile({ path, year, observedAt = null }) {
       diagnostics,
       error: `${year}년 일정이 없는 그룹 — ${diagnostics.missingGroups.join(', ')}`,
     };
+  }
+  const scopeProblem = coverageProblem(diagnostics.coverage);
+  if (scopeProblem) {
+    return { ...base, sessions, diagnostics, error: `공식 원본 전수 분류 실패 — ${scopeProblem}` };
   }
   if (read.malformed) {
     return { ...base, sessions, diagnostics, error: `칸 수가 안 맞는 행 ${read.malformed}건 — 파서를 확인하라` };

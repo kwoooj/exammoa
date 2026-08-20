@@ -2,7 +2,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizeTilde, parse } from './kacpta-tax.mjs';
+import { normalizeTilde, parse, TAX_EXAMS } from './kacpta-tax.mjs';
 
 /** 실측 표 그대로. 구분자가 `~` 가 아니라 `∼`(U+223C) 다. */
 const ROWS = [
@@ -24,6 +24,7 @@ const page = (rows = ROWS) => `<html><body>
 </body></html>`;
 
 const run = (rows, year = 2026) => parse(page(rows), { year });
+const groupSessions = (result, groupId = 'kacpta-computer-tax-1') => result.sessions.filter(s => s.groupId === groupId);
 
 // ---- 물결표 ----------------------------------------------------------
 
@@ -39,7 +40,9 @@ test('U+223C 물결표를 파서가 아는 형태로 바꾼다', () => {
 test('16개 표 중 헤더로 고른다 — 인덱스로 고르면 개편 때 다른 표를 읽는다', () => {
   const r = run();
   assert.equal(r.diagnostics.headerMatch, true);
-  assert.equal(r.sessions.length, 6, '연 6회');
+  assert.equal(r.sessions.length, 60, '10개 자격별 연 6회');
+  assert.equal(r.diagnostics.coverage.discovered, 10);
+  assert.equal(r.diagnostics.coverage.included, 10);
 });
 
 test('헤더가 사라지면 실패한다', () => {
@@ -51,7 +54,7 @@ test('헤더가 사라지면 실패한다', () => {
 // ---- 날짜 -----------------------------------------------------------
 
 test('첫 회차 날짜가 사이트와 일치한다', () => {
-  const s = run().sessions[0];
+  const s = groupSessions(run())[0];
   const pick = (kind) => s.events.find(e => e.kind === kind);
   assert.deepEqual([pick('reg').start, pick('reg').end], ['2026-01-02', '2026-01-08']);
   assert.equal(pick('exam').start, '2026-01-31');
@@ -60,7 +63,7 @@ test('첫 회차 날짜가 사이트와 일치한다', () => {
 });
 
 test('공백이 끼어 있어도 읽는다 — `07.02∼ 07.08`·`11. 30 ∼12.05`', () => {
-  const sessions = run().sessions;
+  const sessions = groupSessions(run());
   const reg4 = sessions[3].events.find(e => e.kind === 'reg');
   assert.deepEqual([reg4.start, reg4.end], ['2026-07-02', '2026-07-08']);
   assert.equal(sessions[5].events.find(e => e.kind === 'exam').start, '2026-12-05');
@@ -69,7 +72,7 @@ test('공백이 끼어 있어도 읽는다 — `07.02∼ 07.08`·`11. 30 ∼12.0
 test('빈 행을 회차로 만들지 않는다', () => {
   const r = run();
   assert.equal(r.diagnostics.rows, 7);
-  assert.equal(r.sessions.length, 6);
+  assert.equal(r.sessions.length, 60);
   assert.equal(r.diagnostics.failures.length, 0, '빈 행은 파싱 실패가 아니다');
 });
 
@@ -88,16 +91,26 @@ test('장소공고·수험표출력을 접수로 만들지 않는다 — 추가�
 // ---- 회차 번호 -------------------------------------------------------
 
 test('회차 번호를 지어내지 않고 시험일로 라벨을 붙인다', () => {
-  const labels = run().sessions.map(s => s.label);
+  const labels = groupSessions(run()).map(s => s.label);
   assert.deepEqual(labels, ['01.31 시행', '04.04 시행', '06.06 시행', '08.01 시행', '10.03 시행', '12.05 시행']);
   assert.ok(!labels.some(l => /제\d+회/.test(l)), '표에 없는 회차 번호를 붙이면 안 된다');
 });
 
 test('seq 는 시험일 순서다 — sessionId 가 흔들리면 저장된 계획이 깨진다', () => {
   const r = run([ROWS[2], ROWS[0], ROWS[1]]); // 순서를 섞어 넣는다
-  assert.deepEqual(r.sessions.map(s => s.seq), [1, 2, 3]);
-  assert.equal(r.sessions[0].id, 'kacpta-tax-2026-1');
-  assert.equal(r.sessions[0].events.find(e => e.kind === 'exam').start, '2026-01-31');
+  const sessions = groupSessions(r);
+  assert.deepEqual(sessions.map(s => s.seq), [1, 2, 3]);
+  assert.equal(sessions[0].id, 'kacpta-computer-tax-1-2026-1');
+  assert.equal(sessions[0].events.find(e => e.kind === 'exam').start, '2026-01-31');
+});
+
+test('공식 10개 자격을 별도 그룹으로 만들고 서로 다른 시험시간을 보존한다', () => {
+  const r = run([ROWS[0]]);
+  assert.deepEqual(new Set(r.sessions.map(s => s.groupId)), new Set(TAX_EXAMS.map(exam => exam.groupId)));
+  for (const target of TAX_EXAMS) {
+    const exam = groupSessions(r, target.groupId)[0].events.find(event => event.kind === 'exam');
+    assert.deepEqual([exam.timing.start, exam.timing.end], [target.start, target.end]);
+  }
 });
 
 // ---- 단계 -----------------------------------------------------------

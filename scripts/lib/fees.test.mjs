@@ -49,3 +49,13 @@ test('응시료 시드는 모든 노출 시험을 요구한다', () => {
   assert.equal(checked.ok, false);
   assert.match(checked.problems.join('\n'), /응시료가 없다/);
 });
+
+test('공식 무료 시험은 0원 응시료를 허용한다', () => {
+  const checked = checkFeeSeed({
+    fees: [{
+      slug: '기관시험', items: [{ label: '기관 부담', amount: 0 }], checkedAt: '2026-08-20',
+      source: { kind: 'manual', url: 'https://example.com', recheckAfterDays: 90 },
+    }],
+  }, [{ slug: '기관시험', tier: 'T3' }]);
+  assert.equal(checked.ok, true, checked.problems.join('\n'));
+});

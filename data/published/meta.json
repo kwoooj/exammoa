@@ -1,11 +1,11 @@
 {
-  "fetchedAt": "2026-08-20T00:46:51.660Z",
+  "fetchedAt": "2026-08-20T05:56:27.407Z",
   "year": 2026,
-  "examCount": 68,
+  "examCount": 102,
   "qnetExamCount": 47,
-  "groupCount": 25,
-  "sessionCount": 209,
-  "eventCount": 871,
+  "groupCount": 60,
+  "sessionCount": 313,
+  "eventCount": 1194,
   "tbdCount": 0,
   "staleCount": 0,
   "contradictionCount": 0,
@@ -16,68 +16,98 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-20T00:46:51.660Z",
+      "fetchedAt": "2026-08-20T05:56:27.407Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T00:46:51.660Z",
+      "fetchedAt": "2026-08-20T05:56:27.407Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T00:46:51.660Z",
+      "fetchedAt": "2026-08-20T05:56:27.407Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T00:46:51.660Z",
+      "fetchedAt": "2026-08-20T05:56:27.407Z",
       "sessionCount": 43
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T00:46:51.660Z",
+      "fetchedAt": "2026-08-20T05:56:27.407Z",
       "sessionCount": 6
     },
     "kait-linux": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T00:46:51.660Z",
-      "sessionCount": 4
+      "fetchedAt": "2026-08-20T05:56:27.407Z",
+      "sessionCount": 6,
+      "coverage": {
+        "discovered": 2,
+        "included": 2,
+        "unclassified": [],
+        "missing": []
+      }
     },
     "kacpta-tax": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T00:46:51.660Z",
-      "sessionCount": 6
+      "fetchedAt": "2026-08-20T05:56:27.407Z",
+      "sessionCount": 60,
+      "coverage": {
+        "discovered": 10,
+        "included": 10,
+        "unclassified": [],
+        "missing": []
+      }
     },
     "kbi-finance": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T00:46:51.660Z",
-      "sessionCount": 12
+      "fetchedAt": "2026-08-20T05:56:27.407Z",
+      "sessionCount": 37,
+      "coverage": {
+        "discovered": 18,
+        "included": 18,
+        "unclassified": [],
+        "missing": []
+      }
     },
     "kofia-investment": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T00:46:51.660Z",
-      "sessionCount": 4
+      "fetchedAt": "2026-08-20T05:56:27.407Z",
+      "sessionCount": 19,
+      "coverage": {
+        "discovered": 8,
+        "included": 8,
+        "unclassified": [],
+        "missing": []
+      }
     },
     "ifpk-afpk": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T00:46:51.660Z",
+      "fetchedAt": "2026-08-20T05:56:27.407Z",
       "sessionCount": 3
     },
     "dataq-csv": {
       "health": "ok",
       "method": "csv",
       "fetchedAt": "2026-01-06T00:00:00.000Z",
-      "sessionCount": 10,
+      "sessionCount": 18,
+      "coverage": {
+        "discovered": 7,
+        "included": 7,
+        "unclassified": [],
+        "missing": []
+      },
       "staleAfterDays": 400
     },
     "rolling-rules": {
@@ -91,9 +121,9 @@
   "archive": null,
   "notes": [],
   "failed": [],
-  "feeCoverage": 68,
-  "feeVerifiedCount": 60,
-  "feeManualCount": 8,
+  "feeCoverage": 102,
+  "feeVerifiedCount": 61,
+  "feeManualCount": 41,
   "feeFallbackCount": 0,
   "feeChanges": [],
   "feeFailures": []
