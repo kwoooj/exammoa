@@ -35,6 +35,13 @@ test('요약에 그룹·회차·소스가 들어간다', () => {
   assert.match(s, /qnet=ok\(102\)/);
 });
 
+test('응시료 커버리지와 확인 방식이 요약에 들어간다', () => {
+  const s = summary(decide(ok({ examCount: 62, feeCoverage: 62, feeVerifiedCount: 57, feeManualCount: 5 })));
+  assert.match(s, /응시료 62\/62종목/);
+  assert.match(s, /자동확인 57/);
+  assert.match(s, /수기 5/);
+});
+
 // ---- 소스 실패 → 커밋하고 빨간불 ----------------------------------------
 
 test('소스가 죽으면 커밋한다 — 직전 값이 stale 로 남아 있다', () => {
@@ -198,6 +205,32 @@ test('그룹 갈림은 종목 실패보다 앞서고 커밋을 막는다', () =>
 test('failed 가 빈 배열이면 정상이다', () => {
   const d = decide(ok({ failed: [] }));
   assert.equal(d.fail, false);
+});
+
+// ---- 응시료 확인 실패 -------------------------------------------------
+
+test('응시료 확인 실패는 기존 금액을 커밋하고 빨간불을 켠다', () => {
+  const d = decide(ok({
+    feeCoverage: 51,
+    feeVerifiedCount: 50,
+    feeFallbackCount: 1,
+    feeFailures: [{ slug: '정보처리기사', reason: '수수료 표를 찾지 못했다' }],
+  }));
+  assert.equal(d.commit, true);
+  assert.equal(d.fail, true);
+  assert.match(d.headline, /응시료 1건/);
+  assert.match(summary(d), /정보처리기사/);
+  assert.match(summary(d), /기존 금액/);
+});
+
+test('소스 실패와 응시료 실패가 함께면 둘 다 요약한다', () => {
+  const d = decide(ok({
+    sources: { qnet: { health: 'stale', sessionCount: 102, reason: 'API 중단' } },
+    feeFailures: [{ slug: '전기기사', reason: 'HTTP 500' }],
+  }));
+  const s = summary(d);
+  assert.match(d.headline, /소스/);
+  assert.match(s, /전기기사/);
 });
 
 // ---- 커밋 제목 --------------------------------------------------------

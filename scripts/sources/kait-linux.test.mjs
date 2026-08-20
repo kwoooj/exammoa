@@ -2,7 +2,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { GRADE, parse, parseRound } from './kait-linux.mjs';
+import { GRADE, parse, parseGrade2Timings, parseRound } from './kait-linux.mjs';
 
 /**
  * 실측 표를 그대로 옮긴 것. 파일이 아니라 여기 두는 이유는 `build/crawl/` 이
@@ -21,8 +21,15 @@ const ROWS = [
 
 const HEAD = ['종목', '등급', '회차', '차수', '접수일자', '시험일자', '합격자 발표'];
 const td = (cells, tag = 'td') => `<tr>${cells.map(c => `<${tag}>${c}</${tag}>`).join('')}</tr>`;
+const TIME_TABLE = `<table><caption>입실 및 시험시간</caption>
+  <tr><th colspan="2">급수</th><th>입실완료시간</th><th>시험시간</th></tr>
+  <tr><th rowspan="2">1급</th><th>1차</th><td rowspan="4">13:50</td><td>14:00 ~ 15:40 (100분)</td></tr>
+  <tr><th>2차</th><td>14:00 ~ 15:40 (100분)</td></tr>
+  <tr><th rowspan="2">2급</th><th>1차</th><td>14:00 ~ 15:00 (60분)</td></tr>
+  <tr><th>2차</th><td>14:00 ~ 15:40 (100분)</td></tr>
+</table>`;
 const page = (rows = ROWS) =>
-  `<html><body><table><caption>정기검정 일정</caption>${td(HEAD, 'th')}${rows.map(r => td(r)).join('')}</table></body></html>`;
+  `<html><body><table><caption>정기검정 일정</caption>${td(HEAD, 'th')}${rows.map(r => td(r)).join('')}</table>${TIME_TABLE}</body></html>`;
 
 const run = (rows, year = 2026) => parse(page(rows), { year });
 
@@ -81,6 +88,25 @@ test('2급 1차 시험은 기간이다 — 온라인 검정이라 그 안에서 
   const s = run().sessions.find(x => x.seq === 1);
   const exam = s.events.find(e => e.kind === 'exam' && e.phase === 'written');
   assert.notEqual(exam.start, exam.end);
+  assert.deepEqual(exam.timing, {
+    timezone: 'Asia/Seoul', status: 'select-on-booking', note: '온라인 시험 기간 내 응시',
+  });
+});
+
+test('같은 공식 페이지의 2급 시험시간과 입실완료시간을 보존한다', () => {
+  assert.deepEqual(parseGrade2Timings(page()), {
+    '1차': {
+      start: '14:00', end: '15:00', timezone: 'Asia/Seoul', status: 'confirmed', admissionDeadline: '13:50',
+    },
+    '2차': {
+      start: '14:00', end: '15:40', timezone: 'Asia/Seoul', status: 'confirmed', admissionDeadline: '13:50',
+    },
+  });
+  const exam = run().sessions.find(x => x.seq === 3).events
+    .find(e => e.kind === 'exam' && e.phase === 'practical');
+  assert.deepEqual(exam.timing, {
+    start: '14:00', end: '15:40', timezone: 'Asia/Seoul', status: 'confirmed', admissionDeadline: '13:50',
+  });
 });
 
 test('라벨이 1차·2차를 밝힌다 — 필기/실기로 오해하면 안 된다', () => {

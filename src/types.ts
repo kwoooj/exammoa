@@ -3,6 +3,19 @@
 export type EventKind = 'reg' | 'exam' | 'result';
 export type EventPhase = 'written' | 'practical' | 'single';
 
+export interface EventTiming {
+  /** HH:mm, 기관이 공지한 한국 현지 시각 */
+  start?: string;
+  /** HH:mm. 접수기간처럼 시작·마감 시각이 모두 있을 때 */
+  end?: string;
+  timezone: 'Asia/Seoul';
+  /** 단일 시각을 확정할 수 없는 시험은 상태만 저장하고 임의 시각을 만들지 않는다. */
+  status: 'confirmed' | 'varies' | 'select-on-booking';
+  /** 시험 시작과 다른 입실 마감 시각 */
+  admissionDeadline?: string;
+  note?: string;
+}
+
 /** 시험 일정의 날짜 하나. start === end 이면 시점(점), 다르면 구간(막대). */
 export interface ExamEvent {
   kind: EventKind;
@@ -15,6 +28,8 @@ export interface ExamEvent {
   seq: number;
   label: string;
   note: string | null;
+  /** 공식 소스에 시각이 있을 때만 존재한다. */
+  timing?: EventTiming;
 }
 
 /**
@@ -161,6 +176,18 @@ export interface Exam {
    */
   tier: 'T1' | 'T2' | 'T3' | 'T4' | 'X';
   priority: number;
+  /**
+   * `data/fees.seed.json`을 기준으로 공식 안내에서 확인한 응시료. 금액은 원 단위이며,
+   * 필기·실기처럼 단계가 다르면 항목을 나눠 저장한다. 확인하지 않은 금액은 추정해
+   * 채우지 않는다. 매일 수집 배치가 공식 페이지를 재검증해 이 필드를 게시한다.
+   */
+  fee?: {
+    items: { label: string; amount: number }[];
+    /** 공식 페이지를 마지막으로 확인한 날 (YYYY-MM-DD) */
+    checkedAt: string;
+    /** 추가접수·자격증 발급비처럼 한 줄 금액에 포함되지 않는 조건 */
+    note?: string;
+  };
   agency?: string;
   /**
    * 수집 대상 URL 은 여기 두지 않는다. ScheduleGroup.sourceUrl 이 정본이다 —

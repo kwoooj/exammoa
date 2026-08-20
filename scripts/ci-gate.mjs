@@ -46,6 +46,7 @@ export function decide(meta) {
   const splits = meta.groupSplits ?? [];
   const splitCount = meta.groupSplitCount ?? splits.length;
   const failedExams = meta.failed ?? [];
+  const feeFailures = meta.feeFailures ?? [];
 
   const lines = [
     `그룹 ${meta.groupCount ?? '?'}개 · 회차 ${meta.sessionCount ?? '?'}건 · 이벤트 ${meta.eventCount ?? '?'}개 · 노출 종목 ${meta.examCount ?? '?'}개`,
@@ -53,6 +54,12 @@ export function decide(meta) {
       ? `소스: ${sources.map(([id, s]) => `${id}=${s.health}(${s.sessionCount ?? 0})`).join(' · ')}`
       : '소스 기록이 없다.',
   ];
+  if (meta.feeCoverage != null) {
+    lines.push(
+      `응시료 ${meta.feeCoverage}/${meta.examCount ?? '?'}종목 · 자동확인 ${meta.feeVerifiedCount ?? 0} · 수기 ${meta.feeManualCount ?? 0}`
+      + `${meta.feeFallbackCount ? ` · 직전값 유지 ${meta.feeFallbackCount}` : ''}`,
+    );
+  }
   if (meta.staleCount) lines.push(`낡은 회차 ${meta.staleCount}건 — 화면에 낡았다고 표시된다.`);
 
   if (splitCount > 0) {
@@ -85,6 +92,7 @@ export function decide(meta) {
           return `- \`${id}\` — ${s.health}${why ? `: ${why}` : ''}`;
         }),
         ...failedLines(failedExams),
+        ...feeFailureLines(feeFailures),
       ],
     };
   }
@@ -102,7 +110,21 @@ export function decide(meta) {
       commit: true,
       fail: true,
       headline: `종목 ${failedExams.length}건이 빠졌다 — 커밋하되 확인이 필요하다`,
-      lines: [...lines, '', ...failedLines(failedExams)],
+      lines: [...lines, '', ...failedLines(failedExams), ...feeFailureLines(feeFailures)],
+    };
+  }
+
+  if (feeFailures.length) {
+    return {
+      commit: true,
+      fail: true,
+      headline: `응시료 ${feeFailures.length}건 확인 실패 — 기존 금액을 유지한 채 커밋한다`,
+      lines: [
+        ...lines,
+        '',
+        '공식 페이지 접근 실패·금액 변경·수기 확인기한 초과 중 하나다. 표시 금액은 직전 검증값을 유지한다.',
+        ...feeFailureLines(feeFailures),
+      ],
     };
   }
 
@@ -123,6 +145,13 @@ function failedLines(failedExams, limit = 6) {
     const more = slugs.length > limit ? ` … 외 ${slugs.length - limit}건` : '';
     return `- ${reason} (${slugs.length}건): ${shown}${more}`;
   })];
+}
+
+function feeFailureLines(failures, limit = 8) {
+  if (!failures.length) return [];
+  const shown = failures.slice(0, limit).map(failure => `- ${failure.slug ?? '?'} — ${failure.reason ?? '사유 불명'}`);
+  if (failures.length > limit) shown.push(`- … 외 ${failures.length - limit}건`);
+  return [`응시료 확인 실패 ${failures.length}건:`, ...shown];
 }
 
 /** GitHub Actions 요약 마크다운 */

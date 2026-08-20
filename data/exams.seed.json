@@ -127,6 +127,36 @@
         "linkType": "orgOnly",
         "note": "파라미터는 examSchedule (examSchdule 아님). 급수별 URL 없음. 생존 여부 국내 IP 재확인 필요"
       },
+      "신용분석사": {
+        "orgUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=01&pageName=qualInfo",
+        "scheduleUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+        "linkType": "manual"
+      },
+      "자산관리사-FP": {
+        "orgUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=04&pageName=qualInfo",
+        "scheduleUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+        "linkType": "manual"
+      },
+      "외환전문역1종": {
+        "orgUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=09&pageName=qualInfo",
+        "scheduleUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+        "linkType": "manual"
+      },
+      "외환전문역2종": {
+        "orgUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=10&pageName=qualInfo",
+        "scheduleUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+        "linkType": "manual"
+      },
+      "투자자산운용사": {
+        "orgUrl": "https://license.kofia.or.kr/examInfo/examInfo.do",
+        "scheduleUrl": "https://license.kofia.or.kr/examInfo/examYearly.do",
+        "linkType": "manual"
+      },
+      "AFPK": {
+        "orgUrl": "https://www.ifpk.org/?mnu_usn=29",
+        "scheduleUrl": "https://www.ifpk.org/?mnu_usn=27",
+        "linkType": "manual"
+      },
       "오픽": {
         "orgUrl": "https://www.opic.or.kr/opics/servlet/controller.opic.site.receipt.AnnualScheduleServlet?p_process=select-new-list",
         "linkType": "orgOnly",
@@ -162,6 +192,10 @@
     {
       "id": "lang",
       "name": "어학 · 국어 · 한국사"
+    },
+    {
+      "id": "finance",
+      "name": "금융 · 은행"
     }
   ],
   "tiers": {
@@ -1000,6 +1034,91 @@
       "agency": "국사편찬위원회",
       "collect": "crawl",
       "note": "모바일 .do 페이지가 SSR로 유리. 일정 전용 API 없음"
+    },
+    {
+      "slug": "신용분석사",
+      "name": "신용분석사",
+      "short": "신분사",
+      "groupId": "kbi-credit-analyst",
+      "jmCd": null,
+      "qualgbCd": null,
+      "series": null,
+      "category": "finance",
+      "tier": "T3",
+      "priority": 1,
+      "agency": "한국금융연수원",
+      "collect": "crawl"
+    },
+    {
+      "slug": "자산관리사-FP",
+      "name": "자산관리사(FP)",
+      "short": "은행FP",
+      "groupId": "kbi-financial-planner",
+      "jmCd": null,
+      "qualgbCd": null,
+      "series": null,
+      "category": "finance",
+      "tier": "T3",
+      "priority": 1,
+      "agency": "한국금융연수원",
+      "collect": "crawl"
+    },
+    {
+      "slug": "외환전문역1종",
+      "name": "외환전문역 I종",
+      "short": "외환전문역 I",
+      "groupId": "kbi-foreign-exchange-1",
+      "jmCd": null,
+      "qualgbCd": null,
+      "series": null,
+      "category": "finance",
+      "tier": "T3",
+      "priority": 2,
+      "agency": "한국금융연수원",
+      "collect": "crawl"
+    },
+    {
+      "slug": "외환전문역2종",
+      "name": "외환전문역 II종",
+      "short": "외환전문역 II",
+      "groupId": "kbi-foreign-exchange-2",
+      "jmCd": null,
+      "qualgbCd": null,
+      "series": null,
+      "category": "finance",
+      "tier": "T3",
+      "priority": 2,
+      "agency": "한국금융연수원",
+      "collect": "crawl"
+    },
+    {
+      "slug": "투자자산운용사",
+      "name": "투자자산운용사",
+      "short": "투운사",
+      "groupId": "kofia-investment-manager",
+      "jmCd": null,
+      "qualgbCd": null,
+      "series": null,
+      "category": "finance",
+      "tier": "T3",
+      "priority": 1,
+      "agency": "한국금융투자협회",
+      "collect": "crawl"
+    },
+    {
+      "slug": "AFPK",
+      "name": "AFPK",
+      "short": "AFPK",
+      "groupId": "ifpk-afpk",
+      "jmCd": null,
+      "qualgbCd": null,
+      "series": null,
+      "category": "finance",
+      "tier": "T3",
+      "priority": 2,
+      "agency": "한국재무설계협회",
+      "collect": "crawl",
+      "note": "응시 전 지정 교육과정 이수 또는 교육면제 자격 확인 필요"
     }
   ],
   "excluded": [

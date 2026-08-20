@@ -7,7 +7,7 @@
 // '추가 접수기간' 은 공단 빈자리접수·한능검 취소좌석접수와 같은 성격이라 reg seq 2 다.
 // 정기접수 마감과 섞이면 D-Day 가 거짓이 된다.
 
-import { tryParseRange } from '../lib/kdate.mjs';
+import { parseTiming, tryParseRange } from '../lib/kdate.mjs';
 import { readTables, rowsAsObjects, tableByHeader } from '../lib/html.mjs';
 
 export const id = 'kbs-korean';
@@ -58,7 +58,11 @@ export function parse(html, { year }) {
         return;
       }
       const end = kind === 'result' ? res.value.start : res.value.end;
-      events.push({ kind, phase: 'single', start: res.value.start, end, seq: evSeq, label, note });
+      const timing = parseTiming(text);
+      events.push({
+        kind, phase: 'single', start: res.value.start, end, seq: evSeq, label, note,
+        ...(timing ? { timing } : {}),
+      });
     };
 
     add('reg', row['접수기간'], '원서접수', 1);

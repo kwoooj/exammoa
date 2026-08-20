@@ -63,13 +63,21 @@ test('제89회 날짜가 사이트와 일치한다', () => {
   assert.equal(pick('result').start, '2026-03-12');
 });
 
-test('오전·오후 표기와 시각을 버린다', () => {
+test('날짜와 공식 시각을 각각 보존한다', () => {
   for (const s of run().sessions) {
     for (const e of s.events) {
       assert.match(e.start, /^\d{4}-\d{2}-\d{2}$/, `${s.label} ${e.label}`);
       assert.match(e.end, /^\d{4}-\d{2}-\d{2}$/);
     }
   }
+  const s = run().sessions.find(x => x.seq === 92);
+  assert.deepEqual(s.events.find(e => e.kind === 'reg' && e.seq === 1).timing, {
+    start: '09:00', end: '18:00', timezone: 'Asia/Seoul', status: 'confirmed',
+  });
+  assert.deepEqual(s.events.find(e => e.kind === 'exam').timing, {
+    start: '10:00', timezone: 'Asia/Seoul', status: 'confirmed',
+  });
+  assert.equal(s.events.find(e => e.kind === 'result').timing, undefined);
 });
 
 test('접수가 해를 넘기지 않는 범위에서 월을 넘긴다 (제94회 11/02~12/04)', () => {

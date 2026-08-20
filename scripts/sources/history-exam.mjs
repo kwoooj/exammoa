@@ -10,7 +10,7 @@
 //
 // robots.txt 가 없다 (HTTP 404 = RFC 9309 전면 허용). 확인은 npm run probe:crawl.
 
-import { tryParseRange } from '../lib/kdate.mjs';
+import { parseTiming, tryParseRange } from '../lib/kdate.mjs';
 import { readTables, rowsAsObjects, tableByHeader } from '../lib/html.mjs';
 
 export const id = 'history-exam';
@@ -19,6 +19,9 @@ export const groupId = 'history-exam';
 
 /** 이 헤더가 사라지면 사이트가 개편된 것이다. 조용히 다른 표를 읽지 않고 실패한다. */
 export const EXPECT_HEADERS = ['구분', '원서접수', '취소좌석 접수', '시험일시', '합격자발표'];
+
+// 공식 응시 안내의 공통 시작 시각. 심화·기본 종료 시각은 달라서 시작만 확정한다.
+export const EXAM_START = '10:00';
 
 /**
  * 표 → Session[]. 네트워크를 타지 않으므로 저장된 HTML 로도 테스트할 수 있다.
@@ -49,6 +52,9 @@ export function parse(html, { year }) {
         if (res.reason !== 'tbd') failures.push({ seq, label, reason: res.reason, raw: res.raw });
         return;
       }
+      const timing = parseTiming(text) ?? (kind === 'exam'
+        ? { start: EXAM_START, timezone: 'Asia/Seoul', status: 'confirmed' }
+        : null);
       events.push({
         kind,
         phase: 'single',
@@ -57,6 +63,7 @@ export function parse(html, { year }) {
         seq: evSeq,
         label,
         note: evSeq > 1 ? '취소좌석접수' : null,
+        ...(timing ? { timing } : {}),
       });
     };
 
