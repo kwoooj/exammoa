@@ -1,180 +1,184 @@
-/**
- * S-01 홈. 화면정의 §5.
- *
- * 처음 온 사람이 3초 안에 용도를 알고 검색 또는 상태 탐색을 시작하게 한다.
- * 가장 큰 상호작용 요소는 검색창이다 (§5.3-A) — 일러스트도 목업도 두지 않는다.
- *
- * 이번 달 미리보기는 **새 캘린더 코드를 만들지 않는다.** `summarize()` 로 기간을
- * 하루로 줄이고 같은 `layoutMonth` 에 laneCap 2 로 넘긴다 (§5.3-E). 접수는 마감일,
- * 기간 시험은 시작일만 남고 발표는 빠진다.
- */
-
 import { useMemo } from 'react';
+import {
+  BookOpenText,
+  Briefcase,
+  CalendarBlank,
+  CaretRight,
+  Code,
+  GearFine,
+  GraduationCap,
+  GridFour,
+  HardHat,
+  Translate,
+} from '@phosphor-icons/react';
 import type { AppData } from '../data/index.ts';
 import { buildRows, byCategory, openNow, startingSoon } from '../lib/browse.ts';
-import { buildCalendarData } from '../lib/calevents.ts';
-import { assignColors } from '../lib/calcolors.ts';
-import { layoutMonth, summarize } from '../lib/monthbars.ts';
-import { ym } from '../lib/calendar.ts';
-import { monthLabel } from '../lib/calendar.ts';
 import { EMPTY_EXAMS_QUERY, toExamsSearch } from '../lib/query.ts';
 import { ROUTE_PATHS, examPath } from '../lib/routes.ts';
-import { dotted } from '../lib/dates.ts';
+import { rangeLabel } from '../lib/dates.ts';
+import { feeLabel } from '../lib/fees.ts';
 import { Link } from '../router/Link.tsx';
-import { useNavigate } from '../router/Router.tsx';
-import { SearchBox } from '../components/SearchBox.tsx';
-import { ExamRow } from '../components/ExamRow.tsx';
-import { MonthGrid } from '../components/calendar/MonthGrid.tsx';
+import { EventDateTime } from '../components/EventDateTime.tsx';
+import { FavoriteButton } from '../components/FavoriteButton.tsx';
+import { useFavorites } from '../lib/favorites.ts';
 
-/** 홈 미리보기는 하루 두 건까지만 (§5.3-E) */
-const PREVIEW_LANES = 2;
+function categoryIcon(id: string) {
+  const props = { size: 31, weight: 'regular' as const, 'aria-hidden': true };
+  switch (id) {
+    case 'it': return <Code {...props} />;
+    case 'office': return <Briefcase {...props} />;
+    case 'safety': return <HardHat {...props} />;
+    case 'eng': return <GearFine {...props} />;
+    case 'service': return <GraduationCap {...props} />;
+    case 'skill': return <BookOpenText {...props} />;
+    case 'lang': return <Translate {...props} />;
+    default: return <GridFour {...props} />;
+  }
+}
+
+function providerMark(agency: string, category: string) {
+  if (/YBM/i.test(agency)) {
+    return <img src="/brands/ybm.svg" alt="" />;
+  }
+  if (agency.includes('한국산업인력공단')) {
+    return <img src="/brands/qnet.svg" alt="" />;
+  }
+  return categoryIcon(category);
+}
+
+function longDate(date: string): string {
+  const [year, month, day] = date.split('-').map(Number);
+  const weekday = ['일', '월', '화', '수', '목', '금', '토'][new Date(Date.UTC(year!, month! - 1, day!)).getUTCDay()];
+  return `${year}년 ${month}월 ${day}일 (${weekday})`;
+}
 
 export function Home({ data, today }: { data: AppData; today: string }) {
-  const navigate = useNavigate();
-  const month = ym(today);
-
+  const { favorites } = useFavorites();
   const rows = useMemo(() => buildRows({ ...data, today }), [data, today]);
-  const open = useMemo(() => openNow(rows, 5, 3), [rows]);
+  const groupedOpen = useMemo(() => openNow(rows, 3, 1), [rows]);
   const soon = useMemo(() => startingSoon(rows, 3), [rows]);
-  const cats = useMemo(() => byCategory(rows, data.categories, 3), [rows, data.categories]);
-
-  const preview = useMemo(() => {
-    const built = buildCalendarData({
-      sessions: data.sessions, groups: data.groups, exams: data.exams,
-      links: data.links, jmCds: data.jmCds,
-    });
-    // 발표는 홈에서 뺀다. 접수는 마감일, 기간 시험은 시작일 하루로 줄인다.
-    const events = summarize(built.events).map((b, i) => ({ ...built.events[i]!, start: b.start, end: b.end }))
-      .filter((_, i) => built.events[i]!.kind !== 'result');
-    return { events, byId: new Map(events.map(e => [e.id, e])) };
-  }, [data]);
-
-  const layout = layoutMonth(month, preview.events, { today, laneCap: PREVIEW_LANES });
-  const colorOf = useMemo(
-    () => assignColors(preview.events.map(e => e.groupId)),
-    [preview.events],
-  );
-
-  const shortcuts = [
-    { label: '현재 접수 중', search: toExamsSearch({ ...EMPTY_EXAMS_QUERY, status: 'open' }) },
-    { label: '곧 접수 시작', search: toExamsSearch({ ...EMPTY_EXAMS_QUERY, status: 'upcoming' }) },
-    { label: '이번 달 시험', search: toExamsSearch({ ...EMPTY_EXAMS_QUERY, month, kinds: ['exam'] }) },
-    { label: '상시시험', search: toExamsSearch({ ...EMPTY_EXAMS_QUERY, cadence: 'rolling' }) },
-  ];
-
-  const openCount = open.reduce((n, g) => n + g.rows.length + g.more.length, 0);
+  const categories = useMemo(() => byCategory(rows, data.categories, 3), [rows, data.categories]);
+  const openRows = groupedOpen.flatMap(group => group.rows);
+  const featuredRows = openRows.length > 0 ? openRows : soon;
+  const favoriteRows = favorites
+    .map(slug => rows.find(row => row.exam.slug === slug))
+    .filter((row): row is (typeof rows)[number] => Boolean(row));
+  const calendarHref = `${ROUTE_PATHS.calendar}?view=favorites`;
 
   return (
     <>
-      <section className="hero">
-        <h1>흩어진 시험 일정을 한곳에서 확인하세요</h1>
-        <p className="lede">
-          접수 기간과 시험일을 비교하고 공식 접수처로 바로 이동할 수 있어요.
+      <section className="homeIntro" aria-labelledby="home-title">
+        <div>
+          <h1 id="home-title">안녕하세요, 시험모아입니다.</h1>
+          <p>원하는 시험을 쉽게 찾고, 접수 일정까지 한곳에서 관리하세요.</p>
+        </div>
+        <p className="homeIntro__date">
+          <time dateTime={today}>{longDate(today)}</time>
+          <span>오늘 기준</span>
         </p>
-        <SearchBox data={data} today={today} variant="hero" />
-        <p className="small muted">로그인 없이 모든 일정을 볼 수 있어요.</p>
-
-        {/* §5.3-B — 최대 네 개. 카테고리 칩을 여기 섞지 않는다 */}
-        <nav className="shortcuts" aria-label="상태별 바로가기">
-          {shortcuts.map(s => (
-            <Link key={s.label} to={`${ROUTE_PATHS.exams}${s.search}`} className="btn">{s.label}</Link>
-          ))}
-        </nav>
       </section>
 
-      <section className="section" aria-labelledby="open-h">
-        <div className="section__head">
-          <h2 id="open-h">지금 접수할 수 있는 시험</h2>
-          {openCount > 0 && (
-            <Link to={`${ROUTE_PATHS.exams}${toExamsSearch({ ...EMPTY_EXAMS_QUERY, status: 'open' })}`}>
-              전체 보기
+      <div className="homeGrid">
+        <section className="homePanel categoryPanel" aria-labelledby="category-title">
+          <div className="panelHead">
+            <h2 id="category-title">분야별 시험 찾기</h2>
+          </div>
+          <div className="categoryGrid">
+            {categories.map(({ category, rows: exampleRows }) => (
+              <Link
+                key={category.id}
+                to={`${ROUTE_PATHS.exams}${toExamsSearch({ ...EMPTY_EXAMS_QUERY, category: category.id })}`}
+                className="categoryTile"
+              >
+                <span className="categoryTile__icon">{categoryIcon(category.id)}</span>
+                <strong>{category.name}</strong>
+                <span>{exampleRows.map(row => row.exam.short ?? row.exam.name).slice(0, 2).join(', ')}</span>
+              </Link>
+            ))}
+            <Link to={ROUTE_PATHS.exams} className="categoryTile">
+              <span className="categoryTile__icon"><GridFour size={31} aria-hidden="true" /></span>
+              <strong>전체 시험</strong>
+              <span>{data.meta.examCount}개 시험 한눈에 보기</span>
+            </Link>
+          </div>
+          <Link to={ROUTE_PATHS.exams} className="panelMore">
+            모든 분야 보기 <CaretRight size={16} aria-hidden="true" />
+          </Link>
+        </section>
+
+        <section className="homePanel openPanel" aria-labelledby="open-title">
+          <div className="panelHead">
+            <h2 id="open-title">{openRows.length > 0 ? '지금 접수 중' : '곧 접수 시작'}</h2>
+            <Link to={`${ROUTE_PATHS.exams}${toExamsSearch({ ...EMPTY_EXAMS_QUERY, status: openRows.length > 0 ? 'open' : 'upcoming' })}`}>
+              전체 보기 <CaretRight size={14} aria-hidden="true" />
+            </Link>
+          </div>
+          <ul className="openList">
+            {featuredRows.map(row => (
+              <li key={row.exam.slug} className="openItem">
+                <span className="openItem__icon">{providerMark(row.agency, row.exam.category)}</span>
+                <div className="openItem__body">
+                  <div className="openItem__top">
+                    <Link to={examPath(row.exam.slug)}>{row.exam.name}</Link>
+                    <span className={row.status.emphasis ? 'statusTag statusTag--active' : 'statusTag'}>
+                      {row.status.label}
+                    </span>
+                  </div>
+                  <p>{row.agency}</p>
+                  <dl>
+                    <div><dt>접수</dt><dd>{row.nextReg ? rangeLabel(row.nextReg.start, row.nextReg.end, 'short') : '일정 확인 중'}</dd></div>
+                    <div><dt>시험일</dt><dd>{row.nextExam ? rangeLabel(row.nextExam.start, row.nextExam.end, 'short') : '일정 확인 중'}</dd></div>
+                    <div className="openItem__fee"><dt>응시료</dt><dd>{feeLabel(row.exam) ?? '공식 확인'}</dd></div>
+                  </dl>
+                </div>
+                <Link to={examPath(row.exam.slug)} className="iconLink" aria-label={`${row.exam.name} 상세 일정`}>
+                  <CaretRight size={18} aria-hidden="true" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <section className="homePanel favoritesPanel" aria-labelledby="favorites-title">
+        <div className="panelHead panelHead--favorites">
+          <h2 id="favorites-title">관심 시험 <span className="countBadge">{favoriteRows.length}</span></h2>
+          {favoriteRows.length > 0 && (
+            <Link to={calendarHref} className="favoritesCalendarLink">
+              <CalendarBlank size={18} aria-hidden="true" /> 캘린더로 보기
             </Link>
           )}
         </div>
 
-        {openCount === 0 ? (
-          // §5.4 — 없으면 없다고 말하고 곧 시작하는 것을 대신 준다
-          <div className="empty">
-            <p>현재 접수 중인 시험이 없어요.</p>
-            {soon.length > 0 && <p className="small muted">곧 접수가 시작되는 시험을 확인해 보세요.</p>}
+        {favoriteRows.length === 0 ? (
+          <div className="favoritesEmpty">
+            <p>관심 있는 시험을 별표로 저장해 보세요.</p>
+            <Link to={ROUTE_PATHS.exams} className="btn">시험 찾아보기</Link>
           </div>
         ) : (
-          <ul className="exrows">
-            {open.map(g => (
-              <li key={g.groupId} className="exgroup">
-                <ul className="exrows">
-                  {g.rows.map(row => <ExamRow key={row.exam.slug} row={row} />)}
-                </ul>
-                {g.more.length > 0 && (
-                  // §5.3-C — 같은 일정이라 접었다는 것을 밝힌다
-                  <p className="small">
-                    <Link to={`${ROUTE_PATHS.exams}${toExamsSearch({ ...EMPTY_EXAMS_QUERY, status: 'open', agency: g.rows[0]?.agency ?? null })}`}>
-                      같은 일정의 시험 {g.more.length}개 더 보기
-                    </Link>
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
+          <div className="tableScroll">
+            <table className="favoritesTable">
+              <thead>
+                <tr><th>시험명</th><th>주관 기관</th><th>현재 상태</th><th>다음 접수</th><th>시험일</th><th>응시료</th></tr>
+              </thead>
+              <tbody>
+                {favoriteRows.map(row => (
+                  <tr key={row.exam.slug}>
+                    <td>
+                      <FavoriteButton slug={row.exam.slug} name={row.exam.name} />
+                      <Link to={examPath(row.exam.slug)}>{row.exam.name}</Link>
+                    </td>
+                    <td>{row.agency}</td>
+                    <td><span className={row.status.emphasis ? 'statusTag statusTag--active' : 'statusTag'}>{row.status.label}</span></td>
+                    <td>{row.nextReg ? <EventDateTime start={row.nextReg.start} end={row.nextReg.end} timing={row.nextReg.timing} style="short" /> : '—'}</td>
+                    <td>{row.nextExam ? <EventDateTime start={row.nextExam.start} end={row.nextExam.end} timing={row.nextExam.timing} style="short" /> : '—'}</td>
+                    <td className="favoritesTable__fee">{feeLabel(row.exam) ?? '공식 확인'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
-
-        {openCount === 0 && soon.length > 0 && (
-          <ul className="exrows">
-            {soon.map(row => <ExamRow key={row.exam.slug} row={row} />)}
-          </ul>
-        )}
-      </section>
-
-      <section className="section" aria-labelledby="cat-h">
-        <div className="section__head"><h2 id="cat-h">분야별 시험 찾기</h2></div>
-        <ul className="catlist">
-          {cats.map(c => (
-            <li key={c.category.id} className="catlist__item">
-              <Link
-                to={`${ROUTE_PATHS.exams}${toExamsSearch({ ...EMPTY_EXAMS_QUERY, category: c.category.id })}`}
-                className="catlist__name"
-              >
-                {c.category.name}
-              </Link>
-              <span className="small muted">{c.total}개</span>
-              {/* 첫 화면에서 62종목을 전부 펼치지 않는다 (§5.3-D) */}
-              <p className="small muted catlist__examples">
-                {c.rows.map(r => r.exam.name).join(' · ')}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="section" aria-labelledby="prev-h">
-        <div className="section__head">
-          <h2 id="prev-h">{monthLabel(month)} 주요 일정</h2>
-          <Link to={ROUTE_PATHS.calendar}>전체 캘린더</Link>
-        </div>
-        <MonthGrid
-          layout={layout}
-          eventById={preview.byId}
-          today={today}
-          colorOf={colorOf}
-          compact
-          ariaLabel={`${monthLabel(month)} 주요 일정 미리보기`}
-          // 날짜를 누르면 그 달의 통합 캘린더로 넘어간다 (§5.3-E)
-          onSelectDay={() => navigate(`${ROUTE_PATHS.calendar}?month=${month}`)}
-          onSelectBar={id => {
-            const slug = preview.byId.get(id)?.examSlugs[0];
-            navigate(slug ? examPath(slug) : `${ROUTE_PATHS.calendar}?month=${month}`);
-          }}
-        />
-        <p className="small muted">
-          접수 마감일과 시험 시작일만 요약했어요. 전체 기간은 캘린더에서 볼 수 있어요.
-        </p>
-      </section>
-
-      <section className="section">
-        <p className="small muted">
-          시험 {data.meta.examCount}개 · 시행그룹 {data.meta.groupCount}개 · 최종 확인 {dotted(data.buildDate)}
-        </p>
-        <p className="small"><Link to={ROUTE_PATHS.about}>데이터 출처와 갱신 방식</Link></p>
       </section>
     </>
   );

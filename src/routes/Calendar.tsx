@@ -2,9 +2,8 @@
  * S-04 통합 캘린더. 화면정의 §8.
  *
  * 두 모드가 한 화면이다 (§8.3):
- *   - 선택이 없으면 **전체 일정 모드** — 필터에 걸리는 공식 일정을 전부 보여준다
- *   - 1~6개를 고르면 **선택 비교 모드** — 고른 것만 남긴다
- * 비교는 별도의 제품이 아니라 이 화면의 선택 상태다.
+ *   - **전체 시험** — 필터에 걸리는 공식 일정을 전부 보여준다
+ *   - **관심 시험** — 사용자가 별표로 저장한 시험만 보여준다
  *
  * **겹친다고 경고하지 않는다** (§8.11). 실측상 미래 시험이 있는 그룹 조합의 다수가
  * 한 번 이상 겹치는데, 겹침 자체는 응시 불가를 뜻하지 않는다 — 기간 시행이면 다른
@@ -19,10 +18,10 @@ import { ym } from '../lib/calendar.ts';
 import { layoutMonth } from '../lib/monthbars.ts';
 import { buildCalendarData } from '../lib/calevents.ts';
 import { assignColors } from '../lib/calcolors.ts';
-import { MAX_CALENDAR_EXAMS, parseCalendarQuery, toCalendarSearch } from '../lib/query.ts';
+import { parseCalendarQuery, toCalendarSearch } from '../lib/query.ts';
 import type { CalendarQuery } from '../lib/query.ts';
-import { copyText } from '../lib/share.ts';
 import { examPath } from '../lib/routes.ts';
+import { useFavorites } from '../lib/favorites.ts';
 import { useLocation, useNavigate } from '../router/Router.tsx';
 import { ExternalLink, Link } from '../router/Link.tsx';
 import { MonthGrid } from '../components/calendar/MonthGrid.tsx';
@@ -30,7 +29,7 @@ import type { CalendarSelection } from '../components/calendar/MonthGrid.tsx';
 import { CalendarLegend, MonthNav } from '../components/calendar/MonthNav.tsx';
 import { ScheduleTable } from '../components/calendar/ScheduleTable.tsx';
 import { EventDetail } from '../components/calendar/EventDetail.tsx';
-import { ExamChips } from '../components/calendar/ExamChips.tsx';
+import { X } from '@phosphor-icons/react';
 
 /** 한 주에 그릴 최대 레인. 넘치면 `외 N건` 으로 접는다 (§8.3) */
 const LANE_CAP = 3;
@@ -54,13 +53,20 @@ const KINDS: { value: EventKind; label: string }[] = [
 export function Calendar({ data, today }: { data: AppData; today: string }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { favorites } = useFavorites();
   const [selection, setSelection] = useState<CalendarSelection>(null);
-  const [toast, setToast] = useState<string | null>(null);
 
-  const { query, missing } = parseCalendarQuery(location.search, {
+  const { query } = parseCalendarQuery(location.search, {
     categoryIds: data.categories.map(c => c.id),
     slugs: data.exams.map(e => e.slug),
   });
+  // 예전 비교 링크(exams=...)도 관심 시험 보기로 자연스럽게 이어 준다.
+  const favoriteView = new URLSearchParams(location.search).get('view') === 'favorites'
+    || query.exams.length > 0;
+  const favoriteSlugs = useMemo(
+    () => favorites.filter(slug => data.examBySlug.has(slug)),
+    [favorites, data.examBySlug],
+  );
 
   const month = query.month ?? ym(today);
 
@@ -68,22 +74,46 @@ export function Calendar({ data, today }: { data: AppData; today: string }) {
    * 주소를 바꿀 때 히스토리를 쌓지 않는다. 달을 열 번 넘긴 사람이 뒤로 가기를
    * 열 번 눌러야 원래 있던 화면으로 돌아가면 그것은 되돌아가기가 아니다.
    */
+  const viewSearch = (next: CalendarQuery, favoritesOnly = favoriteView) => {
+    const params = new URLSearchParams(toCalendarSearch({ ...next, exams: [] }));
+    if (favoritesOnly) params.set('view', 'favorites');
+    const value = params.toString();
+    return value ? `?${value}` : '';
+  };
+
   const update = (next: Partial<CalendarQuery>) => {
-    navigate(`/calendar${toCalendarSearch({ ...query, ...next })}`, { replace: true, scroll: false });
+    navigate(`/calendar${viewSearch({ ...query, ...next })}`, { replace: true, scroll: false });
+    setSelection(null);
+  };
+
+  const changeView = (favoritesOnly: boolean) => {
+    navigate(`/calendar${viewSearch({ ...query, exams: [] }, favoritesOnly)}`, { replace: true, scroll: false });
     setSelection(null);
   };
 
   /**
    * 실제로 그릴 종목.
    *
-   * 고른 것이 있으면 그것만. 없으면 분야·기관 필터에 걸리는 전부. 둘 다 없으면
-   * 빈 배열을 넘겨 전체 일정 모드가 된다.
+   * 관심 시험 보기면 별표로 저장한 시험만, 전체 시험 보기면 분야 필터에 걸리는
+   * 전부를 사용한다. 빈 배열은 전체 일정 모드라는 데이터 계약을 유지한다.
    */
   const effectiveSlugs = useMemo(() => {
-    if (query.exams.length > 0) return query.exams;
+    if (favoriteView) {
+      return query.category
+        ? favoriteSlugs.filter(slug => data.examBySlug.get(slug)?.category === query.category)
+        : favoriteSlugs;
+    }
     if (query.category) return data.exams.filter(e => e.category === query.category).map(e => e.slug);
     return [];
-  }, [query.exams, query.category, data.exams]);
+  }, [favoriteView, favoriteSlugs, query.category, data.examBySlug, data.exams]);
+  // buildCalendarData에서 빈 배열은 "전체"다. 관심 시험이 0개일 때만 존재하지 않는
+  // slug를 넘겨 전체 일정이 새어 나오지 않게 한다.
+  const calendarSlugs = useMemo(
+    () => favoriteView && effectiveSlugs.length === 0
+      ? ['__no_favorites__']
+      : effectiveSlugs,
+    [favoriteView, effectiveSlugs],
+  );
 
   /** 주소에 종류가 없으면 기본값을 쓴다. 빈 배열을 '전부' 로 읽지 않는다 */
   const effectiveKinds = query.kinds.length ? query.kinds : DEFAULT_KINDS;
@@ -93,24 +123,23 @@ export function Calendar({ data, today }: { data: AppData; today: string }) {
       sessions: data.sessions,
       groups: data.groups,
       exams: data.exams,
-      selectedSlugs: effectiveSlugs,
+      selectedSlugs: calendarSlugs,
       kinds: effectiveKinds,
       links: data.links,
       jmCds: data.jmCds,
     }),
-    [data, effectiveSlugs, effectiveKinds],
+    [data, calendarSlugs, effectiveKinds],
   );
 
   /**
-   * 색은 넘겨받은 순서를 따른다. 고른 순서대로 배정해야 칩과 막대가 같은 색이 되고,
-   * 시험 하나를 빼도 남은 것들의 색이 갑자기 뒤바뀌지 않는다.
+   * 관심 시험은 즐겨찾기 순서를, 전체 시험은 일정 순서를 사용한다.
    */
   const colorOf = useMemo(() => {
-    const ordered = query.exams.length > 0
-      ? query.exams.map(s => data.examBySlug.get(s)?.groupId ?? '')
+    const ordered = favoriteView
+      ? effectiveSlugs.map(s => data.examBySlug.get(s)?.groupId ?? '')
       : calendar.events.map(e => e.groupId);
     return assignColors(ordered.filter(Boolean));
-  }, [query.exams, data.examBySlug, calendar.events]);
+  }, [favoriteView, effectiveSlugs, data.examBySlug, calendar.events]);
 
   const eventById = useMemo(() => new Map(calendar.events.map(e => [e.id, e])), [calendar.events]);
   const layout = layoutMonth(month, calendar.events, { today, laneCap: LANE_CAP });
@@ -122,50 +151,38 @@ export function Calendar({ data, today }: { data: AppData; today: string }) {
     : [];
 
   const nameOf = (slug: string) => data.examBySlug.get(slug)?.name ?? slug;
-  const compare = query.exams.length > 0;
-
-  async function copyLink() {
-    const url = `${window.location.origin}/calendar${toCalendarSearch(query)}`;
-    const ok = await copyText(url);
-    setToast(ok ? '링크를 복사했어요' : '복사하지 못했어요. 주소창의 주소를 복사해 주세요');
-    window.setTimeout(() => setToast(null), 2400);
-  }
 
   return (
     <>
       <section className="section section--lead">
         <div className="section__head">
           <h1>시험 일정 캘린더</h1>
-          {/* 두 개 이상 골랐을 때만. 하나짜리 링크는 상세 페이지가 더 낫다 (§8.3) */}
-          {query.exams.length >= 2 && (
-            <button type="button" className="btn" onClick={copyLink}>링크 복사</button>
-          )}
         </div>
 
         <p className="lede">
-          {compare
-            ? `고른 시험 ${query.exams.length}개의 접수·시험·발표 일정을 같은 달력에서 봅니다.`
-            : '고르지 않아도 전체 공식 일정을 볼 수 있어요. 시험을 담으면 그것만 남습니다.'}
+          {favoriteView
+            ? `관심 시험 ${favoriteSlugs.length}개의 접수·시험·발표 일정을 한눈에 봅니다.`
+            : '등록된 모든 시험의 공식 일정을 한눈에 봅니다.'}
         </p>
 
-        {/* §8.12 — 잘못된 slug 를 조용히 지우지 않는다 */}
-        {missing.length > 0 && (
-          <p className="notice" role="status">
-            <span>
-              일부 시험을 찾지 못했어요: {missing.join(', ')}.
-              {missing.length > 0 && query.exams.length >= MAX_CALENDAR_EXAMS
-                ? ` 한 번에 최대 ${MAX_CALENDAR_EXAMS}개까지 볼 수 있어요.`
-                : ''}
-            </span>
-          </p>
-        )}
-
-        <ExamChips
-          data={data}
-          selected={query.exams}
-          colorOf={colorOf}
-          onChange={slugs => update({ exams: slugs })}
-        />
+        <div className="calendarViewSwitch" role="group" aria-label="캘린더 보기 범위">
+          <button
+            type="button"
+            className={!favoriteView ? 'calendarViewSwitch__button calendarViewSwitch__button--active' : 'calendarViewSwitch__button'}
+            aria-pressed={!favoriteView}
+            onClick={() => changeView(false)}
+          >
+            전체 시험
+          </button>
+          <button
+            type="button"
+            className={favoriteView ? 'calendarViewSwitch__button calendarViewSwitch__button--active' : 'calendarViewSwitch__button'}
+            aria-pressed={favoriteView}
+            onClick={() => changeView(true)}
+          >
+            관심 시험 <span>{favoriteSlugs.length}</span>
+          </button>
+        </div>
 
         <div className="filters">
           <label className="filters__field">
@@ -173,7 +190,6 @@ export function Calendar({ data, today }: { data: AppData; today: string }) {
             <select
               value={query.category ?? ''}
               onChange={e => update({ category: e.target.value || null })}
-              disabled={compare}
             >
               <option value="">전체</option>
               {data.categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
@@ -212,11 +228,17 @@ export function Calendar({ data, today }: { data: AppData; today: string }) {
           <MonthNav month={month} today={today} onChange={m => update({ month: m })} />
         </div>
 
-        {calendar.events.length === 0 ? (
+        {favoriteView && favoriteSlugs.length === 0 ? (
+          <div className="empty">
+            <p>아직 관심 시험이 없어요.</p>
+            <p className="small muted">시험 목록에서 별표를 누르면 이 캘린더에 모아 볼 수 있어요.</p>
+            <Link to="/exams" className="btn">관심 시험 추가하기</Link>
+          </div>
+        ) : calendar.events.length === 0 ? (
           <p className="empty">
             {calendar.ruleCards.length > 0
               // 상시시험만 남았으면 빈 격자를 그리지 않는다 (§8.12)
-              ? '고른 시험은 확정된 연간 일정이 없는 상시시험이에요. 아래 규칙을 확인해 주세요.'
+              ? '관심 시험에 확정된 연간 일정이 없어요. 아래 상시시험 규칙을 확인해 주세요.'
               : '조건에 맞는 공식 일정이 없어요. 달을 옮기거나 필터를 줄여 보세요.'}
           </p>
         ) : (
@@ -248,7 +270,7 @@ export function Calendar({ data, today }: { data: AppData; today: string }) {
                   onClick={() => setSelection(null)}
                   aria-label="상세 닫기"
                 >
-                  ×
+                  <X size={18} aria-hidden="true" />
                 </button>
                 <EventDetail
                   event={selectedEvent}
@@ -312,16 +334,6 @@ export function Calendar({ data, today }: { data: AppData; today: string }) {
         </section>
       )}
 
-      {compare && (
-        <section className="section">
-          <p className="small muted">
-            {/* §8.11 — 겹친다고 위험하다고 말하지 않는다 */}
-            기간이 겹쳐도 응시가 불가능하다는 뜻은 아니에요. 기간 시행은 그 안에서 날짜를 고를 수 있어요.
-          </p>
-        </section>
-      )}
-
-      {toast && <p className="toast" role="status">{toast}</p>}
     </>
   );
 }

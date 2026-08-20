@@ -19,10 +19,10 @@
  * 검색했더니 아무 설명 없는 빈 달력이 나온다.
  */
 
-import type { EventKind, Exam, LinksFile, ScheduleGroup, Session } from '../types.ts';
+import type { EventKind, EventTiming, Exam, LinksFile, ScheduleGroup, Session } from '../types.ts';
 import type { BarEvent } from './monthbars.ts';
 import { summarize } from './monthbars.ts';
-import { rangeLabel } from './dates.ts';
+import { rangeLabel, timingSpokenLabel } from './dates.ts';
 import { applyLink, officialLink } from './links.ts';
 
 export interface CalendarEvent extends BarEvent {
@@ -47,6 +47,7 @@ export interface CalendarEvent extends BarEvent {
   /** 표의 구분 열. `실기 접수` · `시험` · `실기 추가접수` */
   kindLabel: string;
   note: string | null;
+  timing?: EventTiming;
   applyUrl?: string;
   /**
    * 접수 링크에 쓸 문구. 종목별 접수 페이지면 `원서접수`, 기관의 일반 안내면
@@ -94,7 +95,7 @@ export interface CalendarInput {
   sessions: Session[];
   groups: ScheduleGroup[];
   exams: Exam[];
-  /** 선택 비교 모드. 비어 있으면 전체 일정 모드 (§8.3) */
+  /** 관심 시험 보기에서 사용할 종목. 비어 있으면 전체 일정 모드 (§8.3) */
   selectedSlugs?: string[];
   /** 접수·시험·발표 필터. 비어 있거나 없으면 전부 */
   kinds?: EventKind[];
@@ -251,6 +252,7 @@ export function buildCalendarData(input: CalendarInput): CalendarData {
           eventLabel: e.label,
           kindLabel: kindLabelOf(e.kind, e.phase, e.seq),
           note: e.note,
+          ...(e.timing ? { timing: e.timing } : {}),
           ...(resolved.apply ? { applyUrl: resolved.apply, applyLabel: resolved.applyLabel } : {}),
           ...(resolved.official ? { agencyUrl: resolved.official } : {}),
         });
@@ -258,8 +260,29 @@ export function buildCalendarData(input: CalendarInput): CalendarData {
 
       // 요약은 날짜만 줄인다. 나머지 필드는 그대로 유지된다.
       const shaped = collapse
-        ? summarize(made).map((b, i) => ({ ...made[i]!, start: b.start, end: b.end }))
-          .filter((_, i) => made[i]!.kind !== 'result')
+        ? summarize(made).map((b, i) => {
+          const original = made[i]!;
+          if (original.start !== original.end && b.start === b.end) {
+            // 고빈도 접수는 마감일 점 하나로 줄인다. 원래 시작 시각을 마감일에
+            // 붙이면 거짓 정보가 되므로 공식 마감 시각만 새 점의 시작 시각으로 쓴다.
+            const { timing, ...withoutTiming } = original;
+            const deadline = timing?.end;
+            return {
+              ...withoutTiming,
+              start: b.start,
+              end: b.end,
+              ...(deadline ? {
+                timing: {
+                  start: deadline,
+                  timezone: timing.timezone,
+                  status: timing.status,
+                  ...(timing.note ? { note: timing.note } : {}),
+                },
+              } : {}),
+            };
+          }
+          return { ...original, start: b.start, end: b.end };
+        }).filter((_, i) => made[i]!.kind !== 'result')
         : made;
 
       for (const ce of shaped) {
@@ -309,6 +332,9 @@ export interface TableRow {
   dateLabel: string;
   /** 기계 판독용. 기간이면 두 개 */
   dateTimes: string[];
+  start: string;
+  end: string;
+  timing?: EventTiming;
   examName: string;
   examSlugs: string[];
   kindLabel: string;
@@ -335,6 +361,9 @@ export function scheduleTable(events: CalendarEvent[], today: string): TableRow[
         eventId: e.id,
         dateLabel: rangeLabel(e.start, e.end, 'short'),
         dateTimes: e.start === e.end ? [e.start] : [e.start, e.end],
+        start: e.start,
+        end: e.end,
+        ...(e.timing ? { timing: e.timing } : {}),
         examName: e.displayName,
         examSlugs: e.examSlugs,
         kindLabel: e.kindLabel,
@@ -357,6 +386,7 @@ export function barAriaLabel(event: CalendarEvent, today: string): string {
     event.displayName,
     event.kindLabel,
     rangeLabel(event.start, event.end, 'spoken'),
+    timingSpokenLabel(event.timing),
     STATE_TEXT[stateOf(event, today)],
-  ].join(', ');
+  ].filter(Boolean).join(', ');
 }

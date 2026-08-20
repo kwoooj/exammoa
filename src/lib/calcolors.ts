@@ -52,8 +52,3 @@ export function assignColors(groupIds: readonly string[]): Map<string, ColorInde
 export function colorClass(index: ColorIndex): string {
   return index === NEUTRAL ? '' : `cal__bar--c${index + 1}`;
 }
-
-/** 칩·범례처럼 막대가 아닌 곳에서 같은 색을 쓸 때 */
-export function swatchClass(index: ColorIndex): string {
-  return index === NEUTRAL ? 'swatch' : `swatch swatch--c${index + 1}`;
-}
