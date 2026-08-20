@@ -710,7 +710,7 @@
         "전산세무1급"
       ],
       "collect": "crawl",
-      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "sourceUrl": "https://license.kacta.or.kr/web/info/info_diary.aspx",
       "agencyUrl": "https://license.kacpta.or.kr",
       "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
     },
@@ -723,7 +723,7 @@
         "전산세무2급"
       ],
       "collect": "crawl",
-      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "sourceUrl": "https://license.kacta.or.kr/web/info/info_diary.aspx",
       "agencyUrl": "https://license.kacpta.or.kr",
       "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
     },
@@ -736,7 +736,7 @@
         "전산회계1급"
       ],
       "collect": "crawl",
-      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "sourceUrl": "https://license.kacta.or.kr/web/info/info_diary.aspx",
       "agencyUrl": "https://license.kacpta.or.kr",
       "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
     },
@@ -749,7 +749,7 @@
         "전산회계2급"
       ],
       "collect": "crawl",
-      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "sourceUrl": "https://license.kacta.or.kr/web/info/info_diary.aspx",
       "agencyUrl": "https://license.kacpta.or.kr",
       "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
     },
@@ -762,7 +762,7 @@
         "세무회계1급"
       ],
       "collect": "crawl",
-      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "sourceUrl": "https://license.kacta.or.kr/web/info/info_diary.aspx",
       "agencyUrl": "https://license.kacpta.or.kr",
       "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
     },
@@ -775,7 +775,7 @@
         "세무회계2급"
       ],
       "collect": "crawl",
-      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "sourceUrl": "https://license.kacta.or.kr/web/info/info_diary.aspx",
       "agencyUrl": "https://license.kacpta.or.kr",
       "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
     },
@@ -788,7 +788,7 @@
         "세무회계3급"
       ],
       "collect": "crawl",
-      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "sourceUrl": "https://license.kacta.or.kr/web/info/info_diary.aspx",
       "agencyUrl": "https://license.kacpta.or.kr",
       "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
     },
@@ -801,7 +801,7 @@
         "기업회계1급"
       ],
       "collect": "crawl",
-      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "sourceUrl": "https://license.kacta.or.kr/web/info/info_diary.aspx",
       "agencyUrl": "https://license.kacpta.or.kr",
       "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
     },
@@ -814,7 +814,7 @@
         "기업회계2급"
       ],
       "collect": "crawl",
-      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "sourceUrl": "https://license.kacta.or.kr/web/info/info_diary.aspx",
       "agencyUrl": "https://license.kacpta.or.kr",
       "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
     },
@@ -827,7 +827,7 @@
         "기업회계3급"
       ],
       "collect": "crawl",
-      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "sourceUrl": "https://license.kacta.or.kr/web/info/info_diary.aspx",
       "agencyUrl": "https://license.kacpta.or.kr",
       "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
     },

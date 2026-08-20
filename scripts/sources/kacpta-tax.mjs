@@ -34,6 +34,7 @@ import { sourceCoverage } from '../lib/source-coverage.mjs';
 
 export const id = 'kacpta-tax';
 export const method = 'crawl';
+export const archiveExt = 'html';
 // 같은 날짜라도 시험시간이 다르면 같은 시행그룹이 아니다. 첫 그룹은 collect.mjs가
 // sourceUrl을 찾는 대표 그룹이고, 파서는 아래 10개 그룹의 세션을 모두 반환한다.
 export const groupId = 'kacpta-computer-tax-1';
@@ -59,8 +60,43 @@ export function normalizeTilde(text) {
   return String(text ?? '').replace(/[∼〜～]/g, '~');
 }
 
+const compact = text => String(text ?? '').replace(/\s/g, '');
+const targetByName = new Map(TAX_EXAMS.map(target => [compact(target.name), target]));
+
+/** 공식 연간일정의 `시험시간` 표에서 종목과 시각을 직접 읽는다. */
+export function officialExamTimes(tables) {
+  const table = tables.find(candidate => {
+    const firstCells = candidate.grid.slice(0, 5).map(row => compact(row[0]?.text));
+    const all = candidate.grid.flat().map(cell => compact(cell.text));
+    return firstCells.includes('등급')
+      && firstCells.includes('시험시간')
+      && all.includes('전산세무회계')
+      && all.includes('세무회계')
+      && all.includes('기업회계');
+  });
+  if (!table) return { entries: [], tableMatch: false };
+
+  const categoryRow = table.grid.find(row => compact(row[0]?.text) === '종목');
+  const gradeRow = table.grid.find(row => compact(row[0]?.text) === '등급');
+  const timeRow = table.grid.find(row => compact(row[0]?.text) === '시험시간' && row.slice(1).some(cell => /\d{1,2}:\d{2}/.test(cell.text)));
+  if (!categoryRow || !gradeRow || !timeRow) return { entries: [], tableMatch: false };
+
+  const entries = [];
+  const width = Math.max(categoryRow.length, gradeRow.length, timeRow.length);
+  for (let i = 1; i < width; i++) {
+    const category = compact(categoryRow[i]?.text);
+    const grade = compact(gradeRow[i]?.text);
+    const name = category === '전산세무회계' ? grade : `${category}${grade}`;
+    if (!name) continue;
+    const match = normalizeTilde(timeRow[i]?.text).match(/(\d{1,2}:\d{2})\s*~\s*(\d{1,2}:\d{2})/);
+    entries.push({ name, start: match?.[1] ?? null, end: match?.[2] ?? null });
+  }
+  return { entries, tableMatch: true };
+}
+
 export function parse(html, { year }) {
-  const picked = tableByHeader(readTables(html), EXPECT_HEADERS);
+  const tables = readTables(html);
+  const picked = tableByHeader(tables, EXPECT_HEADERS);
   if (!picked) {
     return { sessions: [], diagnostics: { rows: 0, parsed: 0, headerMatch: false, failures: [] } };
   }
@@ -132,18 +168,29 @@ export function parse(html, { year }) {
   })));
   out.sort((a, b) => a.groupId.localeCompare(b.groupId) || a.seq - b.seq);
 
+  const official = officialExamTimes(tables);
+  const officialByName = new Map(official.entries.map(entry => [entry.name, entry]));
+  const expectedNames = TAX_EXAMS.map(target => compact(target.name));
+  const includedNames = official.entries
+    .filter(entry => targetByName.has(entry.name))
+    .map(entry => entry.name);
+
   return {
     sessions: out,
     diagnostics: {
       rows: rows.length,
       parsed: out.length,
       headerMatch: true,
-      timingMatch: TAX_EXAMS.every(target => target.start && target.end),
-      coverage: sourceCoverage({
-        discovered: TAX_EXAMS.map(target => target.groupId),
-        included: TAX_EXAMS.map(target => target.groupId),
-        expected: TAX_EXAMS.map(target => target.groupId),
+      timingMatch: official.tableMatch && TAX_EXAMS.every(target => {
+        const entry = officialByName.get(compact(target.name));
+        return entry?.start === target.start && entry?.end === target.end;
       }),
+      coverage: sourceCoverage({
+        discovered: official.entries.map(entry => entry.name),
+        included: includedNames,
+        expected: expectedNames,
+      }),
+      officialTimes: official.entries,
       failures,
     },
   };

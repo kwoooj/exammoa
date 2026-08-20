@@ -26,7 +26,8 @@ import { decodeResponse } from './lib/csv.mjs';
 import { checkSeeds, formatProblems } from './lib/seed-check.mjs';
 import { checkFeeSeed, collectFees } from './lib/fees.mjs';
 import { qnetEventTiming } from './lib/event-timing.mjs';
-import { coverageLine, coverageProblem } from './lib/source-coverage.mjs';
+import { coverageLine } from './lib/source-coverage.mjs';
+import { crawlDiagnosticProblem } from './lib/crawl-health.mjs';
 
 /** 크롤 어댑터 목록. 여기 없는 사이트는 요청되지 않는다. */
 const CRAWL_SOURCES = [
@@ -110,25 +111,12 @@ async function harvestCrawl(src, url, year) {
       raw = decoded.text;
       ({ sessions, diagnostics } = src.parse(raw, { year }));
     }
-    if (!diagnostics.headerMatch) {
-      // 헤더가 사라진 것은 개편 신호다. 빈 결과를 조용히 게시하지 않는다.
-      return { ...base, ok: false, error: '기대한 일정 구조를 찾지 못했다 (사이트 개편 가능)', rawHtml: raw };
-    }
-    if (diagnostics.timingMatch === false) {
-      return { ...base, ok: false, error: '공식 시험시간 표를 찾지 못했다 (사이트 개편 가능)', rawHtml: raw };
-    }
-    const scopeProblem = coverageProblem(diagnostics.coverage);
-    if (scopeProblem) {
-      return { ...base, ok: false, error: `공식 원본 전수 분류 실패 — ${scopeProblem}`, rawHtml: raw, diagnostics };
+    const diagnosticProblem = crawlDiagnosticProblem(diagnostics);
+    if (diagnosticProblem) {
+      return { ...base, ok: false, error: diagnosticProblem, rawHtml: raw, diagnostics };
     }
     if (!sessions.length) {
       return { ...base, ok: false, error: '회차를 하나도 뽑지 못했다', rawHtml: raw };
-    }
-    if (diagnostics.failures.length) {
-      console.log(`     ⚠ ${src.id} 날짜 파싱 실패 ${diagnostics.failures.length}건:`);
-      for (const f of diagnostics.failures.slice(0, 5)) {
-        console.log(`       ${f.seq}회 ${f.label} — ${f.reason} ${JSON.stringify(f.raw)}`);
-      }
     }
     return { ...base, ok: true, sessions, error: null, rawHtml: raw, diagnostics };
   } catch (e) {

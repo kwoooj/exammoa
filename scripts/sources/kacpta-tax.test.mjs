@@ -17,10 +17,21 @@ const ROWS = [
 
 const HEAD = ['원서접수', '장소공고 수험표출력', '시험일자', '발표'];
 const td = (cells, tag = 'td') => `<tr>${cells.map(c => `<${tag}>${c}</${tag}>`).join('')}</tr>`;
+const OFFICIAL = TAX_EXAMS.map(exam => ({
+  category: exam.name.startsWith('전산') ? '전산세무회계' : exam.name.replace(/\s*[1-9]급$/, ''),
+  grade: exam.name.startsWith('전산') ? exam.name.replace(' ', '') : exam.name.match(/[1-9]급$/)[0],
+  time: `${exam.start} ∼ ${exam.end}`,
+}));
+const timingTable = (entries = OFFICIAL) => `<table>
+${td(['종목', ...entries.map(entry => entry.category)], 'th')}
+${td(['등급', ...entries.map(entry => entry.grade)])}
+${td(['시험시간', ...entries.map(entry => entry.time)])}
+</table>`;
 // 실제 페이지에는 표가 16개다. 앞에 관계없는 표를 두어 헤더로 고르는지 본다.
-const page = (rows = ROWS) => `<html><body>
+const page = (rows = ROWS, times = OFFICIAL) => `<html><body>
 <table><tr><td>공지사항</td><td>2026-07-15</td></tr></table>
 <table>${td(HEAD, 'th')}${rows.map(r => td(r)).join('')}</table>
+${timingTable(times)}
 </body></html>`;
 
 const run = (rows, year = 2026) => parse(page(rows), { year });
@@ -111,6 +122,21 @@ test('공식 10개 자격을 별도 그룹으로 만들고 서로 다른 시험�
     const exam = groupSessions(r, target.groupId)[0].events.find(event => event.kind === 'exam');
     assert.deepEqual([exam.timing.start, exam.timing.end], [target.start, target.end]);
   }
+});
+
+test('공식 시간표의 시각이 바뀌면 timingMatch가 실패한다', () => {
+  const changed = OFFICIAL.map((entry, index) => index === 0 ? { ...entry, time: '15:30 ∼ 17:00' } : entry);
+  const r = parse(page([ROWS[0]], changed), { year: 2026 });
+  assert.equal(r.diagnostics.timingMatch, false);
+  assert.equal(r.diagnostics.officialTimes[0].start, '15:30');
+});
+
+test('공식 시간표에 새 등급이 생기면 미분류로 감지한다', () => {
+  const added = [...OFFICIAL, { category: '기업회계', grade: '4급', time: '09:30 ∼ 10:30' }];
+  const r = parse(page([ROWS[0]], added), { year: 2026 });
+  assert.deepEqual(r.diagnostics.coverage.unclassified, ['기업회계4급']);
+  assert.equal(r.diagnostics.coverage.discovered, 11);
+  assert.equal(r.diagnostics.coverage.included, 10);
 });
 
 // ---- 단계 -----------------------------------------------------------

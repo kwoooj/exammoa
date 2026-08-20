@@ -83,7 +83,11 @@ export function parse(raw, { year }) {
   for (const row of targetRows) {
     const target = TARGETS[String(row.I_QLFN)];
     const seq = Number(row.Q_SEQ);
-    if (!target || !Number.isFinite(seq)) continue;
+    if (!target) continue;
+    if (!Number.isInteger(seq) || seq <= 0) {
+      failures.push({ seq: row.Q_SEQ, label: target.name, reason: 'invalid-sequence', raw: row.Q_SEQ });
+      continue;
+    }
     const events = [];
     add(events, row, 'reg', row.D_INT_ACPT_DT, '원서접수', `${clockMatch?.[1] ?? ''} ~ ${clockMatch?.[2] ?? ''}`);
     add(events, row, 'exam', row.D_OF_APPR, '시험', row.EAXM_PERIOD);

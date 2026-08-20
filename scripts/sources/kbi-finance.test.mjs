@@ -75,6 +75,17 @@ test('공식 API의 접수일 미공고 표기 `~`는 날짜를 만들거나 실
   assert.deepEqual(diagnostics.failures, []);
 });
 
+test('종목 행의 회차가 비정상이면 coverage에만 포함하고 조용히 버리지 않는다', () => {
+  const invalid = row('01', '미정', '09.22~09.29', '10.31', '11.13', '09:00~15:30');
+  const { sessions, diagnostics } = parse(payload([invalid]), { year: 2026 });
+  assert.equal(sessions.length, 0);
+  assert.equal(diagnostics.coverage.discovered, 1);
+  assert.equal(diagnostics.coverage.included, 1);
+  assert.deepEqual(diagnostics.failures, [{
+    seq: '미정', label: TARGETS['01'].name, reason: 'invalid-sequence', raw: '미정',
+  }]);
+});
+
 test('깨진 응답은 던지지 않고 실패한다', () => {
   const result = parse('not-json', { year: 2026 });
   assert.equal(result.diagnostics.headerMatch, false);
