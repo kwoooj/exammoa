@@ -8,7 +8,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { EXPECT_HEADERS, parse } from './history-exam.mjs';
+import { EXAM_START, EXPECT_HEADERS, parse } from './history-exam.mjs';
 
 /** 실측 5행 그대로 */
 const ROWS = [
@@ -54,13 +54,24 @@ test('월을 넘기는 취소좌석 접수를 바르게 읽는다 (제80회 9/29
   assert.deepEqual([extra.start, extra.end], ['2026-09-29', '2026-10-02']);
 });
 
-test('시각을 버린다 — 데이터 계약이 날짜 단위다', () => {
+test('접수 시작·마감 시각을 보존하고 날짜 필드는 날짜로 유지한다', () => {
   for (const s of run().sessions) {
     for (const e of s.events) {
       assert.match(e.start, /^\d{4}-\d{2}-\d{2}$/, `${s.label} ${e.label}`);
       assert.match(e.end, /^\d{4}-\d{2}-\d{2}$/);
     }
   }
+  const s = run().sessions.find(x => x.seq === 81);
+  assert.deepEqual(s.events.find(e => e.kind === 'reg' && e.seq === 1).timing, {
+    start: '10:00', end: '17:00', timezone: 'Asia/Seoul', status: 'confirmed',
+  });
+  assert.deepEqual(s.events.find(e => e.kind === 'reg' && e.seq === 2).timing, {
+    start: '13:00', end: '17:00', timezone: 'Asia/Seoul', status: 'confirmed',
+  });
+  assert.equal(EXAM_START, '10:00');
+  assert.deepEqual(s.events.find(e => e.kind === 'exam').timing, {
+    start: '10:00', timezone: 'Asia/Seoul', status: 'confirmed',
+  });
 });
 
 // ---- 취소좌석 접수 -----------------------------------------------------

@@ -11,7 +11,7 @@
 //   ② 토익의 접수기간 한 칸에 '정기접수' 와 '특별추가' 가 함께 들어있다 → reg seq 1·2
 //   ③ 토스는 같은 시험일이 여러 행에 중복된다 (지역·시간대) → 시험일로 중복 제거
 
-import { tryParseRange } from '../lib/kdate.mjs';
+import { parseTiming, tryParseRange } from '../lib/kdate.mjs';
 import { readTables, rowsAsObjects, tableByHeader } from '../lib/html.mjs';
 
 export const method = 'crawl';
@@ -64,8 +64,10 @@ export function parseWith(html, { year }, conf) {
     const examDate = examRes.value.start;
     if (byExamDate.has(examDate)) continue; // 중복 행
 
+    const examTiming = parseTiming(row[conf.examColumn]) ?? conf.examTimingFallback ?? null;
     const events = [{
       kind: 'exam', phase: 'single', start: examDate, end: examDate, seq: 1, label: '시험', note: null,
+      ...(examTiming ? { timing: examTiming } : {}),
     }];
 
     for (const part of splitReg(row[conf.regColumn])) {
@@ -74,17 +76,21 @@ export function parseWith(html, { year }, conf) {
         if (r.reason !== 'tbd') failures.push({ label: part.label, reason: r.reason, raw: r.raw });
         continue;
       }
+      const timing = parseTiming(part.text);
       events.push({
         kind: 'reg', phase: 'single', start: r.value.start, end: r.value.end,
         seq: part.seq, label: part.label, note: part.seq > 1 ? '특별추가접수' : null,
+        ...(timing ? { timing } : {}),
       });
     }
 
     const res = tryParseRange(row[conf.resultColumn], { year, requireYear: true });
     if (res.ok) {
+      const timing = parseTiming(row[conf.resultColumn]);
       events.push({
         kind: 'result', phase: 'single', start: res.value.start, end: res.value.start,
         seq: 1, label: '성적발표', note: null,
+        ...(timing ? { timing } : {}),
       });
     } else if (res.reason !== 'tbd' && res.reason !== 'no-match') {
       failures.push({ label: '성적발표', reason: res.reason, raw: res.raw });
@@ -154,6 +160,11 @@ export const toeicSpeaking = {
       examColumn: '시험일시',
       resultColumn: '성적발표일',
       regColumn: '접수기간',
+      examTimingFallback: {
+        timezone: 'Asia/Seoul',
+        status: 'select-on-booking',
+        note: '접수할 때 시험시간 선택',
+      },
     });
   },
 };

@@ -8,6 +8,7 @@
 import { monthLabel, shiftMonth } from '../../lib/calendar.ts';
 import type { YearMonth } from '../../lib/calendar.ts';
 import type { EventKind } from '../../types.ts';
+import { CaretLeft, CaretRight } from '@phosphor-icons/react';
 
 interface NavProps {
   month: YearMonth;
@@ -32,7 +33,7 @@ export function MonthNav({ month, today, onChange, min, max }: NavProps) {
         disabled={min !== undefined && prev < min}
         aria-label={`${monthLabel(prev)} 보기`}
       >
-        ‹
+        <CaretLeft size={18} aria-hidden="true" />
       </button>
       {/* 제목이 살아 있는 영역이어야 스크린리더가 달이 바뀐 것을 읽어 준다 */}
       <p className="cal__title" aria-live="polite">{monthLabel(month)}</p>
@@ -43,7 +44,7 @@ export function MonthNav({ month, today, onChange, min, max }: NavProps) {
         disabled={max !== undefined && next > max}
         aria-label={`${monthLabel(next)} 보기`}
       >
-        ›
+        <CaretRight size={18} aria-hidden="true" />
       </button>
       {month !== thisMonth && (
         <button type="button" className="btn btn--ghost" onClick={() => onChange(thisMonth)}>

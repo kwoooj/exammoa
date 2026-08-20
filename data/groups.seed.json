@@ -286,33 +286,6 @@
       "ruleCheckedAt": "2026-08-13"
     },
     {
-      "id": "kait-linux",
-      "name": "리눅스마스터",
-      "agency": "한국정보통신진흥협회",
-      "cadence": "periodic",
-      "examSlugs": [
-        "리눅스마스터2급"
-      ],
-      "collect": "crawl",
-      "sourceUrl": "https://www.ihd.or.kr/guidecert1.do",
-      "agencyUrl": "https://www.ihd.or.kr/guidecert1.do",
-      "note": "연 4회. 1차 필기 + 2차 실기. 루트(ihd.or.kr)는 meta refresh 셸이라 /guidecert1.do 가 정본이다"
-    },
-    {
-      "id": "kacpta-tax",
-      "name": "전산세무회계",
-      "agency": "한국세무사회",
-      "cadence": "periodic",
-      "examSlugs": [
-        "전산회계1급",
-        "전산세무2급"
-      ],
-      "collect": "crawl",
-      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
-      "agencyUrl": "https://license.kacpta.or.kr",
-      "note": "연 6회. license.kacpta.or.kr 은 kacta.or.kr 로 302 후 frameset 이라 본문 프레임이 정본이다. 사람이 클릭할 agencyUrl 은 프레임셋 입구여야 한다 — 본문 프레임만 열면 기관 내비게이션 없이 표 하나만 뜬다"
-    },
-    {
       "id": "kpc-itq",
       "name": "ITQ",
       "agency": "한국생산성본부",
@@ -325,6 +298,564 @@
       "agencyUrl": "https://license.kpc.or.kr",
       "note": "매월 시행이라 막대 대신 규칙 카드. 페이지는 크롤링 가능하지만(robots 허용) 상시이므로 우선순위가 낮다",
       "ruleCheckedAt": "2026-08-13"
+    },
+    {
+      "id": "kbi-credit-analyst",
+      "name": "신용분석사",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "신용분석사"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=01&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "note": "공개 일정 JSON과 화면의 접수시간 안내를 함께 수집"
+    },
+    {
+      "id": "kbi-financial-planner",
+      "name": "자산관리사(FP)",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "자산관리사-FP"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=04&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-foreign-exchange-1",
+      "name": "외환전문역 I종",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "외환전문역1종"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=09&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-foreign-exchange-2",
+      "name": "외환전문역 II종",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "외환전문역2종"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=10&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kofia-investment-manager",
+      "name": "투자자산운용사",
+      "agency": "한국금융투자협회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "투자자산운용사"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kofia.or.kr/examInfo/examYearly.do",
+      "agencyUrl": "https://license.kofia.or.kr/examInfo/examInfo.do",
+      "applyUrl": "https://license.kofia.or.kr/examRcpt/LICExamRcptStpOne.do",
+      "note": "공식 연간일정 JSON API에서 투자자산운용사만 선별"
+    },
+    {
+      "id": "ifpk-afpk",
+      "name": "AFPK",
+      "agency": "한국재무설계협회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "AFPK"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.ifpk.org/?mnu_usn=27",
+      "agencyUrl": "https://www.ifpk.org/?mnu_usn=29",
+      "applyUrl": "https://www.ifpk.org/?mnu_usn=26",
+      "note": "회차별 최신 일정표에서 접수·시험·발표 시간을 수집"
+    },
+    {
+      "id": "kdata-adp",
+      "name": "데이터분석 전문가(ADP)",
+      "agency": "한국데이터산업진흥원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "ADP"
+      ],
+      "collect": "csv",
+      "agencyUrl": "https://www.dataq.or.kr/www/accept/guide.do",
+      "note": "dataq.or.kr은 robots.txt 전체 금지이므로 공공데이터포털 15062838 CSV를 연 1회 반영한다."
+    },
+    {
+      "id": "kdata-sqlp",
+      "name": "SQL 전문가(SQLP)",
+      "agency": "한국데이터산업진흥원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "SQLP"
+      ],
+      "collect": "csv",
+      "agencyUrl": "https://www.dataq.or.kr/www/accept/guide.do",
+      "note": "dataq.or.kr은 robots.txt 전체 금지이므로 공공데이터포털 15062838 CSV를 연 1회 반영한다."
+    },
+    {
+      "id": "kdata-dap",
+      "name": "데이터아키텍처 전문가(DAP)",
+      "agency": "한국데이터산업진흥원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "DAP"
+      ],
+      "collect": "csv",
+      "agencyUrl": "https://www.dataq.or.kr/www/accept/guide.do",
+      "note": "dataq.or.kr은 robots.txt 전체 금지이므로 공공데이터포털 15062838 CSV를 연 1회 반영한다."
+    },
+    {
+      "id": "kdata-dasp",
+      "name": "데이터아키텍처 준전문가(DAsP)",
+      "agency": "한국데이터산업진흥원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "DAsP"
+      ],
+      "collect": "csv",
+      "agencyUrl": "https://www.dataq.or.kr/www/accept/guide.do",
+      "note": "dataq.or.kr은 robots.txt 전체 금지이므로 공공데이터포털 15062838 CSV를 연 1회 반영한다."
+    },
+    {
+      "id": "kbi-loan-officer",
+      "name": "여신심사역",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "여신심사역"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=02&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-international-finance",
+      "name": "국제금융역",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "국제금융역"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=03&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-credit-risk-analyst",
+      "name": "신용위험분석사(CRA)",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "신용위험분석사-CRA"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=05&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-bank-teller",
+      "name": "은행텔러",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "은행텔러"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=07&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-compliance-bank",
+      "name": "영업점 컴플라이언스 오피서(은행)",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "영업점컴플라이언스오피서-은행"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=14&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-compliance-insurance",
+      "name": "영업점 컴플라이언스 오피서(보험)",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "영업점컴플라이언스오피서-보험"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=15&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-compliance-securities",
+      "name": "영업점 컴플라이언스 오피서(증권)",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "영업점컴플라이언스오피서-증권"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=16&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-nh-personal-credit",
+      "name": "농협은행 개인여신전문역",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "농협은행개인여신전문역"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=21&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-nh-sme-credit",
+      "name": "농협은행 중소기업 심사역",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "농협은행중소기업심사역"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=24&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-private-banker",
+      "name": "프라이빗뱅커",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "프라이빗뱅커"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=25&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-finance-dt",
+      "name": "KBI 금융DT 테스트",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "KBI금융DT테스트"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=26&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-aml",
+      "name": "자금세탁방지 업무능력 검정시험",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "자금세탁방지업무능력검정시험"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=28&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-suhyup-sca",
+      "name": "수협은행 직무역량평가(SCA)",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "수협은행직무역량평가-SCA"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=29&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kbi-finance-ai-literacy",
+      "name": "KBI 금융 AI 리터러시",
+      "agency": "한국금융연수원",
+      "cadence": "periodic",
+      "examSlugs": [
+        "KBI금융AI리터러시"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList",
+      "agencyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=30&pageName=qualInfo",
+      "applyUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&pageName=qualTestScheduleList"
+    },
+    {
+      "id": "kofia-securities-adviser",
+      "name": "증권투자권유자문인력",
+      "agency": "한국금융투자협회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "증권투자권유자문인력"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kofia.or.kr/examInfo/examYearly.do",
+      "agencyUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FCS005",
+      "applyUrl": "https://license.kofia.or.kr/examRcpt/LICExamRcptStpOne.do"
+    },
+    {
+      "id": "kofia-fund-adviser",
+      "name": "펀드투자권유자문인력",
+      "agency": "한국금융투자협회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "펀드투자권유자문인력"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kofia.or.kr/examInfo/examYearly.do",
+      "agencyUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FCF008",
+      "applyUrl": "https://license.kofia.or.kr/examRcpt/LICExamRcptStpOne.do"
+    },
+    {
+      "id": "kofia-derivatives-adviser",
+      "name": "파생상품투자권유자문인력",
+      "agency": "한국금융투자협회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "파생상품투자권유자문인력"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kofia.or.kr/examInfo/examYearly.do",
+      "agencyUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FCD006",
+      "applyUrl": "https://license.kofia.or.kr/examRcpt/LICExamRcptStpOne.do"
+    },
+    {
+      "id": "kofia-securities-agent",
+      "name": "증권투자권유대행인",
+      "agency": "한국금융투자협회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "증권투자권유대행인"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kofia.or.kr/examInfo/examYearly.do",
+      "agencyUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=SCS003",
+      "applyUrl": "https://license.kofia.or.kr/examRcpt/LICExamRcptStpOne.do"
+    },
+    {
+      "id": "kofia-fund-agent",
+      "name": "펀드투자권유대행인",
+      "agency": "한국금융투자협회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "펀드투자권유대행인"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kofia.or.kr/examInfo/examYearly.do",
+      "agencyUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=SCF003",
+      "applyUrl": "https://license.kofia.or.kr/examRcpt/LICExamRcptStpOne.do"
+    },
+    {
+      "id": "kofia-financial-analyst",
+      "name": "금융투자분석사",
+      "agency": "한국금융투자협회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "금융투자분석사"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kofia.or.kr/examInfo/examYearly.do",
+      "agencyUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FWR005",
+      "applyUrl": "https://license.kofia.or.kr/examRcpt/LICExamRcptStpOne.do"
+    },
+    {
+      "id": "kofia-risk-manager",
+      "name": "재무위험관리사",
+      "agency": "한국금융투자협회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "재무위험관리사"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kofia.or.kr/examInfo/examYearly.do",
+      "agencyUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FWD003",
+      "applyUrl": "https://license.kofia.or.kr/examRcpt/LICExamRcptStpOne.do"
+    },
+    {
+      "id": "kacpta-computer-tax-1",
+      "name": "전산세무 1급",
+      "agency": "한국세무사회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "전산세무1급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "agencyUrl": "https://license.kacpta.or.kr",
+      "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
+    },
+    {
+      "id": "kacpta-computer-tax-2",
+      "name": "전산세무 2급",
+      "agency": "한국세무사회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "전산세무2급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "agencyUrl": "https://license.kacpta.or.kr",
+      "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
+    },
+    {
+      "id": "kacpta-computer-accounting-1",
+      "name": "전산회계 1급",
+      "agency": "한국세무사회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "전산회계1급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "agencyUrl": "https://license.kacpta.or.kr",
+      "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
+    },
+    {
+      "id": "kacpta-computer-accounting-2",
+      "name": "전산회계 2급",
+      "agency": "한국세무사회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "전산회계2급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "agencyUrl": "https://license.kacpta.or.kr",
+      "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
+    },
+    {
+      "id": "kacpta-tax-accounting-1",
+      "name": "세무회계 1급",
+      "agency": "한국세무사회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "세무회계1급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "agencyUrl": "https://license.kacpta.or.kr",
+      "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
+    },
+    {
+      "id": "kacpta-tax-accounting-2",
+      "name": "세무회계 2급",
+      "agency": "한국세무사회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "세무회계2급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "agencyUrl": "https://license.kacpta.or.kr",
+      "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
+    },
+    {
+      "id": "kacpta-tax-accounting-3",
+      "name": "세무회계 3급",
+      "agency": "한국세무사회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "세무회계3급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "agencyUrl": "https://license.kacpta.or.kr",
+      "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
+    },
+    {
+      "id": "kacpta-corporate-accounting-1",
+      "name": "기업회계 1급",
+      "agency": "한국세무사회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "기업회계1급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "agencyUrl": "https://license.kacpta.or.kr",
+      "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
+    },
+    {
+      "id": "kacpta-corporate-accounting-2",
+      "name": "기업회계 2급",
+      "agency": "한국세무사회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "기업회계2급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "agencyUrl": "https://license.kacpta.or.kr",
+      "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
+    },
+    {
+      "id": "kacpta-corporate-accounting-3",
+      "name": "기업회계 3급",
+      "agency": "한국세무사회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "기업회계3급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://license.kacta.or.kr/web/home/Default.aspx",
+      "agencyUrl": "https://license.kacpta.or.kr",
+      "note": "공통 시행일을 사용하되 공식 교시별 시험시간이 달라 종목·급수별 그룹으로 분리한다."
+    },
+    {
+      "id": "kait-linux-1",
+      "name": "리눅스마스터 1급",
+      "agency": "한국정보통신진흥협회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "리눅스마스터1급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.ihd.or.kr/guidecert1.do",
+      "agencyUrl": "https://www.ihd.or.kr/guidecert1.do",
+      "note": "1급과 2급은 회차·시험시간이 달라 별도 그룹으로 수집한다."
+    },
+    {
+      "id": "kait-linux-2",
+      "name": "리눅스마스터 2급",
+      "agency": "한국정보통신진흥협회",
+      "cadence": "periodic",
+      "examSlugs": [
+        "리눅스마스터2급"
+      ],
+      "collect": "crawl",
+      "sourceUrl": "https://www.ihd.or.kr/guidecert1.do",
+      "agencyUrl": "https://www.ihd.or.kr/guidecert1.do",
+      "note": "1급과 2급은 회차·시험시간이 달라 별도 그룹으로 수집한다."
     }
   ]
 }

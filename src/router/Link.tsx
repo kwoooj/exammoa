@@ -15,6 +15,7 @@ import { isInternalHref } from '../lib/routes.ts';
 import { useNavigate } from './Router.tsx';
 import type { NavigateOptions } from './Router.tsx';
 import type { OfficialLink } from '../lib/links.ts';
+import { ArrowUpRight } from '@phosphor-icons/react';
 
 type AnchorProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>;
 
@@ -70,8 +71,7 @@ export function ExternalLink({ href, label, children, className, ...rest }: Exte
       {...rest}
     >
       {children}
-      {/* 화면에 보이는 외부 이동 표시. 읽어 주는 이름에는 이미 '새 창 열기' 가 있다 */}
-      <span aria-hidden="true"> ↗</span>
+      <ArrowUpRight size={14} aria-hidden="true" className="extlink__icon" />
     </a>
   );
 }

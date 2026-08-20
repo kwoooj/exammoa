@@ -30,10 +30,26 @@
 
 import { tryParseRange } from '../lib/kdate.mjs';
 import { readTables, rowsAsObjects, tableByHeader } from '../lib/html.mjs';
+import { sourceCoverage } from '../lib/source-coverage.mjs';
 
 export const id = 'kacpta-tax';
 export const method = 'crawl';
-export const groupId = 'kacpta-tax';
+// 같은 날짜라도 시험시간이 다르면 같은 시행그룹이 아니다. 첫 그룹은 collect.mjs가
+// sourceUrl을 찾는 대표 그룹이고, 파서는 아래 10개 그룹의 세션을 모두 반환한다.
+export const groupId = 'kacpta-computer-tax-1';
+
+export const TAX_EXAMS = [
+  { slug: '전산세무1급', groupId: 'kacpta-computer-tax-1', name: '전산세무 1급', start: '15:00', end: '16:30' },
+  { slug: '전산세무2급', groupId: 'kacpta-computer-tax-2', name: '전산세무 2급', start: '12:30', end: '14:00' },
+  { slug: '전산회계1급', groupId: 'kacpta-computer-accounting-1', name: '전산회계 1급', start: '15:00', end: '16:00' },
+  { slug: '전산회계2급', groupId: 'kacpta-computer-accounting-2', name: '전산회계 2급', start: '12:30', end: '13:30' },
+  { slug: '세무회계1급', groupId: 'kacpta-tax-accounting-1', name: '세무회계 1급', start: '09:30', end: '11:10' },
+  { slug: '세무회계2급', groupId: 'kacpta-tax-accounting-2', name: '세무회계 2급', start: '09:30', end: '10:50' },
+  { slug: '세무회계3급', groupId: 'kacpta-tax-accounting-3', name: '세무회계 3급', start: '09:30', end: '10:30' },
+  { slug: '기업회계1급', groupId: 'kacpta-corporate-accounting-1', name: '기업회계 1급', start: '09:30', end: '11:10' },
+  { slug: '기업회계2급', groupId: 'kacpta-corporate-accounting-2', name: '기업회계 2급', start: '09:30', end: '10:50' },
+  { slug: '기업회계3급', groupId: 'kacpta-corporate-accounting-3', name: '기업회계 3급', start: '09:30', end: '10:30' },
+];
 
 /** 이 헤더가 사라지면 사이트가 개편된 것이다. 16개 표 중 하나를 고르는 유일한 근거다. */
 export const EXPECT_HEADERS = ['원서접수', '시험일자', '발표'];
@@ -94,19 +110,41 @@ export function parse(html, { year }) {
 
   // 시험일 순서로 연내 순번을 매긴다. 회차 번호를 지어내지 않는다.
   sessions.sort((a, b) => a.examDate.localeCompare(b.examDate));
-  const out = sessions.map((s, i) => ({
-    id: `${groupId}-${year}-${i + 1}`,
-    groupId,
+  const out = TAX_EXAMS.flatMap(target => sessions.map((s, i) => ({
+    id: `${target.groupId}-${year}-${i + 1}`,
+    groupId: target.groupId,
     year,
     seq: i + 1,
     label: `${s.examDate.slice(5).replace('-', '.')} 시행`,
     mode: 'scheduled',
     status: 'confirmed',
-    events: s.events,
-  }));
+    events: s.events.map(event => event.kind === 'exam'
+      ? {
+          ...event,
+          timing: {
+            start: target.start,
+            end: target.end,
+            timezone: 'Asia/Seoul',
+            status: 'confirmed',
+          },
+        }
+      : { ...event }),
+  })));
+  out.sort((a, b) => a.groupId.localeCompare(b.groupId) || a.seq - b.seq);
 
   return {
     sessions: out,
-    diagnostics: { rows: rows.length, parsed: out.length, headerMatch: true, failures },
+    diagnostics: {
+      rows: rows.length,
+      parsed: out.length,
+      headerMatch: true,
+      timingMatch: TAX_EXAMS.every(target => target.start && target.end),
+      coverage: sourceCoverage({
+        discovered: TAX_EXAMS.map(target => target.groupId),
+        included: TAX_EXAMS.map(target => target.groupId),
+        expected: TAX_EXAMS.map(target => target.groupId),
+      }),
+      failures,
+    },
   };
 }

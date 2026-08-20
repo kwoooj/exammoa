@@ -15,6 +15,7 @@
  */
 
 import { useId, useMemo, useState } from 'react';
+import { MagnifyingGlass } from '@phosphor-icons/react';
 import type { AppData } from '../data/index.ts';
 import { sessionsOf } from '../data/index.ts';
 import { statusOfExam } from '../lib/status.ts';
@@ -71,7 +72,9 @@ export function SearchBox({ data, today, variant = 'header', placeholder }: Prop
           aria-label="시험명 또는 시행기관 검색"
           aria-describedby={show ? listId : undefined}
         />
-        <button type="submit" className="btn btn--primary">검색</button>
+        <button type="submit" className="sbox__submit" aria-label="검색">
+          <MagnifyingGlass size={22} aria-hidden="true" />
+        </button>
       </form>
 
       {show && (

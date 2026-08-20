@@ -5,7 +5,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isRealDate, parseCell, parseRange, tryParseRange, yearFromHeading } from './kdate.mjs';
+import { isRealDate, parseCell, parseClock, parseRange, parseTiming, tryParseRange, yearFromHeading } from './kdate.mjs';
 
 const r = (t, ctx) => parseRange(t, ctx);
 
@@ -37,6 +37,29 @@ test('한능검 실측 — 하루짜리 시험일', () => {
 test('KBS 실측 — 일 뒤 마침표와 오전·오후', () => {
   const t = '2026.01.05. (월) 오전 09:00 ~ 2026.02.06. (금) 오후  06:00';
   assert.deepEqual(r(t), { start: '2026-01-05', end: '2026-02-06' });
+});
+
+test('공식 시각을 24시간제 메타데이터로 보존한다', () => {
+  assert.deepEqual(
+    parseTiming('2026.01.05. (월) 오전 09:00 ~ 2026.02.06. (금) 오후 06:00'),
+    { start: '09:00', end: '18:00', timezone: 'Asia/Seoul', status: 'confirmed' },
+  );
+  assert.deepEqual(
+    parseTiming('2026.08.23. (일) 오전 10:00'),
+    { start: '10:00', timezone: 'Asia/Seoul', status: 'confirmed' },
+  );
+});
+
+test('24시간제와 초가 붙은 시각을 읽는다', () => {
+  assert.equal(parseClock('시험시작시간 09:20:00'), '09:20');
+  assert.equal(parseClock('성적발표 12:00'), '12:00');
+  assert.equal(parseClock('시각 없음'), null);
+});
+
+test('잘못된 시각은 만들지 않는다', () => {
+  assert.equal(parseClock('오후 13:00'), null);
+  assert.equal(parseClock('25:00'), null);
+  assert.equal(parseClock('09:61'), null);
 });
 
 test('2자리 연도', () => {

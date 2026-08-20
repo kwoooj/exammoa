@@ -105,10 +105,31 @@ test('TOEIC — 시험은 하루짜리다', () => {
   }
 });
 
-test('TOEIC — 시각을 버린다', () => {
-  for (const s of toeic.parse(toeicPage(), { year: 2026 }).sessions) {
-    for (const e of s.events) assert.match(e.start, /^\d{4}-\d{2}-\d{2}$/);
-  }
+test('TOEIC — 시험·접수·발표 시각을 보존한다', () => {
+  const s = toeic.parse(toeicPage(), { year: 2026 }).sessions.find(x => x.seq === 575);
+  assert.deepEqual(s.events.find(e => e.kind === 'exam').timing, {
+    start: '09:20', timezone: 'Asia/Seoul', status: 'confirmed',
+  });
+  assert.deepEqual(s.events.find(e => e.kind === 'reg' && e.seq === 1).timing, {
+    start: '10:00', end: '10:00', timezone: 'Asia/Seoul', status: 'confirmed',
+  });
+  assert.deepEqual(s.events.find(e => e.kind === 'reg' && e.seq === 2).timing, {
+    start: '10:00', end: '13:00', timezone: 'Asia/Seoul', status: 'confirmed',
+  });
+  assert.deepEqual(s.events.find(e => e.kind === 'result').timing, {
+    start: '12:00', timezone: 'Asia/Seoul', status: 'confirmed',
+  });
+});
+
+test('TOEIC Speaking — 단일 시각을 지어내지 않고 접수 시 선택 상태를 보존한다', () => {
+  const s = toeicSpeaking.parse(tosPage(), { year: 2026 }).sessions[0];
+  assert.deepEqual(s.events.find(e => e.kind === 'exam').timing, {
+    timezone: 'Asia/Seoul', status: 'select-on-booking', note: '접수할 때 시험시간 선택',
+  });
+  assert.equal(s.events.find(e => e.kind === 'result').timing.start, '12:00');
+  assert.deepEqual(s.events.find(e => e.kind === 'reg').timing, {
+    start: '10:00', end: '10:00', timezone: 'Asia/Seoul', status: 'confirmed',
+  });
 });
 
 test('TOEIC — 파싱 실패가 0건이다', () => {

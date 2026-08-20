@@ -15,8 +15,8 @@
 //   종목 | 등급 | 회차 | 차수 | 접수일자 | 시험일자 | 합격자 발표
 //
 // **1급과 2급이 한 표에 섞여 있고 일정이 다르다.** 1급은 연 2회, 2급은 연 4회다.
-// 그룹(`kait-linux`)이 2급만 담고 있으므로 등급으로 걸러낸다. 1급을 나중에 넣으려면
-// 같은 그룹에 넣지 말 것 — 일정이 갈려 `foldGroups` 가 종료코드 1 을 낸다.
+// 둘을 각각 `kait-linux-1`, `kait-linux-2` 그룹으로 수집한다. 같은 그룹에 넣으면
+// 일정이 갈려 `foldGroups` 가 종료코드 1 을 낸다.
 //
 // **1차·2차가 별도 행이고 회차 번호가 같다.** 한 Session 으로 합친다 (빅분기와 같다).
 // `phase` 는 written/practical 슬롯을 1차/2차로 쓴다. 라벨에 `1차`·`2차` 를 적어
@@ -27,18 +27,23 @@
 //
 // **합격자 발표가 `시험종료 즉시` 인 행이 있다.** 날짜가 아니므로 이벤트를 만들지 않는다.
 
-import { tryParseRange } from '../lib/kdate.mjs';
+import { parseClock, parseTiming, tryParseRange } from '../lib/kdate.mjs';
 import { readTables, rowsAsObjects, tableByHeader } from '../lib/html.mjs';
+import { sourceCoverage } from '../lib/source-coverage.mjs';
 
 export const id = 'kait-linux';
 export const method = 'crawl';
-export const groupId = 'kait-linux';
+export const groupId = 'kait-linux-1';
 
 /** 이 헤더가 사라지면 사이트가 개편된 것이다. 조용히 다른 표를 읽지 않는다. */
 export const EXPECT_HEADERS = ['종목', '등급', '회차', '차수', '접수일자', '시험일자', '합격자 발표'];
+export const EXPECT_TIME_CAPTION = '입실 및 시험시간';
 
-/** 이 그룹이 담는 등급. 1급은 일정이 달라 같은 그룹에 넣으면 안 된다. */
-export const GRADE = '2급';
+/** 1급과 2급은 회차·시험시간이 달라 별도 시행그룹이다. */
+export const GRADES = {
+  '1급': { groupId: 'kait-linux-1' },
+  '2급': { groupId: 'kait-linux-2' },
+};
 
 /** `2601회` → `{ year: 2026, seq: 1 }`. 형식이 아니면 null */
 export function parseRound(text) {
@@ -58,6 +63,30 @@ function phaseOf(text) {
   return null;
 }
 
+/** 같은 공식 페이지 하단의 등급별 1·2차 입실/시험시간 표를 읽는다. */
+export function parseGradeTimings(html) {
+  const table = readTables(html).find(t => t.caption?.replace(/\s/g, '').includes(EXPECT_TIME_CAPTION.replace(/\s/g, '')));
+  if (!table) return null;
+
+  const out = {};
+  for (const row of table.grid.slice(1)) {
+    const grade = Object.keys(GRADES).find(name => row[0]?.text.includes(name));
+    if (!grade) continue;
+    const stage = row[1]?.text;
+    const timing = parseTiming(row[3]?.text);
+    if (!stage || !timing) continue;
+    const admissionDeadline = parseClock(row[2]?.text);
+    out[grade] ??= {};
+    out[grade][stage] = { ...timing, ...(admissionDeadline ? { admissionDeadline } : {}) };
+  }
+  return Object.keys(GRADES).every(grade => out[grade]?.['1차'] && out[grade]?.['2차']) ? out : null;
+}
+
+/** 기존 호출부 호환용. 정본은 parseGradeTimings다. */
+export function parseGrade2Timings(html) {
+  return parseGradeTimings(html)?.['2급'] ?? null;
+}
+
 export function parse(html, { year }) {
   const picked = tableByHeader(readTables(html), EXPECT_HEADERS);
   if (!picked) {
@@ -65,17 +94,26 @@ export function parse(html, { year }) {
   }
 
   const rows = rowsAsObjects(picked);
+  const gradeTimings = parseGradeTimings(html);
   const failures = [];
-  let otherGrade = 0;
   let otherYear = 0;
-  /** seq → session */
-  const bySeq = new Map();
+  const discovered = [];
+  const included = [];
+  /** groupId|seq → session */
+  const byKey = new Map();
 
   for (const row of rows) {
     // 등급 칸이 비어 있으면 표의 빈 행이다
     const grade = row['등급'];
     if (!grade) continue;
-    if (!grade.includes(GRADE)) { otherGrade++; continue; }
+    const gradeName = Object.keys(GRADES).find(name => grade.includes(name));
+    discovered.push(gradeName ?? `unknown:${grade}`);
+    if (!gradeName) {
+      failures.push({ label: '등급', reason: '매핑에 없는 등급', raw: grade });
+      continue;
+    }
+    included.push(gradeName);
+    const target = GRADES[gradeName];
 
     const round = parseRound(row['회차']);
     if (!round) {
@@ -102,9 +140,22 @@ export function parse(html, { year }) {
         return;
       }
       const end = kind === 'result' ? res.value.start : res.value.end;
+      let timing = null;
+      if (kind === 'exam') {
+        if (stage.phase === 'written' && res.value.start !== res.value.end) {
+          timing = {
+            timezone: 'Asia/Seoul',
+            status: 'select-on-booking',
+            note: '온라인 시험 기간 내 응시',
+          };
+        } else {
+          timing = gradeTimings?.[gradeName]?.[stage.stage] ?? null;
+        }
+      }
       events.push({
         kind, phase: stage.phase, start: res.value.start, end,
         seq: 1, label: `${stage.stage} ${label}`, note: null,
+        ...(timing ? { timing } : {}),
       });
     };
 
@@ -113,11 +164,12 @@ export function parse(html, { year }) {
     add('result', row['합격자 발표'], '합격발표');
     if (!events.length) continue;
 
-    const existing = bySeq.get(round.seq);
+    const key = `${target.groupId}|${round.seq}`;
+    const existing = byKey.get(key);
     if (existing) { existing.events.push(...events); continue; }
-    bySeq.set(round.seq, {
-      id: `${groupId}-${round.year}-${round.seq}`,
-      groupId,
+    byKey.set(key, {
+      id: `${target.groupId}-${round.year}-${round.seq}`,
+      groupId: target.groupId,
       year: round.year,
       seq: round.seq,
       label: `제${round.seq}회`,
@@ -127,12 +179,20 @@ export function parse(html, { year }) {
     });
   }
 
-  const sessions = [...bySeq.values()];
+  const sessions = [...byKey.values()];
   for (const s of sessions) s.events.sort((a, b) => a.start.localeCompare(b.start) || a.seq - b.seq);
-  sessions.sort((a, b) => (a.seq ?? 0) - (b.seq ?? 0));
+  sessions.sort((a, b) => a.groupId.localeCompare(b.groupId) || (a.seq ?? 0) - (b.seq ?? 0));
 
   return {
     sessions,
-    diagnostics: { rows: rows.length, parsed: sessions.length, headerMatch: true, otherGrade, otherYear, failures },
+    diagnostics: {
+      rows: rows.length,
+      parsed: sessions.length,
+      headerMatch: true,
+      timingMatch: gradeTimings !== null,
+      otherYear,
+      coverage: sourceCoverage({ discovered, included, expected: Object.keys(GRADES) }),
+      failures,
+    },
   };
 }

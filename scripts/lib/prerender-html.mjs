@@ -136,7 +136,7 @@ export function outPathFor(routePath) {
  */
 export const PLACEHOLDER_ORIGIN = 'https://exammoa.example';
 
-/** Cloudflare Pages 프로덕션 브랜치. 이것 말고는 전부 미리보기 배포다 */
+/** Cloudflare Workers Builds 프로덕션 브랜치. 이것 말고는 전부 미리보기 배포다 */
 export const PRODUCTION_BRANCH = 'mvp';
 
 function normalizeOrigin(raw, from) {
@@ -172,16 +172,11 @@ export function resolveOrigin(env = {}) {
   const explicit = (env.SITE_ORIGIN ?? '').trim();
   if (explicit) return { origin: normalizeOrigin(explicit, 'SITE_ORIGIN'), source: 'SITE_ORIGIN' };
 
-  // 미리보기 배포는 자기 주소를 갖는다. 프로덕션은 SITE_ORIGIN 을 명시하므로
-  // 여기 값이 무엇인지에 계획이 걸리지 않는다.
-  const cfUrl = (env.CF_PAGES_URL ?? '').trim();
-  if (env.CF_PAGES && cfUrl) return { origin: normalizeOrigin(cfUrl, 'CF_PAGES_URL'), source: 'CF_PAGES_URL' };
-
-  if (env.CF_PAGES || env.CI) {
+  if (env.WORKERS_CI || env.CI) {
     throw new PrerenderError(
       'SITE_ORIGIN 이 없습니다. 배포 환경에서는 자리표시자로 빌드하지 않습니다 —\n' +
       `그대로 나가면 검색엔진이 ${PLACEHOLDER_ORIGIN} 을 정본으로 색인합니다.\n` +
-      'Cloudflare Pages 라면 Production 환경변수에 SITE_ORIGIN 을 넣으세요.',
+      'Cloudflare Workers Builds 의 Build variables and secrets 에 SITE_ORIGIN 을 넣으세요.',
     );
   }
 
@@ -190,8 +185,8 @@ export function resolveOrigin(env = {}) {
 
 /** 이 빌드가 색인돼도 되는가. 미리보기 배포는 안 된다 — 같은 내용이 여러 주소로 잡힌다 */
 export function isIndexable(env = {}) {
-  if (!env.CF_PAGES) return true; // 로컬·CI 빌드는 공개되지 않는다
-  return env.CF_PAGES_BRANCH === PRODUCTION_BRANCH;
+  if (!env.WORKERS_CI) return true; // 로컬·GitHub CI 빌드는 공개되지 않는다
+  return env.WORKERS_CI_BRANCH === PRODUCTION_BRANCH;
 }
 
 /**
