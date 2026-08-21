@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-20T22:38:05.684Z",
+  "fetchedAt": "2026-08-21T22:34:40.414Z",
   "year": 2026,
   "examCount": 102,
   "qnetExamCount": 47,
@@ -16,31 +16,31 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-20T22:38:05.684Z",
+      "fetchedAt": "2026-08-21T22:34:40.414Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T22:38:05.684Z",
+      "fetchedAt": "2026-08-21T22:34:40.414Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T22:38:05.684Z",
+      "fetchedAt": "2026-08-21T22:34:40.414Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T22:38:05.684Z",
+      "fetchedAt": "2026-08-21T22:34:40.414Z",
       "sessionCount": 42
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T22:38:05.684Z",
+      "fetchedAt": "2026-08-21T22:34:40.414Z",
       "sessionCount": 6
     },
     "kait-linux": {
@@ -60,7 +60,7 @@
     "kbi-finance": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T22:38:05.684Z",
+      "fetchedAt": "2026-08-21T22:34:40.414Z",
       "sessionCount": 37,
       "coverage": {
         "discovered": 18,
@@ -72,7 +72,7 @@
     "kofia-investment": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T22:38:05.684Z",
+      "fetchedAt": "2026-08-21T22:34:40.414Z",
       "sessionCount": 19,
       "coverage": {
         "discovered": 8,
@@ -84,7 +84,7 @@
     "ifpk-afpk": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-20T22:38:05.684Z",
+      "fetchedAt": "2026-08-21T22:34:40.414Z",
       "sessionCount": 3
     },
     "dataq-csv": {
@@ -108,22 +108,18 @@
       "staleAfterDays": 180
     }
   },
-  "archive": "data/archive/2026/qnet.2026-08-20.16eafec18ab1.json",
+  "archive": null,
   "notes": [
     "kait-linux 실패 — 이전 6회차를 유지하고 stale 로 표시했다 (타임아웃)",
     "kacpta-tax 실패 — 이전 60회차를 유지하고 stale 로 표시했다 (타임아웃)"
   ],
   "failed": [],
   "feeCoverage": 102,
-  "feeVerifiedCount": 58,
+  "feeVerifiedCount": 59,
   "feeManualCount": 41,
-  "feeFallbackCount": 3,
+  "feeFallbackCount": 2,
   "feeChanges": [],
   "feeFailures": [
-    {
-      "slug": "ITQ",
-      "reason": "fetch failed"
-    },
     {
       "slug": "리눅스마스터2급",
       "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
