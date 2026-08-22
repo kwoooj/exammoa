@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-21T22:34:40.414Z",
+  "fetchedAt": "2026-08-22T22:32:28.277Z",
   "year": 2026,
   "examCount": 102,
   "qnetExamCount": 47,
@@ -16,31 +16,31 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-21T22:34:40.414Z",
+      "fetchedAt": "2026-08-22T22:32:28.277Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-21T22:34:40.414Z",
+      "fetchedAt": "2026-08-22T22:32:28.277Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-21T22:34:40.414Z",
+      "fetchedAt": "2026-08-22T22:32:28.277Z",
       "sessionCount": 11
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-21T22:34:40.414Z",
+      "fetchedAt": "2026-08-22T22:32:28.277Z",
       "sessionCount": 42
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-21T22:34:40.414Z",
+      "fetchedAt": "2026-08-22T22:32:28.277Z",
       "sessionCount": 6
     },
     "kait-linux": {
@@ -60,7 +60,7 @@
     "kbi-finance": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-21T22:34:40.414Z",
+      "fetchedAt": "2026-08-22T22:32:28.277Z",
       "sessionCount": 37,
       "coverage": {
         "discovered": 18,
@@ -72,7 +72,7 @@
     "kofia-investment": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-21T22:34:40.414Z",
+      "fetchedAt": "2026-08-22T22:32:28.277Z",
       "sessionCount": 19,
       "coverage": {
         "discovered": 8,
@@ -84,7 +84,7 @@
     "ifpk-afpk": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-21T22:34:40.414Z",
+      "fetchedAt": "2026-08-22T22:32:28.277Z",
       "sessionCount": 3
     },
     "dataq-csv": {
