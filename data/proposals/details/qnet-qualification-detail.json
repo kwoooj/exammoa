@@ -1,7 +1,7 @@
 {
   "version": 1,
   "sourceId": "qnet-qualification-detail",
-  "status": "review-required",
+  "status": "approved",
   "observedAt": "2026-08-25T00:32:24.608Z",
   "contentHash": "0983ac8a3028914c9762bac2d75844082c3dd988ec4262f420739e6881f2d5f8",
   "archiveHash": "cd7c462c682788df8ec21b5606e1fcaec37d504131bd54e9cc80a81bafb54e8f",
@@ -3904,5 +3904,6 @@
         }
       ]
     }
-  ]
+  ],
+  "approvedAt": "2026-08-25T01:37:43.787Z"
 }
