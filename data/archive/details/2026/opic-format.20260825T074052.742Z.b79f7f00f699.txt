@@ -1,0 +1,12 @@
+Checked at: 2026-08-25
+Official introduction: https://www.opic.or.kr/opics/servlet/controller.opic.site.about.AboutServlet?p_process=move-introduce-opic
+Official rule comparison PDF: https://www.opic.or.kr/senior/notice/2024/20241108/%EC%8B%9C%ED%97%98%EA%B4%80%EB%A6%AC%EA%B7%9C%EC%A0%95_%EC%8B%A0%EA%B5%AC%EB%8C%80%EC%A1%B0%ED%91%9C.pdf
+
+Manually verified facts:
+- OPIc is an ACTFL-developed international speaking assessment administered domestically by Multicampus.
+- iBT, personal Background Survey and Self Assessment, 12-15 adaptive questions.
+- Actual test: 40 minutes. Orientation: about 20 minutes. Total visit: about 60 minutes.
+- Nine reported levels: NL, NM, NH, IL, IM1, IM2, IM3, IH, AL.
+- Current regular fee: 84,000 KRW including VAT.
+
+Collection policy: robots.txt disallows all general bots, so this evidence is manually reviewed and must not be crawled automatically.

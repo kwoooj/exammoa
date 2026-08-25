@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "sourceId": "teps-format",
+  "status": "approved",
+  "observedAt": "2026-08-25T07:40:50.927Z",
+  "contentHash": "bb56bd5ed298130de1d90e961fb0def3d64bcb9504f0373ab572c261d6c00912",
+  "archiveHash": "036e70136163245343e49342be5e1e18130c55e35a045a5a80294c0c558d1bad",
+  "archivePath": "data/archive/details/2026/teps-format.20260825T074050.927Z.036e70136163.txt",
+  "diagnostics": {
+    "discovered": 1,
+    "included": 1,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "New-TEPS",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "서울대학교발전재단 TEPS관리위원회",
+        "sourceUrl": "https://www.teps.or.kr/Info/Teps",
+        "checkedAt": "2026-08-25",
+        "note": "TEPS영어능력검정 등록번호 2008-0167, 공인등급 1+급·1급·2+급·2급"
+      },
+      "result": {
+        "type": "score",
+        "label": "0~600점·10개 등급",
+        "passCriteria": "합격·불합격 없이 0~600점과 1+급~5급을 제공하며, 327점 이상은 국가공인 2급~1+급 인증서 발급 대상입니다.",
+        "note": "문항반응이론과 동등화를 적용한 척도점수입니다."
+      },
+      "deliveryModes": [
+        "PBT 4지선다 객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.teps.or.kr/receiption/testrule",
+          "totalDurationMinutes": 105,
+          "summary": "135문항·105분·600점",
+          "stages": [
+            {
+              "id": "regular",
+              "name": "정기시험",
+              "durationMinutes": 105,
+              "totalItemCount": 135,
+              "totalScore": 600,
+              "sections": [
+                {
+                  "name": "청해",
+                  "itemCount": 40,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 240
+                  }
+                },
+                {
+                  "name": "어휘",
+                  "itemCount": 30,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "문법",
+                  "itemCount": 30,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "독해",
+                  "itemCount": 35,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 240
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "청해",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "청해"
+                  ]
+                },
+                {
+                  "name": "어휘·문법·독해 통합",
+                  "durationMinutes": 65,
+                  "sectionNames": [
+                    "어휘",
+                    "문법",
+                    "독해"
+                  ],
+                  "note": "어휘·문법 25분과 독해 40분을 합한 공식 통합 제한시간"
+                }
+              ],
+              "note": "어휘·문법·독해 95문항은 공식 시험관리 규정에 따라 65분 안에 통합 시행합니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "teps-format"
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-25T07:41:13.537Z"
+}

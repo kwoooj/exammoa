@@ -6069,6 +6069,249 @@
           "note": "약 30분의 오리엔테이션·장비 점검·답변 확인 시간은 실제 말하기 평가시간에 포함하지 않습니다."
         }
       ]
+    },
+    {
+      "examSlug": "New-TEPS",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "서울대학교발전재단 TEPS관리위원회",
+        "sourceUrl": "https://www.teps.or.kr/Info/Teps",
+        "checkedAt": "2026-08-25",
+        "note": "TEPS영어능력검정 등록번호 2008-0167, 공인등급 1+급·1급·2+급·2급"
+      },
+      "result": {
+        "type": "score",
+        "label": "0~600점·10개 등급",
+        "passCriteria": "합격·불합격 없이 0~600점과 1+급~5급을 제공하며, 327점 이상은 국가공인 2급~1+급 인증서 발급 대상입니다.",
+        "note": "문항반응이론과 동등화를 적용한 척도점수입니다."
+      },
+      "deliveryModes": [
+        "PBT 4지선다 객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.teps.or.kr/receiption/testrule",
+          "totalDurationMinutes": 105,
+          "summary": "135문항·105분·600점",
+          "stages": [
+            {
+              "id": "regular",
+              "name": "정기시험",
+              "durationMinutes": 105,
+              "totalItemCount": 135,
+              "totalScore": 600,
+              "sections": [
+                {
+                  "name": "청해",
+                  "itemCount": 40,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 240
+                  }
+                },
+                {
+                  "name": "어휘",
+                  "itemCount": 30,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "문법",
+                  "itemCount": 30,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "독해",
+                  "itemCount": 35,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 240
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "청해",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "청해"
+                  ]
+                },
+                {
+                  "name": "어휘·문법·독해 통합",
+                  "durationMinutes": 65,
+                  "sectionNames": [
+                    "어휘",
+                    "문법",
+                    "독해"
+                  ],
+                  "note": "어휘·문법 25분과 독해 40분을 합한 공식 통합 제한시간"
+                }
+              ],
+              "note": "어휘·문법·독해 95문항은 공식 시험관리 규정에 따라 65분 안에 통합 시행합니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "teps-format"
+      ]
+    },
+    {
+      "examSlug": "G-TELP-Level-2",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 공인 영어능력 평가",
+        "authority": "G-TELP KOREA",
+        "sourceUrl": "https://g-telp.co.kr/mobile/info/info2_2.asp",
+        "checkedAt": "2026-08-25",
+        "note": "Level 2는 국가고시·국가자격 영어대체시험에 활용되는 정기시험입니다."
+      },
+      "result": {
+        "type": "score",
+        "label": "영역별 0~100점·Mastery 판정",
+        "passCriteria": "문법·청취·독해 및 어휘 세 영역에서 각각 75점 이상이면 Level 2 Mastery로 인정됩니다.",
+        "note": "활용기관별 요구 점수는 별도 기준을 확인해야 합니다."
+      },
+      "deliveryModes": [
+        "4지선다 객관식(PBT·IBT 회차별 공지)"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://g-telp.co.kr/mobile/info/info2_2.asp",
+          "totalDurationMinutes": 90,
+          "summary": "80문항·약 90분(문법 20분 + 청취 약 30분 + 독해·어휘 40분)",
+          "stages": [
+            {
+              "id": "level-2",
+              "name": "Level 2 시험",
+              "durationMinutes": 90,
+              "totalItemCount": 80,
+              "sections": [
+                {
+                  "name": "문법",
+                  "itemCount": 26,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "청취",
+                  "itemCount": 26,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "독해 및 어휘",
+                  "itemCount": 28,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "문법",
+                  "durationMinutes": 20,
+                  "sectionNames": [
+                    "문법"
+                  ]
+                },
+                {
+                  "name": "청취",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "청취"
+                  ],
+                  "note": "공식 안내는 약 30분"
+                },
+                {
+                  "name": "독해 및 어휘",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "독해 및 어휘"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "gtelp-level2-format"
+      ]
+    },
+    {
+      "examSlug": "오픽",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 공인 외국어 말하기 평가",
+        "authority": "멀티캠퍼스 OPIc",
+        "sourceUrl": "https://www.opic.or.kr/opics/servlet/controller.opic.site.about.AboutServlet?p_process=move-introduce-opic",
+        "checkedAt": "2026-08-25",
+        "note": "ACTFL이 개발·평가·인증하고 멀티캠퍼스가 국내 평가 서비스를 제공합니다."
+      },
+      "result": {
+        "type": "level-awarded",
+        "label": "NL~AL 9개 등급",
+        "passCriteria": "합격·불합격 없이 NL·NM·NH·IL·IM1·IM2·IM3·IH·AL 중 한 등급을 제공합니다.",
+        "note": "IM 등급은 IM1·IM2·IM3으로 세분화됩니다."
+      },
+      "deliveryModes": [
+        "iBT 개인 맞춤형 음성 녹음"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.opic.or.kr/opics/servlet/controller.opic.site.about.AboutServlet?p_process=move-introduce-opic",
+          "totalDurationMinutes": 40,
+          "summary": "12~15문항·본시험 40분 · 개인 맞춤형 인터뷰",
+          "stages": [
+            {
+              "id": "interview",
+              "name": "본시험",
+              "durationMinutes": 40,
+              "totalItemCount": {
+                "min": 12,
+                "max": 15
+              },
+              "sections": [
+                {
+                  "name": "개인 맞춤형 말하기 인터뷰",
+                  "mode": "recorded-response"
+                }
+              ],
+              "note": "Background Survey와 Self Assessment를 바탕으로 개인별 12~15문항이 출제됩니다."
+            }
+          ],
+          "note": "약 20분의 오리엔테이션은 본시험 40분에 포함하지 않습니다."
+        }
+      ],
+      "sourceRefs": [
+        "opic-format"
+      ]
     }
   ]
 }

@@ -262,6 +262,69 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
       "examSlugs": ["토익스피킹"]
+    },
+    {
+      "id": "teps-format",
+      "name": "New TEPS 자격·시험 구성",
+      "authority": "서울대학교발전재단 TEPS관리위원회",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.teps.or.kr/Info/Teps",
+        "https://www.teps.or.kr/receiption/testrule"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-25",
+        "url": "https://www.teps.or.kr/robots.txt",
+        "note": "핵심 시험소개 /Info/ 경로가 자동 수집 제한이므로 공식 페이지 수기 대조와 승인형 업로드만 사용"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["New-TEPS"]
+    },
+    {
+      "id": "gtelp-level2-format",
+      "name": "G-TELP Level 2 시험 구성",
+      "authority": "G-TELP KOREA",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrl": "https://g-telp.co.kr/mobile/info/info2_2.asp",
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-25",
+        "url": "https://www.g-telp.co.kr/robots.txt",
+        "note": "robots 정책을 안정적으로 확인할 수 없어 자동 요청하지 않고 공식 페이지 수기 대조와 승인형 업로드만 사용"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["G-TELP-Level-2"]
+    },
+    {
+      "id": "opic-format",
+      "name": "OPIc 시험 구성",
+      "authority": "멀티캠퍼스 OPIc",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.opic.or.kr/opics/servlet/controller.opic.site.about.AboutServlet?p_process=move-introduce-opic",
+        "https://www.opic.or.kr/senior/notice/2024/20241108/%EC%8B%9C%ED%97%98%EA%B4%80%EB%A6%AC%EA%B7%9C%EC%A0%95_%EC%8B%A0%EA%B5%AC%EB%8C%80%EC%A1%B0%ED%91%9C.pdf"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-25",
+        "url": "https://www.opic.or.kr/robots.txt",
+        "note": "robots.txt가 일반 봇 전체를 제한하므로 공식 페이지 수기 대조와 승인형 업로드만 사용"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["오픽"]
     }
   ]
 }
