@@ -394,6 +394,30 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
       "examSlugs": ["IELTS-General-Training"]
+    },
+    {
+      "id": "jlpt-levels-format",
+      "name": "JLPT N1~N5 현행 시험 구성",
+      "authority": "국제교류기금·일본국제교육지원협회·JLPT 한국실시위원회",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.jlpt.jp/e/guideline/testsections.html",
+        "https://www.jlpt.jp/e/guideline/results.html",
+        "https://www.jlpt.jp/e/faq/",
+        "https://www.bsjlpt.or.kr/web/support/noticeview.html?bo_master_idx=1&idx=852&page_name=notice"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-25",
+        "url": "https://www.jlpt.jp/robots.txt",
+        "note": "세계 공식 시험 구성·합격 기준·유효기간과 한국 공식 실시기관의 2026년 응시료를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["JLPT-N1", "JLPT-N2", "JLPT-N3", "JLPT-N4", "JLPT-N5"]
     }
   ]
 }

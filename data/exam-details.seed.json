@@ -6667,6 +6667,444 @@
       "sourceRefs": [
         "ielts-general-format"
       ]
+    },
+    {
+      "examSlug": "JLPT-N1",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 일본어능력 평가",
+        "authority": "국제교류기금·일본국제교육지원협회",
+        "sourceUrl": "https://www.jlpt.jp/e/about/purpose.html",
+        "checkedAt": "2026-08-25",
+        "note": "비원어민의 일본어 언어지식과 읽기·듣기 이해 능력을 인증하는 국제 시험입니다. N1은 가장 높은 단계입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~180점·합격/불합격",
+        "passCriteria": "총점 100점 이상이면서 언어지식·독해·청해 각 19점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "한 영역이라도 기준점 미달이거나 한 시험과목을 결시하면 불합격입니다. 활용기관이 별도 인정기간을 정할 수 있습니다."
+      },
+      "deliveryModes": [
+        "지필 마크시트 객관식",
+        "듣기 평가"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.jlpt.jp/e/guideline/testsections.html",
+          "totalDurationMinutes": 165,
+          "summary": "언어지식·독해 110분 + 청해 55분",
+          "stages": [
+            {
+              "id": "n1",
+              "name": "JLPT N1",
+              "durationMinutes": 165,
+              "totalScore": 180,
+              "sections": [
+                {
+                  "name": "언어지식(문자·어휘·문법)",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "청해",
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "언어지식·독해",
+                  "durationMinutes": 110,
+                  "sectionNames": [
+                    "언어지식(문자·어휘·문법)",
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "청해",
+                  "durationMinutes": 55,
+                  "sectionNames": [
+                    "청해"
+                  ],
+                  "note": "녹음 길이에 따라 다소 달라질 수 있음"
+                }
+              ],
+              "note": "공식 출제 문항 유형은 공개되지만 고정 총문항 수와 정오답 개수는 공개되지 않아 문항 수를 추정하지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "jlpt-levels-format"
+      ]
+    },
+    {
+      "examSlug": "JLPT-N2",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 일본어능력 평가",
+        "authority": "국제교류기금·일본국제교육지원협회",
+        "sourceUrl": "https://www.jlpt.jp/e/about/purpose.html",
+        "checkedAt": "2026-08-25",
+        "note": "비원어민의 일본어 언어지식과 읽기·듣기 이해 능력을 인증하는 국제 시험입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~180점·합격/불합격",
+        "passCriteria": "총점 90점 이상이면서 언어지식·독해·청해 각 19점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "한 영역이라도 기준점 미달이거나 한 시험과목을 결시하면 불합격입니다. 활용기관이 별도 인정기간을 정할 수 있습니다."
+      },
+      "deliveryModes": [
+        "지필 마크시트 객관식",
+        "듣기 평가"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.jlpt.jp/e/guideline/testsections.html",
+          "totalDurationMinutes": 155,
+          "summary": "언어지식·독해 105분 + 청해 50분",
+          "stages": [
+            {
+              "id": "n2",
+              "name": "JLPT N2",
+              "durationMinutes": 155,
+              "totalScore": 180,
+              "sections": [
+                {
+                  "name": "언어지식(문자·어휘·문법)",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "청해",
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "언어지식·독해",
+                  "durationMinutes": 105,
+                  "sectionNames": [
+                    "언어지식(문자·어휘·문법)",
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "청해",
+                  "durationMinutes": 50,
+                  "sectionNames": [
+                    "청해"
+                  ],
+                  "note": "녹음 길이에 따라 다소 달라질 수 있음"
+                }
+              ],
+              "note": "공식 출제 문항 유형은 공개되지만 고정 총문항 수와 정오답 개수는 공개되지 않아 문항 수를 추정하지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "jlpt-levels-format"
+      ]
+    },
+    {
+      "examSlug": "JLPT-N3",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 일본어능력 평가",
+        "authority": "국제교류기금·일본국제교육지원협회",
+        "sourceUrl": "https://www.jlpt.jp/e/about/purpose.html",
+        "checkedAt": "2026-08-25",
+        "note": "비원어민의 일본어 언어지식과 읽기·듣기 이해 능력을 인증하는 국제 시험입니다. N1·N2와 N4·N5 사이의 단계입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~180점·합격/불합격",
+        "passCriteria": "총점 95점 이상이면서 언어지식·독해·청해 각 19점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "한 영역이라도 기준점 미달이거나 한 시험과목을 결시하면 불합격입니다. 활용기관이 별도 인정기간을 정할 수 있습니다."
+      },
+      "deliveryModes": [
+        "지필 마크시트 객관식",
+        "듣기 평가"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.jlpt.jp/e/guideline/testsections.html",
+          "totalDurationMinutes": 140,
+          "summary": "문자·어휘 30분 + 문법·독해 70분 + 청해 40분",
+          "stages": [
+            {
+              "id": "n3",
+              "name": "JLPT N3",
+              "durationMinutes": 140,
+              "totalScore": 180,
+              "sections": [
+                {
+                  "name": "언어지식(문자·어휘·문법)",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "청해",
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "언어지식(문자·어휘)",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "언어지식(문자·어휘·문법)"
+                  ]
+                },
+                {
+                  "name": "언어지식(문법)·독해",
+                  "durationMinutes": 70,
+                  "sectionNames": [
+                    "언어지식(문자·어휘·문법)",
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "청해",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "청해"
+                  ],
+                  "note": "녹음 길이에 따라 다소 달라질 수 있음"
+                }
+              ],
+              "note": "공식 출제 문항 유형은 공개되지만 고정 총문항 수와 정오답 개수는 공개되지 않아 문항 수를 추정하지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "jlpt-levels-format"
+      ]
+    },
+    {
+      "examSlug": "JLPT-N4",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 일본어능력 평가",
+        "authority": "국제교류기금·일본국제교육지원협회",
+        "sourceUrl": "https://www.jlpt.jp/e/about/purpose.html",
+        "checkedAt": "2026-08-25",
+        "note": "비원어민의 기초 일본어 언어지식과 읽기·듣기 이해 능력을 인증하는 국제 시험입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~180점·합격/불합격",
+        "passCriteria": "총점 90점 이상이면서 언어지식·독해 38점 이상, 청해 19점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "한 영역이라도 기준점 미달이거나 한 시험과목을 결시하면 불합격입니다. 활용기관이 별도 인정기간을 정할 수 있습니다."
+      },
+      "deliveryModes": [
+        "지필 마크시트 객관식",
+        "듣기 평가"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.jlpt.jp/e/guideline/testsections.html",
+          "totalDurationMinutes": 115,
+          "summary": "문자·어휘 25분 + 문법·독해 55분 + 청해 35분",
+          "stages": [
+            {
+              "id": "n4",
+              "name": "JLPT N4",
+              "durationMinutes": 115,
+              "totalScore": 180,
+              "sections": [
+                {
+                  "name": "언어지식(문자·어휘·문법)·독해",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 120
+                  }
+                },
+                {
+                  "name": "청해",
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "언어지식(문자·어휘)",
+                  "durationMinutes": 25,
+                  "sectionNames": [
+                    "언어지식(문자·어휘·문법)·독해"
+                  ]
+                },
+                {
+                  "name": "언어지식(문법)·독해",
+                  "durationMinutes": 55,
+                  "sectionNames": [
+                    "언어지식(문자·어휘·문법)·독해"
+                  ]
+                },
+                {
+                  "name": "청해",
+                  "durationMinutes": 35,
+                  "sectionNames": [
+                    "청해"
+                  ],
+                  "note": "녹음 길이에 따라 다소 달라질 수 있음"
+                }
+              ],
+              "note": "공식 출제 문항 유형은 공개되지만 고정 총문항 수와 정오답 개수는 공개되지 않아 문항 수를 추정하지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "jlpt-levels-format"
+      ]
+    },
+    {
+      "examSlug": "JLPT-N5",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 일본어능력 평가",
+        "authority": "국제교류기금·일본국제교육지원협회",
+        "sourceUrl": "https://www.jlpt.jp/e/about/purpose.html",
+        "checkedAt": "2026-08-25",
+        "note": "비원어민의 초급 일본어 언어지식과 읽기·듣기 이해 능력을 인증하는 국제 시험입니다. N5는 입문 단계입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~180점·합격/불합격",
+        "passCriteria": "총점 80점 이상이면서 언어지식·독해 38점 이상, 청해 19점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "한 영역이라도 기준점 미달이거나 한 시험과목을 결시하면 불합격입니다. 활용기관이 별도 인정기간을 정할 수 있습니다."
+      },
+      "deliveryModes": [
+        "지필 마크시트 객관식",
+        "듣기 평가"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.jlpt.jp/e/guideline/testsections.html",
+          "totalDurationMinutes": 90,
+          "summary": "문자·어휘 20분 + 문법·독해 40분 + 청해 30분",
+          "stages": [
+            {
+              "id": "n5",
+              "name": "JLPT N5",
+              "durationMinutes": 90,
+              "totalScore": 180,
+              "sections": [
+                {
+                  "name": "언어지식(문자·어휘·문법)·독해",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 120
+                  }
+                },
+                {
+                  "name": "청해",
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "언어지식(문자·어휘)",
+                  "durationMinutes": 20,
+                  "sectionNames": [
+                    "언어지식(문자·어휘·문법)·독해"
+                  ]
+                },
+                {
+                  "name": "언어지식(문법)·독해",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "언어지식(문자·어휘·문법)·독해"
+                  ]
+                },
+                {
+                  "name": "청해",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "청해"
+                  ],
+                  "note": "녹음 길이에 따라 다소 달라질 수 있음"
+                }
+              ],
+              "note": "공식 출제 문항 유형은 공개되지만 고정 총문항 수와 정오답 개수는 공개되지 않아 문항 수를 추정하지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "jlpt-levels-format"
+      ]
     }
   ]
 }

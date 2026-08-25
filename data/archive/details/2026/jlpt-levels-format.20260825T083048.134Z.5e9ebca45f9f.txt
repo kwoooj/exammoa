@@ -1,0 +1,28 @@
+JLPT N1-N5 official detail evidence, checked 2026-08-25
+
+Current forced test times:
+N1 language knowledge/reading 110 min + listening 55 min.
+N2 language knowledge/reading 105 min + listening 50 min.
+N3 vocabulary 30 min + grammar/reading 70 min + listening 40 min.
+N4 vocabulary 25 min + grammar/reading 55 min + listening 35 min.
+N5 vocabulary 20 min + grammar/reading 40 min + listening 30 min.
+Listening time can vary slightly with recorded material.
+
+All levels are scored 0-180. Overall pass marks are N1 100, N2 90,
+N3 95, N4 90, N5 80. N1-N3 require at least 19/60 in each of
+language knowledge, reading and listening. N4-N5 require at least 38/120
+in language knowledge/reading and 19/60 in listening. Missing any test
+section is a fail. Certificates do not expire, though accepting institutions
+may impose their own recency requirement.
+
+The official site discloses test-item types, but not a fixed total question
+count; answer correctness counts are not disclosed. No question count was
+inferred from prep services. Current Korean regular fees for the official
+2026 administration are KRW 75,000 for N1-N3 and KRW 60,000 for N4-N5.
+Late application adds 10%.
+
+Official URLs:
+https://www.jlpt.jp/e/guideline/testsections.html
+https://www.jlpt.jp/e/guideline/results.html
+https://www.jlpt.jp/e/faq/
+https://www.bsjlpt.or.kr/web/support/noticeview.html?bo_master_idx=1&idx=852&page_name=notice
