@@ -17,4 +17,6 @@ test('어댑터 레지스트리에 승인형 JSON 입력이 있다', () => {
   assert.equal(typeof DETAIL_ADAPTERS.get('qnet-detail')?.collect, 'function');
   assert.equal(typeof DETAIL_ADAPTERS.get('qnet-detail')?.parse, 'function');
   assert.equal(typeof DETAIL_ADAPTERS.get('kait-linux-detail')?.parse, 'function');
+  assert.equal(typeof DETAIL_ADAPTERS.get('kacpta-detail')?.parse, 'function');
+  assert.equal(typeof DETAIL_ADAPTERS.get('kacpta-detail')?.collect, 'function');
 });

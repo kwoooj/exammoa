@@ -4846,6 +4846,692 @@
           "note": "1차와 2차는 별도 일정으로 시행하며, 실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
         }
       ]
+    },
+    {
+      "examSlug": "전산세무1급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kacpta-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국세무사회",
+        "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "100점 만점 70점 이상",
+        "passCriteria": "이론·실무 합계 100점 만점에 70점 이상"
+      },
+      "deliveryModes": [
+        "이론 객관식 4지선다형",
+        "실무 전산세무회계프로그램 작업"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+          "totalDurationMinutes": 90,
+          "summary": "이론 30점 · 실무 70점 · 90분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "이론·실무 통합 시험",
+              "durationMinutes": 90,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "이론 · 재무회계",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "이론 · 원가회계",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "이론 · 세무회계",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "실무 · 재무회계 및 원가회계",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 15
+                  }
+                },
+                {
+                  "name": "실무 · 부가가치세",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 15
+                  }
+                },
+                {
+                  "name": "실무 · 원천제세",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "실무 · 법인세무조정",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 30
+                  }
+                }
+              ],
+              "note": "이론과 실무를 한 제한시간 안에 통합 시행하며, 영역별 제한시간은 공식 안내에 없습니다."
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "전산세무2급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kacpta-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국세무사회",
+        "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "100점 만점 70점 이상",
+        "passCriteria": "이론·실무 합계 100점 만점에 70점 이상"
+      },
+      "deliveryModes": [
+        "이론 객관식 4지선다형",
+        "실무 전산세무회계프로그램 작업"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+          "totalDurationMinutes": 90,
+          "summary": "이론 30점 · 실무 70점 · 90분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "이론·실무 통합 시험",
+              "durationMinutes": 90,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "이론 · 재무회계",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "이론 · 원가회계",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "이론 · 세무회계",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "실무 · 재무회계 및 원가회계",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 35
+                  }
+                },
+                {
+                  "name": "실무 · 부가가치세",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                },
+                {
+                  "name": "실무 · 원천제세",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 15
+                  }
+                }
+              ],
+              "note": "이론과 실무를 한 제한시간 안에 통합 시행하며, 영역별 제한시간은 공식 안내에 없습니다."
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "전산회계1급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kacpta-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국세무사회",
+        "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "100점 만점 70점 이상",
+        "passCriteria": "이론·실무 합계 100점 만점에 70점 이상"
+      },
+      "deliveryModes": [
+        "이론 객관식 4지선다형",
+        "실무 전산세무회계프로그램 작업"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+          "totalDurationMinutes": 60,
+          "summary": "이론 30점 · 실무 70점 · 60분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "이론·실무 통합 시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "이론 · 회계원리",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 15
+                  }
+                },
+                {
+                  "name": "이론 · 원가회계",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "이론 · 세무회계",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 5
+                  }
+                },
+                {
+                  "name": "실무 · 기초정보의 등록·수정",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 15
+                  }
+                },
+                {
+                  "name": "실무 · 거래자료의 입력",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 30
+                  }
+                },
+                {
+                  "name": "실무 · 부가가치세",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 15
+                  }
+                },
+                {
+                  "name": "실무 · 입력자료 및 제장부 조회",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                }
+              ],
+              "note": "이론과 실무를 한 제한시간 안에 통합 시행하며, 영역별 제한시간은 공식 안내에 없습니다."
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "전산회계2급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kacpta-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국세무사회",
+        "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "100점 만점 70점 이상",
+        "passCriteria": "이론·실무 합계 100점 만점에 70점 이상"
+      },
+      "deliveryModes": [
+        "이론 객관식 4지선다형",
+        "실무 전산세무회계프로그램 작업"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+          "totalDurationMinutes": 60,
+          "summary": "이론 30점 · 실무 70점 · 60분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "이론·실무 통합 시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "이론 · 회계원리",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 30
+                  }
+                },
+                {
+                  "name": "실무 · 기초정보의 등록·수정",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                },
+                {
+                  "name": "실무 · 거래자료의 입력",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 40
+                  }
+                },
+                {
+                  "name": "실무 · 입력자료 및 제장부 조회",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                }
+              ],
+              "note": "이론과 실무를 한 제한시간 안에 통합 시행하며, 영역별 제한시간은 공식 안내에 없습니다."
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "세무회계1급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kacpta-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국세무사회",
+        "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline2.aspx",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "1·2부 과락 적용 평균 합격제",
+        "passCriteria": "세법 1부·2부 각각 40점 이상이면서 합산평균 60점 이상"
+      },
+      "deliveryModes": [
+        "객관식·주관식·약술형 혼합 필기"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline2.aspx",
+          "totalDurationMinutes": 100,
+          "summary": "44문항 · 100분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "통합 필기시험",
+              "durationMinutes": 100,
+              "totalItemCount": 44,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "세법 1부 · 법인세법·부가가치세법·조세특례제한법",
+                  "mode": "mixed",
+                  "itemCount": 22,
+                  "note": "객관식 15문항 · 주관식 5문항 · 약술형 2문항"
+                },
+                {
+                  "name": "세법 2부 · 국세기본법·소득세법·조세특례제한법",
+                  "mode": "mixed",
+                  "itemCount": 22,
+                  "note": "객관식 15문항 · 주관식 5문항 · 약술형 2문항"
+                }
+              ],
+              "note": "1부와 2부를 한 제한시간 안에 통합 시행하며, 과목별 제한시간은 공식 안내에 없습니다."
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "세무회계2급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kacpta-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국세무사회",
+        "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline2.aspx",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "1·2부 과락 적용 평균 합격제",
+        "passCriteria": "세법 1부·2부 각각 40점 이상이면서 합산평균 60점 이상"
+      },
+      "deliveryModes": [
+        "객관식 필기"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline2.aspx",
+          "totalDurationMinutes": 80,
+          "summary": "50문항 · 80분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "통합 필기시험",
+              "durationMinutes": 80,
+              "totalItemCount": 50,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "세법 1부 · 법인세법·부가가치세법",
+                  "mode": "multiple-choice",
+                  "itemCount": 25
+                },
+                {
+                  "name": "세법 2부 · 국세기본법·소득세법",
+                  "mode": "multiple-choice",
+                  "itemCount": 25
+                }
+              ],
+              "note": "1부와 2부를 한 제한시간 안에 통합 시행하며, 과목별 제한시간은 공식 안내에 없습니다."
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "세무회계3급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kacpta-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국세무사회",
+        "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline2.aspx",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "1·2부 과락 적용 평균 합격제",
+        "passCriteria": "세법 1부·2부 각각 40점 이상이면서 합산평균 60점 이상"
+      },
+      "deliveryModes": [
+        "객관식 필기"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline2.aspx",
+          "totalDurationMinutes": 60,
+          "summary": "40문항 · 60분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "통합 필기시험",
+              "durationMinutes": 60,
+              "totalItemCount": 40,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "세법 1부 · 법인세법·부가가치세법",
+                  "mode": "multiple-choice",
+                  "itemCount": 20
+                },
+                {
+                  "name": "세법 2부 · 소득세법",
+                  "mode": "multiple-choice",
+                  "itemCount": 20
+                }
+              ],
+              "note": "1부와 2부를 한 제한시간 안에 통합 시행하며, 과목별 제한시간은 공식 안내에 없습니다."
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "기업회계1급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kacpta-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국세무사회",
+        "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline3.aspx",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "1·2부 평균 합격제",
+        "passCriteria": "1부·2부 합산평균 70점 이상"
+      },
+      "deliveryModes": [
+        "객관식·주관식 혼합 필기"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline3.aspx",
+          "totalDurationMinutes": 100,
+          "summary": "50문항 · 100분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "통합 필기시험",
+              "durationMinutes": 100,
+              "totalItemCount": 50,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "1부 · 재무회계",
+                  "mode": "mixed",
+                  "itemCount": 25,
+                  "note": "객관식 20문항 · 주관식 5문항"
+                },
+                {
+                  "name": "2부 · 원가관리회계",
+                  "mode": "mixed",
+                  "itemCount": 25,
+                  "note": "객관식 20문항 · 주관식 5문항"
+                }
+              ],
+              "note": "1부와 2부를 한 제한시간 안에 통합 시행하며, 과목별 제한시간은 공식 안내에 없습니다."
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "기업회계2급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kacpta-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국세무사회",
+        "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline3.aspx",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "1·2부 평균 합격제",
+        "passCriteria": "1부·2부 합산평균 70점 이상"
+      },
+      "deliveryModes": [
+        "객관식 필기"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline3.aspx",
+          "totalDurationMinutes": 80,
+          "summary": "50문항 · 80분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "통합 필기시험",
+              "durationMinutes": 80,
+              "totalItemCount": 50,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "1부 · 재무회계",
+                  "mode": "multiple-choice",
+                  "itemCount": 25
+                },
+                {
+                  "name": "2부 · 원가회계",
+                  "mode": "multiple-choice",
+                  "itemCount": 25
+                }
+              ],
+              "note": "1부와 2부를 한 제한시간 안에 통합 시행하며, 과목별 제한시간은 공식 안내에 없습니다."
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "기업회계3급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kacpta-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국세무사회",
+        "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline3.aspx",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "70점 이상 합격제",
+        "passCriteria": "100점 만점에 70점 이상"
+      },
+      "deliveryModes": [
+        "객관식 필기"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline3.aspx",
+          "totalDurationMinutes": 60,
+          "summary": "40문항 · 60분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "통합 필기시험",
+              "durationMinutes": 60,
+              "totalItemCount": 40,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "1부 · 회계원리",
+                  "mode": "multiple-choice",
+                  "itemCount": 20
+                },
+                {
+                  "name": "2부 · 회계원리",
+                  "mode": "multiple-choice",
+                  "itemCount": 20
+                }
+              ],
+              "note": "1부와 2부를 한 제한시간 안에 통합 시행하며, 과목별 제한시간은 공식 안내에 없습니다."
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
     }
   ]
 }

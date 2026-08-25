@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { checkFeeSeed, collectFees, pageContainsFee, parseQnetFee } from './fees.mjs';
+import { checkFeeSeed, collectFees, labeledPageFees, pageContainsFee, parseQnetFee } from './fees.mjs';
 
 const qnetHtml = `<table><caption>필기, 실기 항목순으로 수수료 안내표</caption>
   <tr><th>필기</th><th>실기</th></tr><tr><td>19,400원</td><td>22,600원</td></tr></table>`;
@@ -21,6 +21,30 @@ test('공식 페이지 fingerprint는 쉼표와 공백 차이를 허용한다', 
   const record = { items: [{ label: '일반', amount: 84000 }], source: { kind: 'page' } };
   assert.equal(pageContainsFee('<p>응시료 84,000 원</p>', record), true);
   assert.equal(pageContainsFee('<p>응시료 90,000원</p>', record), false);
+});
+
+test('라벨형 공식 응시료는 과거 금액과 새 금액이 함께 남으면 실패한다', () => {
+  const record = { items: [{ label: '일반', amount: 25000 }], source: { kind: 'page', feeLabel: '접수수수료' } };
+  assert.deepEqual(labeledPageFees('접수수수료 25,000원 / 접수수수료 25,000원', '접수수수료'), [25000]);
+  assert.equal(pageContainsFee('접수수수료 25,000원', record), true);
+  assert.equal(pageContainsFee('접수수수료 25,000원(기존) / 접수수수료 27,000원(현재)', record), false);
+});
+
+test('같은 공식 페이지를 공유하는 응시료는 배치에서 한 번만 가져온다', async () => {
+  const exams = [{ slug: '시험1', tier: 'T1' }, { slug: '시험2', tier: 'T1' }];
+  const record = slug => ({ slug, items: [{ label: '일반', amount: 25000 }], checkedAt: '2026-01-01', source: { kind: 'page', url: 'https://example.com/fees' } });
+  let pageRequests = 0;
+  const result = await collectFees(exams, { fees: exams.map(exam => record(exam.slug)) }, {
+    now: '2026-08-25T00:00:00Z',
+    fetchImpl: async url => {
+      if (String(url).endsWith('/robots.txt')) return new Response('', { status: 404 });
+      pageRequests += 1;
+      return new Response('접수수수료 25,000원', { status: 200, headers: { 'content-type': 'text/html; charset=utf-8' } });
+    },
+  });
+  assert.equal(result.failures.length, 0);
+  assert.equal(result.stats.verified, 2);
+  assert.equal(pageRequests, 1);
 });
 
 test('Q-Net 인상 금액을 자동 반영하고 변경을 기록한다', async () => {
