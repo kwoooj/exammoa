@@ -1025,10 +1025,10 @@
           "amount": 84000
         }
       ],
-      "checkedAt": "2026-08-19",
+      "checkedAt": "2026-08-25",
       "source": {
         "kind": "manual",
-        "url": "https://www.opic.or.kr/opics/servlet/controller.opic.site.guide.GuideServlet?p_nav=4_1&p_process=move-page-examProGuide",
+        "url": "https://www.opic.or.kr/opics/servlet/controller.opic.site.about.AboutServlet?p_process=move-introduce-opic",
         "recheckAfterDays": 90
       }
     },
@@ -1718,11 +1718,27 @@
       "source": { "kind": "manual", "url": "https://www.ets.org/toefl/test-takers/ibt/register/fees.html", "recheckAfterDays": 30 }
     },
     {
-      "slug": "New-TEPS", "items": [{ "label": "응시료", "amountLabel": "공식 접수처에서 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.teps.or.kr/Receipt/ExamSchedule", "recheckAfterDays": 30 }
+      "slug": "New-TEPS",
+      "items": [
+        { "label": "정기접수", "amount": 54000 },
+        { "label": "추가접수", "amount": 57000 }
+      ],
+      "checkedAt": "2026-08-25",
+      "source": { "kind": "manual", "url": "https://www.teps.or.kr/Info/Teps", "recheckAfterDays": 30 }
     },
     {
-      "slug": "G-TELP-Level-2", "items": [{ "label": "응시료", "amountLabel": "접수 유형별 확인" }], "checkedAt": "2026-08-20",
+      "slug": "G-TELP-Level-2",
+      "items": [
+        { "label": "일반 정기접수", "amount": 69300 },
+        { "label": "일반 추가접수", "amount": 74100 },
+        { "label": "졸업인증 정기접수", "amount": 48700 },
+        { "label": "졸업인증 추가접수", "amount": 53600 },
+        { "label": "군인 정기접수", "amount": 36200 },
+        { "label": "군인 추가접수", "amount": 41000 },
+        { "label": "기초생활수급자 정기접수(환급 후)", "amount": 38000 },
+        { "label": "기초생활수급자 추가접수(환급 후)", "amount": 42800 }
+      ],
+      "checkedAt": "2026-08-25",
       "source": { "kind": "manual", "url": "https://g-telp.co.kr/mobile/info/info2_2.asp", "recheckAfterDays": 30 }
     },
     {

@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "sourceId": "gtelp-level2-format",
+  "status": "approved",
+  "observedAt": "2026-08-25T07:40:51.801Z",
+  "contentHash": "52dc41ab8dc6ef4bb4bcd076d2169db946b0908c0baa729c962c539214f1367c",
+  "archiveHash": "b48de8cbaeba7d3264715c09ec6475757ebd79adfae9058e6649864a6ae1c1b1",
+  "archivePath": "data/archive/details/2026/gtelp-level2-format.20260825T074051.801Z.b48de8cbaeba.txt",
+  "diagnostics": {
+    "discovered": 1,
+    "included": 1,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "G-TELP-Level-2",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 공인 영어능력 평가",
+        "authority": "G-TELP KOREA",
+        "sourceUrl": "https://g-telp.co.kr/mobile/info/info2_2.asp",
+        "checkedAt": "2026-08-25",
+        "note": "Level 2는 국가고시·국가자격 영어대체시험에 활용되는 정기시험입니다."
+      },
+      "result": {
+        "type": "score",
+        "label": "영역별 0~100점·Mastery 판정",
+        "passCriteria": "문법·청취·독해 및 어휘 세 영역에서 각각 75점 이상이면 Level 2 Mastery로 인정됩니다.",
+        "note": "활용기관별 요구 점수는 별도 기준을 확인해야 합니다."
+      },
+      "deliveryModes": [
+        "4지선다 객관식(PBT·IBT 회차별 공지)"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://g-telp.co.kr/mobile/info/info2_2.asp",
+          "totalDurationMinutes": 90,
+          "summary": "80문항·약 90분(문법 20분 + 청취 약 30분 + 독해·어휘 40분)",
+          "stages": [
+            {
+              "id": "level-2",
+              "name": "Level 2 시험",
+              "durationMinutes": 90,
+              "totalItemCount": 80,
+              "sections": [
+                {
+                  "name": "문법",
+                  "itemCount": 26,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "청취",
+                  "itemCount": 26,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "독해 및 어휘",
+                  "itemCount": 28,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "문법",
+                  "durationMinutes": 20,
+                  "sectionNames": [
+                    "문법"
+                  ]
+                },
+                {
+                  "name": "청취",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "청취"
+                  ],
+                  "note": "공식 안내는 약 30분"
+                },
+                {
+                  "name": "독해 및 어휘",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "독해 및 어휘"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "gtelp-level2-format"
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-25T07:41:14.402Z"
+}

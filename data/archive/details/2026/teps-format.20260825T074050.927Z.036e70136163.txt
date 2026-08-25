@@ -1,0 +1,15 @@
+Checked at: 2026-08-25
+Official source: https://www.teps.or.kr/Info/Teps
+Official rule: https://www.teps.or.kr/receiption/testrule
+
+Manually verified facts:
+- TEPS영어능력검정 is a 국가공인 민간자격, registration 2008-0167.
+- New TEPS: 135 questions, 105 minutes, 0-600 scaled score.
+- Listening: 40 questions / about 40 minutes / 0-240.
+- Vocabulary: 30 / 0-60; Grammar: 30 / 0-60; Reading: 35 / 0-240.
+- The management rule combines vocabulary, grammar and reading (95 questions) into 65 minutes.
+- New TEPS levels: 1+ 526-600, 1 453-525, 2+ 387-452, 2 327-386, down to 5.
+- 327 or higher is eligible for the accredited 2 to 1+ certificate.
+- Fees from test 401: regular 54,000 KRW; late registration 57,000 KRW.
+
+Collection policy: /Info/ is disallowed by robots.txt, so this evidence is manually reviewed and must not be crawled automatically.
