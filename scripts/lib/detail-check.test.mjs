@@ -51,6 +51,14 @@ test('문항 수와 배점 범위의 잘못된 값을 막는다', () => {
   assert.match(problems, /과목 배점 범위/);
 });
 
+test('화면에서 표시할 수 없는 응시 방식은 정본에 넣지 않는다', () => {
+  const valid = structuredClone(detail);
+  valid.formats[0].stages[0].sections[0].mode = 'recorded-response';
+  assert.equal(checkExamDetails({ details: [valid] }, ['시험']).ok, true);
+  valid.formats[0].stages[0].sections[0].mode = 'unknown-mode';
+  assert.match(checkExamDetails({ details: [valid] }, ['시험']).problems.join('\n'), /지원하지 않는 응시 방식/);
+});
+
 test('과목별 수를 알 수 없을 때 단계 전체 문항 수를 허용하고 잘못된 값은 막는다', () => {
   const valid = structuredClone(detail);
   valid.formats[0].stages[0].totalItemCount = 60;

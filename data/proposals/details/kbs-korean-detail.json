@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "sourceId": "kbs-korean-detail",
+  "status": "approved",
+  "observedAt": "2026-08-25T07:26:50.533Z",
+  "contentHash": "1c18aa42144853dfb4d904df528173914d06d586f7d583830976d0823e9e9e72",
+  "archiveHash": "07a1272096b85033fbdad054e14cc0767d2f045a03c5895183e8e77a1901972d",
+  "archivePath": "data/archive/details/2026/kbs-korean-detail.20260825T072650.533Z.07a1272096b8.json",
+  "diagnostics": {
+    "discovered": 1,
+    "included": 1,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "KBS한국어능력시험",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kbs-korean-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "KBS한국방송공사",
+        "sourceUrl": "https://www.kbskorean.org/klt/helper/exam-process",
+        "checkedAt": "2026-08-25",
+        "note": "국가공인 KBS한국어능력시험이며 성적과 자격은 성적발표일로부터 2년간 유효합니다."
+      },
+      "result": {
+        "type": "level-awarded",
+        "label": "10~990점·1급~4-급 등급제",
+        "passCriteria": "1급·2+급·2-급·3+급·3-급·4+급·4-급 또는 무급으로 판정",
+        "note": "매회 난이도와 문항 변별도를 반영하는 등급 부여 시스템을 사용하므로 고정 절대점수 경계가 아닙니다."
+      },
+      "deliveryModes": [
+        "방송 듣기·말하기",
+        "지필 객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.kbskorean.org/klt/helper/exam-process",
+          "totalDurationMinutes": 120,
+          "summary": "100문항·120분(듣기·말하기 25분 + 지필 95분)",
+          "stages": [
+            {
+              "id": "regular",
+              "name": "정기시험",
+              "durationMinutes": 120,
+              "totalItemCount": 100,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "듣기·말하기",
+                  "itemCount": 15,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "지필 평가",
+                  "itemCount": 85,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "듣기·말하기",
+                  "durationMinutes": 25,
+                  "sectionNames": [
+                    "듣기·말하기"
+                  ]
+                },
+                {
+                  "name": "지필 평가",
+                  "durationMinutes": 95,
+                  "sectionNames": [
+                    "지필 평가"
+                  ]
+                }
+              ],
+              "note": "원점수는 100점 기준이며 성적표에는 난이도를 보정한 10~990점 환산점수와 등급이 제공됩니다."
+            }
+          ],
+          "note": "10:00~12:00에 쉬는 시간 없이 시행합니다."
+        }
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-25T07:28:31.299Z"
+}

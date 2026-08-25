@@ -205,6 +205,63 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
       "examSlugs": ["ITQ"]
+    },
+    {
+      "id": "history-exam-detail",
+      "name": "한국사능력검정시험 시험 구성",
+      "authority": "국사편찬위원회",
+      "method": "html",
+      "collectionStatus": "active",
+      "adapter": "existing-schedule-detail",
+      "sourceUrl": "https://www.historyexam.go.kr/pageLink.do?link=examGuideline",
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "allowed",
+        "checkedAt": "2026-08-25",
+        "url": "https://www.historyexam.go.kr/robots.txt",
+        "note": "robots.txt가 404를 반환해 RFC 9309 기준 허용으로 판정"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["한국사능력검정시험"]
+    },
+    {
+      "id": "kbs-korean-detail",
+      "name": "KBS한국어능력시험 시험 구성",
+      "authority": "KBS한국방송공사",
+      "method": "html",
+      "collectionStatus": "active",
+      "adapter": "existing-schedule-detail",
+      "sourceUrl": "https://www.kbskorean.org/klt/helper/exam-process",
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "allowed",
+        "checkedAt": "2026-08-25",
+        "url": "https://www.kbskorean.org/robots.txt",
+        "note": "robots.txt가 전체 공개 경로의 수집을 허용"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats"],
+      "examSlugs": ["KBS한국어능력시험"]
+    },
+    {
+      "id": "ybm-toeic-speaking-detail",
+      "name": "TOEIC Speaking 시험 구성",
+      "authority": "한국TOEIC위원회(YBM)",
+      "method": "html",
+      "collectionStatus": "active",
+      "adapter": "existing-schedule-detail",
+      "sourceUrl": "https://www.toeicswt.co.kr/common/template/viewContents.php?contentsCode=72",
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "allowed",
+        "checkedAt": "2026-08-25",
+        "url": "https://www.toeicswt.co.kr/robots.txt",
+        "note": "robots.txt 제한 경로에 공식 시험소개·수험자가이드 경로가 포함되지 않음"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["토익스피킹"]
     }
   ]
 }
