@@ -1679,7 +1679,7 @@ h2 { margin-bottom: 0; font-size: 20px; line-height: 1.35; letter-spacing: -0.02
 .detail__event { color: var(--ink-secondary); }
 .detailFee { display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 12px; margin: 0 0 16px; color: var(--ink); }
 .detailFee__label { color: var(--ink-muted); font-size: 13px; }
-.detailFee strong { font-size: 15px; font-weight: 650; }
+.detailFee strong { min-width: 0; overflow-wrap: anywhere; font-size: 15px; font-weight: 650; }
 .detailFee__checked { color: var(--ink-muted); font-size: 12px; }
 .detailFee p { flex-basis: 100%; margin: 0; color: var(--ink-muted); font-size: 12px; }
 .detailOverview { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); }
@@ -1828,6 +1828,8 @@ h2 { margin-bottom: 0; font-size: 20px; line-height: 1.35; letter-spacing: -0.02
   .exrow__name { margin-bottom: 10px; }
   .exrow__when { display: inline-block; width: 48%; }
   .exrow__go { grid-column: 2; min-width: 0; flex-direction: row; }
+  .detailFee strong { flex: 1 1 calc(100% - 60px); }
+  .detailFee__checked { flex-basis: 100%; margin-left: 50px; }
   .detailFacts { grid-template-columns: 1fr 1fr; }
   .detailFacts > div { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .detailFacts > div:nth-child(2n) { border-right: 0; }

@@ -1750,24 +1750,29 @@
       "source": { "kind": "manual", "url": "https://www.britishcouncil.kr/en/exam/ielts/which-test/general-training", "recheckAfterDays": 30 }
     },
     {
-      "slug": "JLPT-N1", "items": [{ "label": "응시료", "amountLabel": "국내 접수처에서 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.jlpt.jp/e/application/overseas_index.html", "recheckAfterDays": 30 }
+      "slug": "JLPT-N1", "items": [{ "label": "정규접수", "amount": 75000 }, { "label": "추가접수", "amount": 82500 }], "checkedAt": "2026-08-25",
+      "source": { "kind": "manual", "url": "https://www.bsjlpt.or.kr/web/support/noticeview.html?bo_master_idx=1&idx=852&page_name=notice", "recheckAfterDays": 30 },
+      "note": "2026년 국내 공식 실시기관 기준. 추가접수는 정규 수험료의 10%가 가산됩니다."
     },
     {
-      "slug": "JLPT-N2", "items": [{ "label": "응시료", "amountLabel": "국내 접수처에서 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.jlpt.jp/e/application/overseas_index.html", "recheckAfterDays": 30 }
+      "slug": "JLPT-N2", "items": [{ "label": "정규접수", "amount": 75000 }, { "label": "추가접수", "amount": 82500 }], "checkedAt": "2026-08-25",
+      "source": { "kind": "manual", "url": "https://www.bsjlpt.or.kr/web/support/noticeview.html?bo_master_idx=1&idx=852&page_name=notice", "recheckAfterDays": 30 },
+      "note": "2026년 국내 공식 실시기관 기준. 추가접수는 정규 수험료의 10%가 가산됩니다."
     },
     {
-      "slug": "JLPT-N3", "items": [{ "label": "응시료", "amountLabel": "국내 접수처에서 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.jlpt.jp/e/application/overseas_index.html", "recheckAfterDays": 30 }
+      "slug": "JLPT-N3", "items": [{ "label": "정규접수", "amount": 75000 }, { "label": "추가접수", "amount": 82500 }], "checkedAt": "2026-08-25",
+      "source": { "kind": "manual", "url": "https://www.bsjlpt.or.kr/web/support/noticeview.html?bo_master_idx=1&idx=852&page_name=notice", "recheckAfterDays": 30 },
+      "note": "2026년 국내 공식 실시기관 기준. 추가접수는 정규 수험료의 10%가 가산됩니다."
     },
     {
-      "slug": "JLPT-N4", "items": [{ "label": "응시료", "amountLabel": "국내 접수처에서 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.jlpt.jp/e/application/overseas_index.html", "recheckAfterDays": 30 }
+      "slug": "JLPT-N4", "items": [{ "label": "정규접수", "amount": 60000 }, { "label": "추가접수", "amount": 66000 }], "checkedAt": "2026-08-25",
+      "source": { "kind": "manual", "url": "https://www.bsjlpt.or.kr/web/support/noticeview.html?bo_master_idx=1&idx=852&page_name=notice", "recheckAfterDays": 30 },
+      "note": "2026년 국내 공식 실시기관 기준. 추가접수는 정규 수험료의 10%가 가산됩니다."
     },
     {
-      "slug": "JLPT-N5", "items": [{ "label": "응시료", "amountLabel": "국내 접수처에서 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.jlpt.jp/e/application/overseas_index.html", "recheckAfterDays": 30 }
+      "slug": "JLPT-N5", "items": [{ "label": "정규접수", "amount": 60000 }, { "label": "추가접수", "amount": 66000 }], "checkedAt": "2026-08-25",
+      "source": { "kind": "manual", "url": "https://www.bsjlpt.or.kr/web/support/noticeview.html?bo_master_idx=1&idx=852&page_name=notice", "recheckAfterDays": 30 },
+      "note": "2026년 국내 공식 실시기관 기준. 추가접수는 정규 수험료의 10%가 가산됩니다."
     },
     {
       "slug": "HSK-1", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
