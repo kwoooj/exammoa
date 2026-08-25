@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "sourceId": "toefl-ibt-format",
+  "status": "approved",
+  "observedAt": "2026-08-25T07:59:42.123Z",
+  "contentHash": "997756d5770e0851c13f54a160c6f18cf48ee30cd8d2557e7135999688c60807",
+  "archiveHash": "55806a8c2bf217cc2510d8ac5e6e586a8039433eefb69fd616c44da4cca0706d",
+  "archivePath": "data/archive/details/2026/toefl-ibt-format.20260825T075942.123Z.55806a8c2bf2.txt",
+  "diagnostics": {
+    "discovered": 1,
+    "included": 1,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "TOEFL-iBT",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 영어능력 평가",
+        "authority": "ETS",
+        "sourceUrl": "https://www.ets.org/toefl/test-takers/ibt/about/content.html",
+        "checkedAt": "2026-08-25",
+        "note": "대학 학업 환경의 읽기·듣기·쓰기·말하기 능력을 평가합니다."
+      },
+      "result": {
+        "type": "score",
+        "label": "영역·종합 1~6점(0.5 단위)",
+        "validityLabel": "시험일로부터 2년",
+        "note": "2026년 1월 21일부터 1~6 척도를 사용하며, 전환 기간 2년 동안 비교 가능한 0~120 종합점수도 함께 제공합니다."
+      },
+      "deliveryModes": [
+        "시험센터 컴퓨터 시험",
+        "Home Edition 원격 감독 시험"
+      ],
+      "formats": [
+        {
+          "effectiveFrom": "2026-01-21",
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.ets.org/toefl/test-takers/ibt/about/content.html",
+          "totalDurationMinutes": 90,
+          "summary": "기준 120문항·약 90분 · 읽기·듣기 적응형",
+          "stages": [
+            {
+              "id": "updated-ibt",
+              "name": "TOEFL iBT",
+              "durationMinutes": 90,
+              "totalItemCount": 120,
+              "sections": [
+                {
+                  "name": "Reading",
+                  "itemCount": 50,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 1,
+                    "max": 6
+                  }
+                },
+                {
+                  "name": "Listening",
+                  "itemCount": 47,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 1,
+                    "max": 6
+                  }
+                },
+                {
+                  "name": "Writing",
+                  "itemCount": 12,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 1,
+                    "max": 6
+                  }
+                },
+                {
+                  "name": "Speaking",
+                  "itemCount": 11,
+                  "mode": "recorded-response",
+                  "scoreRange": {
+                    "min": 1,
+                    "max": 6
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "Reading",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "Reading"
+                  ]
+                },
+                {
+                  "name": "Listening",
+                  "durationMinutes": 29,
+                  "sectionNames": [
+                    "Listening"
+                  ]
+                },
+                {
+                  "name": "Writing",
+                  "durationMinutes": 23,
+                  "sectionNames": [
+                    "Writing"
+                  ]
+                },
+                {
+                  "name": "Speaking",
+                  "durationMinutes": 8,
+                  "sectionNames": [
+                    "Speaking"
+                  ]
+                }
+              ],
+              "note": "Reading과 Listening은 다단계 적응형이므로 실제 문항 수와 시간은 달라질 수 있습니다. 안내·장비 점검 시간은 약 90분에 포함하지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "toefl-ibt-format"
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-25T08:00:11.727Z"
+}

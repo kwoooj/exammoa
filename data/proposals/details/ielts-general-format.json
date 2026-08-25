@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "sourceId": "ielts-general-format",
+  "status": "approved",
+  "observedAt": "2026-08-25T08:04:26.495Z",
+  "contentHash": "c085195750af9652376ad83289166c44c0986b10e51a7182203b76c033053dc7",
+  "archiveHash": "1f81b77afe2c0ff168658816e0887511a0c5e87ef6f4a6d87fec4fea6b4b52e4",
+  "archivePath": "data/archive/details/2026/ielts-general-format.20260825T075955.404Z.1f81b77afe2c.txt",
+  "diagnostics": {
+    "discovered": 1,
+    "included": 1,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "IELTS-General-Training",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 영어능력 평가",
+        "authority": "IELTS Partners",
+        "sourceUrl": "https://ielts.org/take-a-test/test-types/ielts-general-training-test",
+        "checkedAt": "2026-08-25",
+        "note": "이민·취업·학부 이전 교육에서 사용하는 실용 영어능력을 평가합니다."
+      },
+      "result": {
+        "type": "score",
+        "label": "영역·종합 0~9 Band(0.5 단위)",
+        "validityLabel": "통상 시험일로부터 2년",
+        "note": "인정기관이 요구 점수와 인정기간을 별도로 정할 수 있습니다."
+      },
+      "deliveryModes": [
+        "시험센터 컴퓨터 시험",
+        "말하기 대면 또는 시험센터 화상 인터뷰"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://ielts.org/take-a-test/test-types/ielts-general-training-test",
+          "totalDurationMinutes": {
+            "min": 161,
+            "max": 164
+          },
+          "summary": "듣기 30분·읽기 60분·쓰기 60분·말하기 11~14분",
+          "stages": [
+            {
+              "id": "ielts-general",
+              "name": "IELTS General Training 시험",
+              "durationMinutes": {
+                "min": 161,
+                "max": 164
+              },
+              "sections": [
+                {
+                  "name": "Listening",
+                  "itemCount": 40,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 9
+                  },
+                  "note": "4개 녹음 파트"
+                },
+                {
+                  "name": "General Training Reading",
+                  "itemCount": 40,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 9
+                  },
+                  "note": "3개 실용 지문 섹션"
+                },
+                {
+                  "name": "General Training Writing",
+                  "taskCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 9
+                  },
+                  "note": "편지 Task 1·에세이 Task 2, Task 2가 Writing 점수에 두 배 반영"
+                },
+                {
+                  "name": "Speaking",
+                  "taskCount": 3,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 9
+                  },
+                  "note": "3개 인터뷰 파트"
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "Listening",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "Listening"
+                  ]
+                },
+                {
+                  "name": "General Training Reading",
+                  "durationMinutes": 60,
+                  "sectionNames": [
+                    "General Training Reading"
+                  ]
+                },
+                {
+                  "name": "General Training Writing",
+                  "durationMinutes": 60,
+                  "sectionNames": [
+                    "General Training Writing"
+                  ]
+                },
+                {
+                  "name": "Speaking",
+                  "durationMinutes": {
+                    "min": 11,
+                    "max": 14
+                  },
+                  "sectionNames": [
+                    "Speaking"
+                  ]
+                }
+              ]
+            }
+          ],
+          "note": "Listening·Reading·Writing은 보통 같은 날 휴식 없이 진행되며, Speaking 일정은 접수처 배정에 따라 달라질 수 있습니다."
+        }
+      ],
+      "sourceRefs": [
+        "ielts-general-format"
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-25T08:04:52.994Z"
+}
