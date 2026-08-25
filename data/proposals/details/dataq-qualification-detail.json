@@ -1,0 +1,607 @@
+{
+  "version": 1,
+  "sourceId": "dataq-qualification-detail",
+  "status": "approved",
+  "observedAt": "2026-08-25T04:38:20.178Z",
+  "contentHash": "9fe7ab536661a19f7ead6974aabdd7f0179971a3499283c23e1afa1ff772df7d",
+  "archiveHash": "12e8d1649a0bb2222eb9b208363ad4741849b812f190fc61426f0161bbeb6221",
+  "archivePath": "data/archive/details/2026/dataq-qualification-detail.20260825T043820.178Z.12e8d1649a0b.txt",
+  "diagnostics": {
+    "discovered": 7,
+    "included": 7,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "DAP",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "dataq-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국데이터산업진흥원",
+        "sourceUrl": "https://www.dataq.or.kr/www/sub/a_01.do",
+        "checkedAt": "2026-08-25",
+        "note": "공인번호 제2023-03호"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 통합 합격제",
+        "validityLabel": "합격일로부터 2년 · 보수교육 이수 후 영구 전환",
+        "passCriteria": "총점 75점 이상이면서 필기 과목별 40% 이상, 실기 40% 이상",
+        "note": "합격 후 응시자격 증빙서류 심사를 통과해야 최종 합격합니다."
+      },
+      "deliveryModes": [
+        "시험장 지필시험",
+        "객관식·실기문항 통합"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.dataq.or.kr/www/sub/a_01.do",
+          "totalDurationMinutes": 240,
+          "summary": "객관식 75문항·실기 1문항·240분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "필기·실기 통합시험",
+              "durationMinutes": 240,
+              "sections": [
+                {
+                  "name": "전사아키텍처 이해",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 8
+                  }
+                },
+                {
+                  "name": "데이터 요건 분석",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 8
+                  }
+                },
+                {
+                  "name": "데이터 표준화",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 8
+                  }
+                },
+                {
+                  "name": "데이터 모델링",
+                  "itemCount": 25,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                },
+                {
+                  "name": "데이터베이스 설계와 이용",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 8
+                  }
+                },
+                {
+                  "name": "데이터 품질 관리 이해",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 8
+                  }
+                },
+                {
+                  "name": "데이터 모델링 실기",
+                  "itemCount": 1,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 40
+                  }
+                }
+              ],
+              "note": "과목별 제한시간 없이 4시간 동안 통합 시행"
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "DAsP",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "dataq-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국데이터산업진흥원",
+        "sourceUrl": "https://www.dataq.or.kr/www/sub/a_02.do",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "과목별 과락 적용 합격제",
+        "passCriteria": "총점 60점 이상이면서 과목별 40% 이상"
+      },
+      "deliveryModes": [
+        "시험장 지필시험",
+        "객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.dataq.or.kr/www/sub/a_02.do",
+          "totalDurationMinutes": 90,
+          "summary": "4과목·50문항·90분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 90,
+              "sections": [
+                {
+                  "name": "전사아키텍처 이해",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                },
+                {
+                  "name": "데이터 요건 분석",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                },
+                {
+                  "name": "데이터 표준화",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                },
+                {
+                  "name": "데이터 모델링",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 40
+                  }
+                }
+              ],
+              "note": "과목별 제한시간 없이 90분 동안 통합 시행"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "examSlug": "SQLP",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "dataq-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국데이터산업진흥원",
+        "sourceUrl": "https://www.dataq.or.kr/www/sub/a_03.do",
+        "checkedAt": "2026-08-25",
+        "note": "공인번호 제2022-04호"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 통합 합격제",
+        "validityLabel": "합격일로부터 2년 · 보수교육 이수 후 영구 전환",
+        "passCriteria": "총점 75점 이상이면서 과목별 40% 이상",
+        "note": "합격 후 응시자격 증빙서류 심사를 통과해야 최종 합격합니다."
+      },
+      "deliveryModes": [
+        "시험장 지필시험",
+        "객관식·실기문항 통합"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.dataq.or.kr/www/sub/a_03.do",
+          "totalDurationMinutes": 180,
+          "summary": "객관식 70문항·실기 2문항·180분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "필기·실기 통합시험",
+              "durationMinutes": 180,
+              "sections": [
+                {
+                  "name": "데이터 모델링의 이해",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "SQL 기본 및 활용",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                },
+                {
+                  "name": "SQL 고급 활용 및 튜닝",
+                  "itemCount": 40,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 40
+                  }
+                },
+                {
+                  "name": "SQL 실기",
+                  "itemCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 30
+                  }
+                }
+              ],
+              "note": "과목별 제한시간 없이 3시간 동안 통합 시행"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "examSlug": "SQLD",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "dataq-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국데이터산업진흥원",
+        "sourceUrl": "https://www.dataq.or.kr/www/sub/a_04.do",
+        "checkedAt": "2026-08-25",
+        "note": "공인번호 제2022-04호"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "과목별 과락 적용 합격제",
+        "validityLabel": "합격일로부터 2년 · 보수교육 이수 후 영구 전환",
+        "passCriteria": "총점 60점 이상이면서 과목별 40% 이상"
+      },
+      "deliveryModes": [
+        "시험장 지필시험",
+        "객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.dataq.or.kr/www/sub/a_04.do",
+          "totalDurationMinutes": 90,
+          "summary": "2과목·50문항·90분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 90,
+              "sections": [
+                {
+                  "name": "데이터 모델링의 이해",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                },
+                {
+                  "name": "SQL 기본 및 활용",
+                  "itemCount": 40,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 80
+                  }
+                }
+              ],
+              "note": "과목별 제한시간 없이 90분 동안 통합 시행"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "examSlug": "ADP",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "dataq-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국데이터산업진흥원",
+        "sourceUrl": "https://www.dataq.or.kr/www/sub/a_05.do",
+        "checkedAt": "2026-08-25",
+        "note": "공인번호 제2022-05호"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 단계별 합격제",
+        "passCriteria": "필기: 총점 70점 이상이면서 과목별 40% 이상 · 실기: 75점 이상",
+        "note": "필기 합격 후 2년간 필기가 면제되며, 최종 합격 전 응시자격 증빙서류 심사를 거칩니다."
+      },
+      "deliveryModes": [
+        "필기 시험장 지필시험",
+        "실기 CBT"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.dataq.or.kr/www/sub/a_05.do",
+          "totalDurationMinutes": 420,
+          "summary": "필기 81문항·180분 · 실기 240분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 180,
+              "sections": [
+                {
+                  "name": "데이터 이해",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "데이터 처리 기술 이해",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "데이터분석 기획",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "데이터분석",
+                  "itemCount": 40,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 40
+                  }
+                },
+                {
+                  "name": "데이터 시각화",
+                  "itemCount": 10,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 10
+                  }
+                },
+                {
+                  "name": "서술형",
+                  "itemCount": 1,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                }
+              ],
+              "note": "과목별 제한시간 없이 3시간 동안 통합 시행"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 240,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "데이터분석 실무",
+                  "mode": "computer-task"
+                }
+              ],
+              "note": "CBT 방식, 문항 수는 공식 안내에 별도 공개되지 않음"
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "ADsP",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "dataq-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국데이터산업진흥원",
+        "sourceUrl": "https://www.dataq.or.kr/www/sub/a_06.do",
+        "checkedAt": "2026-08-25",
+        "note": "공인번호 제2022-05호"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "과목별 과락 적용 합격제",
+        "passCriteria": "총점 60점 이상이면서 과목별 40% 이상"
+      },
+      "deliveryModes": [
+        "시험장 지필시험",
+        "객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.dataq.or.kr/www/sub/a_06.do",
+          "totalDurationMinutes": 90,
+          "summary": "3과목·50문항·90분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 90,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "데이터 이해",
+                  "itemCount": 10,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "데이터분석 기획",
+                  "itemCount": 10,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "데이터분석",
+                  "itemCount": 30,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "각 문항 2점, 과목별 제한시간 없이 90분 동안 통합 시행"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "examSlug": "빅데이터분석기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "dataq-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국데이터산업진흥원",
+        "sourceUrl": "https://www.dataq.or.kr/www/sub/a_07.do",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 단계별 합격제",
+        "passCriteria": "필기: 총점 60점 이상이면서 과목별 40% 이상 · 실기: 60점 이상",
+        "note": "최종 합격 전 응시자격 증빙서류 심사를 거치며, 필기 합격 후 2년간 필기가 면제됩니다."
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 CBT"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.dataq.or.kr/www/sub/a_07.do",
+          "totalDurationMinutes": 300,
+          "summary": "필기 4과목·80문항·120분 · 실기 180분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "빅데이터 분석 기획",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "빅데이터 탐색",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "빅데이터 모델링",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "빅데이터 결과 해석",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "note": "과목별 제한시간 없이 2시간 동안 통합 시행"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 180,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "빅데이터 분석 실무",
+                  "mode": "mixed",
+                  "note": "통합형(필답형·작업형)"
+                }
+              ],
+              "note": "CBT 방식, 문항 수는 공식 안내에 별도 공개되지 않음"
+            }
+          ],
+          "note": "실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-25T04:38:47.421Z"
+}

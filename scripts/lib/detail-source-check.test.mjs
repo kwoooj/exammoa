@@ -36,6 +36,34 @@ test('자동 출처는 robots 허용 없이는 활성화할 수 없다', () => {
   assert.match(result.problems.join('\n'), /robots가 허용되지 않은 자동 출처/);
 });
 
+test('승인형 업로드는 여러 공식 종목 URL을 추적할 수 있다', () => {
+  const result = checkDetailSources({ sources: [source({
+    method: 'manual-upload', adapter: 'normalized-detail-json', sourceUrl: undefined,
+    sourceUrls: ['https://example.com/a', 'https://example.com/b'],
+    robots: { status: 'not-applicable', checkedAt: '2026-08-24' },
+  })] }, ['시험A'], { knownAdapters: ['normalized-detail-json'] });
+  assert.equal(result.ok, true, result.problems.join('\n'));
+});
+
+test('자동 출처는 다중 수동 URL 계약을 쓸 수 없다', () => {
+  const result = checkDetailSources({ sources: [source({
+    sourceUrl: undefined, sourceUrls: ['https://example.com/a'],
+  })] }, ['시험A'], { knownAdapters: ['official-html'] });
+  assert.equal(result.ok, false);
+  assert.match(result.problems.join('\n'), /자동 출처는 sourceUrls/);
+});
+
+test('다중 공식 URL은 단일 URL과 섞거나 중복할 수 없다', () => {
+  const result = checkDetailSources({ sources: [source({
+    method: 'manual-upload', adapter: 'normalized-detail-json',
+    sourceUrls: ['https://example.com/a', 'https://example.com/a'],
+    robots: { status: 'not-applicable', checkedAt: '2026-08-24' },
+  })] }, ['시험A'], { knownAdapters: ['normalized-detail-json'] });
+  assert.equal(result.ok, false);
+  assert.match(result.problems.join('\n'), /중복 공식 출처/);
+  assert.match(result.problems.join('\n'), /함께 쓸 수 없다/);
+});
+
 test('활성 출처의 미구현 adapter와 잘못된 종목을 잡는다', () => {
   const result = checkDetailSources({ sources: [source({ examSlugs: ['없는시험'] })] }, ['시험A'], {
     knownAdapters: ['다른-adapter'],
@@ -67,6 +95,6 @@ test('저장소 출처 레지스트리가 통과한다', async () => {
   const visible = exams.exams.filter(exam => exam.tier !== 'X').map(exam => exam.slug);
   const result = checkDetailSources(registry, visible, { knownAdapters: ['normalized-detail-json', 'qnet-detail'] });
   assert.equal(result.ok, true, result.problems.join('\n'));
-  assert.equal(result.coverage.registered.length, 49);
-  assert.equal(result.coverage.uncovered.length, visible.length - 49);
+  assert.equal(result.coverage.registered.length, 56);
+  assert.equal(result.coverage.uncovered.length, visible.length - 56);
 });
