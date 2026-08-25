@@ -51,7 +51,19 @@ export function checkDetailSources(seed, knownExamSlugs = [], options = {}) {
     if (!Number.isInteger(source?.cadenceDays) || source.cadenceDays < 1) problems.push(`${id}: cadenceDays가 올바르지 않다.`);
     if (source?.reviewMode !== 'draft-pr') problems.push(`${id}: reviewMode는 draft-pr이어야 한다.`);
 
-    const url = source?.sourceUrl ?? source?.urlTemplate;
+    const sourceUrls = source?.sourceUrls;
+    if (sourceUrls !== undefined
+      && (!Array.isArray(sourceUrls) || !sourceUrls.length || sourceUrls.some(candidate => !HTTPS.test(candidate ?? '')))) {
+      problems.push(`${id}: sourceUrls에 올바른 공식 HTTPS 출처가 없다.`);
+    }
+    if (Array.isArray(sourceUrls) && new Set(sourceUrls).size !== sourceUrls.length) {
+      problems.push(`${id}: sourceUrls에 중복 공식 출처가 있다.`);
+    }
+    if (sourceUrls !== undefined && (source?.sourceUrl || source?.urlTemplate)) {
+      problems.push(`${id}: sourceUrls와 단일 공식 출처를 함께 쓸 수 없다.`);
+    }
+    if (sourceUrls !== undefined && automatic(source)) problems.push(`${id}: 자동 출처는 sourceUrls를 쓸 수 없다.`);
+    const url = source?.sourceUrl ?? source?.urlTemplate ?? sourceUrls?.[0];
     if (!HTTPS.test(url ?? '')) problems.push(`${id}: 공식 HTTPS 출처가 없다.`);
     if (source?.urlTemplate && !source.urlTemplate.includes('{')) problems.push(`${id}: urlTemplate에 치환 토큰이 없다.`);
 

@@ -102,6 +102,33 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats"],
       "examSlugs": ["AFPK"]
+    },
+    {
+      "id": "dataq-qualification-detail",
+      "name": "DataQ 7종 자격·시험 구성",
+      "authority": "한국데이터산업진흥원",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.dataq.or.kr/www/sub/a_01.do",
+        "https://www.dataq.or.kr/www/sub/a_02.do",
+        "https://www.dataq.or.kr/www/sub/a_03.do",
+        "https://www.dataq.or.kr/www/sub/a_04.do",
+        "https://www.dataq.or.kr/www/sub/a_05.do",
+        "https://www.dataq.or.kr/www/sub/a_06.do",
+        "https://www.dataq.or.kr/www/sub/a_07.do"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-25",
+        "url": "https://www.dataq.or.kr/robots.txt",
+        "note": "robots.txt가 전체 자동 수집을 제한하므로 공식 페이지 수기 대조와 승인형 업로드만 사용"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats"],
+      "examSlugs": ["ADP", "ADsP", "DAP", "DAsP", "SQLP", "SQLD", "빅데이터분석기사"]
     }
   ]
 }
