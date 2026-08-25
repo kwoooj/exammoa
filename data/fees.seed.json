@@ -1714,7 +1714,7 @@
       }
     },
     {
-      "slug": "TOEFL-iBT", "items": [{ "label": "응시료", "amountLabel": "접수 국가·시험 방식별 확인" }], "checkedAt": "2026-08-20",
+      "slug": "TOEFL-iBT", "items": [{ "label": "응시료", "amountLabel": "접수 국가 선택 후 USD 금액 확인" }], "checkedAt": "2026-08-25",
       "source": { "kind": "manual", "url": "https://www.ets.org/toefl/test-takers/ibt/register/fees.html", "recheckAfterDays": 30 }
     },
     {
@@ -1742,12 +1742,12 @@
       "source": { "kind": "manual", "url": "https://g-telp.co.kr/mobile/info/info2_2.asp", "recheckAfterDays": 30 }
     },
     {
-      "slug": "IELTS-Academic", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://ielts.org/take-a-test/book-a-test", "recheckAfterDays": 30 }
+      "slug": "IELTS-Academic", "items": [{ "label": "컴퓨터 시험", "amount": 347000 }], "checkedAt": "2026-08-25",
+      "source": { "kind": "manual", "url": "https://www.britishcouncil.kr/exam/ielts/which-test/academic", "recheckAfterDays": 30 }
     },
     {
-      "slug": "IELTS-General-Training", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://ielts.org/take-a-test/book-a-test", "recheckAfterDays": 30 }
+      "slug": "IELTS-General-Training", "items": [{ "label": "컴퓨터 시험", "amount": 347000 }], "checkedAt": "2026-08-25",
+      "source": { "kind": "manual", "url": "https://www.britishcouncil.kr/en/exam/ielts/which-test/general-training", "recheckAfterDays": 30 }
     },
     {
       "slug": "JLPT-N1", "items": [{ "label": "응시료", "amountLabel": "국내 접수처에서 확인" }], "checkedAt": "2026-08-20",

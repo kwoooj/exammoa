@@ -1,0 +1,10 @@
+ETS TOEFL iBT Test Content and Structure, checked 2026-08-25
+Effective 2026-01-21. Reading 50 items / 30 min, Listening 47 / 29 min,
+Writing 12 / 23 min, Speaking 11 / 8 min. Base total 120 items / 90 min.
+Reading and Listening are adaptive; time and items may vary. Directions excluded.
+Scores: four section and overall scores on 1-6 scale in half-band increments;
+comparable overall 0-120 score is also provided for a two-year transition.
+Official URLs:
+https://www.ets.org/toefl/test-takers/ibt/about/content.html
+https://www.ets.org/toefl/test-takers/ibt/scores/understand-scores.html
+https://www.ets.org/toefl/test-takers/ibt/register/fees.html

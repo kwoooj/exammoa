@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "sourceId": "ielts-academic-format",
+  "status": "approved",
+  "observedAt": "2026-08-25T08:04:20.062Z",
+  "contentHash": "885e4e1b54f8e88abe9c7b388b53f19628d18a2629555166a1410b2a07790008",
+  "archiveHash": "1710e0b0bd3638691f937da1dbf672abaac35967861fb429b9eb437657ee887d",
+  "archivePath": "data/archive/details/2026/ielts-academic-format.20260825T075948.456Z.1710e0b0bd36.txt",
+  "diagnostics": {
+    "discovered": 1,
+    "included": 1,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "IELTS-Academic",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 영어능력 평가",
+        "authority": "IELTS Partners",
+        "sourceUrl": "https://ielts.org/take-a-test/test-types/ielts-academic-test",
+        "checkedAt": "2026-08-25",
+        "note": "학부·대학원 진학과 전문직 등록에 필요한 학업 영어능력을 평가합니다."
+      },
+      "result": {
+        "type": "score",
+        "label": "영역·종합 0~9 Band(0.5 단위)",
+        "validityLabel": "통상 시험일로부터 2년",
+        "note": "인정기관이 요구 점수와 인정기간을 별도로 정할 수 있습니다."
+      },
+      "deliveryModes": [
+        "시험센터 컴퓨터 시험",
+        "말하기 대면 또는 시험센터 화상 인터뷰"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://ielts.org/take-a-test/test-types/ielts-academic-test",
+          "totalDurationMinutes": {
+            "min": 161,
+            "max": 164
+          },
+          "summary": "듣기 30분·읽기 60분·쓰기 60분·말하기 11~14분",
+          "stages": [
+            {
+              "id": "ielts-academic",
+              "name": "IELTS Academic 시험",
+              "durationMinutes": {
+                "min": 161,
+                "max": 164
+              },
+              "sections": [
+                {
+                  "name": "Listening",
+                  "itemCount": 40,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 9
+                  },
+                  "note": "4개 녹음 파트"
+                },
+                {
+                  "name": "Academic Reading",
+                  "itemCount": 40,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 9
+                  },
+                  "note": "3개 학술 지문"
+                },
+                {
+                  "name": "Academic Writing",
+                  "taskCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 9
+                  },
+                  "note": "Task 1·Task 2, Task 2가 Writing 점수에 두 배 반영"
+                },
+                {
+                  "name": "Speaking",
+                  "taskCount": 3,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 9
+                  },
+                  "note": "3개 인터뷰 파트"
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "Listening",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "Listening"
+                  ]
+                },
+                {
+                  "name": "Academic Reading",
+                  "durationMinutes": 60,
+                  "sectionNames": [
+                    "Academic Reading"
+                  ]
+                },
+                {
+                  "name": "Academic Writing",
+                  "durationMinutes": 60,
+                  "sectionNames": [
+                    "Academic Writing"
+                  ]
+                },
+                {
+                  "name": "Speaking",
+                  "durationMinutes": {
+                    "min": 11,
+                    "max": 14
+                  },
+                  "sectionNames": [
+                    "Speaking"
+                  ]
+                }
+              ]
+            }
+          ],
+          "note": "Listening·Reading·Writing은 보통 같은 날 휴식 없이 진행되며, Speaking 일정은 접수처 배정에 따라 달라질 수 있습니다."
+        }
+      ],
+      "sourceRefs": [
+        "ielts-academic-format"
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-25T08:04:42.027Z"
+}

@@ -325,6 +325,75 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
       "examSlugs": ["오픽"]
+    },
+    {
+      "id": "toefl-ibt-format",
+      "name": "TOEFL iBT 현행 시험 구성",
+      "authority": "ETS",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.ets.org/toefl/test-takers/ibt/about/content.html",
+        "https://www.ets.org/toefl/test-takers/ibt/scores/understand-scores.html",
+        "https://www.ets.org/toefl/test-takers/ibt/register/fees.html"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-25",
+        "url": "https://www.ets.org/robots.txt",
+        "note": "2026년 개편 후 현행 구성과 지역 선택형 응시료를 공식 페이지에서 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["TOEFL-iBT"]
+    },
+    {
+      "id": "ielts-academic-format",
+      "name": "IELTS Academic 시험 구성",
+      "authority": "IELTS Partners·주한영국문화원",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://ielts.org/take-a-test/test-types/ielts-academic-test",
+        "https://ielts.org/take-a-test/your-results/ielts-scoring-in-detail",
+        "https://www.britishcouncil.kr/exam/ielts/which-test/academic"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-25",
+        "url": "https://ielts.org/robots.txt",
+        "note": "글로벌 공식 시험 구성과 한국 공식 접수처의 컴퓨터 시험 응시료를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["IELTS-Academic"]
+    },
+    {
+      "id": "ielts-general-format",
+      "name": "IELTS General Training 시험 구성",
+      "authority": "IELTS Partners·주한영국문화원",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://ielts.org/take-a-test/test-types/ielts-general-training-test",
+        "https://ielts.org/take-a-test/your-results/ielts-scoring-in-detail",
+        "https://www.britishcouncil.kr/en/exam/ielts/which-test/general-training"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-25",
+        "url": "https://ielts.org/robots.txt",
+        "note": "글로벌 공식 시험 구성과 한국 공식 접수처의 컴퓨터 시험 응시료를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["IELTS-General-Training"]
     }
   ]
 }
