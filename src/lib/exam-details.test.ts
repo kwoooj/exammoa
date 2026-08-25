@@ -35,6 +35,17 @@ test('시험 한눈에 시간에는 과목·문항 수를 섞지 않는다', () 
   assert.equal(formatDurationLabel(staged), '필기 2시간 30분 · 실기 2시간 30분');
 });
 
+test('단계명과 시험시간 사이 공백은 하나만 둔다', () => {
+  const format = {
+    checkedAt: '2026-08-25', sourceUrl: 'https://example.com',
+    stages: [
+      { id: 'first', name: '1차 시험', durationMinutes: 100, sections: [{ name: '전체' }] },
+      { id: 'second', name: '2차 시험', durationMinutes: 100, sections: [{ name: '전체' }] },
+    ],
+  };
+  assert.equal(formatDurationLabel(format), '1차 1시간 40분 · 2차 1시간 40분');
+});
+
 test('고정·가변 문항 수와 응시 방식을 표시한다', () => {
   assert.equal(countLabel(20), '20문항');
   assert.equal(countLabel({ max: 50 }), '최대 50문항');

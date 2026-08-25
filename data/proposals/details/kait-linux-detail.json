@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "sourceId": "kait-linux-detail",
+  "status": "approved",
+  "observedAt": "2026-08-25T05:10:37.496Z",
+  "contentHash": "a2096743dd7478396f84799f39977010d5c5330f82a5549e5b3f7e04f8375488",
+  "archiveHash": "af5d4d3b7d3c55e49fb63562b53ec1ecefad5f5d0d9b416716d650b28240a1d2",
+  "archivePath": "data/archive/details/2026/kait-linux-detail.20260825T051037.496Z.af5d4d3b7d3c.html",
+  "diagnostics": {
+    "discovered": 2,
+    "included": 2,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "리눅스마스터1급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kait-linux-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국정보통신진흥협회(KAIT)",
+        "sourceUrl": "https://kait.or.kr/user/MainMenuList.do?cateSeq=5&menuSeq=119",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "1차·2차 단계별 합격제",
+        "passCriteria": "1차: 60점 이상이면서 과목별 40% 이상 · 2차: 60점 이상"
+      },
+      "deliveryModes": [
+        "1차 시험장 객관식",
+        "2차 필기·작업식 통합"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://kait.or.kr/user/MainMenuList.do?cateSeq=5&menuSeq=119",
+          "totalDurationMinutes": 200,
+          "summary": "1차 100문항·100분 · 2차 필기 10문항·실기 5~7문항·100분",
+          "stages": [
+            {
+              "id": "first",
+              "name": "1차 시험",
+              "durationMinutes": 100,
+              "totalItemCount": 100,
+              "sections": [
+                {
+                  "name": "리눅스 실무의 이해",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "리눅스 시스템 관리",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "네트워크 및 서비스의 활용",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "필기(객관식), 과목별 문항 배분·제한시간은 공식 안내에 별도 공개되지 않음"
+            },
+            {
+              "id": "second",
+              "name": "2차 시험",
+              "durationMinutes": 100,
+              "sections": [
+                {
+                  "name": "필기(단답식·서술식)",
+                  "itemCount": 10,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 40
+                  }
+                },
+                {
+                  "name": "실기(작업식)",
+                  "itemCount": {
+                    "min": 5,
+                    "max": 7
+                  },
+                  "mode": "practical",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                }
+              ],
+              "note": "출제범위: 리눅스 실무의 이해 · 리눅스 시스템 관리 · 네트워크 및 서비스의 활용. 필기 40%·실기 60%이며 두 방식은 100분 안에 통합 시행"
+            }
+          ],
+          "note": "1차와 2차는 별도 일정으로 시행하며, 실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "리눅스마스터2급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kait-linux-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국정보통신진흥협회(KAIT)",
+        "sourceUrl": "https://kait.or.kr/user/MainMenuList.do?cateSeq=5&menuSeq=119",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "1차·2차 단계별 합격제",
+        "passCriteria": "1차: 60점 이상 · 2차: 60점 이상이면서 과목별 40% 이상"
+      },
+      "deliveryModes": [
+        "1차 온라인 객관식",
+        "2차 시험장 객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://kait.or.kr/user/MainMenuList.do?cateSeq=5&menuSeq=119",
+          "totalDurationMinutes": 160,
+          "summary": "1차 50문항·60분 · 2차 80문항·100분",
+          "stages": [
+            {
+              "id": "first",
+              "name": "1차 온라인시험",
+              "durationMinutes": 60,
+              "totalItemCount": 50,
+              "sections": [
+                {
+                  "name": "리눅스 일반",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "온라인시험(객관식), 과목별 문항 배분·제한시간은 공식 안내에 별도 공개되지 않음"
+            },
+            {
+              "id": "second",
+              "name": "2차 시험",
+              "durationMinutes": 100,
+              "totalItemCount": 80,
+              "sections": [
+                {
+                  "name": "리눅스 운영 및 관리",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "리눅스 활용",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "필기(객관식), 과목별 문항 배분·제한시간은 공식 안내에 별도 공개되지 않음"
+            }
+          ],
+          "note": "1차와 2차는 별도 일정으로 시행하며, 실제 시작시각과 입실 마감은 회차별 수험표를 확인해야 합니다."
+        }
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-25T05:11:48.194Z"
+}

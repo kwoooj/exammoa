@@ -129,6 +129,25 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats"],
       "examSlugs": ["ADP", "ADsP", "DAP", "DAsP", "SQLP", "SQLD", "빅데이터분석기사"]
+    },
+    {
+      "id": "kait-linux-detail",
+      "name": "리눅스마스터 자격 개요",
+      "authority": "한국정보통신진흥협회(KAIT)",
+      "method": "html",
+      "collectionStatus": "active",
+      "adapter": "kait-linux-detail",
+      "sourceUrl": "https://kait.or.kr/user/MainMenuList.do?cateSeq=5&menuSeq=119",
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "allowed",
+        "checkedAt": "2026-08-25",
+        "url": "https://kait.or.kr/robots.txt",
+        "note": "robots.txt가 규칙 파일 대신 404 HTML 안내를 반환해 RFC 9309 기준 허용으로 판정"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats"],
+      "examSlugs": ["리눅스마스터1급", "리눅스마스터2급"]
     }
   ]
 }
