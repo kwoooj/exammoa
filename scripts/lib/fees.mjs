@@ -48,12 +48,13 @@ export function labeledPageFees(html, label) {
 
 /** 공식 HTML에 현재 기준 금액이 모두 남아 있는지 확인한다. */
 export function pageContainsFee(html, record) {
+  const currentHtml = String(html ?? '').replace(/<!--[\s\S]*?-->/g, ' ');
   if (record.source.feeLabel) {
-    const observed = labeledPageFees(html, record.source.feeLabel);
+    const observed = labeledPageFees(currentHtml, record.source.feeLabel);
     const expected = [...new Set(record.items.map(item => item.amount).filter(Number.isSafeInteger))];
     return observed.length === expected.length && observed.every(amount => expected.includes(amount));
   }
-  const body = compact(html);
+  const body = compact(currentHtml);
   const fingerprints = record.source.fingerprints
     ?? record.items.filter(item => item.amount !== undefined).map(item => `${item.amount}원`);
   return fingerprints.every(value => body.includes(compact(value)));

@@ -167,6 +167,44 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
       "examSlugs": ["전산세무1급", "전산세무2급", "전산회계1급", "전산회계2급", "세무회계1급", "세무회계2급", "세무회계3급", "기업회계1급", "기업회계2급", "기업회계3급"]
+    },
+    {
+      "id": "korcham-qualification-detail",
+      "name": "대한상공회의소 사무정보 3종 시험 구성",
+      "authority": "대한상공회의소",
+      "method": "html",
+      "collectionStatus": "active",
+      "adapter": "korcham-detail",
+      "sourceUrl": "https://license.korcham.net/co/examguide.do?cd=0103&mm=21",
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "allowed",
+        "checkedAt": "2026-08-25",
+        "url": "https://license.korcham.net/robots.txt",
+        "note": "robots.txt는 /kor/만 제한하며 자동 수집하는 /co/examguide.do 경로는 허용"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["컴퓨터활용능력1급", "컴퓨터활용능력2급", "워드프로세서"]
+    },
+    {
+      "id": "kpc-itq-qualification-detail",
+      "name": "ITQ 자격·시험 구성",
+      "authority": "한국생산성본부(KPC)",
+      "method": "html",
+      "collectionStatus": "active",
+      "adapter": "kpc-itq-detail",
+      "sourceUrl": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectItqinfotchnlgyqc.do?pageKind=announcement",
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "allowed",
+        "checkedAt": "2026-08-25",
+        "url": "https://license.kpc.or.kr/robots.txt",
+        "note": "robots.txt Allow:/이며 ITQ 자격소개 경로는 개별 제한 목록에 포함되지 않음"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["ITQ"]
     }
   ]
 }

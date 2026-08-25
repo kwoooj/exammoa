@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { checkDetailSources } from './detail-source-check.mjs';
+import { DETAIL_ADAPTERS } from './detail-adapters.mjs';
 
 const source = (over = {}) => ({
   id: 'official', name: '공식 상세', authority: '시행기관', method: 'html',
@@ -93,8 +94,8 @@ test('저장소 출처 레지스트리가 통과한다', async () => {
     readFile('data/exams.seed.json', 'utf8').then(JSON.parse),
   ]);
   const visible = exams.exams.filter(exam => exam.tier !== 'X').map(exam => exam.slug);
-  const result = checkDetailSources(registry, visible, { knownAdapters: ['normalized-detail-json', 'qnet-detail', 'kait-linux-detail', 'kacpta-detail'] });
+  const result = checkDetailSources(registry, visible, { knownAdapters: [...DETAIL_ADAPTERS.keys()] });
   assert.equal(result.ok, true, result.problems.join('\n'));
-  assert.equal(result.coverage.registered.length, 68);
-  assert.equal(result.coverage.uncovered.length, visible.length - 68);
+  assert.equal(result.coverage.registered.length, 72);
+  assert.equal(result.coverage.uncovered.length, visible.length - 72);
 });

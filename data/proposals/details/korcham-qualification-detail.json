@@ -1,0 +1,278 @@
+{
+  "version": 1,
+  "sourceId": "korcham-qualification-detail",
+  "status": "approved",
+  "observedAt": "2026-08-25T06:57:13.622Z",
+  "contentHash": "7579cb3db9a894db2efcbb484d37592b12e4f20c427fc8003cfa26d24a7c98e0",
+  "archiveHash": "268d0847ea7e68b49f6452ffce358933b2acfc6828107b21bd4bdc23ab4c247a",
+  "archivePath": "data/archive/details/2026/korcham-qualification-detail.20260825T065713.622Z.268d0847ea7e.json",
+  "diagnostics": {
+    "discovered": 3,
+    "included": 3,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "컴퓨터활용능력1급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "korcham-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "대한상공회의소",
+        "sourceUrl": "https://license.korcham.net/co/examguide.do?cd=0103&mm=21",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 과목당 40점 이상이면서 전과목 평균 60점 이상 · 실기: 스프레드시트 실무와 데이터베이스 실무 모두 70점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 컴퓨터 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.korcham.net/co/examguide.do?cd=0103&mm=21",
+          "totalDurationMinutes": 150,
+          "summary": "필기 60문항·60분 · 실기 2과목·90분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalItemCount": 60,
+              "sections": [
+                {
+                  "name": "컴퓨터 일반",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "스프레드시트 일반",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "데이터베이스 일반",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 60문항을 60분 안에 통합 시행하며, 과목별 문항 배분은 공식 안내에 별도 공개되지 않습니다."
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 90,
+              "sections": [
+                {
+                  "name": "스프레드시트 실무",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "데이터베이스 실무",
+                  "mode": "computer-task",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "스프레드시트 실무",
+                  "durationMinutes": 45,
+                  "sectionNames": [
+                    "스프레드시트 실무"
+                  ]
+                },
+                {
+                  "name": "데이터베이스 실무",
+                  "durationMinutes": 45,
+                  "sectionNames": [
+                    "데이터베이스 실무"
+                  ]
+                }
+              ],
+              "note": "공식 안내가 두 실기 과목을 각각 45분으로 구분합니다."
+            }
+          ],
+          "note": "필기와 실기는 별도 시험입니다. 실제 시작시각은 시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "컴퓨터활용능력2급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "korcham-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "대한상공회의소",
+        "sourceUrl": "https://license.korcham.net/co/examguide.do?cd=0103&mm=21",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 과목당 40점 이상이면서 전과목 평균 60점 이상 · 실기: 100점 만점에 70점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 컴퓨터 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.korcham.net/co/examguide.do?cd=0103&mm=21",
+          "totalDurationMinutes": 80,
+          "summary": "필기 40문항·40분 · 실기 40분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 40,
+              "totalItemCount": 40,
+              "sections": [
+                {
+                  "name": "컴퓨터 일반",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "스프레드시트 일반",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 40문항을 40분 안에 통합 시행하며, 과목별 문항 배분은 공식 안내에 별도 공개되지 않습니다."
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 40,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "스프레드시트 실무",
+                  "mode": "computer-task"
+                }
+              ],
+              "note": "컴퓨터 작업형 단일 과목입니다."
+            }
+          ],
+          "note": "필기와 실기는 별도 시험입니다. 실제 시작시각은 시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "워드프로세서",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "korcham-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "대한상공회의소",
+        "sourceUrl": "https://license.korcham.net/co/examguide.do?cd=0102&mm=22",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 과목당 40점 이상이면서 전과목 평균 60점 이상 · 실기: 100점 만점에 80점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 컴퓨터 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.korcham.net/co/examguide.do?cd=0102&mm=22",
+          "totalDurationMinutes": 90,
+          "summary": "필기 60문항·60분 · 실기 30분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalItemCount": 60,
+              "sections": [
+                {
+                  "name": "워드프로세싱 용어 및 기능",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "PC 운영체제",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "PC 기본상식",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 60문항을 60분 안에 통합 시행하며, 과목별 문항 배분은 공식 안내에 별도 공개되지 않습니다."
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 30,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "문서편집 기능",
+                  "mode": "computer-task"
+                }
+              ],
+              "note": "컴퓨터 작업형 단일 과목입니다."
+            }
+          ],
+          "note": "필기와 실기는 별도 시험입니다. 실제 시작시각은 시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-25T06:58:21.315Z"
+}

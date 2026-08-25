@@ -165,10 +165,11 @@
           "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-19",
+      "checkedAt": "2026-08-25",
       "source": {
         "kind": "page",
-        "url": "https://license.korcham.net/co/examguide.do?cd=0103&mm=202"
+        "url": "https://license.korcham.net/co/examguide.do?cd=0103&mm=21",
+        "fingerprints": ["필기 : 20,500원", "실기 : 25,000원"]
       }
     },
     {
@@ -183,10 +184,11 @@
           "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-19",
+      "checkedAt": "2026-08-25",
       "source": {
         "kind": "page",
-        "url": "https://license.korcham.net/co/examguide.do?cd=0103&mm=202"
+        "url": "https://license.korcham.net/co/examguide.do?cd=0103&mm=21",
+        "fingerprints": ["필기 : 20,500원", "실기 : 25,000원"]
       }
     },
     {
@@ -201,10 +203,11 @@
           "amount": 22000
         }
       ],
-      "checkedAt": "2026-08-19",
+      "checkedAt": "2026-08-25",
       "source": {
         "kind": "page",
-        "url": "https://license.korcham.net/co/examguide.do?cd=0102&mm=22"
+        "url": "https://license.korcham.net/co/examguide.do?cd=0102&mm=22",
+        "fingerprints": ["필기 : 19,000원", "실기 : 22,000원"]
       }
     },
     {
@@ -223,11 +226,12 @@
           "amount": 60000
         }
       ],
-      "checkedAt": "2026-08-19",
+      "checkedAt": "2026-08-25",
       "note": "개인 온라인 접수 시 결제대행수수료 1,000원이 별도 부과됩니다.",
       "source": {
         "kind": "page",
-        "url": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectItqinfotchnlgyqc.do?pageKind=announcement"
+        "url": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectItqinfotchnlgyqc.do?pageKind=announcement",
+        "fingerprints": ["일반접수", "22,000원", "42,000원", "60,000원", "2024년 1회차 정기시험부터 적용"]
       }
     },
     {
