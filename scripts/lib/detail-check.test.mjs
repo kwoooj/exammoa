@@ -51,6 +51,14 @@ test('문항 수와 배점 범위의 잘못된 값을 막는다', () => {
   assert.match(problems, /과목 배점 범위/);
 });
 
+test('과목별 수를 알 수 없을 때 단계 전체 문항 수를 허용하고 잘못된 값은 막는다', () => {
+  const valid = structuredClone(detail);
+  valid.formats[0].stages[0].totalItemCount = 60;
+  assert.equal(checkExamDetails({ details: [valid] }, ['시험']).ok, true);
+  valid.formats[0].stages[0].totalItemCount = 0;
+  assert.match(checkExamDetails({ details: [valid] }, ['시험']).problems.join('\n'), /단계 전체 문항 수/);
+});
+
 test('강제 진행 구간은 실제 과목을 참조하고 전체 시간과 일치해야 한다', () => {
   const bad = structuredClone(detail);
   bad.formats[0].stages[0].durationMinutes = 60;
@@ -67,4 +75,12 @@ test('동시에 적용되는 구성 버전을 막는다', () => {
   const bad = structuredClone(detail);
   bad.formats.push({ ...structuredClone(bad.formats[0]), effectiveFrom: '2026-08-01' });
   assert.match(checkExamDetails({ details: [bad] }, ['시험']).problems.join('\n'), /구성 적용 기간이 겹친다/);
+});
+
+test('적용 시작일 미공개는 단일 현행 구성에서만 허용한다', () => {
+  const current = structuredClone(detail);
+  delete current.formats[0].effectiveFrom;
+  assert.equal(checkExamDetails({ details: [current] }, ['시험']).ok, true);
+  current.formats.push(structuredClone(current.formats[0]));
+  assert.match(checkExamDetails({ details: [current] }, ['시험']).problems.join('\n'), /단일 현행 버전/);
 });

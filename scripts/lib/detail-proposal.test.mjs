@@ -54,6 +54,7 @@ test('부분 파싱 후보는 승격 전에 실패한다', () => {
   }), source, ['시험A']);
   assert.equal(result.ok, false);
   assert.match(result.problems.join('\n'), /승격할 수 없다/);
+  assert.match(result.problems.join('\n'), /수집 누락: 시험B/);
 });
 
 test('진단이 초록이어도 출처 등록 시험 일부가 빠지면 실패한다', () => {

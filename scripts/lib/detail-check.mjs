@@ -53,10 +53,14 @@ export function checkExamDetails(seed, knownExamSlugs = [], options = {}) {
     for (let formatIndex = 0; formatIndex < orderedFormats.length; formatIndex += 1) {
       const format = orderedFormats[formatIndex];
       const previous = orderedFormats[formatIndex - 1];
-      if (!iso(format.effectiveFrom) || starts.has(format.effectiveFrom)) problems.push(`${slug}: 구성 적용일이 없거나 중복이다.`);
-      starts.add(format.effectiveFrom);
-      if (format.effectiveTo && (!iso(format.effectiveTo) || format.effectiveTo < format.effectiveFrom)) problems.push(`${slug}: 구성 종료일이 올바르지 않다.`);
-      if (previous && (!previous.effectiveTo || previous.effectiveTo >= format.effectiveFrom)) problems.push(`${slug}: 구성 적용 기간이 겹친다.`);
+      if (format.effectiveFrom === undefined) {
+        if (detail.formats.length !== 1 || format.effectiveTo) problems.push(`${slug}: 적용일 미공개 구성은 단일 현행 버전이어야 한다.`);
+      } else {
+        if (!iso(format.effectiveFrom) || starts.has(format.effectiveFrom)) problems.push(`${slug}: 구성 적용일이 올바르지 않거나 중복이다.`);
+        starts.add(format.effectiveFrom);
+      }
+      if (format.effectiveTo && (!iso(format.effectiveTo) || (format.effectiveFrom && format.effectiveTo < format.effectiveFrom))) problems.push(`${slug}: 구성 종료일이 올바르지 않다.`);
+      if (previous && format.effectiveFrom && (!previous.effectiveTo || previous.effectiveTo >= format.effectiveFrom)) problems.push(`${slug}: 구성 적용 기간이 겹친다.`);
       if (!iso(format.checkedAt) || !http(format.sourceUrl)) problems.push(`${slug}: 구성 출처 또는 확인일이 올바르지 않다.`);
       if (!positiveDuration(format.totalDurationMinutes)) problems.push(`${slug}: 전체 시간이 올바르지 않다.`);
       if (!Array.isArray(format.stages) || !format.stages.length) problems.push(`${slug}: 시험 단계가 비었다.`);
@@ -65,6 +69,7 @@ export function checkExamDetails(seed, knownExamSlugs = [], options = {}) {
         if (!stage.id || !stage.name || stageIds.has(stage.id) || !Array.isArray(stage.sections) || !stage.sections.length) problems.push(`${slug}: 시험 단계가 올바르지 않다.`);
         stageIds.add(stage.id);
         if (!positiveDuration(stage.durationMinutes)) problems.push(`${slug}: 단계 전체 시간이 올바르지 않다.`);
+        if (!positiveCount(stage.totalItemCount)) problems.push(`${slug}: 단계 전체 문항 수가 올바르지 않다.`);
         if (stage.totalScore !== undefined && !positive(stage.totalScore)) problems.push(`${slug}: 단계 전체 배점이 올바르지 않다.`);
         const sectionNames = new Set((stage.sections ?? []).map(section => section.name));
         for (const section of stage.sections ?? []) {

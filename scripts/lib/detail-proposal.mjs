@@ -70,6 +70,9 @@ export function checkDetailProposal(proposal, source, knownExamSlugs = [], optio
     }
     if (diagnostics.missing.length || diagnostics.unclassified.length || diagnostics.failures.length) {
       problems.push('후보에 누락·미분류·파싱 실패가 있어 승격할 수 없다.');
+      if (diagnostics.missing.length) problems.push(`수집 누락: ${diagnostics.missing.join(', ')}`);
+      if (diagnostics.unclassified.length) problems.push(`미분류: ${diagnostics.unclassified.join(', ')}`);
+      if (diagnostics.failures.length) problems.push(`파싱 실패: ${diagnostics.failures.join(' | ')}`);
     }
     if (Array.isArray(proposal?.details) && diagnostics.included !== proposal.details.length) {
       problems.push('후보 included 수와 details 수가 다르다.');

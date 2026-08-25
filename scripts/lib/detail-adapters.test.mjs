@@ -14,4 +14,6 @@ test('정규화 업로드에 출처 참조를 중복 없이 붙인다', () => {
 
 test('어댑터 레지스트리에 승인형 JSON 입력이 있다', () => {
   assert.equal(typeof DETAIL_ADAPTERS.get('normalized-detail-json')?.parse, 'function');
+  assert.equal(typeof DETAIL_ADAPTERS.get('qnet-detail')?.collect, 'function');
+  assert.equal(typeof DETAIL_ADAPTERS.get('qnet-detail')?.parse, 'function');
 });

@@ -1,0 +1,3908 @@
+{
+  "version": 1,
+  "sourceId": "qnet-qualification-detail",
+  "status": "review-required",
+  "observedAt": "2026-08-25T00:32:24.608Z",
+  "contentHash": "0983ac8a3028914c9762bac2d75844082c3dd988ec4262f420739e6881f2d5f8",
+  "archiveHash": "cd7c462c682788df8ec21b5606e1fcaec37d504131bd54e9cc80a81bafb54e8f",
+  "archivePath": "data/archive/details/2026/qnet-qualification-detail.20260825T002217.387Z.cd7c462c6827.json",
+  "diagnostics": {
+    "discovered": 47,
+    "included": 47,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "정보처리기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1320",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1320",
+          "totalDurationMinutes": 300,
+          "summary": "필기·5과목·100문항·150분 · 실기·정보처리 실무·150분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "소프트웨어설계",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "소프트웨어개발",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "데이터베이스구축",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "프로그래밍언어활용",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "정보시스템구축관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형, 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 150,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "정보처리 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(2시간30분)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "위험물산업기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2121",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2121",
+          "totalDurationMinutes": 210,
+          "summary": "필기·3과목·60문항·90분 · 실기·위험물 취급 실무·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 90,
+              "sections": [
+                {
+                  "name": "물질의 물리화학적 성질",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "화재예방과 소화방법",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "위험물의 성질 및 취급",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형, 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 120,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "위험물 취급 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(2시간, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "전기산업기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2140",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점이상 · 실기: 100점을 만점으로 하여 60점이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2140",
+          "totalDurationMinutes": 270,
+          "summary": "필기·5과목·100문항·150분 · 실기·전기설비설계 및 관리·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "전기자기학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "전력공학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "전기기기",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "회로이론",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "전기설비기술기준",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형, 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 120,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "전기설비설계 및 관리",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(2시간)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "사회조사분석사2급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=9521",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100 점을 만점으로 하여 과목당 40 점 이상 , 전과목 평균 60 점 이상 · 실기: 100 점을 만점으로 하여 60 점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형·작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=9521",
+          "totalDurationMinutes": 390,
+          "summary": "필기·3과목·100문항·150분 · 실기·사회조사실무 (설문작성, 단순통계처리 및 분석)·240분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "조사방법과 설계",
+                  "itemCount": 30,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "조사관리와 자료처리",
+                  "itemCount": 30,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "통계분석과 활용",
+                  "itemCount": 40,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 100문제(150분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 240,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "사회조사실무 (설문작성, 단순통계처리 및 분석)",
+                  "mode": "mixed"
+                }
+              ],
+              "note": "복합형 [작업형 2시간 정도(40점)+ 필답형 2시간(60점)]"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "산업안전기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1431",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형·작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1431",
+          "totalDurationMinutes": 330,
+          "summary": "필기·6과목·120문항·180분 · 실기·산업안전관리실무·150분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 180,
+              "sections": [
+                {
+                  "name": "산업재해 예방 및 안전보건교육",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "인간공학 및 위험성 평가 · 관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "기계 · 기구 및 설비 안전 관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "전기설비 안전 관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "화학설비 안전 관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "건설공사 안전 관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 150,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "산업안전관리실무",
+                  "mode": "mixed"
+                }
+              ],
+              "note": "복합형[필답형(1시간 30분, 55점) + 작업형(1시간 정도, 45점)]"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "직업상담사2급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=9511",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=9511",
+          "totalDurationMinutes": 300,
+          "summary": "필기·5과목·100문항·150분 · 실기·직업상담 실무·150분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "직업심리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "직업상담 및 취업지원",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "직업정보",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "노동시장",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "고용노동관계법규(Ⅰ)",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(2시간 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 150,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "직업상담 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(2시간 30분, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "지게차운전기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7875",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7875",
+          "totalDurationMinutes": 64,
+          "summary": "필기·5과목·60문항·60분 · 실기·지게차운전 작업 및 도로주행·4분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalItemCount": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "지게차 주행",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "화물 적재",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "운반",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "하역",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "안전관리",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4지 택일형 60문항(60분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 4,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "지게차운전 작업 및 도로주행",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(4분 정도)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "전기기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1150",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1150",
+          "totalDurationMinutes": 300,
+          "summary": "필기·5과목·100문항·150분 · 실기·전기설비설계 및 관리·150분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "전기자기학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "전력공학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "전기기기",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "회로이론 및 제어공학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "전기설비기술기준",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형, 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 150,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "전기설비설계 및 관리",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(2시간 30분)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "굴착기운전기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7862",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7862",
+          "totalDurationMinutes": 66,
+          "summary": "필기·굴착기 조종, 점검 및 안전관리·60문항·60분 · 실기·굴착기 조정 실무·6분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "굴착기 조종, 점검 및 안전관리",
+                  "itemCount": 60,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "전과목 혼합, 객관식 60문항 (60분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 6,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "굴착기 조정 실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(6분 정도)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "한식조리기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7910",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100 점을 만점으로 하여 60 점 이상 · 실기: 100 점을 만점으로 하여 60 점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7910",
+          "totalDurationMinutes": 130,
+          "summary": "필기·한식 재료관리 , 음식조리 및 위생관리·60문항·60분 · 실기·조리작업·70분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "한식 재료관리 , 음식조리 및 위생관리",
+                  "itemCount": 60,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4 지 택일형 , 60 문항 (60 분 )"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 70,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "조리작업",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형 (70 분 정도 )"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "제과기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7892",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7892",
+          "totalDurationMinutes": {
+            "min": 180,
+            "max": 300
+          },
+          "summary": "필기·과자류 재료, 제조 및 위생관리(출제기준 상세 참고)·60문항·60분 · 실기·제과 실무",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "과자류 재료, 제조 및 위생관리(출제기준 상세 참고)",
+                  "itemCount": 60,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4지 택일형, 60문항(60분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": {
+                "min": 120,
+                "max": 240
+              },
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "제과 실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(2~4시간 정도)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "토목기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1250",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1250",
+          "totalDurationMinutes": 360,
+          "summary": "필기·6과목·120문항·180분 · 실기·토목설계 및 시공 실무·180분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 180,
+              "sections": [
+                {
+                  "name": "응용역학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "측량학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "수리학 및 수문학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "철근콘크리트 및 강구조",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "토질 및 기초",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "상하수도공학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 180,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "토목설계 및 시공 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(3시간, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "제빵기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7893",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7893",
+          "totalDurationMinutes": {
+            "min": 180,
+            "max": 300
+          },
+          "summary": "필기·빵류 재료, 제조 및 위생관리(출제기준 상세 참고)·60문항·60분 · 실기·제빵 실무",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "빵류 재료, 제조 및 위생관리(출제기준 상세 참고)",
+                  "itemCount": 60,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4지 택일형, 60문항(60분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": {
+                "min": 120,
+                "max": 240
+              },
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "제빵 실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(2~4시간 정도)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "건축기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1630",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1630",
+          "totalDurationMinutes": 330,
+          "summary": "필기·5과목·100문항·150분 · 실기·건축시공 실무·180분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "건축계획",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "건축시공",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "건축구조",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "건축설비",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "건축관계법규",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 180,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "건축시공 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(3시간, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "일반기계기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1021",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형·작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1021",
+          "totalDurationMinutes": 540,
+          "summary": "필기·4과목·80문항·120분 · 실기·기계설계 실무·420분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "기계제도 및 설계",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "기계재료 및 제작",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "구조 해석",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "열·유체 해석",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형, 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 420,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "기계설계 실무",
+                  "mode": "mixed"
+                }
+              ],
+              "note": "복합형[필답형(2시간, 50점) ) + 작업형(5시간, 50점)]"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "소방설비기사-기계",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1900",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1900",
+          "totalDurationMinutes": 300,
+          "summary": "필기·4과목·80문항·120분 · 실기·소방기계시설 설계 및 시공실무·180분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "소방원론",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "소방유체역학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "소방관계법규",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "소방기계시설의 구조 및 원리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 180,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "소방기계시설 설계 및 시공실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(3시간, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "전기기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7780",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점 만점에 60점 이상 · 실기: 100점 만점에 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7780",
+          "summary": "필기·3과목·60문항 · 실기·전기설비작업·270분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "totalItemCount": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "전기이론",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "전기기기",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "전기설비",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4지택일형(60문항)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 270,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "전기설비작업",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(4시간 30분 정도, 전기설비작업)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "소방설비기사-전기",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1910",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1910",
+          "totalDurationMinutes": 300,
+          "summary": "필기·4과목·80문항·120분 · 실기·소방전기시설 설계 및 시공실무·180분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "소방원론",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "소방전기일반",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "소방관계법규",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "소방전기시설의 구조 및 원리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 180,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "소방전기시설 설계 및 시공실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(3시간)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "산업안전산업기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2381",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형·작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2381",
+          "totalDurationMinutes": 270,
+          "summary": "필기·5과목·100문항·150분 · 실기·산업안전관리실무·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "산업재해 예방 및 안전보건교육",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "인간공학 및 위험성 평가 · 관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "기계 · 기구 및 설비 안전 관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "전기 및 화학설비 안전 관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "건설공사 안전 관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 120,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "산업안전관리실무",
+                  "mode": "mixed"
+                }
+              ],
+              "note": "복합형[필답형(1시간, 55점) + 작업형(1시간 정도, 45점)]"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "품질경영기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1500",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1500",
+          "totalDurationMinutes": 330,
+          "summary": "필기·5과목·100문항·150분 · 실기·품질경영 실무·180분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "실험계획법",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "통계적품질관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "생산시스템",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "신뢰성관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "품질경영",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형, 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 180,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "품질경영 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(3시간, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "정보처리산업기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2290",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2290",
+          "totalDurationMinutes": 240,
+          "summary": "필기·3과목·60문항·90분 · 실기·정보처리 실무·150분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 90,
+              "sections": [
+                {
+                  "name": "정보시스템 기반 기술",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "프로그래밍언어 활용",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "데이터베이스 활용",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형, 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 150,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "정보처리 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(2시간 30분)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "위험물기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6697",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6697",
+          "totalDurationMinutes": 150,
+          "summary": "필기·화재예방과 소화방법, 위험물의 화학적 성질 및 취급·60문항·60분 · 실기·위험물 취급 실무·90분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "화재예방과 소화방법, 위험물의 화학적 성질 및 취급",
+                  "itemCount": 60,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4지 택일형, 60문항(60분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 90,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "위험물 취급 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(1시간 30분, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "건설안전기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1440",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형·작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1440",
+          "totalDurationMinutes": 290,
+          "summary": "필기·5과목·100문항·150분 · 실기·건설안전실무·140분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "산업재해 예방 및 안전보건교육",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "인간공학 및 위험성 평가·관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "건설재료",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "건설시공",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "건설공사 안전관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 140,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "건설안전실무",
+                  "mode": "mixed"
+                }
+              ],
+              "note": "복합형[필답형(1시간 30분, 60점) + 작업형(50분 정도, 40점)]"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "수질환경기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1662",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1662",
+          "totalDurationMinutes": 300,
+          "summary": "필기·4과목·80문항·120분 · 실기·수질오염방지 실무·180분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "수질오염개론",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "상하수도계획",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "수질오염방지기술",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "수질오염 공정시험 기준",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 180,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "수질오염방지 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(3시간)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "가스기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6335",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "100점 만점에 60점 이상 득점자"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6335",
+          "totalDurationMinutes": 180,
+          "summary": "필기·3과목·60문항·60분 · 실기·가스 실무·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalItemCount": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "가스안전관리",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "가스장치 및 기기",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "가스일반",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "전과목혼합, 객관식 60문항 (60분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 120,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "가스 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "복합형[필답형(1시간) + 동영상(1시간)]"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "양식조리기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7911",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100 점을 만점으로 하여 60 점 이상 · 실기: 100 점을 만점으로 하여 60 점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7911",
+          "totalDurationMinutes": 130,
+          "summary": "필기·양 식 재료관리 , 음식조리 및 위생관리·60문항·60분 · 실기·조리작업·70분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "양 식 재료관리 , 음식조리 및 위생관리",
+                  "itemCount": 60,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4 지 택일형 , 60 문항 (60 분 )"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 70,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "조리작업",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형 (70 분 정도 )"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "건설안전산업기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2390",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형·작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2390",
+          "totalDurationMinutes": 230,
+          "summary": "필기·4과목·80문항·120분 · 실기·건설안전실무·110분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "산업재해 예방 및 안전보건교육",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "인간공학 및 위험성 평가·관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "건설재료 및 시공",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "건설공사 안전관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 110,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "건설안전실무",
+                  "mode": "mixed"
+                }
+              ],
+              "note": "복합형[필답형(1시간, 60점) + 작업형(50분 정도, 40점)]"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "기계설계산업기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2031",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점이상, 전과목 평균 60점이상 · 실기: 100점을 만점으로하여 60점이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2031",
+          "totalDurationMinutes": 420,
+          "summary": "필기·3과목·60문항·90분 · 실기·기계설계실무·330분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 90,
+              "sections": [
+                {
+                  "name": "기계제도",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "기계요소설계",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "기계재료 및 측정",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형, 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 330,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "기계설계실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(5시간 30분 정도, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "산업위생관리기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1472",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1472",
+          "totalDurationMinutes": 330,
+          "summary": "필기·5과목·100문항·150분 · 실기·작업환경관리 실무·180분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "산업위생학개론",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "작업위생측정 및 평가",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "작업환경관리대책",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "물리적유해인자관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "산업독성학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 180,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "작업환경관리 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(3시간, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "미용사-일반",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7937",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100 점을 만점으로 하여 60 점 이상 · 실기: 100 점을 만점으로 하여 60 점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7937",
+          "totalDurationMinutes": 205,
+          "summary": "필기·헤어스타일연출 및 두피모발관리 ( 공중위생관리학, 피부의 이해, 화장품 분류 포함) 등에 관한 사항·60문항·60분 · 실기·미용실무·145분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "헤어스타일연출 및 두피모발관리 ( 공중위생관리학, 피부의 이해, 화장품 분류 포함) 등에 관한 사항",
+                  "itemCount": 60,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4 지 택일형 , 60 문항 (60 분 )"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 145,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "미용실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(2시간 25분 정도, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "품질경영산업기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2420",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2420",
+          "totalDurationMinutes": 270,
+          "summary": "필기·4과목·20문항·120분 · 실기·품질경영 실무·150분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "totalItemCount": 20,
+              "sections": [
+                {
+                  "name": "실험계획법",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "통계적품질관리",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "생산시스템",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "품질경영",
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 150,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "품질경영 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(2시간 30분, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "대기환경기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1661",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1661",
+          "totalDurationMinutes": 300,
+          "summary": "필기·4과목·80문항·120분 · 실기·대기오염관리 실무·180분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "대기환경관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "연소공학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "대기오염방지기술",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "대기오염공정시험기준",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 180,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "대기오염관리 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(3시간)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "컨벤션기획사2급",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=9536",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100 점을 만점으로 하여 과목당 40 점 이상 , 전과목 평균 60 점 이상 · 실기: 100 점을 만점으로 하여 60 점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=9536",
+          "summary": "필기·3과목·80문항 · 실기·컨벤션 실무(컨벤션기획 및 실무제안서 작성, 영어서신 작성)·360분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "sections": [
+                {
+                  "name": "컨벤션 기획",
+                  "itemCount": 30,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "컨벤션 운영",
+                  "itemCount": 30,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "부대행사 기획·운영",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 360,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "컨벤션 실무(컨벤션기획 및 실무제안서 작성, 영어서신 작성)",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(6시간 정도, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "사무자동화산업기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2193",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점이상, 전과목 평균60점이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2193",
+          "totalDurationMinutes": 210,
+          "summary": "필기·3과목·60문항·90분 · 실기·사무자동화 실무·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 90,
+              "sections": [
+                {
+                  "name": "사무자동화시스템",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "프로그래밍일반",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "네트워크 일반",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형, 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 120,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "사무자동화 실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(2시간)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "프로그래밍기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6921",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100 점을 만점으로 하여 60 점 이상 · 실기: 100 점을 만점으로 하여 60 점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6921",
+          "totalDurationMinutes": 150,
+          "summary": "필기·4과목·60문항·60분 · 실기·기초프로그래밍 실무·90분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalItemCount": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "프로그래밍 언어",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "응용SW기초기술",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "SQL 활용",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "정보시스템 기초기술",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4 지 택일형 60 문항 (60 분 )"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 90,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "기초프로그래밍 실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(1시간 30분, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "수질환경산업기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2572",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2572",
+          "totalDurationMinutes": 240,
+          "summary": "필기·3과목·60문항·90분 · 실기·수질오염방지 실무·150분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 90,
+              "sections": [
+                {
+                  "name": "수질오염개론",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "수질오염방지기술",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "수질오염 공정시험 기준",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 150,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "수질오염방지 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(2시간 30분)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "미용사-피부",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7947",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100 점을 만점으로 하여 60 점 이상 · 실기: 100 점을 만점으로 하여 60 점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7947",
+          "totalDurationMinutes": {
+            "min": 180,
+            "max": 240
+          },
+          "summary": "필기·피부미용학, 피부학. 해부생리학 , 피부미용기기학, 공중위생관리학(공중보건학, 소독 , 공중위생법규), 화장품학 등에 관한 사항·60문항·60분 · 실기·피부미용실무",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "피부미용학, 피부학. 해부생리학 , 피부미용기기학, 공중위생관리학(공중보건학, 소독 , 공중위생법규), 화장품학 등에 관한 사항",
+                  "itemCount": 60,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4 지 택일형 , 60 문항 (60 분 )"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": {
+                "min": 120,
+                "max": 180
+              },
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "피부미용실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(2~3시간 정도, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "정보기기운용기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6892",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6892",
+          "totalDurationMinutes": 150,
+          "summary": "필기·3과목·60문항·60분 · 실기·네트워크 운용 실무·90분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalItemCount": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "네트워크 구성",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "정보기기 유지보수",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "정보기기 설치운영",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "전과목 혼합, 객관식 60문항(60분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 90,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "네트워크 운용 실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(1시간 30분 정도)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "피복아크용접기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6223",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6223",
+          "totalDurationMinutes": 180,
+          "summary": "필기·6과목·60문항·60분 · 실기·피복아크용접 실무·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalItemCount": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "아크용접",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "용접안전",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "용접재료",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "도면해독",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "가스절단",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "기타용접",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4지 택일형 60문항(60분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 120,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "피복아크용접 실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(2시간 정도)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "텔레마케팅관리사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=9541",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=9541",
+          "totalDurationMinutes": 300,
+          "summary": "필기·4과목·100문항·150분 · 실기·비대면매체 고객관리 실무·150분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "고객관리",
+                  "itemCount": 25,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "시장환경조사",
+                  "itemCount": 25,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "마케팅관리",
+                  "itemCount": 25,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "조직운영 및 성과관리",
+                  "itemCount": 25,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 25문항(2시간 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 150,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "비대면매체 고객관리 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(2시간 30분 정도, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "에너지관리기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1340",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1340",
+          "totalDurationMinutes": 330,
+          "summary": "필기·5과목·100문항·150분 · 실기·열관리 실무·180분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "연소공학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "열역학",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "계측방법",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "열설비재료 및 관계법규",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "열설비설계",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 180,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "열관리 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(3시간, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "전산응용기계제도기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6151",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "100점을 만점으로 하여 60점이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=6151",
+          "totalDurationMinutes": 360,
+          "summary": "필기·기계설계제도·60문항·60분 · 실기·기계설계제도실무·300분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "기계설계제도",
+                  "itemCount": 60,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4지 택일형 60문항(60분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 300,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "기계설계제도실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(5시간 정도, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "산업위생관리산업기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2472",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점을 만점으로 하여 과목당 40점 이상, 전과목 평균 60점 이상 · 실기: 100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=2472",
+          "totalDurationMinutes": 270,
+          "summary": "필기·4과목·80문항·120분 · 실기·작업환경관리 실무·150분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "산업위생학 개론",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "작업환경측정 및 평가",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "작업환경관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "산업환기",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형 과목당 20문항(과목당 30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 150,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "작업환경관리 실무",
+                  "mode": "written"
+                }
+              ],
+              "note": "필답형(2시간 30분, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "미용사-메이크업",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7967",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100 점을 만점으로 하여 60 점 이상 · 실기: 100 점을 만점으로 하여 60 점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7967",
+          "totalDurationMinutes": 215,
+          "summary": "필기·이미지 연풀 및 메이크업 디자인 ( 공중위생관리학, 피부의 이해, 화장품 분류 포함) , 등에 관한 사항·60문항·60분 · 실기·메이크업 실무·155분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "이미지 연풀 및 메이크업 디자인 ( 공중위생관리학, 피부의 이해, 화장품 분류 포함) , 등에 관한 사항",
+                  "itemCount": 60,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4 지 택일형 , 60 문항 (60 분 )"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 155,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "메이크업 실무",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(2시간 35분 정도, 100점)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "화학분석기사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1563",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "필기: 100점 만점에 과목당 40점이상, 전과목 평균 60점이상 · 실기: 100점 만점에 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 필답형·작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=1563",
+          "totalDurationMinutes": 450,
+          "summary": "필기·4과목·80문항·120분 · 실기·실기시험·330분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "화학분석의 이해와 환경·안전관리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "분석계획 수립과 분석화학기초",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "화학물질 특성분석",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "화학물질 구조분석 및 표면 분석",
+                  "itemCount": 20,
+                  "mode": "multiple-choice",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "note": "객관식 4지 택일형, 과목당 과목당 20문항(과목당30분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 330,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "실기시험",
+                  "mode": "mixed"
+                }
+              ],
+              "note": "복합형[필답형(2시간) + 작업형(약 3시간 30분)]"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "정보관리기술사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=0601",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "100점을 만점으로 하여 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 논술형",
+        "실기 면접"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=0601",
+          "totalDurationMinutes": 430,
+          "summary": "필기·정보의 구조, 수집, 정리, 축적, 검색 등 정보시스템의 설계 및 수치계산, 기타 정보의 분석, 관리 및 기본적인 응용에 관한 사항·400분 · 면접·정보의 구조, 수집, 정리, 축적, 검색 등 정보시스템의 설계 및 수치계산, 기타 정보의 분석, 관리 및 기본적인 응용에 관한 사항·30분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 400,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "정보의 구조, 수집, 정리, 축적, 검색 등 정보시스템의 설계 및 수치계산, 기타 정보의 분석, 관리 및 기본적인 응용에 관한 사항",
+                  "mode": "written"
+                }
+              ],
+              "note": "단답형 및 주관식 논술형(매교시당 100분 총 400분)"
+            },
+            {
+              "id": "interview",
+              "name": "면접시험",
+              "durationMinutes": 30,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "정보의 구조, 수집, 정리, 축적, 검색 등 정보시스템의 설계 및 수치계산, 기타 정보의 분석, 관리 및 기본적인 응용에 관한 사항",
+                  "mode": "interview"
+                }
+              ],
+              "note": "구술형 면접 (시험시간 30분정도)"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "조경기능사",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "qnet-qualification-detail"
+      ],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7900",
+        "checkedAt": "2026-08-25"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "passCriteria": "100점 만점 60점 이상"
+      },
+      "deliveryModes": [
+        "필기 객관식",
+        "실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd=7900",
+          "totalDurationMinutes": 270,
+          "summary": "필기·3과목·60문항·60분 · 실기·1일차: 1차 실기시험(1과제: 도면설계작업, 2과제: 수목영상감별) 2일차: 2차 실기시험(3과제: 조경시공 실무작업 2개 과정)·210분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 60,
+              "totalItemCount": 60,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "조경일반",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "조경재료",
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "조경시공및관리",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "객관식 4지 택일형 60문항(60분)"
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 210,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "1일차: 1차 실기시험(1과제: 도면설계작업, 2과제: 수목영상감별) 2일차: 2차 실기시험(3과제: 조경시공 실무작업 2개 과정)",
+                  "mode": "practical"
+                }
+              ],
+              "note": "작업형(3시간 30분 내외): 도면작업+수목감별+조경시공작업"
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    }
+  ]
+}

@@ -233,6 +233,7 @@ export type AssessmentMode =
   | 'multiple-choice'
   | 'written'
   | 'interview'
+  | 'practical'
   | 'computer-task'
   | 'mixed';
 
@@ -257,6 +258,8 @@ export interface AssessmentStage {
   id: string;
   name: string;
   durationMinutes?: number | { min?: number; max?: number };
+  /** 과목별 문항 수가 공개되지 않고 단계 전체 문항 수만 공식 공개될 때 사용 */
+  totalItemCount?: number | { min?: number; max?: number };
   /** 세부 영역별 배점이 공식 공개되지 않을 때만 쓰는 단계 전체 만점 */
   totalScore?: number;
   sections: AssessmentSection[];
@@ -267,7 +270,8 @@ export interface AssessmentStage {
 
 /** 시험 형식은 회차 시작시각과 별개다. 개정 전 형식을 덮어쓰지 않고 적용 기간으로 고른다. */
 export interface AssessmentFormat {
-  effectiveFrom: string;
+  /** 공식 적용 시작일. 현재 형식만 공개하고 시작일을 밝히지 않으면 생략한다. */
+  effectiveFrom?: string;
   effectiveTo?: string;
   checkedAt: string;
   sourceUrl: string;

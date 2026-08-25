@@ -2,8 +2,8 @@ import type { AssessmentFormat, AssessmentMode } from '../types.ts';
 
 export function activeFormat(formats: AssessmentFormat[], on: string): AssessmentFormat | undefined {
   return formats
-    .filter(format => format.effectiveFrom <= on && (!format.effectiveTo || on <= format.effectiveTo))
-    .sort((a, b) => b.effectiveFrom.localeCompare(a.effectiveFrom))[0];
+    .filter(format => (!format.effectiveFrom || format.effectiveFrom <= on) && (!format.effectiveTo || on <= format.effectiveTo))
+    .sort((a, b) => (b.effectiveFrom ?? '').localeCompare(a.effectiveFrom ?? ''))[0];
 }
 
 export function durationLabel(value: number | { min?: number; max?: number } | undefined): string {
@@ -40,7 +40,8 @@ export function countLabel(itemCount?: number | { min?: number; max?: number }, 
 export function modeLabel(mode?: AssessmentMode): string {
   return mode === 'multiple-choice' ? '객관식'
     : mode === 'written' ? '필답형'
-      : mode === 'interview' ? '말하기'
+      : mode === 'interview' ? '면접·구술'
+        : mode === 'practical' ? '작업형'
         : mode === 'computer-task' ? '컴퓨터 기반'
           : mode === 'mixed' ? '혼합형'
             : '—';

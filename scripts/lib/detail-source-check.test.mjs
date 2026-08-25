@@ -65,7 +65,7 @@ test('저장소 출처 레지스트리가 통과한다', async () => {
     readFile('data/exams.seed.json', 'utf8').then(JSON.parse),
   ]);
   const visible = exams.exams.filter(exam => exam.tier !== 'X').map(exam => exam.slug);
-  const result = checkDetailSources(registry, visible, { knownAdapters: ['normalized-detail-json'] });
+  const result = checkDetailSources(registry, visible, { knownAdapters: ['normalized-detail-json', 'qnet-detail'] });
   assert.equal(result.ok, true, result.problems.join('\n'));
   assert.equal(result.coverage.registered.length, 49);
   assert.equal(result.coverage.uncovered.length, visible.length - 49);
