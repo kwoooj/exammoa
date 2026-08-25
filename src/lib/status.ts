@@ -55,6 +55,8 @@ export interface ExamStatus {
   session: Session | null;
   /** 정렬 2차 키. 이 상태가 가리키는 날짜 */
   date: string | null;
+  /** 공식 미공고가 아니라 시험모아의 일정 수집 연결을 기다리는 상태. */
+  pendingImport: boolean;
 }
 
 /** §6.4 상태 필터 · §5.3-B 홈 바로가기 */
@@ -70,7 +72,7 @@ function make(
   rank: number,
   label: string,
   a11yLabel: string,
-  opts: { emphasis?: boolean; pair?: Pair; date?: string | null } = {},
+  opts: { emphasis?: boolean; pair?: Pair; date?: string | null; pendingImport?: boolean } = {},
 ): ExamStatus {
   return {
     id,
@@ -81,6 +83,7 @@ function make(
     event: opts.pair?.event ?? null,
     session: opts.pair?.session ?? null,
     date: opts.date ?? null,
+    pendingImport: opts.pendingImport ?? false,
   };
 }
 
@@ -113,6 +116,11 @@ function isRolling(group: ScheduleGroup | undefined, sessions: Session[]): boole
 
 const ROLLING = make('rolling', 7, '상시시험', '상시시험. 확정된 시험일이 없습니다');
 const TBD = make('tbd', 8, '일정 미공고', '아직 공식 일정이 발표되지 않았습니다');
+const IMPORT_PENDING = make(
+  'tbd', 8, '일정 연동 준비 중',
+  '공식 일정 수집을 연결하고 있습니다. 현재는 공식 접수처에서 확인해야 합니다',
+  { pendingImport: true },
+);
 
 /**
  * 그룹 하나의 대표 상태. 일정의 주체는 종목이 아니라 시행그룹이다.
@@ -128,7 +136,9 @@ export function statusOfGroup(
   if (isRolling(group, sessions)) return ROLLING;
 
   const pairs = scheduledPairs(sessions);
-  if (pairs.length === 0) return TBD;
+  if (pairs.length === 0) {
+    return sessions.some(session => session.scheduleState === 'import-pending') ? IMPORT_PENDING : TBD;
+  }
 
   /**
    * 연도 가드. 가진 일정이 전부 지난 해의 것이면 "종료" 가 아니라 "미공고" 다.

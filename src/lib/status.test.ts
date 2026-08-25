@@ -267,6 +267,16 @@ test('status:tbd 인 회차는 일정으로 세지 않는다', () => {
   assert.equal(statusOfGroup(hrdkRegular, [미정], '2026-08-14').id, 'tbd');
 });
 
+test('공식 일정 수집 대기는 미공고와 다른 문구로 안내한다', () => {
+  const 연동대기: Session = {
+    ...기사3회, id: 'pending-1', status: 'tbd', events: [], scheduleState: 'import-pending',
+  };
+  const status = statusOfGroup(hrdkRegular, [연동대기], '2026-08-14');
+  assert.equal(status.id, 'tbd');
+  assert.equal(status.label, '일정 연동 준비 중');
+  assert.equal(status.pendingImport, true);
+});
+
 test('이벤트가 하나도 없는 확정 회차도 미공고다', () => {
   const 빈회차: Session = { ...기사3회, id: 'empty', events: [] };
   assert.equal(statusOfGroup(hrdkRegular, [빈회차], '2026-08-14').id, 'tbd');

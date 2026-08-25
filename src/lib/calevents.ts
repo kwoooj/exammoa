@@ -81,6 +81,7 @@ export interface TbdNotice {
   agency: string;
   examSlugs: string[];
   agencyUrl?: string;
+  pendingImport: boolean;
 }
 
 export interface CalendarData {
@@ -302,6 +303,7 @@ export function buildCalendarData(input: CalendarInput): CalendarData {
     if (!hasSchedule) {
       tbdNotices.push({
         groupId, name: group?.name ?? displayNameOf(names), agency, examSlugs: slugs,
+        pendingImport: groupSessions.some(session => session.scheduleState === 'import-pending'),
         // 일정이 없을수록 링크가 중요하다. 여기서 빠지면 막다른 길이 된다.
         ...(resolved.official ? { agencyUrl: resolved.official } : {}),
       });

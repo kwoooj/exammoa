@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readdir, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { archive, forHashing, hashEvents } from './store.mjs';
+import { archive, forHashing, hashEvents, mergeStale } from './store.mjs';
 import { volatile as kbsVolatile } from '../sources/kbs-korean.mjs';
 
 /** 실측 스냅샷에서 잘라온 조각. 두 파일의 차이가 SERVER_NOW 딱 한 군데였다. */
@@ -67,6 +67,15 @@ test('이벤트 해시는 날짜뿐 아니라 공식 시각 변경도 감지한�
   assert.notEqual(before, after);
 });
 
+test('아직 관측하지 않은 카탈로그 회차의 시각을 오늘로 꾸미지 않는다', () => {
+  const merged = mergeStale([{
+    id: 'catalog-placeholders', method: 'manual', ok: true, observedAt: null,
+    sessions: [{ id: 'g-2026-tbd', groupId: 'g', events: [] }],
+  }], null, { now: '2026-08-25T00:00:00.000Z' });
+  assert.equal(merged.sources['catalog-placeholders'].fetchedAt, null);
+  assert.equal(merged.provenance['g-2026-tbd'].observedAt, null);
+});
+
 // ---- archive ----------------------------------------------------------
 
 test('첫 스냅샷은 저장하고 확장자를 반영한다', () => withTmp(async (dir) => {
@@ -112,6 +121,16 @@ test('저장된 바이트는 원본 그대로다 — 정규화 결과를 쓰면 
   const saved = await readFile(a.path, 'utf8');
   assert.equal(saved, raw);
   assert.match(saved, /SERVER_NOW:"2026\/08\/13 16:12:42"/, '서버 시각이 파일에는 남아 있어야 한다');
+}));
+
+test('PDF 같은 바이너리 원문은 JSON 변환 없이 그대로 저장한다', () => withTmp(async (dir) => {
+  const raw = new Uint8Array([0x25, 0x50, 0x44, 0x46, 0x00, 0xff]);
+  const archived = await archive({
+    year: 2026, sourceId: 'official-pdf', body: raw,
+    ext: 'pdf', dir, stamp: '2026-08-24',
+  });
+  const saved = await readFile(archived.path);
+  assert.deepEqual(saved, Buffer.from(raw));
 }));
 
 test('volatile 없이도 동작한다 — API 응답은 지울 것이 없다', () => withTmp(async (dir) => {

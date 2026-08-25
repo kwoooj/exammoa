@@ -21,6 +21,7 @@ import { applyLink, officialLink } from '../lib/links.ts';
 import { freshnessOfSource } from '../lib/freshness.ts';
 import { addDays, rangeLabel } from '../lib/dates.ts';
 import { feeCheckedLabel, feeLabel } from '../lib/fees.ts';
+import { activeFormat, countLabel, durationLabel, formatDurationLabel, modeLabel, scoreLabel } from '../lib/exam-details.ts';
 import { ym } from '../lib/calendar.ts';
 import { layoutMonth } from '../lib/monthbars.ts';
 import { buildCalendarData } from '../lib/calevents.ts';
@@ -35,6 +36,7 @@ import { EventDetail } from '../components/calendar/EventDetail.tsx';
 import { EventDateTime } from '../components/EventDateTime.tsx';
 import { NotFound } from './NotFound.tsx';
 import { FavoriteButton } from '../components/FavoriteButton.tsx';
+import type { AssessmentFormat, ExamDetail as ExamDetailData } from '../types.ts';
 
 /**
  * 상시시험 규칙을 사람이 확인한 지 이만큼 지나면 "공식 사이트에서 최신 규칙을
@@ -105,6 +107,8 @@ export function ExamDetail({ data, today, slug }: { data: AppData; today: string
   const nameOf = (s: string) => data.examBySlug.get(s)?.name ?? s;
   const fee = feeLabel(exam);
   const feeChecked = feeCheckedLabel(exam);
+  const detail = data.detailsBySlug.get(exam.slug);
+  const format = detail ? activeFormat(detail.formats, today) : undefined;
 
   const layout = layoutMonth(shownMonth, events, { today, laneCap: Number.POSITIVE_INFINITY });
   const selectedEvent = selection?.kind === 'bar' ? eventById.get(selection.eventId) : undefined;
@@ -157,6 +161,7 @@ export function ExamDetail({ data, today, slug }: { data: AppData; today: string
           <OfficialLinkButton link={apply} className="btn btn--primary" />
           <OfficialLinkButton link={official} className="btn" />
         </p>
+        {detail && format && <ExamOverview detail={detail} format={format} />}
         {fresh.failed && (
           <p className="notice" role="status">
             <span>이전에 확인한 정보를 표시하고 있어요. 공식 사이트에서 다시 확인해 주세요.</span>
@@ -192,8 +197,9 @@ export function ExamDetail({ data, today, slug }: { data: AppData; today: string
         ) : status.id === 'tbd' ? (
           // 빈 일정표나 비활성 버튼을 보여주지 않는다 (§7.8).
           <p>
-            {Number(today.slice(0, 4))}년 일정이 아직 발표되지 않았어요.
-            공식 기관에 일정이 게시되면 시험모아에도 반영됩니다.
+            {status.pendingImport
+              ? '공식 일정 수집을 연결하고 있어요. 현재 일정은 공식 시험정보에서 확인해 주세요.'
+              : `${Number(today.slice(0, 4))}년 일정이 아직 발표되지 않았어요. 공식 기관에 일정이 게시되면 시험모아에도 반영됩니다.`}
           </p>
         ) : (
           <>
@@ -219,6 +225,8 @@ export function ExamDetail({ data, today, slug }: { data: AppData; today: string
           </>
         )}
       </section>
+
+      {detail && format && <ExamComposition detail={detail} format={format} />}
 
       <section className="section" aria-labelledby="src-h">
         <div className="section__head"><h2 id="src-h">공식 정보</h2></div>
@@ -257,6 +265,109 @@ export function ExamDetail({ data, today, slug }: { data: AppData; today: string
         </section>
       )}
     </>
+  );
+}
+
+function ExamOverview({ detail, format }: { detail: ExamDetailData; format: AssessmentFormat }) {
+  const facts = [
+    ['분류', detail.classification.label],
+    ['결과', detail.result.label],
+    ['응시 방식', detail.deliveryModes.join(' · ')],
+    ['표준 시험시간', formatDurationLabel(format)],
+    ['유효기간', detail.result.validityLabel ?? '공식 안내 없음'],
+  ];
+  return (
+    <div className="detailOverview" aria-labelledby="overview-h">
+      <h2 id="overview-h">시험 한눈에</h2>
+      <dl className="detailFacts">
+        {facts.map(([label, value]) => (
+          <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
+        ))}
+      </dl>
+      {detail.result.passCriteria && <p className="detailOverview__criteria"><strong>합격 기준</strong>{detail.result.passCriteria}</p>}
+      {detail.result.note && <p className="small muted">{detail.result.note}</p>}
+    </div>
+  );
+}
+
+function ExamComposition({ detail, format }: { detail: ExamDetailData; format: AssessmentFormat }) {
+  return (
+    <section className="section examComposition" aria-labelledby="composition-h">
+      <div className="section__head examComposition__head">
+        <div>
+          <h2 id="composition-h">시험 구성</h2>
+          {format.summary && <p className="section__hint">{format.summary}</p>}
+        </div>
+        <span className="badge">
+          {format.effectiveTo ? `${format.effectiveTo.replaceAll('-', '.')}까지 적용` : '현행 기준'}
+        </span>
+      </div>
+
+      <div className="examStages">
+        {format.stages.map(stage => {
+          const sharedDuration = stage.durationMinutes !== undefined;
+          const sharedScore = stage.totalScore !== undefined
+            && stage.sections.every(section => section.scoreRange === undefined);
+          const showCount = stage.sections.some(section => section.itemCount !== undefined || section.taskCount !== undefined);
+          const showMode = stage.sections.some(section => section.mode !== undefined);
+          const showScore = sharedScore || stage.sections.some(section => section.scoreRange !== undefined);
+          return <article className="examStage" key={stage.id}>
+            <div className="examStage__head">
+              <h3>{stage.name}</h3>
+              {(sharedDuration || sharedScore) && (
+                <p className="examStage__sharedMeta">
+                  {sharedDuration && <span>전체 시험시간 {durationLabel(stage.durationMinutes)}</span>}
+                  {sharedScore && <span>전체 배점 {stage.totalScore}점</span>}
+                </p>
+              )}
+            </div>
+            <table className="formatTable" aria-label={`${stage.name} 구성`}>
+              <thead><tr>
+                <th>영역·과목</th>
+                {showCount && <th>문항·과제</th>}
+                {showMode && <th>방식</th>}
+                {showScore && <th>배점</th>}
+              </tr></thead>
+              <tbody>
+                {stage.sections.map((section, index) => (
+                  <tr key={section.name}>
+                    <td className="formatTable__name"><small>영역·과목</small><strong>{section.name}</strong>{section.note && <em>{section.note}</em>}</td>
+                    {showCount && <td><small>문항·과제</small>{countLabel(section.itemCount, section.taskCount)}</td>}
+                    {showMode && <td><small>방식</small>{modeLabel(section.mode)}</td>}
+                    {showScore && (sharedScore
+                      ? index === 0 && <td className="formatTable__sharedCell" rowSpan={stage.sections.length}><small>전체 배점</small><strong>{stage.totalScore}점</strong></td>
+                      : <td><small>배점</small>{scoreLabel(section.scoreRange)}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {stage.timedBlocks?.length ? (
+              <div className="examStage__timing" aria-label={`${stage.name} 강제 진행 구간`}>
+                <strong>진행 구간</strong>
+                <ul>
+                  {stage.timedBlocks.map(block => (
+                    <li key={block.name}>
+                      <span>{block.name}</span>
+                      <b>{durationLabel(block.durationMinutes)}</b>
+                      {block.note && <em>{block.note}</em>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+            {stage.note && <p className="small muted examStage__note">{stage.note}</p>}
+          </article>;
+        })}
+      </div>
+
+      {format.note && <p className="notice examComposition__notice">{format.note}</p>}
+      <p className="small muted examComposition__source">
+        구성 확인 {rangeLabel(format.checkedAt, format.checkedAt)} ·{' '}
+        <a href={format.sourceUrl} target="_blank" rel="noreferrer">공식 시험 구성 ↗</a>
+        {' · '}분류 출처{' '}
+        <a href={detail.classification.sourceUrl} target="_blank" rel="noreferrer">{detail.classification.authority} ↗</a>
+      </p>
+    </section>
   );
 }
 

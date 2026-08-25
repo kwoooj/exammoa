@@ -49,6 +49,8 @@ export interface Session {
   mode: 'scheduled' | 'rolling';
   status: 'confirmed' | 'tbd';
   events: ExamEvent[];
+  /** 공식 일정은 존재할 수 있지만 시험모아 수집 어댑터가 아직 연결되지 않은 상태. */
+  scheduleState?: 'import-pending';
   /** 이 회차를 만든 원본 레코드 수. 1건이면 생략 (Q-Net은 필기행·실기행이 분리돼 온다) */
   sourceRows?: number;
   /** description 이 여러 개일 때만 */
@@ -189,7 +191,7 @@ export interface Exam {
    * 채우지 않는다. 매일 수집 배치가 공식 페이지를 재검증해 이 필드를 게시한다.
    */
   fee?: {
-    items: { label: string; amount: number }[];
+    items: { label: string; amount?: number; amountLabel?: string }[];
     /** 공식 페이지를 마지막으로 확인한 날 (YYYY-MM-DD) */
     checkedAt: string;
     /** 추가접수·자격증 발급비처럼 한 줄 금액에 포함되지 않는 조건 */
@@ -217,6 +219,86 @@ export interface Exam {
   rolling?: boolean;
   rollingRule?: string;
   note?: string;
+}
+
+export type CredentialKind =
+  | 'national-technical'
+  | 'national-professional'
+  | 'private-accredited'
+  | 'private-registered'
+  | 'international-assessment'
+  | 'institutional-assessment';
+
+export type AssessmentMode =
+  | 'multiple-choice'
+  | 'written'
+  | 'interview'
+  | 'computer-task'
+  | 'mixed';
+
+export interface AssessmentSection {
+  name: string;
+  itemCount?: number | { min?: number; max?: number };
+  taskCount?: number;
+  mode?: AssessmentMode;
+  scoreRange?: { min: number; max: number };
+  note?: string;
+}
+
+/** 감독 진행상 다음 영역으로 넘어가면 되돌아갈 수 없는 실제 제한시간 구간. */
+export interface AssessmentTimedBlock {
+  name: string;
+  durationMinutes: number | { min?: number; max?: number };
+  sectionNames?: string[];
+  note?: string;
+}
+
+export interface AssessmentStage {
+  id: string;
+  name: string;
+  durationMinutes?: number | { min?: number; max?: number };
+  /** 세부 영역별 배점이 공식 공개되지 않을 때만 쓰는 단계 전체 만점 */
+  totalScore?: number;
+  sections: AssessmentSection[];
+  /** 단순 권장 배분이 아니라 공식 운영상 강제되는 구간만 기록한다. */
+  timedBlocks?: AssessmentTimedBlock[];
+  note?: string;
+}
+
+/** 시험 형식은 회차 시작시각과 별개다. 개정 전 형식을 덮어쓰지 않고 적용 기간으로 고른다. */
+export interface AssessmentFormat {
+  effectiveFrom: string;
+  effectiveTo?: string;
+  checkedAt: string;
+  sourceUrl: string;
+  totalDurationMinutes?: number | { min?: number; max?: number };
+  summary?: string;
+  stages: AssessmentStage[];
+  note?: string;
+}
+
+export interface ExamDetail {
+  examSlug: string;
+  catalogStatus: 'published' | 'planned';
+  /** 상세정보의 공식 근거. detail-sources.seed.json의 id를 참조한다. */
+  sourceRefs: string[];
+  classification: {
+    kind: CredentialKind;
+    label: string;
+    authority: string;
+    sourceUrl: string;
+    checkedAt: string;
+    note?: string;
+  };
+  result: {
+    type: 'score' | 'pass-fail' | 'level-awarded';
+    label: string;
+    validityLabel?: string;
+    passCriteria?: string;
+    note?: string;
+  };
+  deliveryModes: string[];
+  formats: AssessmentFormat[];
 }
 
 export interface Category {
@@ -299,6 +381,11 @@ export interface ExamsFile {
   exams: Exam[];
   categories: Category[];
   links?: LinksFile;
+}
+
+export interface ExamDetailsFile {
+  version: string;
+  details: ExamDetail[];
 }
 
 export interface MetaFile {

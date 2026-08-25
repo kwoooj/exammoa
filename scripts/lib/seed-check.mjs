@@ -102,8 +102,10 @@ export function checkSeeds(examSeed, groupSeed) {
         problems.push(problem('fee-no-items', `${e.slug}.fee.items 가 비어 있다`));
       } else {
         for (const item of e.fee.items) {
+          const hasAmount = Number.isInteger(item?.amount) && item.amount >= 0;
+          const hasLabel = typeof item?.amountLabel === 'string' && item.amountLabel.trim();
           if (!item || typeof item.label !== 'string' || !item.label.trim()
-            || !Number.isInteger(item.amount) || item.amount < 0) {
+            || Boolean(hasAmount) === Boolean(hasLabel)) {
             problems.push(problem('bad-fee-item', `${e.slug} 의 응시료 항목이 올바르지 않다`));
           }
         }

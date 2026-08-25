@@ -69,6 +69,9 @@ function examDescription(exam: Exam, group: ScheduleGroup | undefined, sessions:
     const rule = group?.rollingRule ?? exam.rollingRule;
     return `${head}는 확정된 연간 시험일이 없는 상시시험입니다.${rule ? ` ${rule}.` : ''} 공식 사이트에서 접수 가능 일자를 확인하세요.`;
   }
+  if (status.pendingImport) {
+    return `${head}의 일정 수집을 연결하고 있습니다. 현재 일정은 공식 시험정보에서 확인하세요.`;
+  }
   return `${head}의 공식 일정이 아직 발표되지 않았습니다. 기관에 일정이 게시되면 ${SITE_NAME}에도 반영됩니다.`;
 }
 

@@ -856,6 +856,127 @@
       "sourceUrl": "https://www.ihd.or.kr/guidecert1.do",
       "agencyUrl": "https://www.ihd.or.kr/guidecert1.do",
       "note": "1급과 2급은 회차·시험시간이 달라 별도 그룹으로 수집한다."
+    },
+    {
+      "id": "toefl-ibt", "name": "TOEFL iBT", "agency": "ETS", "cadence": "rolling",
+      "rollingRule": "시험센터·Home Edition의 가능한 일정을 조회해 예약", "ruleCheckedAt": "2026-08-20",
+      "examSlugs": ["TOEFL-iBT"], "collect": "manual", "agencyUrl": "https://www.ets.org/toefl/test-takers/ibt/schedule.html"
+    },
+    {
+      "id": "new-teps", "name": "New TEPS", "agency": "서울대학교발전재단 TEPS관리위원회", "cadence": "periodic",
+      "examSlugs": ["New-TEPS"], "collect": "none", "agencyUrl": "https://www.teps.or.kr/Receipt/ExamSchedule",
+      "note": "공식 일정 링크만 제공하며 자동 수집 어댑터는 후속 작업에서 연결한다."
+    },
+    {
+      "id": "gtelp-level-2", "name": "G-TELP Level 2", "agency": "G-TELP KOREA", "cadence": "frequent",
+      "examSlugs": ["G-TELP-Level-2"], "collect": "none", "agencyUrl": "https://sw.g-telp.co.kr/index.asp",
+      "note": "공식 일정 링크만 제공하며 자동 수집 어댑터는 후속 작업에서 연결한다."
+    },
+    {
+      "id": "ielts-academic", "name": "IELTS Academic", "agency": "IELTS", "cadence": "rolling",
+      "rollingRule": "시험센터별 가능한 일정을 조회해 예약", "ruleCheckedAt": "2026-08-20",
+      "examSlugs": ["IELTS-Academic"], "collect": "manual", "agencyUrl": "https://ielts.org/take-a-test/book-a-test"
+    },
+    {
+      "id": "ielts-general-training", "name": "IELTS General Training", "agency": "IELTS", "cadence": "rolling",
+      "rollingRule": "시험센터별 가능한 일정을 조회해 예약", "ruleCheckedAt": "2026-08-20",
+      "examSlugs": ["IELTS-General-Training"], "collect": "manual", "agencyUrl": "https://ielts.org/take-a-test/book-a-test"
+    },
+    {
+      "id": "jlpt-n1", "name": "JLPT N1", "agency": "JLPT", "cadence": "periodic", "examSlugs": ["JLPT-N1"],
+      "collect": "none", "agencyUrl": "https://www.jlpt.jp/e/application/overseas_index.html"
+    },
+    {
+      "id": "jlpt-n2", "name": "JLPT N2", "agency": "JLPT", "cadence": "periodic", "examSlugs": ["JLPT-N2"],
+      "collect": "none", "agencyUrl": "https://www.jlpt.jp/e/application/overseas_index.html"
+    },
+    {
+      "id": "jlpt-n3", "name": "JLPT N3", "agency": "JLPT", "cadence": "periodic", "examSlugs": ["JLPT-N3"],
+      "collect": "none", "agencyUrl": "https://www.jlpt.jp/e/application/overseas_index.html"
+    },
+    {
+      "id": "jlpt-n4", "name": "JLPT N4", "agency": "JLPT", "cadence": "periodic", "examSlugs": ["JLPT-N4"],
+      "collect": "none", "agencyUrl": "https://www.jlpt.jp/e/application/overseas_index.html"
+    },
+    {
+      "id": "jlpt-n5", "name": "JLPT N5", "agency": "JLPT", "cadence": "periodic", "examSlugs": ["JLPT-N5"],
+      "collect": "none", "agencyUrl": "https://www.jlpt.jp/e/application/overseas_index.html"
+    },
+    {
+      "id": "hsk-1", "name": "HSK 1급", "agency": "Chinese Test International", "cadence": "frequent", "examSlugs": ["HSK-1"],
+      "collect": "none", "agencyUrl": "https://www.chinesetest.cn/HSK/1?type=1"
+    },
+    {
+      "id": "hsk-2", "name": "HSK 2급", "agency": "Chinese Test International", "cadence": "frequent", "examSlugs": ["HSK-2"],
+      "collect": "none", "agencyUrl": "https://www.chinesetest.cn/HSK/2?type=1"
+    },
+    {
+      "id": "hsk-3", "name": "HSK 3급", "agency": "Chinese Test International", "cadence": "frequent", "examSlugs": ["HSK-3"],
+      "collect": "none", "agencyUrl": "https://www.chinesetest.cn/HSK/3?type=1"
+    },
+    {
+      "id": "hsk-4", "name": "HSK 4급", "agency": "Chinese Test International", "cadence": "frequent", "examSlugs": ["HSK-4"],
+      "collect": "none", "agencyUrl": "https://www.chinesetest.cn/HSK/4?type=1"
+    },
+    {
+      "id": "hsk-5", "name": "HSK 5급", "agency": "Chinese Test International", "cadence": "frequent", "examSlugs": ["HSK-5"],
+      "collect": "none", "agencyUrl": "https://www.chinesetest.cn/HSK/5?type=1"
+    },
+    {
+      "id": "hsk-6", "name": "HSK 6급", "agency": "Chinese Test International", "cadence": "frequent", "examSlugs": ["HSK-6"],
+      "collect": "none", "agencyUrl": "https://www.chinesetest.cn/HSK/6?type=1"
+    },
+    {
+      "id": "hsk-7-9", "name": "HSK 7–9급", "agency": "Chinese Test International", "cadence": "periodic", "examSlugs": ["HSK-7-9"],
+      "collect": "none", "agencyUrl": "https://www.chinesetest.cn/HSK/7-9"
+    },
+    {
+      "id": "delf-a1", "name": "DELF A1", "agency": "France Éducation international", "cadence": "periodic", "examSlugs": ["DELF-A1"],
+      "collect": "none", "agencyUrl": "https://www.france-education-international.fr/en/diplome/delf-tout-public/niveau-a1?langue=en"
+    },
+    {
+      "id": "delf-a2", "name": "DELF A2", "agency": "France Éducation international", "cadence": "periodic", "examSlugs": ["DELF-A2"],
+      "collect": "none", "agencyUrl": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a2?langue=fr"
+    },
+    {
+      "id": "delf-b1", "name": "DELF B1", "agency": "France Éducation international", "cadence": "periodic", "examSlugs": ["DELF-B1"],
+      "collect": "none", "agencyUrl": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b1"
+    },
+    {
+      "id": "delf-b2", "name": "DELF B2", "agency": "France Éducation international", "cadence": "periodic", "examSlugs": ["DELF-B2"],
+      "collect": "none", "agencyUrl": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b2"
+    },
+    {
+      "id": "dalf-c1", "name": "DALF C1", "agency": "France Éducation international", "cadence": "periodic", "examSlugs": ["DALF-C1"],
+      "collect": "none", "agencyUrl": "https://www.france-education-international.fr/en/article/dalf-c1"
+    },
+    {
+      "id": "dalf-c2", "name": "DALF C2", "agency": "France Éducation international", "cadence": "periodic", "examSlugs": ["DALF-C2"],
+      "collect": "none", "agencyUrl": "https://www.france-education-international.fr/en/article/dalf-c2"
+    },
+    {
+      "id": "dele-a1", "name": "DELE A1", "agency": "Instituto Cervantes", "cadence": "periodic", "examSlugs": ["DELE-A1"],
+      "collect": "none", "agencyUrl": "https://examenes.cervantes.es/es/dele/preparar-prueba"
+    },
+    {
+      "id": "dele-a2", "name": "DELE A2", "agency": "Instituto Cervantes", "cadence": "periodic", "examSlugs": ["DELE-A2"],
+      "collect": "none", "agencyUrl": "https://examenes.cervantes.es/es/dele/preparar-prueba"
+    },
+    {
+      "id": "dele-b1", "name": "DELE B1", "agency": "Instituto Cervantes", "cadence": "periodic", "examSlugs": ["DELE-B1"],
+      "collect": "none", "agencyUrl": "https://examenes.cervantes.es/es/dele/preparar-prueba"
+    },
+    {
+      "id": "dele-b2", "name": "DELE B2", "agency": "Instituto Cervantes", "cadence": "periodic", "examSlugs": ["DELE-B2"],
+      "collect": "none", "agencyUrl": "https://examenes.cervantes.es/es/dele/preparar-prueba"
+    },
+    {
+      "id": "dele-c1", "name": "DELE C1", "agency": "Instituto Cervantes", "cadence": "periodic", "examSlugs": ["DELE-C1"],
+      "collect": "none", "agencyUrl": "https://examenes.cervantes.es/es/dele/preparar-prueba"
+    },
+    {
+      "id": "dele-c2", "name": "DELE C2", "agency": "Instituto Cervantes", "cadence": "periodic", "examSlugs": ["DELE-C2"],
+      "collect": "none", "agencyUrl": "https://examenes.cervantes.es/es/dele/preparar-prueba"
     }
   ]
 }

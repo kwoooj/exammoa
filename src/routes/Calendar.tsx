@@ -321,13 +321,18 @@ export function Calendar({ data, today }: { data: AppData; today: string }) {
       {/* 상시시험과 절대 한 통에 담지 않는다 — 뜻이 정반대다 (§7.8) */}
       {calendar.tbdNotices.length > 0 && (
         <section className="section" aria-labelledby="tbd-h">
-          <div className="section__head"><h2 id="tbd-h">아직 일정이 발표되지 않은 시험</h2></div>
+          <div className="section__head"><h2 id="tbd-h">
+            {calendar.tbdNotices.every(notice => notice.pendingImport)
+              ? '일정 연동 준비 중인 시험'
+              : '공식 일정 확인이 필요한 시험'}
+          </h2></div>
           <ul className="linklist">
             {calendar.tbdNotices.map(n => (
               <li key={n.groupId}>
                 {n.examSlugs.map(slug => (
                   <Link key={slug} to={examPath(slug)}>{nameOf(slug)}</Link>
                 ))}
+                {n.pendingImport && <span className="small muted">공식 접수처에서 먼저 확인해 주세요</span>}
               </li>
             ))}
           </ul>

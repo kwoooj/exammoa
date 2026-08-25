@@ -12,11 +12,11 @@
  * 산출물 안의 `meta.sources` 로 들어오고 `freshness.ts` 가 읽는다.
  */
 
-import type { ExamsFile, GroupsFile, MetaFile, SessionsFile } from '../types.ts';
+import type { ExamDetailsFile, ExamsFile, GroupsFile, MetaFile, SessionsFile } from '../types.ts';
 
-export type DataFile = 'exams' | 'groups' | 'sessions' | 'meta';
+export type DataFile = 'exams' | 'groups' | 'sessions' | 'meta' | 'details';
 
-export const DATA_FILES: readonly DataFile[] = ['exams', 'groups', 'sessions', 'meta'];
+export const DATA_FILES: readonly DataFile[] = ['exams', 'groups', 'sessions', 'meta', 'details'];
 
 export type JsonReader = (file: DataFile) => Promise<unknown>;
 
@@ -25,6 +25,7 @@ export interface RawData {
   groups: GroupsFile;
   sessions: SessionsFile;
   meta: MetaFile;
+  details: ExamDetailsFile;
 }
 
 /**
@@ -68,12 +69,13 @@ export async function loadRaw(read: JsonReader): Promise<RawData> {
     }
   };
 
-  const [exams, groups, sessions, meta] = await Promise.all(DATA_FILES.map(read1));
+  const [exams, groups, sessions, meta, details] = await Promise.all(DATA_FILES.map(read1));
 
   expectArray('exams', exams, 'exams');
   expectArray('exams', exams, 'categories');
   expectArray('groups', groups, 'groups');
   expectArray('sessions', sessions, 'sessions');
+  expectArray('details', details, 'details');
   if (!isObject(meta) || typeof meta['fetchedAt'] !== 'string') {
     throw new DataError('meta', 'meta.json 의 모양이 예상과 다릅니다 (fetchedAt 없음)');
   }
@@ -83,6 +85,7 @@ export async function loadRaw(read: JsonReader): Promise<RawData> {
     groups: groups as GroupsFile,
     sessions: sessions as SessionsFile,
     meta: meta as unknown as MetaFile,
+    details: details as ExamDetailsFile,
   };
 }
 

@@ -1555,10 +1555,10 @@
           "amount": 30000
         }
       ],
-      "checkedAt": "2026-08-20",
+      "checkedAt": "2026-08-24",
       "source": {
         "kind": "manual",
-        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
         "recheckAfterDays": 90
       }
     },
@@ -1570,10 +1570,10 @@
           "amount": 30000
         }
       ],
-      "checkedAt": "2026-08-20",
+      "checkedAt": "2026-08-24",
       "source": {
         "kind": "manual",
-        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
         "recheckAfterDays": 90
       }
     },
@@ -1582,13 +1582,13 @@
       "items": [
         {
           "label": "일반",
-          "amount": 30000
+          "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-20",
+      "checkedAt": "2026-08-24",
       "source": {
         "kind": "manual",
-        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
         "recheckAfterDays": 90
       }
     },
@@ -1597,13 +1597,13 @@
       "items": [
         {
           "label": "일반",
-          "amount": 30000
+          "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-20",
+      "checkedAt": "2026-08-24",
       "source": {
         "kind": "manual",
-        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
         "recheckAfterDays": 90
       }
     },
@@ -1612,13 +1612,13 @@
       "items": [
         {
           "label": "일반",
-          "amount": 30000
+          "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-20",
+      "checkedAt": "2026-08-24",
       "source": {
         "kind": "manual",
-        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
         "recheckAfterDays": 90
       }
     },
@@ -1627,13 +1627,13 @@
       "items": [
         {
           "label": "일반",
-          "amount": 30000
+          "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-20",
+      "checkedAt": "2026-08-24",
       "source": {
         "kind": "manual",
-        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
         "recheckAfterDays": 90
       }
     },
@@ -1642,13 +1642,13 @@
       "items": [
         {
           "label": "일반",
-          "amount": 30000
+          "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-20",
+      "checkedAt": "2026-08-24",
       "source": {
         "kind": "manual",
-        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
         "recheckAfterDays": 90
       }
     },
@@ -1657,13 +1657,13 @@
       "items": [
         {
           "label": "일반",
-          "amount": 30000
+          "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-20",
+      "checkedAt": "2026-08-24",
       "source": {
         "kind": "manual",
-        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
+        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
         "recheckAfterDays": 90
       }
     },
@@ -1688,6 +1688,122 @@
           "77,000원"
         ]
       }
+    },
+    {
+      "slug": "TOEFL-iBT", "items": [{ "label": "응시료", "amountLabel": "접수 국가·시험 방식별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.ets.org/toefl/test-takers/ibt/register/fees.html", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "New-TEPS", "items": [{ "label": "응시료", "amountLabel": "공식 접수처에서 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.teps.or.kr/Receipt/ExamSchedule", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "G-TELP-Level-2", "items": [{ "label": "응시료", "amountLabel": "접수 유형별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://g-telp.co.kr/mobile/info/info2_2.asp", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "IELTS-Academic", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://ielts.org/take-a-test/book-a-test", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "IELTS-General-Training", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://ielts.org/take-a-test/book-a-test", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "JLPT-N1", "items": [{ "label": "응시료", "amountLabel": "국내 접수처에서 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.jlpt.jp/e/application/overseas_index.html", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "JLPT-N2", "items": [{ "label": "응시료", "amountLabel": "국내 접수처에서 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.jlpt.jp/e/application/overseas_index.html", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "JLPT-N3", "items": [{ "label": "응시료", "amountLabel": "국내 접수처에서 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.jlpt.jp/e/application/overseas_index.html", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "JLPT-N4", "items": [{ "label": "응시료", "amountLabel": "국내 접수처에서 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.jlpt.jp/e/application/overseas_index.html", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "JLPT-N5", "items": [{ "label": "응시료", "amountLabel": "국내 접수처에서 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.jlpt.jp/e/application/overseas_index.html", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "HSK-1", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/1?type=1", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "HSK-2", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/2?type=1", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "HSK-3", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/3?type=1", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "HSK-4", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/4?type=1", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "HSK-5", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/5?type=1", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "HSK-6", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/6?type=1", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "HSK-7-9", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/7-9", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DELF-A1", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.france-education-international.fr/en/diplome/delf-tout-public/niveau-a1?langue=en", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DELF-A2", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a2?langue=fr", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DELF-B1", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b1", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DELF-B2", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b2", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DALF-C1", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.france-education-international.fr/en/article/dalf-c1", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DALF-C2", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://www.france-education-international.fr/en/article/dalf-c2", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DELE-A1", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DELE-A2", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DELE-B1", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DELE-B2", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DELE-C1", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "DELE-C2", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
+      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
     }
   ]
 }

@@ -25,7 +25,7 @@ test('며칠 전인지 센다', () => {
 test('확인된 적 없으면 null', () => {
   assert.equal(daysSince(null, TODAY), null);
   assert.equal(daysSince('언젠가', TODAY), null);
-  assert.equal(agoLabel(null), '확인된 적 없음');
+  assert.equal(agoLabel(null), '기록 없음');
 });
 
 test('라벨', () => {

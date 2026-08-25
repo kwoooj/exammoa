@@ -1,0 +1,186 @@
+{
+  "$comment": "시험 한눈에·시험 구성 수기 정본. 공식 근거 없는 값은 생략하고 시간·배점을 계산해 추정하지 않는다.",
+  "version": "0.2.0",
+  "details": [
+    {
+      "examSlug": "정보처리기사",
+      "catalogStatus": "published",
+      "sourceRefs": ["qnet-qualification-detail"],
+      "classification": {
+        "kind": "national-technical",
+        "label": "국가기술자격",
+        "authority": "과학기술정보통신부 · 한국산업인력공단",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?id=crf00503s02&jmCd=1320&jmInfoDivCcd=B0",
+        "checkedAt": "2026-08-20"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기·실기 합격제",
+        "validityLabel": "취득 자격에 별도 유효기간 없음",
+        "passCriteria": "필기는 과목당 40점 이상이면서 전 과목 평균 60점 이상, 실기는 60점 이상"
+      },
+      "deliveryModes": ["필기 CBT", "실기 필답형"],
+      "formats": [
+        {
+          "effectiveFrom": "2020-01-01",
+          "checkedAt": "2026-08-20",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?id=crf00503s02&jmCd=1320&jmInfoDivCcd=B0",
+          "summary": "필기 5과목·100문항·150분 · 실기 150분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 150,
+              "sections": [
+                { "name": "소프트웨어 설계", "itemCount": 20, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "소프트웨어 개발", "itemCount": 20, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "데이터베이스 구축", "itemCount": 20, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "프로그래밍 언어 활용", "itemCount": 20, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "정보시스템 구축관리", "itemCount": 20, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } }
+              ]
+            },
+            {
+              "id": "practical",
+              "name": "실기시험",
+              "durationMinutes": 150,
+              "totalScore": 100,
+              "sections": [
+                { "name": "정보처리 실무", "mode": "written" }
+              ]
+            }
+          ],
+          "note": "실제 시작시각은 회차·시험장별 수험표를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "토익",
+      "catalogStatus": "published",
+      "sourceRefs": ["ybm-toeic-format"],
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 공인 어학시험",
+        "authority": "ETS · 한국TOEIC위원회(YBM)",
+        "sourceUrl": "https://exam.toeic.co.kr/common/template/viewContents.php?contentsCode=19",
+        "checkedAt": "2026-08-20"
+      },
+      "result": {
+        "type": "score",
+        "label": "10–990점 점수제",
+        "validityLabel": "시험일로부터 2년",
+        "note": "합격·불합격 기준은 없으며 기관별 요구점수가 다릅니다."
+      },
+      "deliveryModes": ["시험장 지필시험", "OMR 답안"],
+      "formats": [
+        {
+          "effectiveFrom": "2016-05-29",
+          "checkedAt": "2026-08-20",
+          "sourceUrl": "https://exam.toeic.co.kr/common/template/viewContents.php?contentsCode=19",
+          "totalDurationMinutes": 120,
+          "summary": "2개 영역·7개 파트·200문항·120분",
+          "stages": [
+            {
+              "id": "single",
+              "name": "TOEIC Listening & Reading",
+              "durationMinutes": 120,
+              "sections": [
+                { "name": "Listening Comprehension", "itemCount": 100, "mode": "multiple-choice", "scoreRange": { "min": 5, "max": 495 }, "note": "Part 1~4" },
+                { "name": "Reading Comprehension", "itemCount": 100, "mode": "multiple-choice", "scoreRange": { "min": 5, "max": 495 }, "note": "Part 5~7" }
+              ],
+              "timedBlocks": [
+                { "name": "Listening", "durationMinutes": 45, "sectionNames": ["Listening Comprehension"] },
+                { "name": "Reading", "durationMinutes": 75, "sectionNames": ["Reading Comprehension"] }
+              ]
+            }
+          ],
+          "note": "안내·신분 확인 시간은 120분의 평가시간에 포함되지 않습니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "AFPK",
+      "catalogStatus": "published",
+      "sourceRefs": ["ifpk-afpk-format"],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "금융위원회 · 한국재무설계협회",
+        "sourceUrl": "https://www.pqi.or.kr/inf/qul/infQulBasDetail.do?qulId=801",
+        "checkedAt": "2026-08-20"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "전체·모듈별 합격제",
+        "validityLabel": "전체합격 3년 · 부분합격 연속 4회",
+        "passCriteria": "전체 또는 응시 모듈 평균 70% 이상이면서 모든 과목이 40% 이상"
+      },
+      "deliveryModes": ["시험장 지필시험", "모듈별 응시 가능"],
+      "formats": [
+        {
+          "effectiveFrom": "2024-01-01",
+          "effectiveTo": "2026-08-21",
+          "checkedAt": "2026-08-20",
+          "sourceUrl": "https://www.ifpk.org/?data_usn=179161&mnu_usn=67&mode=view&page_no=1",
+          "totalDurationMinutes": 210,
+          "summary": "2개 모듈·190문항·210분",
+          "stages": [
+            {
+              "id": "module-1",
+              "name": "모듈1",
+              "durationMinutes": 110,
+              "sections": [
+                { "name": "재무설계 개론", "itemCount": 15 },
+                { "name": "재무설계 직업윤리", "itemCount": 5, "note": "재무설계 개론에 포함" },
+                { "name": "은퇴설계", "itemCount": 30 },
+                { "name": "부동산설계", "itemCount": 25 },
+                { "name": "상속설계", "itemCount": 25 }
+              ]
+            },
+            {
+              "id": "module-2",
+              "name": "모듈2",
+              "durationMinutes": 100,
+              "sections": [
+                { "name": "위험관리와 보험설계", "itemCount": 30 },
+                { "name": "투자설계", "itemCount": 30 },
+                { "name": "세금설계", "itemCount": 30 }
+              ]
+            }
+          ]
+        },
+        {
+          "effectiveFrom": "2026-08-22",
+          "checkedAt": "2026-08-20",
+          "sourceUrl": "https://www.ifpk.org/?mnu_usn=29",
+          "totalDurationMinutes": 170,
+          "summary": "2개 모듈·150문항·170분",
+          "stages": [
+            {
+              "id": "module-1",
+              "name": "모듈1",
+              "durationMinutes": 90,
+              "sections": [
+                { "name": "재무설계 개론", "itemCount": 12 },
+                { "name": "재무설계 직업윤리", "itemCount": 3, "note": "재무설계 개론에 포함" },
+                { "name": "은퇴설계", "itemCount": 25 },
+                { "name": "부동산설계", "itemCount": 20 },
+                { "name": "상속설계", "itemCount": 20 }
+              ]
+            },
+            {
+              "id": "module-2",
+              "name": "모듈2",
+              "durationMinutes": 80,
+              "sections": [
+                { "name": "위험관리와 보험설계", "itemCount": 20 },
+                { "name": "투자설계", "itemCount": 25 },
+                { "name": "세금설계", "itemCount": 25 }
+              ]
+            }
+          ],
+          "note": "2026년 8월 제94회부터 문항 수와 시험시간이 변경되었습니다."
+        }
+      ]
+    }
+  ]
+}

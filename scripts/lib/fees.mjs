@@ -42,7 +42,7 @@ const compact = value => String(value ?? '').replace(/[\s,]/g, '');
 export function pageContainsFee(html, record) {
   const body = compact(html);
   const fingerprints = record.source.fingerprints
-    ?? record.items.map(item => `${item.amount}원`);
+    ?? record.items.filter(item => item.amount !== undefined).map(item => `${item.amount}원`);
   return fingerprints.every(value => body.includes(compact(value)));
 }
 
@@ -58,7 +58,9 @@ export function checkFeeSeed(seed, exams) {
     if (!known.has(record.slug)) problems.push(`시험 시드에 없는 응시료: ${record.slug}`);
     if (!Array.isArray(record.items) || !record.items.length) problems.push(`${record.slug}: items가 비었다.`);
     for (const item of record.items ?? []) {
-      if (!item.label || !Number.isSafeInteger(item.amount) || item.amount < 0) {
+      const hasAmount = Number.isSafeInteger(item.amount) && item.amount >= 0;
+      const hasLabel = typeof item.amountLabel === 'string' && item.amountLabel.trim().length > 0;
+      if (!item.label || hasAmount === hasLabel) {
         problems.push(`${record.slug}: 잘못된 금액 항목 ${JSON.stringify(item)}`);
       }
     }
