@@ -9,9 +9,9 @@ export function activeFormat(formats: AssessmentFormat[], on: string): Assessmen
 export function durationLabel(value: number | { min?: number; max?: number } | undefined): string {
   if (value === undefined) return '공식 안내 없음';
   if (typeof value === 'object') {
-    if (value.min !== undefined && value.max !== undefined) return `${value.min}~${value.max}분`;
-    if (value.max !== undefined) return `최대 ${value.max}분`;
-    if (value.min !== undefined) return `최소 ${value.min}분`;
+    if (value.min !== undefined && value.max !== undefined) return `${durationLabel(value.min)}~${durationLabel(value.max)}`;
+    if (value.max !== undefined) return `최대 ${durationLabel(value.max)}`;
+    if (value.min !== undefined) return `최소 ${durationLabel(value.min)}`;
     return '공식 안내 없음';
   }
   const h = Math.floor(value / 60);
@@ -20,10 +20,11 @@ export function durationLabel(value: number | { min?: number; max?: number } | u
 }
 
 export function formatDurationLabel(format: AssessmentFormat): string {
-  if (format.totalDurationMinutes !== undefined) return durationLabel(format.totalDurationMinutes);
   const stages = format.stages
     .filter(stage => stage.durationMinutes !== undefined)
     .map(stage => `${stage.name.replace(/시험$/, '')} ${durationLabel(stage.durationMinutes)}`);
+  if (stages.length > 1) return stages.join(' · ');
+  if (format.totalDurationMinutes !== undefined) return durationLabel(format.totalDurationMinutes);
   return stages.length ? stages.join(' · ') : '공식 안내 없음';
 }
 

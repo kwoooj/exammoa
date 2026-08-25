@@ -20,7 +20,7 @@ test('공식 적용 시작일을 밝히지 않은 단일 현행 구성도 선택
 
 test('표준시간을 읽기 쉬운 시간제로 표시한다', () => {
   assert.equal(durationLabel(150), '2시간 30분');
-  assert.equal(durationLabel({ min: 120, max: 150 }), '120~150분');
+  assert.equal(durationLabel({ min: 120, max: 150 }), '2시간~2시간 30분');
   assert.equal(durationLabel(undefined), '공식 안내 없음');
 });
 
@@ -31,6 +31,7 @@ test('시험 한눈에 시간에는 과목·문항 수를 섞지 않는다', () 
     { id: 'written', name: '필기시험', durationMinutes: 150, sections: [{ name: '과목' }] },
     { id: 'practical', name: '실기시험', durationMinutes: 150, sections: [{ name: '실무' }] },
   ];
+  staged.totalDurationMinutes = 300;
   assert.equal(formatDurationLabel(staged), '필기 2시간 30분 · 실기 2시간 30분');
 });
 
