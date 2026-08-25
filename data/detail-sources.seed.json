@@ -148,6 +148,25 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats"],
       "examSlugs": ["리눅스마스터1급", "리눅스마스터2급"]
+    },
+    {
+      "id": "kacpta-qualification-detail",
+      "name": "한국세무사회 10종 자격·시험 구성",
+      "authority": "한국세무사회",
+      "method": "html",
+      "collectionStatus": "active",
+      "adapter": "kacpta-detail",
+      "sourceUrl": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "allowed",
+        "checkedAt": "2026-08-25",
+        "url": "https://license.kacta.or.kr/robots.txt",
+        "note": "robots.txt가 규칙 파일 대신 HTML 안내를 반환해 RFC 9309 기준 허용으로 판정"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["전산세무1급", "전산세무2급", "전산회계1급", "전산회계2급", "세무회계1급", "세무회계2급", "세무회계3급", "기업회계1급", "기업회계2급", "기업회계3급"]
     }
   ]
 }

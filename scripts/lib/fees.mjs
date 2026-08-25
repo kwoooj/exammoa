@@ -37,9 +37,22 @@ export function parseQnetFee(html) {
 }
 
 const compact = value => String(value ?? '').replace(/[\s,]/g, '');
+const regexEscape = value => String(value ?? '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+export function labeledPageFees(html, label) {
+  const text = String(html ?? '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&#160;/gi, ' ');
+  return [...new Set([...text.matchAll(new RegExp(`${regexEscape(label)}\\s*([0-9][0-9,]*)\\s*원`, 'g'))]
+    .map(match => money(match[1]))
+    .filter(Boolean))];
+}
 
 /** 공식 HTML에 현재 기준 금액이 모두 남아 있는지 확인한다. */
 export function pageContainsFee(html, record) {
+  if (record.source.feeLabel) {
+    const observed = labeledPageFees(html, record.source.feeLabel);
+    const expected = [...new Set(record.items.map(item => item.amount).filter(Number.isSafeInteger))];
+    return observed.length === expected.length && observed.every(amount => expected.includes(amount));
+  }
   const body = compact(html);
   const fingerprints = record.source.fingerprints
     ?? record.items.filter(item => item.amount !== undefined).map(item => `${item.amount}원`);
@@ -136,6 +149,7 @@ export async function collectFees(exams, feeSeed, options = {}) {
   const previous = new Map((options.previousExams ?? []).map(exam => [exam.slug, exam.fee]));
   const records = new Map(feeSeed.fees.map(record => [record.slug, record]));
   const robotsCache = new Map();
+  const pageCache = new Map();
   const fees = new Map();
   const failures = [];
   const changes = [];
@@ -155,7 +169,10 @@ export async function collectFees(exams, feeSeed, options = {}) {
         if (!sameItems(items, fallback.items)) changes.push({ slug: exam.slug, before: fallback.items, after: items });
         verified++;
       } else if (record.source.kind === 'page') {
-        const html = await fetchHtml(record.source.url, fetchImpl, robotsCache);
+        if (!pageCache.has(record.source.url)) {
+          pageCache.set(record.source.url, fetchHtml(record.source.url, fetchImpl, robotsCache));
+        }
+        const html = await pageCache.get(record.source.url);
         if (!pageContainsFee(html, record)) throw new Error('기준 금액을 공식 페이지에서 찾지 못했다 (인상 또는 개편 가능)');
         fees.set(exam.slug, feeOf(record, record.items, today));
         verified++;

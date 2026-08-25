@@ -238,11 +238,13 @@
           "amount": 30000
         }
       ],
-      "checkedAt": "2026-08-19",
+      "checkedAt": "2026-08-25",
+      "note": "전자결제 이용수수료 400원이 별도 부과됩니다.",
       "source": {
-        "kind": "manual",
-        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
-        "recheckAfterDays": 90
+        "kind": "page",
+        "url": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+        "feeLabel": "접수수수료",
+        "fingerprints": ["접수수수료 30,000원"]
       }
     },
     {
@@ -253,11 +255,13 @@
           "amount": 30000
         }
       ],
-      "checkedAt": "2026-08-19",
+      "checkedAt": "2026-08-25",
+      "note": "전자결제 이용수수료 400원이 별도 부과됩니다.",
       "source": {
-        "kind": "manual",
-        "url": "https://www.kacpta.or.kr/data/Board/TaxProvision/40.%20자격시험관리운영규정(2024.%201.%205.%20개정).pdf",
-        "recheckAfterDays": 90
+        "kind": "page",
+        "url": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+        "feeLabel": "접수수수료",
+        "fingerprints": ["접수수수료 30,000원"]
       }
     },
     {
@@ -1555,11 +1559,13 @@
           "amount": 30000
         }
       ],
-      "checkedAt": "2026-08-24",
+      "checkedAt": "2026-08-25",
+      "note": "전자결제 이용수수료 400원이 별도 부과됩니다.",
       "source": {
-        "kind": "manual",
-        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
-        "recheckAfterDays": 90
+        "kind": "page",
+        "url": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+        "feeLabel": "접수수수료",
+        "fingerprints": ["접수수수료 30,000원"]
       }
     },
     {
@@ -1570,11 +1576,13 @@
           "amount": 30000
         }
       ],
-      "checkedAt": "2026-08-24",
+      "checkedAt": "2026-08-25",
+      "note": "전자결제 이용수수료 400원이 별도 부과됩니다.",
       "source": {
-        "kind": "manual",
-        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
-        "recheckAfterDays": 90
+        "kind": "page",
+        "url": "https://license.kacta.or.kr/web/info/info_outline.aspx",
+        "feeLabel": "접수수수료",
+        "fingerprints": ["접수수수료 30,000원"]
       }
     },
     {
@@ -1585,11 +1593,13 @@
           "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-24",
+      "checkedAt": "2026-08-25",
+      "note": "전자결제 이용수수료 400원이 별도 부과됩니다.",
       "source": {
-        "kind": "manual",
-        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
-        "recheckAfterDays": 90
+        "kind": "page",
+        "url": "https://license.kacta.or.kr/web/info/info_outline2.aspx",
+        "feeLabel": "접수수수료",
+        "fingerprints": ["접수수수료 25,000원"]
       }
     },
     {
@@ -1600,11 +1610,13 @@
           "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-24",
+      "checkedAt": "2026-08-25",
+      "note": "전자결제 이용수수료 400원이 별도 부과됩니다.",
       "source": {
-        "kind": "manual",
-        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
-        "recheckAfterDays": 90
+        "kind": "page",
+        "url": "https://license.kacta.or.kr/web/info/info_outline2.aspx",
+        "feeLabel": "접수수수료",
+        "fingerprints": ["접수수수료 25,000원"]
       }
     },
     {
@@ -1615,11 +1627,13 @@
           "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-24",
+      "checkedAt": "2026-08-25",
+      "note": "전자결제 이용수수료 400원이 별도 부과됩니다.",
       "source": {
-        "kind": "manual",
-        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
-        "recheckAfterDays": 90
+        "kind": "page",
+        "url": "https://license.kacta.or.kr/web/info/info_outline2.aspx",
+        "feeLabel": "접수수수료",
+        "fingerprints": ["접수수수료 25,000원"]
       }
     },
     {
@@ -1630,11 +1644,13 @@
           "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-24",
+      "checkedAt": "2026-08-25",
+      "note": "전자결제 이용수수료 400원이 별도 부과됩니다.",
       "source": {
-        "kind": "manual",
-        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
-        "recheckAfterDays": 90
+        "kind": "page",
+        "url": "https://license.kacta.or.kr/web/info/info_outline3.aspx",
+        "feeLabel": "접수수수료",
+        "fingerprints": ["접수수수료 25,000원"]
       }
     },
     {
@@ -1645,11 +1661,13 @@
           "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-24",
+      "checkedAt": "2026-08-25",
+      "note": "전자결제 이용수수료 400원이 별도 부과됩니다.",
       "source": {
-        "kind": "manual",
-        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
-        "recheckAfterDays": 90
+        "kind": "page",
+        "url": "https://license.kacta.or.kr/web/info/info_outline3.aspx",
+        "feeLabel": "접수수수료",
+        "fingerprints": ["접수수수료 25,000원"]
       }
     },
     {
@@ -1660,11 +1678,13 @@
           "amount": 25000
         }
       ],
-      "checkedAt": "2026-08-24",
+      "checkedAt": "2026-08-25",
+      "note": "전자결제 이용수수료 400원이 별도 부과됩니다.",
       "source": {
-        "kind": "manual",
-        "url": "https://license.kacpta.or.kr/web/info/info_diary.aspx",
-        "recheckAfterDays": 90
+        "kind": "page",
+        "url": "https://license.kacta.or.kr/web/info/info_outline3.aspx",
+        "feeLabel": "접수수수료",
+        "fingerprints": ["접수수수료 25,000원"]
       }
     },
     {

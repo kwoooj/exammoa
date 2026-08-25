@@ -3,6 +3,7 @@ import { catalogPlaceholderSessions } from './catalog-placeholders.mjs';
 const publishedFee = fee => fee ? {
   items: fee.items.map(item => ({ ...item })),
   checkedAt: fee.checkedAt,
+  ...(fee.note ? { note: fee.note } : {}),
 } : null;
 
 // 같은 확인일이면 실제 수집값을 우선한다. 기관이 당일 인상한 값을 배치가 잡았는데

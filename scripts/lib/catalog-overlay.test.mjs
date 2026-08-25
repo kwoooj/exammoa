@@ -16,7 +16,7 @@ const input = () => ({
     { id: 'g2', name: '신규 그룹', cadence: 'periodic' },
   ] },
   feeSeed: { fees: [
-    { slug: '기존', items: [{ label: '응시료', amount: 2 }], checkedAt: '2026-02-01' },
+    { slug: '기존', items: [{ label: '응시료', amount: 2 }], checkedAt: '2026-02-01', note: '결제수수료 별도' },
     { slug: '신규', items: [{ label: '응시료', amountLabel: '공식 접수처 확인' }], checkedAt: '2026-02-01' },
   ] },
 });
@@ -26,6 +26,7 @@ test('승인 카탈로그와 일정 미공고 회차를 수집 기준본 위에 
   assert.equal(result.exams.exams.length, 2);
   assert.equal(result.exams.exams[0].name, '새 이름');
   assert.equal(result.exams.exams[0].fee.items[0].amount, 2);
+  assert.equal(result.exams.exams[0].fee.note, '결제수수료 별도');
   assert.equal(result.exams.exams[1].fee.items[0].amountLabel, '공식 접수처 확인');
   assert.equal(result.sessions.sessions.filter(session => session.src === 'catalog-placeholders').length, 1);
   assert.equal(result.meta.examCount, 2);

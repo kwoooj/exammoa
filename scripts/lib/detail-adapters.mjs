@@ -1,5 +1,6 @@
 import { collectQnetDetails, parseQnetDetailBundle } from '../sources/qnet-detail.mjs';
 import { parseKaitLinuxDetail } from '../sources/kait-linux-detail.mjs';
+import { collectKacptaDetails, parseKacptaDetailBundle } from '../sources/kacpta-detail.mjs';
 
 /**
  * 승인형 업로드의 공통 입력 형식.
@@ -32,4 +33,5 @@ export const DETAIL_ADAPTERS = new Map([
   ['normalized-detail-json', { parse: parseNormalizedDetailJson, extension: 'json' }],
   ['qnet-detail', { collect: collectQnetDetails, parse: parseQnetDetailBundle, extension: 'json' }],
   ['kait-linux-detail', { parse: parseKaitLinuxDetail, extension: 'html' }],
+  ['kacpta-detail', { collect: collectKacptaDetails, parse: parseKacptaDetailBundle, extension: 'json' }],
 ]);
