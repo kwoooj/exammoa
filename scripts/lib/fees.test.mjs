@@ -23,6 +23,11 @@ test('공식 페이지 fingerprint는 쉼표와 공백 차이를 허용한다', 
   assert.equal(pageContainsFee('<p>응시료 90,000원</p>', record), false);
 });
 
+test('공식 페이지의 주석에만 남은 과거 금액은 현재 응시료로 인정하지 않는다', () => {
+  const record = { items: [{ label: '일반', amount: 22000 }], source: { kind: 'page' } };
+  assert.equal(pageContainsFee('<!-- 일반접수 22,000원 --><p>일반접수 25,000원</p>', record), false);
+});
+
 test('라벨형 공식 응시료는 과거 금액과 새 금액이 함께 남으면 실패한다', () => {
   const record = { items: [{ label: '일반', amount: 25000 }], source: { kind: 'page', feeLabel: '접수수수료' } };
   assert.deepEqual(labeledPageFees('접수수수료 25,000원 / 접수수수료 25,000원', '접수수수료'), [25000]);

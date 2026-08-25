@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "sourceId": "kpc-itq-qualification-detail",
+  "status": "approved",
+  "observedAt": "2026-08-25T06:57:52.144Z",
+  "contentHash": "1ef41866599f4ee569e8dc0fd161f4da6a73c8dd2694c9716593f15b6f0822ab",
+  "archiveHash": "f2ad66d9c574e905993d3900b0e21534993b7ba157ef45df47c97271f668baee",
+  "archivePath": "data/archive/details/2026/kpc-itq-qualification-detail.20260825T065722.217Z.f2ad66d9c574.html",
+  "diagnostics": {
+    "discovered": 1,
+    "included": 1,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "ITQ",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kpc-itq-qualification-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국생산성본부(KPC)",
+        "sourceUrl": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectItqinfotchnlgyqc.do?pageKind=announcement",
+        "checkedAt": "2026-08-25",
+        "note": "등록번호 2008-0191, 과학기술정보통신부 공인 A·B·C급"
+      },
+      "result": {
+        "type": "level-awarded",
+        "label": "과목별 A·B·C 등급제",
+        "passCriteria": "A등급 400~500점 · B등급 300~399점 · C등급 200~299점 · 200점 미만 불합격",
+        "note": "낮은 등급 취득 후 같은 과목에 다시 응시해 상위 등급으로 갱신할 수 있습니다."
+      },
+      "deliveryModes": [
+        "PBT 기반 컴퓨터 실기 작업형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectItqinfotchnlgyqc.do?pageKind=announcement",
+          "totalDurationMinutes": 60,
+          "summary": "선택 과목당 60분·500점 · 같은 회차 최대 3과목",
+          "stages": [
+            {
+              "id": "selected-subject",
+              "name": "선택 과목 시험",
+              "durationMinutes": 60,
+              "totalScore": 500,
+              "sections": [
+                {
+                  "name": "아래한글",
+                  "mode": "computer-task"
+                },
+                {
+                  "name": "한셀",
+                  "mode": "computer-task"
+                },
+                {
+                  "name": "한쇼",
+                  "mode": "computer-task"
+                },
+                {
+                  "name": "MS워드",
+                  "mode": "computer-task"
+                },
+                {
+                  "name": "한글엑셀",
+                  "mode": "computer-task"
+                },
+                {
+                  "name": "한글액세스",
+                  "mode": "computer-task"
+                },
+                {
+                  "name": "한글파워포인트",
+                  "mode": "computer-task"
+                },
+                {
+                  "name": "인터넷",
+                  "mode": "computer-task"
+                }
+              ],
+              "note": "표시된 8과목 중 선택한 한 과목 기준입니다. 한 회차에 최대 3과목까지 서로 다른 교시에 응시할 수 있습니다."
+            }
+          ],
+          "note": "정기시험은 09:00·10:30·12:00 교시로 운영되며 시험일정에 따라 달라질 수 있습니다."
+        }
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-25T06:58:23.354Z"
+}
