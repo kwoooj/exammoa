@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "sourceId": "history-exam-detail",
+  "status": "approved",
+  "observedAt": "2026-08-25T07:26:47.567Z",
+  "contentHash": "4a3330c481d33a0040d9722b4d84f51bcb0f953cd2e67e8b055953772580de85",
+  "archiveHash": "f273fe3d4596793fc728d960478edc9d98f838d44e7078184a3e45d709b7315c",
+  "archivePath": "data/archive/details/2026/history-exam-detail.20260825T072019.615Z.f273fe3d4596.json",
+  "diagnostics": {
+    "discovered": 1,
+    "included": 1,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "한국사능력검정시험",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "history-exam-detail"
+      ],
+      "classification": {
+        "kind": "institutional-assessment",
+        "label": "국가 시행 능력검정",
+        "authority": "국사편찬위원회",
+        "sourceUrl": "https://www.historyexam.go.kr/pageLink.do?link=examGuideline",
+        "checkedAt": "2026-08-25",
+        "note": "국사편찬위원회가 시행하는 한국사 능력검정시험입니다."
+      },
+      "result": {
+        "type": "level-awarded",
+        "label": "심화 1~3급·기본 4~6급 인증",
+        "passCriteria": "심화: 80점 이상 1급·70~79점 2급·60~69점 3급 · 기본: 80점 이상 4급·70~79점 5급·60~69점 6급"
+      },
+      "deliveryModes": [
+        "심화 5지선다 객관식",
+        "기본 4지선다 객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.historyexam.go.kr/pageLink.do?link=examGuideline",
+          "totalDurationMinutes": {
+            "min": 70,
+            "max": 80
+          },
+          "summary": "심화 50문항·80분 · 기본 50문항·70분",
+          "stages": [
+            {
+              "id": "selected-level",
+              "name": "선택 유형 시험",
+              "durationMinutes": {
+                "min": 70,
+                "max": 80
+              },
+              "totalItemCount": 50,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "한국사(심화 또는 기본)",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "심화와 기본 중 하나를 선택합니다. 과목별 제한시간 없이 50문항 전체를 심화 80분 또는 기본 70분 안에 풉니다."
+            }
+          ],
+          "note": "시험 시작은 10:30이며, 오리엔테이션·신분 확인·문제지 배부는 시험시간에 포함하지 않습니다."
+        }
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-25T07:28:30.500Z"
+}

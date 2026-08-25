@@ -3,6 +3,10 @@ import { parseKaitLinuxDetail } from '../sources/kait-linux-detail.mjs';
 import { collectKacptaDetails, parseKacptaDetailBundle } from '../sources/kacpta-detail.mjs';
 import { collectKorchamDetails, parseKorchamDetailBundle } from '../sources/korcham-detail.mjs';
 import { parseKpcItqDetail } from '../sources/kpc-itq-detail.mjs';
+import {
+  collectExistingScheduleDetails,
+  parseExistingScheduleDetailBundle,
+} from '../sources/existing-schedule-detail.mjs';
 
 /**
  * 승인형 업로드의 공통 입력 형식.
@@ -38,4 +42,9 @@ export const DETAIL_ADAPTERS = new Map([
   ['kacpta-detail', { collect: collectKacptaDetails, parse: parseKacptaDetailBundle, extension: 'json' }],
   ['korcham-detail', { collect: collectKorchamDetails, parse: parseKorchamDetailBundle, extension: 'json' }],
   ['kpc-itq-detail', { parse: parseKpcItqDetail, extension: 'html' }],
+  ['existing-schedule-detail', {
+    collect: collectExistingScheduleDetails,
+    parse: parseExistingScheduleDetailBundle,
+    extension: 'json',
+  }],
 ]);

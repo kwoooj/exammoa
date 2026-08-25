@@ -44,8 +44,11 @@ export function modeLabel(mode?: AssessmentMode): string {
       : mode === 'interview' ? '면접·구술'
         : mode === 'practical' ? '작업형'
         : mode === 'computer-task' ? '컴퓨터 기반'
-          : mode === 'mixed' ? '혼합형'
-            : '—';
+          : mode === 'listening' ? '듣기 평가'
+            : mode === 'speaking' ? '말하기 평가'
+              : mode === 'recorded-response' ? '음성 녹음형'
+                : mode === 'mixed' ? '혼합형'
+                  : '—';
 }
 
 export function scoreLabel(range?: { min: number; max: number }): string {

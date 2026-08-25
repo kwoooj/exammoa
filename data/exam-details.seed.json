@@ -5867,6 +5867,208 @@
           "note": "정기시험은 09:00·10:30·12:00 교시로 운영되며 시험일정에 따라 달라질 수 있습니다."
         }
       ]
+    },
+    {
+      "examSlug": "한국사능력검정시험",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "history-exam-detail"
+      ],
+      "classification": {
+        "kind": "institutional-assessment",
+        "label": "국가 시행 능력검정",
+        "authority": "국사편찬위원회",
+        "sourceUrl": "https://www.historyexam.go.kr/pageLink.do?link=examGuideline",
+        "checkedAt": "2026-08-25",
+        "note": "국사편찬위원회가 시행하는 한국사 능력검정시험입니다."
+      },
+      "result": {
+        "type": "level-awarded",
+        "label": "심화 1~3급·기본 4~6급 인증",
+        "passCriteria": "심화: 80점 이상 1급·70~79점 2급·60~69점 3급 · 기본: 80점 이상 4급·70~79점 5급·60~69점 6급"
+      },
+      "deliveryModes": [
+        "심화 5지선다 객관식",
+        "기본 4지선다 객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.historyexam.go.kr/pageLink.do?link=examGuideline",
+          "totalDurationMinutes": {
+            "min": 70,
+            "max": 80
+          },
+          "summary": "심화 50문항·80분 · 기본 50문항·70분",
+          "stages": [
+            {
+              "id": "selected-level",
+              "name": "선택 유형 시험",
+              "durationMinutes": {
+                "min": 70,
+                "max": 80
+              },
+              "totalItemCount": 50,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "한국사(심화 또는 기본)",
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "심화와 기본 중 하나를 선택합니다. 과목별 제한시간 없이 50문항 전체를 심화 80분 또는 기본 70분 안에 풉니다."
+            }
+          ],
+          "note": "시험 시작은 10:30이며, 오리엔테이션·신분 확인·문제지 배부는 시험시간에 포함하지 않습니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "KBS한국어능력시험",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "kbs-korean-detail"
+      ],
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "KBS한국방송공사",
+        "sourceUrl": "https://www.kbskorean.org/klt/helper/exam-process",
+        "checkedAt": "2026-08-25",
+        "note": "국가공인 KBS한국어능력시험이며 성적과 자격은 성적발표일로부터 2년간 유효합니다."
+      },
+      "result": {
+        "type": "level-awarded",
+        "label": "10~990점·1급~4-급 등급제",
+        "passCriteria": "1급·2+급·2-급·3+급·3-급·4+급·4-급 또는 무급으로 판정",
+        "note": "매회 난이도와 문항 변별도를 반영하는 등급 부여 시스템을 사용하므로 고정 절대점수 경계가 아닙니다."
+      },
+      "deliveryModes": [
+        "방송 듣기·말하기",
+        "지필 객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.kbskorean.org/klt/helper/exam-process",
+          "totalDurationMinutes": 120,
+          "summary": "100문항·120분(듣기·말하기 25분 + 지필 95분)",
+          "stages": [
+            {
+              "id": "regular",
+              "name": "정기시험",
+              "durationMinutes": 120,
+              "totalItemCount": 100,
+              "totalScore": 100,
+              "sections": [
+                {
+                  "name": "듣기·말하기",
+                  "itemCount": 15,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "지필 평가",
+                  "itemCount": 85,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "듣기·말하기",
+                  "durationMinutes": 25,
+                  "sectionNames": [
+                    "듣기·말하기"
+                  ]
+                },
+                {
+                  "name": "지필 평가",
+                  "durationMinutes": 95,
+                  "sectionNames": [
+                    "지필 평가"
+                  ]
+                }
+              ],
+              "note": "원점수는 100점 기준이며 성적표에는 난이도를 보정한 10~990점 환산점수와 등급이 제공됩니다."
+            }
+          ],
+          "note": "10:00~12:00에 쉬는 시간 없이 시행합니다."
+        }
+      ]
+    },
+    {
+      "examSlug": "토익스피킹",
+      "catalogStatus": "published",
+      "sourceRefs": [
+        "ybm-toeic-speaking-detail"
+      ],
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 공인 영어 말하기 평가",
+        "authority": "한국TOEIC위원회(YBM)",
+        "sourceUrl": "https://www.toeicswt.co.kr/common/template/viewContents.php?contentsCode=72",
+        "checkedAt": "2026-08-25",
+        "note": "ETS가 개발하고 한국TOEIC위원회가 국내 정기시험을 시행합니다."
+      },
+      "result": {
+        "type": "score",
+        "label": "0~200점·ACTFL 등급",
+        "passCriteria": "합격·불합격 없이 0~200점과 Novice Mid/Low부터 Advanced High까지의 ACTFL 등급을 제공합니다.",
+        "note": "성적은 시험 시행일로부터 2년 뒤 해당 시험일자까지 유효합니다."
+      },
+      "deliveryModes": [
+        "CBT 음성 녹음형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-25",
+          "sourceUrl": "https://www.toeicswt.co.kr/common/template/viewContents.php?contentsCode=72",
+          "totalDurationMinutes": 20,
+          "summary": "11문항·약 20분 · 컴퓨터 음성 녹음",
+          "stages": [
+            {
+              "id": "speaking",
+              "name": "말하기 평가",
+              "durationMinutes": 20,
+              "totalItemCount": 11,
+              "totalScore": 200,
+              "sections": [
+                {
+                  "name": "문장 읽기",
+                  "itemCount": 2,
+                  "mode": "recorded-response",
+                  "note": "각 문항 준비 45초·답변 45초"
+                },
+                {
+                  "name": "사진 묘사",
+                  "itemCount": 2,
+                  "mode": "recorded-response",
+                  "note": "각 문항 준비 45초·답변 30초"
+                },
+                {
+                  "name": "질문에 답하기",
+                  "itemCount": 3,
+                  "mode": "recorded-response",
+                  "note": "문항당 준비 3초·답변 15~30초"
+                },
+                {
+                  "name": "제공 정보로 답하기",
+                  "itemCount": 3,
+                  "mode": "recorded-response",
+                  "note": "지문 읽기 45초, 문항당 준비 3초·답변 15~30초"
+                },
+                {
+                  "name": "의견 제시",
+                  "itemCount": 1,
+                  "mode": "recorded-response",
+                  "note": "준비 45초·답변 60초"
+                }
+              ],
+              "note": "문항별 준비·응답 제한은 공식 화면 흐름에 따라 자동 진행되며, 전체 소요시간은 약 20분입니다."
+            }
+          ],
+          "note": "약 30분의 오리엔테이션·장비 점검·답변 확인 시간은 실제 말하기 평가시간에 포함하지 않습니다."
+        }
+      ]
     }
   ]
 }

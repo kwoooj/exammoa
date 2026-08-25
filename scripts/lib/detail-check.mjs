@@ -15,6 +15,10 @@ const positiveDuration = value => value === undefined
     && (value.max === undefined || positive(value.max))
     && (value.min !== undefined || value.max !== undefined)
     && (value.min === undefined || value.max === undefined || value.min <= value.max));
+const assessmentModes = new Set([
+  'multiple-choice', 'written', 'interview', 'practical', 'computer-task', 'listening', 'speaking',
+  'recorded-response', 'mixed',
+]);
 
 export function checkExamDetails(seed, knownExamSlugs = [], options = {}) {
   const problems = [];
@@ -74,6 +78,7 @@ export function checkExamDetails(seed, knownExamSlugs = [], options = {}) {
         const sectionNames = new Set((stage.sections ?? []).map(section => section.name));
         for (const section of stage.sections ?? []) {
           if (!section.name) problems.push(`${slug}: 빈 과목명이 있다.`);
+          if (section.mode !== undefined && !assessmentModes.has(section.mode)) problems.push(`${slug}: 지원하지 않는 응시 방식 ${section.mode}`);
           if (!positiveCount(section.itemCount) || !positiveCount(section.taskCount)) problems.push(`${slug}: 문항·과제 수가 올바르지 않다.`);
           if (section.scoreRange !== undefined
             && (!Number.isFinite(section.scoreRange.min)

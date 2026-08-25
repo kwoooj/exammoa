@@ -235,6 +235,9 @@ export type AssessmentMode =
   | 'interview'
   | 'practical'
   | 'computer-task'
+  | 'listening'
+  | 'speaking'
+  | 'recorded-response'
   | 'mixed';
 
 export interface AssessmentSection {

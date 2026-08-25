@@ -50,5 +50,8 @@ test('고정·가변 문항 수와 응시 방식을 표시한다', () => {
   assert.equal(countLabel(20), '20문항');
   assert.equal(countLabel({ max: 50 }), '최대 50문항');
   assert.equal(modeLabel('computer-task'), '컴퓨터 기반');
+  assert.equal(modeLabel('listening'), '듣기 평가');
+  assert.equal(modeLabel('speaking'), '말하기 평가');
+  assert.equal(modeLabel('recorded-response'), '음성 녹음형');
   assert.equal(scoreLabel({ min: 0, max: 100 }), '100점 만점');
 });
