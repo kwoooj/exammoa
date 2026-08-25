@@ -22,7 +22,7 @@ export function durationLabel(value: number | { min?: number; max?: number } | u
 export function formatDurationLabel(format: AssessmentFormat): string {
   const stages = format.stages
     .filter(stage => stage.durationMinutes !== undefined)
-    .map(stage => `${stage.name.replace(/시험$/, '')} ${durationLabel(stage.durationMinutes)}`);
+    .map(stage => `${stage.name.replace(/시험$/, '').trim()} ${durationLabel(stage.durationMinutes)}`);
   if (stages.length > 1) return stages.join(' · ');
   if (format.totalDurationMinutes !== undefined) return durationLabel(format.totalDurationMinutes);
   return stages.length ? stages.join(' · ') : '공식 안내 없음';
