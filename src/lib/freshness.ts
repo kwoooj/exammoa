@@ -42,7 +42,7 @@ export function daysSince(iso: string | null, from = today()): number | null {
 
 /** "오늘" · "어제" · "3일 전" */
 export function agoLabel(days: number | null): string {
-  if (days === null) return '확인된 적 없음';
+  if (days === null) return '기록 없음';
   if (days <= 0) return '오늘';
   if (days === 1) return '어제';
   return `${days}일 전`;

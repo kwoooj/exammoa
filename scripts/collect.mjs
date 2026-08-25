@@ -28,6 +28,7 @@ import { checkFeeSeed, collectFees } from './lib/fees.mjs';
 import { qnetEventTiming } from './lib/event-timing.mjs';
 import { coverageLine } from './lib/source-coverage.mjs';
 import { crawlDiagnosticProblem } from './lib/crawl-health.mjs';
+import { catalogPlaceholderSessions } from './lib/catalog-placeholders.mjs';
 
 /** 크롤 어댑터 목록. 여기 없는 사이트는 요청되지 않는다. */
 const CRAWL_SOURCES = [
@@ -798,6 +799,19 @@ async function collect(seed, groupSeed, feeSeed) {
       ? `  !! rolling-rules ${missingRule.map(g => g.id).join(', ')} 에 규칙이 없다`
       : `  ok rolling-rules ${rollingGroups.length}그룹 (규칙 카드, 막대 없음)`,
   );
+
+  // 공식 종목·링크는 등록됐지만 일정 수집기를 아직 붙이지 않은 수동 종목도 검색과
+  // 즐겨찾기에서는 보여 준다. 미공고 회차만 만들고 날짜·시각은 절대 추정하지 않는다.
+  const catalogSessions = catalogPlaceholderSessions(seed.exams, groupSeed.groups, YEAR);
+  harvests.push({
+    id: 'catalog-placeholders',
+    method: 'manual',
+    ok: true,
+    sessions: catalogSessions,
+    observedAt: null,
+    staleAfterDays: 365,
+  });
+  console.log(`  ok catalog-placeholders ${catalogSessions.length}그룹 (일정 미공고)`);
 
   const prev = await readPrevious();
   if (!prev) {

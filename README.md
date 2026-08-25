@@ -14,8 +14,10 @@
 npm install
 cp .env.example .env       # QNET_KEY 를 채운다
 npm run collect            # 수집 → data/published/*.json
+npm run details:coverage   # 시험 한눈에·시험 구성 커버리지
+npm run collect:details    # 공식 상세정보 → 미승인 후보 (운영 자동 반영 안 함)
 npm run dev                # 화면 확인 (predev 가 public/data 로 복사)
-npm run build              # 빌드 + 74개 페이지 사전 렌더
+npm run build              # 빌드 + 공개 시험 상세 페이지 사전 렌더
 npm run check              # PR 전 검사 한 방
 ```
 
@@ -43,13 +45,13 @@ npm run check              # PR 전 검사 한 방
 | `/calendar` | S-04 통합 캘린더 | 전체 일정 모드 · 1~6개 선택 비교 |
 | `/about` `/privacy` `/404` | S-05~07 | 출처·개인정보·복귀 |
 
-`/exam/{slug}` 이 검색엔진 유입의 첫 화면이라 일정이 확보된 102개를 전부 사전 렌더한다. 순수 CSR 이면 크롤러가 받는 HTML 이 빈 `<div id="root">` 하나다.
+`/exam/{slug}` 이 검색엔진 유입의 첫 화면이라 공개 시험 131개를 전부 사전 렌더한다. 순수 CSR 이면 크롤러가 받는 HTML 이 빈 `<div id="root">` 하나다.
 
 ---
 
 ## 데이터가 어디서 오는가
 
-종목 104개의 수집 경로. 이 중 일정이 확보된 102개가 화면에 노출된다. 근거와 배제 이유는 [docs/데이터-수집-활용.md](docs/데이터-수집-활용.md).
+종목 133개의 수집 경로. 이 중 131개가 화면에 노출된다. 일정 수집기가 아직 없는 시험은 날짜를 추정하지 않고 `일정 수집 연결 중` 상태로 제공한다. 근거와 배제 이유는 [docs/데이터-수집-활용.md](docs/데이터-수집-활용.md).
 
 | 경로 | 종목 | 상태 |
 |---|---|---|
@@ -84,14 +86,18 @@ docs/
 data/
 ├─ exams.seed.json            종목 마스터 (사람이 관리)
 ├─ groups.seed.json           시행그룹 (사람이 관리)
+├─ detail-sources.seed.json   시험 상세정보 공식 출처 레지스트리
+├─ exam-details.seed.json     검토·승인된 시험 한눈에·시험 구성 정본
+├─ proposals/details/         수집기가 만든 미승인 상세정보 후보
 ├─ manual-schedules.json      Q-Net 밖 일정 수기 입력
 ├─ published/                 수집 산출물 (기계가 쓴다. 하루 1회 배치가 커밋)
 └─ archive/                   원본 스냅샷
 scripts/
 ├─ collect.mjs                수집·정규화·그룹 접기
-├─ prerender.mjs              빌드 뒤 102개 페이지를 HTML 로 찍는다
+├─ collect-details.mjs        상세 원문 보관·후보 생성 (정본 직접 변경 안 함)
+├─ prerender.mjs              빌드 뒤 공개 시험 페이지를 HTML 로 찍는다
 ├─ probe-crawl.mjs            기관 페이지 크롤링 가능성 진단
-└─ publish.mjs                data/published → public/data
+└─ publish.mjs                수집 일정 + 승인 카탈로그·상세 → public/data
 src/
 ├─ lib/                       순수 함수. node --test 가 직접 돌린다
 │  ├─ status.ts               대표 상태 9단계

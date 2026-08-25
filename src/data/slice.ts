@@ -40,6 +40,7 @@ function addMonthsIso(iso: string, n: number): string {
 }
 
 function pack(data: AppData, exams: Exam[], groups: ScheduleGroup[], sessions: Session[]): RawData {
+  const slugs = new Set(exams.map(exam => exam.slug));
   return {
     // links 를 반드시 함께 보낸다. 이게 빠지면 사전 렌더한 페이지의 공식 링크가
     // 47종목에서 사라지고, 그 자리에 "공식 링크 확인 중" 이 박혀 나간다.
@@ -47,6 +48,10 @@ function pack(data: AppData, exams: Exam[], groups: ScheduleGroup[], sessions: S
     groups: { year: data.raw.groups.year, groups },
     sessions: { year: data.raw.sessions.year, sessions },
     meta: data.meta,
+    details: {
+      version: data.raw.details.version,
+      details: data.raw.details.details.filter(detail => slugs.has(detail.examSlug)),
+    },
   };
 }
 

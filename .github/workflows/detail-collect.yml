@@ -1,0 +1,72 @@
+# 시험 구성·합격 기준처럼 천천히 바뀌지만 잘못되면 영향이 큰 상세정보를 확인한다.
+# 일정 배치와 달리 운영 브랜치에 직접 커밋하지 않고, 미승인 후보 Draft PR만 만든다.
+name: 시험 상세정보 후보 수집
+
+on:
+  schedule:
+    # 화요일 00:20 UTC = 09:20 KST. 공공기관 새벽 장애 시간대를 피한다.
+    - cron: '20 0 * * 2'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: detail-collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: mvp
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+
+      - name: 출처·승인 데이터 계약 검사
+        run: npm run check:seed
+
+      - name: 활성 공식 출처에서 후보 수집
+        id: collect
+        continue-on-error: true
+        run: npm run collect:details
+
+      - name: 의미 변경 후보 확인
+        id: changes
+        shell: bash
+        run: |
+          if [ -n "$(git status --porcelain -- data/proposals/details)" ]; then
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+            echo '시험 구성의 의미 변경이 없어 Draft PR을 만들지 않습니다.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: 후보 브랜치와 Draft PR 생성
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          BRANCH="bot/detail-refresh-${GITHUB_RUN_ID}"
+          git switch -c "$BRANCH"
+          git config user.name 'exammoa 상세정보 수집 봇'
+          git config user.email 'action@github.com'
+          git add data/proposals/details data/archive/details
+          git commit -m '시험 상세정보 변경 후보 생성' -m '공식 원문과 미승인 후보만 추가합니다. 승인 정본과 운영 화면은 아직 바뀌지 않습니다.'
+          git push origin "$BRANCH"
+          gh pr create --draft --base mvp --head "$BRANCH" \
+            --title '[Data] 시험 상세정보 변경 후보 검토' \
+            --body $'공식 상세정보 원문에 의미 변경이 감지되었습니다.\n\n- 후보는 아직 운영에 반영되지 않습니다.\n- 원문·파서 진단·적용일을 검토합니다.\n- 승인할 때 후보 contentHash를 지정해 승격합니다.\n- 두 차례 독립 코드 리뷰 후 병합합니다.'
+
+      - name: 부분 실패 알림
+        if: steps.collect.outcome == 'failure'
+        run: |
+          echo '::error::일부 상세정보 출처 수집에 실패했습니다. 성공한 후보 Draft PR은 보존했습니다.'
+          exit 1

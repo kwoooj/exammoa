@@ -59,3 +59,13 @@ test('공식 무료 시험은 0원 응시료를 허용한다', () => {
   }, [{ slug: '기관시험', tier: 'T3' }]);
   assert.equal(checked.ok, true, checked.problems.join('\n'));
 });
+
+test('접수처별 가변 응시료는 설명형 값으로 보존한다', () => {
+  const checked = checkFeeSeed({
+    fees: [{
+      slug: '국제시험', items: [{ label: '응시료', amountLabel: '시험센터·접수 국가별 확인' }], checkedAt: '2026-08-20',
+      source: { kind: 'manual', url: 'https://example.com', recheckAfterDays: 30 },
+    }],
+  }, [{ slug: '국제시험', tier: 'T3' }]);
+  assert.equal(checked.ok, true, checked.problems.join('\n'));
+});

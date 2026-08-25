@@ -64,7 +64,10 @@ export function ExamRow({ row }: Props) {
           <p className="exrow__when"><span className="exrow__what">상시시험</span>확정 회차 없음</p>
         )}
         {status.id === 'tbd' && (
-          <p className="exrow__when"><span className="exrow__what">일정</span>아직 발표되지 않았어요</p>
+          <p className="exrow__when">
+            <span className="exrow__what">일정</span>
+            {status.pendingImport ? '연동 준비 중 · 공식 접수처 확인' : '아직 발표되지 않았어요'}
+          </p>
         )}
       </div>
 

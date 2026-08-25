@@ -11,7 +11,7 @@
  * 모든 호출부가 `ScheduleGroup | undefined` 를 받도록 타입으로 강제한다.
  */
 
-import type { Category, Exam, LinksFile, MetaFile, ScheduleGroup, Session } from '../types.ts';
+import type { Category, Exam, ExamDetail, LinksFile, MetaFile, ScheduleGroup, Session } from '../types.ts';
 import { jmCdWhitelist, readLinks } from '../lib/links.ts';
 import { buildSearchIndex, type SearchEntry } from '../lib/search.ts';
 import type { RawData } from './source.ts';
@@ -34,6 +34,7 @@ export interface AppData {
   /** 그룹 id → 게시 데이터에 실제로 있는 종목만 */
   examsByGroup: ReadonlyMap<string, Exam[]>;
   categoryExams: ReadonlyMap<string, Exam[]>;
+  detailsBySlug: ReadonlyMap<string, ExamDetail>;
 
   /** §6.4 기관 필터. 데이터에 실제로 있는 것만, 가나다순 */
   agencies: string[];
@@ -67,6 +68,7 @@ export function buildAppData(raw: RawData): AppData {
   const examBySlug = new Map(exams.map(e => [e.slug, e]));
   const groupById = new Map(groups.map(g => [g.id, g]));
   const categoryById = new Map(categories.map(c => [c.id, c]));
+  const detailsBySlug = new Map(raw.details.details.map(detail => [detail.examSlug, detail]));
 
   const sessionsByGroup = new Map<string, Session[]>();
   for (const s of sessions) pushTo(sessionsByGroup, s.groupId, s);
@@ -102,7 +104,7 @@ export function buildAppData(raw: RawData): AppData {
   return {
     raw,
     exams, groups, sessions, categories, meta: raw.meta, links,
-    examBySlug, groupById, categoryById, sessionsByGroup, examsByGroup, categoryExams,
+    examBySlug, groupById, categoryById, sessionsByGroup, examsByGroup, categoryExams, detailsBySlug,
     agencies,
     jmCds: jmCdWhitelist(exams),
     search: buildSearchIndex(exams, groups, categories),

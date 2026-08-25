@@ -205,6 +205,16 @@ test('status:tbd 인 회차만 있으면 미공고다', () => {
   assert.equal(data.tbdNotices.length, 1);
 });
 
+test('일정 연동 대기는 공식 미공고와 구분한다', () => {
+  const 대기: Session = {
+    ...기사3회, id: 'pending-1', status: 'tbd', events: [], scheduleState: 'import-pending',
+  };
+  const data = buildCalendarData({
+    sessions: [대기], groups: [hrdkRegular], exams: 기사종목, selectedSlugs: ['정보처리기사'],
+  });
+  assert.equal(data.tbdNotices[0]!.pendingImport, true);
+});
+
 test('일정이 있는 그룹은 미공고 안내를 내지 않는다', () => {
   const data = build({ selectedSlugs: ['정보처리기사'] });
   assert.deepEqual(data.tbdNotices, []);

@@ -108,7 +108,7 @@ export function mergeStale(harvests, prev, { now }) {
        * 거짓말한다. 실패한 소스의 fetchedAt 을 갱신하지 않는 것과 같은 이유다 — 확인한
        * 시각과 파일을 읽은 시각은 다르다.
        */
-      const seenAt = h.observedAt ?? now;
+      const seenAt = Object.hasOwn(h, 'observedAt') ? h.observedAt : now;
       for (const s of h.sessions ?? []) {
         const hash = hashEvents(s.events);
         const before = prevProv[s.id];
@@ -213,8 +213,12 @@ export function forHashing(text, volatile = []) {
  * @returns {{written:boolean, path:string, hash:string, reason:string}}
  */
 export async function archive({ year, sourceId, body, volatile = [], ext = 'json', dir = ARCHIVE, stamp }) {
-  const text = typeof body === 'string' ? body : JSON.stringify(body);
-  const hash = sha256(forHashing(text, volatile));
+  const binary = body instanceof Uint8Array;
+  const text = binary ? null : typeof body === 'string' ? body : JSON.stringify(body);
+  // PDF 같은 원문 바이트는 문자열로 바꾸는 순간 손상된다. volatile 정규화는 텍스트
+  // 출처에만 적용하고, 바이너리는 받은 바이트 자체로 해시·저장한다.
+  const stored = binary ? body : text;
+  const hash = sha256(binary ? body : forHashing(text, volatile));
   const base = `${dir}/${year}`;
   await mkdir(base, { recursive: true });
 
@@ -234,7 +238,7 @@ export async function archive({ year, sourceId, body, volatile = [], ext = 'json
 
   const path = `${base}/${sourceId}.${stamp}.${hash.slice(0, 12)}.${ext}`;
   // 원본 그대로. forHashing 의 결과를 쓰지 않는다.
-  await writeFile(path, text, 'utf8');
+  await writeFile(path, stored, binary ? undefined : 'utf8');
   return {
     written: true,
     path,

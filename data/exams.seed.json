@@ -1641,6 +1641,128 @@
       "agency": "한국정보통신진흥협회",
       "collect": "crawl",
       "note": "연 2회. 1차와 2차 일정·시험시간을 2급과 분리한다."
+    },
+    {
+      "slug": "TOEFL-iBT", "name": "TOEFL iBT", "short": "토플", "groupId": "toefl-ibt",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T4", "priority": 1,
+      "agency": "ETS", "rolling": true, "rollingRule": "시험센터·Home Edition의 가능한 일정을 조회해 예약", "collect": "manual"
+    },
+    {
+      "slug": "New-TEPS", "name": "New TEPS", "short": "텝스", "groupId": "new-teps",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 1,
+      "agency": "서울대학교발전재단 TEPS관리위원회", "collect": "manual"
+    },
+    {
+      "slug": "G-TELP-Level-2", "name": "G-TELP Level 2", "short": "지텔프2", "groupId": "gtelp-level-2",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 1,
+      "agency": "G-TELP KOREA", "collect": "manual"
+    },
+    {
+      "slug": "IELTS-Academic", "name": "IELTS Academic", "short": "IELTS A", "groupId": "ielts-academic",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T4", "priority": 1,
+      "agency": "IELTS", "rolling": true, "rollingRule": "시험센터별 가능한 일정을 조회해 예약", "collect": "manual"
+    },
+    {
+      "slug": "IELTS-General-Training", "name": "IELTS General Training", "short": "IELTS G", "groupId": "ielts-general-training",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T4", "priority": 2,
+      "agency": "IELTS", "rolling": true, "rollingRule": "시험센터별 가능한 일정을 조회해 예약", "collect": "manual"
+    },
+    {
+      "slug": "JLPT-N1", "name": "JLPT N1", "short": "JLPT N1", "groupId": "jlpt-n1",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 1, "agency": "JLPT", "collect": "manual"
+    },
+    {
+      "slug": "JLPT-N2", "name": "JLPT N2", "short": "JLPT N2", "groupId": "jlpt-n2",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 1, "agency": "JLPT", "collect": "manual"
+    },
+    {
+      "slug": "JLPT-N3", "name": "JLPT N3", "short": "JLPT N3", "groupId": "jlpt-n3",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 2, "agency": "JLPT", "collect": "manual"
+    },
+    {
+      "slug": "JLPT-N4", "name": "JLPT N4", "short": "JLPT N4", "groupId": "jlpt-n4",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 3, "agency": "JLPT", "collect": "manual"
+    },
+    {
+      "slug": "JLPT-N5", "name": "JLPT N5", "short": "JLPT N5", "groupId": "jlpt-n5",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 3, "agency": "JLPT", "collect": "manual"
+    },
+    {
+      "slug": "HSK-1", "name": "HSK 1급", "short": "HSK 1", "groupId": "hsk-1",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 3, "agency": "Chinese Test International", "collect": "manual"
+    },
+    {
+      "slug": "HSK-2", "name": "HSK 2급", "short": "HSK 2", "groupId": "hsk-2",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 3, "agency": "Chinese Test International", "collect": "manual"
+    },
+    {
+      "slug": "HSK-3", "name": "HSK 3급", "short": "HSK 3", "groupId": "hsk-3",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 2, "agency": "Chinese Test International", "collect": "manual"
+    },
+    {
+      "slug": "HSK-4", "name": "HSK 4급", "short": "HSK 4", "groupId": "hsk-4",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 1, "agency": "Chinese Test International", "collect": "manual"
+    },
+    {
+      "slug": "HSK-5", "name": "HSK 5급", "short": "HSK 5", "groupId": "hsk-5",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 1, "agency": "Chinese Test International", "collect": "manual"
+    },
+    {
+      "slug": "HSK-6", "name": "HSK 6급", "short": "HSK 6", "groupId": "hsk-6",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 2, "agency": "Chinese Test International", "collect": "manual"
+    },
+    {
+      "slug": "HSK-7-9", "name": "HSK 7–9급", "short": "HSK 7–9", "groupId": "hsk-7-9",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 2, "agency": "Chinese Test International", "collect": "manual",
+      "note": "하나의 통합시험 결과에 따라 7·8·9급을 판정"
+    },
+    {
+      "slug": "DELF-A1", "name": "DELF A1", "short": "DELF A1", "groupId": "delf-a1",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 3, "agency": "France Éducation international", "collect": "manual"
+    },
+    {
+      "slug": "DELF-A2", "name": "DELF A2", "short": "DELF A2", "groupId": "delf-a2",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 3, "agency": "France Éducation international", "collect": "manual"
+    },
+    {
+      "slug": "DELF-B1", "name": "DELF B1", "short": "DELF B1", "groupId": "delf-b1",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 2, "agency": "France Éducation international", "collect": "manual"
+    },
+    {
+      "slug": "DELF-B2", "name": "DELF B2", "short": "DELF B2", "groupId": "delf-b2",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 2, "agency": "France Éducation international", "collect": "manual"
+    },
+    {
+      "slug": "DALF-C1", "name": "DALF C1", "short": "DALF C1", "groupId": "dalf-c1",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 2, "agency": "France Éducation international", "collect": "manual"
+    },
+    {
+      "slug": "DALF-C2", "name": "DALF C2", "short": "DALF C2", "groupId": "dalf-c2",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 3, "agency": "France Éducation international", "collect": "manual"
+    },
+    {
+      "slug": "DELE-A1", "name": "DELE A1", "short": "DELE A1", "groupId": "dele-a1",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 3, "agency": "Instituto Cervantes", "collect": "manual"
+    },
+    {
+      "slug": "DELE-A2", "name": "DELE A2", "short": "DELE A2", "groupId": "dele-a2",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 3, "agency": "Instituto Cervantes", "collect": "manual"
+    },
+    {
+      "slug": "DELE-B1", "name": "DELE B1", "short": "DELE B1", "groupId": "dele-b1",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 2, "agency": "Instituto Cervantes", "collect": "manual"
+    },
+    {
+      "slug": "DELE-B2", "name": "DELE B2", "short": "DELE B2", "groupId": "dele-b2",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 2, "agency": "Instituto Cervantes", "collect": "manual"
+    },
+    {
+      "slug": "DELE-C1", "name": "DELE C1", "short": "DELE C1", "groupId": "dele-c1",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 2, "agency": "Instituto Cervantes", "collect": "manual"
+    },
+    {
+      "slug": "DELE-C2", "name": "DELE C2", "short": "DELE C2", "groupId": "dele-c2",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 3, "agency": "Instituto Cervantes", "collect": "manual"
     }
   ],
   "excluded": [
@@ -1657,11 +1779,6 @@
     {
       "name": "삼성 GSAT 등 대기업 인적성",
       "reason": "고정 일정 자체가 부재. 공고별 개별 안내 + 로그인 장벽",
-      "revisit": false
-    },
-    {
-      "name": "TOEFL / IELTS",
-      "reason": "응시 예약제. 국내 청년 수요 대비 수집 난이도 높음",
       "revisit": false
     }
   ],

@@ -85,6 +85,16 @@ const RAW: RawData = {
   groups: { year: 2026, groups: GROUPS },
   sessions: { year: 2026, sessions: SESSIONS },
   meta: META,
+  details: {
+    version: '0.1.0',
+    details: [{
+      examSlug: '정보처리기사', catalogStatus: 'published',
+      sourceRefs: ['qnet-qualification-detail'],
+      classification: { kind: 'national-technical', label: '국가기술자격', authority: '한국산업인력공단', sourceUrl: 'https://example.com', checkedAt: '2026-08-20' },
+      result: { type: 'pass-fail', label: '합격제' }, deliveryModes: ['CBT'],
+      formats: [{ effectiveFrom: '2026-01-01', checkedAt: '2026-08-20', sourceUrl: 'https://example.com', stages: [{ id: 'written', name: '필기', sections: [{ name: '과목' }] }] }],
+    }],
+  },
 };
 
 const DATA = buildAppData(RAW);
@@ -99,7 +109,7 @@ const readerFor = (files: Partial<Record<DataFile, unknown>>) =>
 
 test('리더를 주입받아 읽는다 — 공용 코드에 fetch 가 없다', async () => {
   const raw = await loadRaw(readerFor({
-    exams: RAW.exams, groups: RAW.groups, sessions: RAW.sessions, meta: RAW.meta,
+    exams: RAW.exams, groups: RAW.groups, sessions: RAW.sessions, meta: RAW.meta, details: RAW.details,
   }));
   assert.equal(raw.exams.exams.length, 5);
 });
@@ -107,7 +117,7 @@ test('리더를 주입받아 읽는다 — 공용 코드에 fetch 가 없다', a
 test('어느 파일에서 났는지 알려준다', async () => {
   // "데이터를 못 읽었어요" 만으로는 고칠 수 없다.
   await assert.rejects(
-    () => loadRaw(readerFor({ exams: RAW.exams, groups: RAW.groups, sessions: RAW.sessions })),
+    () => loadRaw(readerFor({ exams: RAW.exams, groups: RAW.groups, sessions: RAW.sessions, details: RAW.details })),
     (e: unknown) => e instanceof DataError && e.file === 'meta',
   );
 });
@@ -115,11 +125,11 @@ test('어느 파일에서 났는지 알려준다', async () => {
 test('다른 모양의 파일을 받으면 거절한다', async () => {
   // 404 페이지의 HTML 이나 캐시가 돌려준 옛 형식을 그대로 통과시키지 않는다.
   await assert.rejects(
-    () => loadRaw(readerFor({ exams: { nope: 1 }, groups: RAW.groups, sessions: RAW.sessions, meta: RAW.meta })),
+    () => loadRaw(readerFor({ exams: { nope: 1 }, groups: RAW.groups, sessions: RAW.sessions, meta: RAW.meta, details: RAW.details })),
     (e: unknown) => e instanceof DataError && e.file === 'exams',
   );
   await assert.rejects(
-    () => loadRaw(readerFor({ exams: RAW.exams, groups: RAW.groups, sessions: RAW.sessions, meta: { nope: 1 } })),
+    () => loadRaw(readerFor({ exams: RAW.exams, groups: RAW.groups, sessions: RAW.sessions, meta: { nope: 1 }, details: RAW.details })),
     (e: unknown) => e instanceof DataError && e.file === 'meta',
   );
 });
@@ -131,6 +141,7 @@ test('인덱스를 만든다', () => {
   assert.equal(DATA.groupById.get('toeic')?.agency, 'YBM');
   assert.equal(DATA.categoryById.get('it')?.name, 'IT · 개발');
   assert.equal(DATA.sessionsByGroup.get('hrdk-regular')?.length, 2);
+  assert.equal(DATA.detailsBySlug.get('정보처리기사')?.classification.label, '국가기술자격');
 });
 
 test('회차를 첫 이벤트 날짜순으로 정렬한다', () => {

@@ -7,7 +7,8 @@
 //   node scripts/publish.mjs        data/published → public/data
 //   npm run dev                     이 스크립트를 먼저 돌린다 (predev)
 
-import { readdir, mkdir, copyFile, stat } from 'node:fs/promises';
+import { readdir, mkdir, copyFile, readFile, writeFile, stat } from 'node:fs/promises';
+import { overlayCatalog } from './lib/catalog-overlay.mjs';
 
 const FROM = 'data/published';
 const TO = 'public/data';
@@ -29,11 +30,21 @@ const present = new Set(await readdir(FROM));
 const missing = WANTED.filter(f => !present.has(f));
 const copied = [];
 
-for (const f of WANTED) {
-  if (!present.has(f)) continue;
-  await copyFile(`${FROM}/${f}`, `${TO}/${f}`);
-  copied.push(f);
+if (!missing.length) {
+  const readJson = path => readFile(path, 'utf8').then(JSON.parse);
+  const [publishedExams, publishedGroups, publishedSessions, publishedMeta, examSeed, groupSeed, feeSeed] = await Promise.all([
+    readJson(`${FROM}/exams.json`), readJson(`${FROM}/groups.json`), readJson(`${FROM}/sessions.json`), readJson(`${FROM}/meta.json`),
+    readJson('data/exams.seed.json'), readJson('data/groups.seed.json'), readJson('data/fees.seed.json'),
+  ]);
+  const overlaid = overlayCatalog({ publishedExams, publishedGroups, publishedSessions, publishedMeta, examSeed, groupSeed, feeSeed });
+  await Promise.all(Object.entries(overlaid).map(([name, value]) => (
+    writeFile(`${TO}/${name}.json`, JSON.stringify(value), 'utf8')
+  )));
+  copied.push(...WANTED);
 }
+
+await copyFile('data/exam-details.seed.json', `${TO}/details.json`);
+copied.push('details.json');
 
 console.log(`${TO} ← ${copied.join(', ')}`);
 if (missing.length) {
