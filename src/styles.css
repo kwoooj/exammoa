@@ -1698,14 +1698,14 @@ h2 { margin-bottom: 0; font-size: 20px; line-height: 1.35; letter-spacing: -0.02
 .examStage__head { min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 16px; background: #fbfcfa; }
 .examStage__head h3 { margin: 0; font-size: 15px; }
 .examStage__sharedMeta { display: flex; margin: 0; flex-wrap: wrap; gap: 6px 14px; color: var(--ink-secondary); font-size: 12px; }
-.formatTable { width: 100%; border-spacing: 0; table-layout: auto; color: var(--ink-secondary); font-size: 13px; }
+.formatTable { width: 100%; border-spacing: 0; table-layout: fixed; color: var(--ink-secondary); font-size: 13px; }
 .formatTable th:first-child, .formatTable td:first-child { width: 34%; }
 .formatTable th { height: 38px; padding: 9px 13px; border-top: 1px solid var(--line); border-right: 1px solid var(--line); background: #f6f8f6; color: var(--ink-muted); font-size: 11px; font-weight: 550; text-align: left; }
 .formatTable th:last-child { border-right: 0; }
 .formatTable td { min-width: 0; height: 58px; padding: 9px 13px; border-top: 1px solid var(--line); border-right: 1px solid var(--line); vertical-align: middle; }
 .formatTable td:last-child { border-right: 0; }
 .formatTable td small { display: none; }
-.formatTable__name strong { color: var(--ink); font-weight: 620; }
+.formatTable__name strong { overflow-wrap: anywhere; color: var(--ink); font-weight: 620; }
 .formatTable__name strong, .formatTable__name em { display: block; }
 .formatTable__name em { margin-top: 3px; color: var(--ink-muted); font-size: 11px; font-style: normal; line-height: 1.4; }
 .formatTable__sharedCell { background: #fbfcfa; text-align: center; }

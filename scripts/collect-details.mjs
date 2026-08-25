@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { extname } from 'node:path';
 import { archive } from './lib/store.mjs';
 import { DETAIL_ADAPTERS } from './lib/detail-adapters.mjs';
-import { fetchDetailRaw, fetchDetailUrl, prepareDetailProposal } from './lib/detail-collector.mjs';
+import { fetchDetailRaw, fetchDetailUrl, prepareDetailProposal, sourceUrlOf } from './lib/detail-collector.mjs';
 import { checkDetailSources } from './lib/detail-source-check.mjs';
 
 const valueOf = name => (process.argv.find(arg => arg.startsWith(`--${name}=`)) ?? '').slice(name.length + 3) || null;
@@ -22,7 +22,7 @@ async function readJsonOrNull(path) {
   }
 }
 
-async function collectOne({ source, inputPath, evidencePath, currentDetails, knownExamSlugs, sourceIds, now = new Date() }) {
+async function collectOne({ source, inputPath, evidencePath, exams, currentDetails, knownExamSlugs, sourceIds, now = new Date() }) {
   if (source.collectionStatus !== 'active') throw new Error(`${source.id}: ${source.collectionStatus} 출처는 수집할 수 없다.`);
   if (source.method === 'manual-upload' && (!inputPath || !evidencePath)) {
     throw new Error(`${source.id}: --input=<정규화 JSON>과 --evidence=<공식 원문>이 모두 필요하다.`);
@@ -38,7 +38,7 @@ async function collectOne({ source, inputPath, evidencePath, currentDetails, kno
     raw = await readFile(evidencePath);
   } else if (adapter.collect) {
     const robotsCache = new Map();
-    const collected = await adapter.collect({ source, fetchDetailRaw, fetchDetailUrl, robotsCache });
+    const collected = await adapter.collect({ source, exams, fetchDetailRaw, fetchDetailUrl, robotsCache, sourceUrlOf });
     raw = collected.raw;
     parseInput = collected.parseInput ?? raw;
   } else {
@@ -99,7 +99,7 @@ async function run() {
   for (const source of targets) {
     try {
       await collectOne({
-        source, inputPath, evidencePath, currentDetails: detailSeed.details, knownExamSlugs: visible,
+        source, inputPath, evidencePath, exams: examSeed.exams, currentDetails: detailSeed.details, knownExamSlugs: visible,
         sourceIds: new Set(sourceSeed.sources.map(candidate => candidate.id)),
       });
     } catch (error) {

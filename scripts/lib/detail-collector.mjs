@@ -63,7 +63,7 @@ export async function fetchDetailRaw(source, fetchImpl = fetch, robotsCache = ne
 export function prepareDetailProposal({ source, raw, parseInput = raw, archivePath, observedAt, currentDetails, knownExamSlugs, sourceIds }) {
   const adapter = DETAIL_ADAPTERS.get(source.adapter);
   if (!adapter?.parse) throw new Error(`${source.id}: adapter ${source.adapter}가 구현되지 않았다.`);
-  const parsed = adapter.parse(parseInput, { source });
+  const parsed = adapter.parse(parseInput, { source, observedAt, currentDetails });
   const proposal = createDetailProposal({
     source,
     raw,

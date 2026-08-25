@@ -7,7 +7,7 @@
       "name": "Q-Net 종목별 취득방법",
       "authority": "한국산업인력공단",
       "method": "html",
-      "collectionStatus": "planned",
+      "collectionStatus": "active",
       "adapter": "qnet-detail",
       "urlTemplate": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmInfoDivCcd=B0&jmCd={jmCd}",
       "cadenceDays": 7,

@@ -306,17 +306,21 @@ function ExamComposition({ detail, format }: { detail: ExamDetailData; format: A
       <div className="examStages">
         {format.stages.map(stage => {
           const sharedDuration = stage.durationMinutes !== undefined;
+          const sharedCount = stage.totalItemCount !== undefined
+            && stage.sections.every(section => section.itemCount === undefined && section.taskCount === undefined);
           const sharedScore = stage.totalScore !== undefined
             && stage.sections.every(section => section.scoreRange === undefined);
-          const showCount = stage.sections.some(section => section.itemCount !== undefined || section.taskCount !== undefined);
+          const showCount = sharedCount || stage.sections.some(section => section.itemCount !== undefined || section.taskCount !== undefined);
+          const showDuration = sharedDuration;
           const showMode = stage.sections.some(section => section.mode !== undefined);
           const showScore = sharedScore || stage.sections.some(section => section.scoreRange !== undefined);
           return <article className="examStage" key={stage.id}>
             <div className="examStage__head">
               <h3>{stage.name}</h3>
-              {(sharedDuration || sharedScore) && (
+              {(sharedDuration || sharedCount || sharedScore) && (
                 <p className="examStage__sharedMeta">
                   {sharedDuration && <span>전체 시험시간 {durationLabel(stage.durationMinutes)}</span>}
+                  {sharedCount && <span>전체 문항 {countLabel(stage.totalItemCount)}</span>}
                   {sharedScore && <span>전체 배점 {stage.totalScore}점</span>}
                 </p>
               )}
@@ -325,6 +329,7 @@ function ExamComposition({ detail, format }: { detail: ExamDetailData; format: A
               <thead><tr>
                 <th>영역·과목</th>
                 {showCount && <th>문항·과제</th>}
+                {showDuration && <th>시험시간</th>}
                 {showMode && <th>방식</th>}
                 {showScore && <th>배점</th>}
               </tr></thead>
@@ -332,7 +337,12 @@ function ExamComposition({ detail, format }: { detail: ExamDetailData; format: A
                 {stage.sections.map((section, index) => (
                   <tr key={section.name}>
                     <td className="formatTable__name"><small>영역·과목</small><strong>{section.name}</strong>{section.note && <em>{section.note}</em>}</td>
-                    {showCount && <td><small>문항·과제</small>{countLabel(section.itemCount, section.taskCount)}</td>}
+                    {showCount && (sharedCount
+                      ? index === 0 && <td className="formatTable__sharedCell" rowSpan={stage.sections.length}><small>전체 문항</small><strong>{countLabel(stage.totalItemCount)}</strong></td>
+                      : <td><small>문항·과제</small>{countLabel(section.itemCount, section.taskCount)}</td>)}
+                    {showDuration && (index === 0
+                      ? <td className="formatTable__sharedCell" rowSpan={stage.sections.length}><small>전체 시험시간</small><strong>{durationLabel(stage.durationMinutes)}</strong></td>
+                      : null)}
                     {showMode && <td><small>방식</small>{modeLabel(section.mode)}</td>}
                     {showScore && (sharedScore
                       ? index === 0 && <td className="formatTable__sharedCell" rowSpan={stage.sections.length}><small>전체 배점</small><strong>{stage.totalScore}점</strong></td>

@@ -12,6 +12,12 @@ test('조회일에 적용되는 가장 최신 시험 구성을 고른다', () =>
   assert.equal(activeFormat([format('2024-01-01', '2026-01-20'), format('2026-01-21')], '2026-08-20')?.effectiveFrom, '2026-01-21');
 });
 
+test('공식 적용 시작일을 밝히지 않은 단일 현행 구성도 선택한다', () => {
+  const current = format('2026-01-01');
+  delete current.effectiveFrom;
+  assert.equal(activeFormat([current], '2026-08-20'), current);
+});
+
 test('표준시간을 읽기 쉬운 시간제로 표시한다', () => {
   assert.equal(durationLabel(150), '2시간 30분');
   assert.equal(durationLabel({ min: 120, max: 150 }), '120~150분');

@@ -1,3 +1,5 @@
+import { collectQnetDetails, parseQnetDetailBundle } from '../sources/qnet-detail.mjs';
+
 /**
  * 승인형 업로드의 공통 입력 형식.
  *
@@ -27,4 +29,5 @@ export function parseNormalizedDetailJson(raw, { source }) {
 
 export const DETAIL_ADAPTERS = new Map([
   ['normalized-detail-json', { parse: parseNormalizedDetailJson, extension: 'json' }],
+  ['qnet-detail', { collect: collectQnetDetails, parse: parseQnetDetailBundle, extension: 'json' }],
 ]);
