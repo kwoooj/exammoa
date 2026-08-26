@@ -274,7 +274,7 @@
     {
       "id": "opic",
       "name": "OPIc",
-      "agency": "크레듀",
+      "agency": "멀티캠퍼스 OPIc",
       "cadence": "rolling",
       "rollingRule": "상시 시행. 센터별 좌석 예약제",
       "examSlugs": [
@@ -977,6 +977,48 @@
     {
       "id": "dele-c2", "name": "DELE C2", "agency": "Instituto Cervantes", "cadence": "periodic", "examSlugs": ["DELE-C2"],
       "collect": "none", "agencyUrl": "https://examenes.cervantes.es/es/dele/preparar-prueba"
+    },
+    {
+      "id": "qnet-realtor", "name": "공인중개사", "agency": "한국산업인력공단", "cadence": "periodic",
+      "examSlugs": ["공인중개사"], "collect": "none",
+      "agencyUrl": "https://www.q-net.or.kr/man001.do?gId=08&gSite=L",
+      "applyUrl": "https://www.q-net.or.kr/man001.do?gId=08&gSite=L",
+      "note": "Q-Net 공식 일정 링크를 제공하며 자동 일정 수집 어댑터는 후속 작업에서 연결한다."
+    },
+    {
+      "id": "qnet-social-worker-1", "name": "사회복지사 1급", "agency": "한국산업인력공단", "cadence": "periodic",
+      "examSlugs": ["사회복지사1급"], "collect": "none",
+      "agencyUrl": "https://www.q-net.or.kr/site/welfare",
+      "applyUrl": "https://www.q-net.or.kr/site/welfare",
+      "note": "Q-Net 공식 일정 링크를 제공하며 자동 일정 수집 어댑터는 후속 작업에서 연결한다."
+    },
+    {
+      "id": "qnet-housing-manager", "name": "주택관리사보", "agency": "한국산업인력공단", "cadence": "periodic",
+      "examSlugs": ["주택관리사보"], "collect": "none",
+      "agencyUrl": "https://www.q-net.or.kr/site/housing",
+      "applyUrl": "https://www.q-net.or.kr/site/housing",
+      "note": "Q-Net 공식 일정 링크를 제공하며 자동 일정 수집 어댑터는 후속 작업에서 연결한다."
+    },
+    {
+      "id": "qnet-logistics-manager", "name": "물류관리사", "agency": "한국산업인력공단", "cadence": "periodic",
+      "examSlugs": ["물류관리사"], "collect": "none",
+      "agencyUrl": "https://www.q-net.or.kr/site/CPL",
+      "applyUrl": "https://www.q-net.or.kr/site/CPL",
+      "note": "Q-Net 공식 일정 링크를 제공하며 자동 일정 수집 어댑터는 후속 작업에서 연결한다."
+    },
+    {
+      "id": "qnet-security-instructor", "name": "경비지도사", "agency": "한국산업인력공단", "cadence": "periodic",
+      "examSlugs": ["경비지도사"], "collect": "none",
+      "agencyUrl": "https://www.q-net.or.kr/site/security",
+      "applyUrl": "https://www.q-net.or.kr/site/security",
+      "note": "일반·기계경비지도사는 같은 일정으로 시행된다. 공식 일정 링크를 제공하며 자동 수집 어댑터는 후속 작업에서 연결한다."
+    },
+    {
+      "id": "topik-i-ii", "name": "한국어능력시험 TOPIK I·II", "agency": "국립국제교육원", "cadence": "frequent",
+      "examSlugs": ["TOPIK-I", "TOPIK-II"], "collect": "none",
+      "agencyUrl": "https://www.topik.go.kr",
+      "applyUrl": "https://register.topik.go.kr",
+      "note": "TOPIK I·II는 PBT·IBT 회차 일정을 공유한다. 시험 방식 차이는 각 상세 페이지에 표시한다."
     }
   ]
 }

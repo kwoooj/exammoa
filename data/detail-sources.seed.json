@@ -603,6 +603,53 @@
         "증권투자권유자문인력", "펀드투자권유자문인력", "파생상품투자권유자문인력",
         "증권투자권유대행인", "펀드투자권유대행인", "금융투자분석사", "재무위험관리사"
       ]
+    },
+    {
+      "id": "qnet-priority-professional-details",
+      "name": "Q-Net 우선 국가전문자격 5종 현행 시험 구성",
+      "authority": "한국산업인력공단(Q-Net)",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.q-net.or.kr/crf005.do?gId=36&gSite=Q&id=crf00503s02&jmCd=9630&jmInfoDivCcd=B0",
+        "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmCd=9738&jmInfoDivCcd=B0",
+        "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmCd=9744&jmInfoDivCcd=B0",
+        "https://www.q-net.or.kr/site/CPL",
+        "https://www.q-net.or.kr/site/security"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "url": "https://www.q-net.or.kr/robots.txt",
+        "note": "Q-Net 공식 자격 상세·2026 시행계획을 사람이 대조해 승인형 정규화 데이터로만 반영"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["공인중개사", "사회복지사1급", "주택관리사보", "물류관리사", "경비지도사"]
+    },
+    {
+      "id": "topik-i-ii-details",
+      "name": "TOPIK I·II PBT·IBT 현행 시험 구성",
+      "authority": "교육부·국립국제교육원",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.niied.go.kr/web/niied/contents/niied_topik",
+        "https://www.niied.go.kr/convert/preview/1764682307493/index.html",
+        "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=333&boardSeq=104354&lev=0&m=020501&opType=N&page=1&s=moe&searchType=null&statusYN=W"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "note": "국립국제교육원 기본운영규정과 교육부 2026 시행계획 공고를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["TOPIK-I", "TOPIK-II"]
     }
   ]
 }

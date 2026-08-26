@@ -992,7 +992,7 @@
     {
       "slug": "오픽",
       "name": "OPIc",
-      "short": null,
+      "short": "오픽",
       "groupId": "opic",
       "jmCd": null,
       "qualgbCd": null,
@@ -1000,7 +1000,7 @@
       "category": "lang",
       "tier": "T4",
       "priority": 2,
-      "agency": "크레듀",
+      "agency": "멀티캠퍼스 OPIc",
       "rolling": true,
       "rollingRule": "상시 시행. 센터별 좌석 예약제",
       "collect": "manual"
@@ -1763,6 +1763,43 @@
     {
       "slug": "DELE-C2", "name": "DELE C2", "short": "DELE C2", "groupId": "dele-c2",
       "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 3, "agency": "Instituto Cervantes", "collect": "manual"
+    },
+    {
+      "slug": "공인중개사", "name": "공인중개사", "short": "공인중개사", "groupId": "qnet-realtor",
+      "jmCd": null, "qualgbCd": "S", "series": null, "category": "service", "tier": "T3", "priority": 1,
+      "agency": "한국산업인력공단", "collect": "manual"
+    },
+    {
+      "slug": "사회복지사1급", "name": "사회복지사 1급", "short": "사회복지사1급", "groupId": "qnet-social-worker-1",
+      "jmCd": null, "qualgbCd": "S", "series": null, "category": "service", "tier": "T3", "priority": 1,
+      "agency": "한국산업인력공단", "collect": "manual",
+      "eligibility": { "status": "restricted", "note": "사회복지학 전공·교과목 이수와 학위 또는 실무경력 등 법정 응시자격을 충족해야 합니다." }
+    },
+    {
+      "slug": "주택관리사보", "name": "주택관리사보", "short": "주택관리사보", "groupId": "qnet-housing-manager",
+      "jmCd": null, "qualgbCd": "S", "series": null, "category": "service", "tier": "T3", "priority": 1,
+      "agency": "한국산업인력공단", "collect": "manual"
+    },
+    {
+      "slug": "물류관리사", "name": "물류관리사", "short": "물류관리사", "groupId": "qnet-logistics-manager",
+      "jmCd": null, "qualgbCd": "S", "series": null, "category": "office", "tier": "T3", "priority": 1,
+      "agency": "한국산업인력공단", "collect": "manual"
+    },
+    {
+      "slug": "경비지도사", "name": "경비지도사", "short": "경비지도사", "groupId": "qnet-security-instructor",
+      "jmCd": null, "qualgbCd": "S", "series": null, "category": "service", "tier": "T3", "priority": 1,
+      "agency": "한국산업인력공단", "collect": "manual",
+      "note": "일반경비지도사와 기계경비지도사의 공통 일정·시험 구조를 제공하고 선택과목 차이는 상세정보에 표시"
+    },
+    {
+      "slug": "TOPIK-I", "name": "TOPIK I", "short": "토픽1", "groupId": "topik-i-ii",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 1,
+      "agency": "국립국제교육원", "collect": "manual"
+    },
+    {
+      "slug": "TOPIK-II", "name": "TOPIK II", "short": "토픽2", "groupId": "topik-i-ii",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 1,
+      "agency": "국립국제교육원", "collect": "manual"
     }
   ],
   "excluded": [
