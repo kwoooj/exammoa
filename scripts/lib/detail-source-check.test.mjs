@@ -96,6 +96,6 @@ test('저장소 출처 레지스트리가 통과한다', async () => {
   const visible = exams.exams.filter(exam => exam.tier !== 'X').map(exam => exam.slug);
   const result = checkDetailSources(registry, visible, { knownAdapters: [...DETAIL_ADAPTERS.keys()] });
   assert.equal(result.ok, true, result.problems.join('\n'));
-  assert.equal(result.coverage.registered.length, 108);
-  assert.equal(result.coverage.uncovered.length, visible.length - 108);
+  assert.equal(result.coverage.registered.length, 124);
+  assert.equal(result.coverage.uncovered.length, visible.length - 124);
 });

@@ -305,21 +305,22 @@ function ExamComposition({ detail, format }: { detail: ExamDetailData; format: A
 
       <div className="examStages">
         {format.stages.map(stage => {
-          const sharedDuration = stage.durationMinutes !== undefined;
+          const hasStageDuration = stage.durationMinutes !== undefined;
+          const hasTimedBlocks = Boolean(stage.timedBlocks?.length);
           const sharedCount = stage.totalItemCount !== undefined
             && stage.sections.every(section => section.itemCount === undefined && section.taskCount === undefined);
           const sharedScore = stage.totalScore !== undefined
             && stage.sections.every(section => section.scoreRange === undefined);
           const showCount = sharedCount || stage.sections.some(section => section.itemCount !== undefined || section.taskCount !== undefined);
-          const showDuration = sharedDuration;
+          const showDuration = hasStageDuration || hasTimedBlocks;
           const showMode = stage.sections.some(section => section.mode !== undefined);
           const showScore = sharedScore || stage.sections.some(section => section.scoreRange !== undefined);
           return <article className="examStage" key={stage.id}>
             <div className="examStage__head">
               <h3>{stage.name}</h3>
-              {(sharedDuration || sharedCount || sharedScore) && (
+              {(hasStageDuration || sharedCount || sharedScore) && (
                 <p className="examStage__sharedMeta">
-                  {sharedDuration && <span>전체 시험시간 {durationLabel(stage.durationMinutes)}</span>}
+                  {hasStageDuration && <span>전체 시험시간 {durationLabel(stage.durationMinutes)}</span>}
                   {sharedCount && <span>전체 문항 {countLabel(stage.totalItemCount)}</span>}
                   {sharedScore && <span>전체 배점 {stage.totalScore}점</span>}
                 </p>
@@ -334,37 +335,30 @@ function ExamComposition({ detail, format }: { detail: ExamDetailData; format: A
                 {showScore && <th>배점</th>}
               </tr></thead>
               <tbody>
-                {stage.sections.map((section, index) => (
-                  <tr key={section.name}>
+                {stage.sections.map((section, index) => {
+                  const timedBlock = stage.timedBlocks?.find(block => block.sectionNames?.includes(section.name));
+                  const timedSections = timedBlock?.sectionNames?.filter(name => stage.sections.some(candidate => candidate.name === name)) ?? [];
+                  const isFirstTimedSection = timedSections[0] === section.name;
+                  return <tr key={section.name}>
                     <td className="formatTable__name"><small>영역·과목</small><strong>{section.name}</strong>{section.note && <em>{section.note}</em>}</td>
                     {showCount && (sharedCount
                       ? index === 0 && <td className="formatTable__sharedCell" rowSpan={stage.sections.length}><small>전체 문항</small><strong>{countLabel(stage.totalItemCount)}</strong></td>
                       : <td><small>문항·과제</small>{countLabel(section.itemCount, section.taskCount)}</td>)}
-                    {showDuration && (index === 0
-                      ? <td className="formatTable__sharedCell" rowSpan={stage.sections.length}><small>전체 시험시간</small><strong>{durationLabel(stage.durationMinutes)}</strong></td>
-                      : null)}
+                    {showDuration && (hasTimedBlocks
+                      ? (timedBlock
+                        ? isFirstTimedSection && <td className="formatTable__sharedCell formatTable__timedCell" rowSpan={timedSections.length}><small>{timedBlock.name}</small><strong>{durationLabel(timedBlock.durationMinutes)}</strong>{timedBlock.note && <em>{timedBlock.note}</em>}</td>
+                        : <td><small>시험시간</small>공식 배분 없음</td>)
+                      : index === 0
+                        ? <td className="formatTable__sharedCell" rowSpan={stage.sections.length}><small>전체 시험시간</small><strong>{durationLabel(stage.durationMinutes)}</strong></td>
+                        : null)}
                     {showMode && <td><small>방식</small>{modeLabel(section.mode)}</td>}
                     {showScore && (sharedScore
                       ? index === 0 && <td className="formatTable__sharedCell" rowSpan={stage.sections.length}><small>전체 배점</small><strong>{stage.totalScore}점</strong></td>
                       : <td><small>배점</small>{scoreLabel(section.scoreRange)}</td>)}
-                  </tr>
-                ))}
+                  </tr>;
+                })}
               </tbody>
             </table>
-            {stage.timedBlocks?.length ? (
-              <div className="examStage__timing" aria-label={`${stage.name} 강제 진행 구간`}>
-                <strong>진행 구간</strong>
-                <ul>
-                  {stage.timedBlocks.map(block => (
-                    <li key={block.name}>
-                      <span>{block.name}</span>
-                      <b>{durationLabel(block.durationMinutes)}</b>
-                      {block.note && <em>{block.note}</em>}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
             {stage.note && <p className="small muted examStage__note">{stage.note}</p>}
           </article>;
         })}

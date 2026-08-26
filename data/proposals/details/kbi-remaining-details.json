@@ -1,0 +1,1194 @@
+{
+  "version": 1,
+  "sourceId": "kbi-remaining-details",
+  "status": "approved",
+  "observedAt": "2026-08-26T03:34:32.558Z",
+  "contentHash": "3bbce52179c45264ae930fb7ffaa0045c50f11e5948f1d8124ff84679593fbd8",
+  "archiveHash": "a00b8b3da7bce763b0453c5322774b4b9a2b02e1a983f4215742313a207e6e2a",
+  "archivePath": "data/archive/details/2026/kbi-remaining-details.20260826T033432.558Z.a00b8b3da7bc.txt",
+  "diagnostics": {
+    "discovered": 16,
+    "included": 16,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "여신심사역",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=02&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "부별 합격제",
+        "passCriteria": "각 시험과목 40점 이상이면서 부별 또는 전과목 평균 60점 이상",
+        "note": "1부 또는 2부만 충족하면 부분합격으로 인정됩니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식 5지선다·일부 서술형"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=02&pageName=qualInfo",
+          "totalDurationMinutes": 250,
+          "summary": "1부 80분 + 2부 170분",
+          "stages": [
+            {
+              "id": "part1",
+              "name": "1부",
+              "durationMinutes": 80,
+              "sections": [
+                {
+                  "name": "여신법률Ⅰ",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 75
+                  },
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "여신법률Ⅱ",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 75
+                  },
+                  "mode": "multiple-choice"
+                }
+              ],
+              "totalScore": 150
+            },
+            {
+              "id": "part2",
+              "name": "2부",
+              "durationMinutes": 170,
+              "sections": [
+                {
+                  "name": "여신관리",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  },
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "심사분석",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 150
+                  },
+                  "mode": "mixed"
+                }
+              ],
+              "totalScore": 250,
+              "timedBlocks": [
+                {
+                  "name": "여신관리",
+                  "durationMinutes": 60,
+                  "sectionNames": [
+                    "여신관리"
+                  ]
+                },
+                {
+                  "name": "심사분석",
+                  "durationMinutes": 110,
+                  "sectionNames": [
+                    "심사분석"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "국제금융역",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=03&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "부별 합격제",
+        "passCriteria": "각 시험과목 40점 이상이면서 부별 또는 전과목 평균 60점 이상",
+        "note": "1부 또는 2부만 충족하면 부분합격으로 인정됩니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식 5지선다"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=03&pageName=qualInfo",
+          "totalDurationMinutes": 180,
+          "summary": "1부 70분 + 2부 110분",
+          "stages": [
+            {
+              "id": "part1",
+              "name": "1부",
+              "durationMinutes": 70,
+              "sections": [
+                {
+                  "name": "국제금융시장의 이해",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 50
+                  }
+                },
+                {
+                  "name": "Money Market & Capital Market",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 40
+                  }
+                },
+                {
+                  "name": "국제금융관계법률",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 30
+                  }
+                }
+              ],
+              "totalScore": 120
+            },
+            {
+              "id": "part2",
+              "name": "2부",
+              "durationMinutes": 110,
+              "sections": [
+                {
+                  "name": "국제채 및 신디케이티드론",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "파생금융상품의 이해",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                },
+                {
+                  "name": "국제금융리스크관리",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 60
+                  }
+                }
+              ],
+              "totalScore": 180
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "신용위험분석사-CRA",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=05&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "1·2차 순차 합격제",
+        "passCriteria": "각 과목 40점 이상이면서 전과목 평균 60점 이상",
+        "note": "1차 합격자만 2차에 응시하며, 2차 합격 후 실무교육과 경력심사를 거쳐 최종 취득합니다."
+      },
+      "deliveryModes": [
+        "1차 시험센터 객관식 5지선다",
+        "2차 시험센터 주관식 서술형(필요 시 선택형 혼합)"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=05&pageName=qualInfo",
+          "totalDurationMinutes": 500,
+          "summary": "1차 250분 + 2차 250분",
+          "stages": [
+            {
+              "id": "first",
+              "name": "1차 시험",
+              "durationMinutes": 250,
+              "sections": [
+                {
+                  "name": "통계분석·기업신용위험분석",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 200
+                  },
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "여신심사 및 관리",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  },
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "재무분석·기업회계",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 200
+                  },
+                  "mode": "multiple-choice"
+                }
+              ],
+              "totalScore": 500,
+              "timedBlocks": [
+                {
+                  "name": "1교시",
+                  "durationMinutes": 100,
+                  "sectionNames": [
+                    "통계분석·기업신용위험분석"
+                  ]
+                },
+                {
+                  "name": "2교시",
+                  "durationMinutes": 50,
+                  "sectionNames": [
+                    "여신심사 및 관리"
+                  ]
+                },
+                {
+                  "name": "3교시",
+                  "durationMinutes": 100,
+                  "sectionNames": [
+                    "재무분석·기업회계"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "second",
+              "name": "2차 시험",
+              "durationMinutes": 250,
+              "sections": [
+                {
+                  "name": "신용분석과 여신심사 사례",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 200
+                  },
+                  "mode": "written"
+                },
+                {
+                  "name": "내부통제 및 여신관련 법규",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  },
+                  "mode": "written"
+                },
+                {
+                  "name": "위험측정 및 활용·신용위험관리",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 200
+                  },
+                  "mode": "written"
+                }
+              ],
+              "totalScore": 500,
+              "timedBlocks": [
+                {
+                  "name": "1교시",
+                  "durationMinutes": 100,
+                  "sectionNames": [
+                    "신용분석과 여신심사 사례"
+                  ]
+                },
+                {
+                  "name": "2교시",
+                  "durationMinutes": 50,
+                  "sectionNames": [
+                    "내부통제 및 여신관련 법규"
+                  ]
+                },
+                {
+                  "name": "3교시",
+                  "durationMinutes": 100,
+                  "sectionNames": [
+                    "위험측정 및 활용·신용위험관리"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "은행텔러",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=07&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "과목 과락·평균 합격제",
+        "passCriteria": "각 시험과목 40점 이상이면서 부별 또는 전과목 평균 60점 이상"
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식 5지선다"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=07&pageName=qualInfo",
+          "totalDurationMinutes": 120,
+          "summary": "3과목·100점·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "텔러기본지식",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 27
+                  }
+                },
+                {
+                  "name": "창구실무Ⅰ",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 42
+                  }
+                },
+                {
+                  "name": "창구실무Ⅱ",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 31
+                  }
+                }
+              ],
+              "totalScore": 100,
+              "note": "공식 페이지는 세부 내용별 개별 배점을 공개하지만 총 문항 수로 명시하지 않아 점수만 표시합니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "외환전문역1종",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=09&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "과목 과락·평균 합격제",
+        "passCriteria": "각 시험과목 40점 이상이면서 부별 또는 전과목 평균 60점 이상"
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식 4지선다"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=09&pageName=qualInfo",
+          "totalDurationMinutes": 120,
+          "summary": "3과목·100점·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "제1종",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "외환관리실무",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 50
+                  }
+                },
+                {
+                  "name": "외국환거래실무",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 30
+                  }
+                },
+                {
+                  "name": "환리스크관리",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                }
+              ],
+              "totalScore": 100
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "외환전문역2종",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-accredited",
+        "label": "국가공인 민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=10&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "과목 과락·평균 합격제",
+        "passCriteria": "각 시험과목 40점 이상이면서 부별 또는 전과목 평균 60점 이상"
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식 4지선다"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=10&pageName=qualInfo",
+          "totalDurationMinutes": 120,
+          "summary": "3과목·100점·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "제2종",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "수출입실무",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 50
+                  }
+                },
+                {
+                  "name": "국제무역규칙",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 30
+                  }
+                },
+                {
+                  "name": "외환관련여신",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                }
+              ],
+              "totalScore": 100,
+              "note": "국제무역규칙은 지문과 보기가 모두 영어로 출제됩니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "영업점컴플라이언스오피서-은행",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=14&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "과목 과락·평균 합격제",
+        "passCriteria": "각 시험과목 40점 이상이면서 부별 또는 전과목 평균 60점 이상"
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식 4지선다"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=14&pageName=qualInfo",
+          "totalDurationMinutes": 80,
+          "summary": "공통편 25문항 + 은행편 45문항·80분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 80,
+              "sections": [
+                {
+                  "name": "공통편",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 35
+                  },
+                  "itemCount": 25,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "은행편",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 65
+                  },
+                  "itemCount": 45,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "totalItemCount": 70,
+              "totalScore": 100
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "영업점컴플라이언스오피서-보험",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=15&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "과목 과락·평균 합격제",
+        "passCriteria": "각 시험과목 40점 이상이면서 부별 또는 전과목 평균 60점 이상"
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식 4지선다"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=15&pageName=qualInfo",
+          "totalDurationMinutes": 80,
+          "summary": "공통편 25문항 + 보험편 45문항·80분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 80,
+              "sections": [
+                {
+                  "name": "공통편",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 35
+                  },
+                  "itemCount": 25,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "보험편",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 65
+                  },
+                  "itemCount": 45,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "totalItemCount": 70,
+              "totalScore": 100
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "영업점컴플라이언스오피서-증권",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=16&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "과목 과락·평균 합격제",
+        "passCriteria": "각 시험과목 40점 이상이면서 부별 또는 전과목 평균 60점 이상"
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식 4지선다"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=16&pageName=qualInfo",
+          "totalDurationMinutes": 80,
+          "summary": "공통편 25문항 + 증권편 45문항·80분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 80,
+              "sections": [
+                {
+                  "name": "공통편",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 35
+                  },
+                  "itemCount": 25,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "증권편",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 65
+                  },
+                  "itemCount": 45,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "totalItemCount": 70,
+              "totalScore": 100
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "농협은행개인여신전문역",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "commissioned-assessment",
+        "label": "금융기관 위탁자격",
+        "authority": "농협은행·한국금융연수원",
+        "sourceUrl": "https://www.kbi.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=21&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "institutional",
+        "label": "기관 위탁 평가",
+        "passCriteria": "공식 공개 합격 기준 없음",
+        "note": "기관 지정 응시자 대상이며 세부 합격 기준은 공개되지 않았습니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기(세부 방식 미공개)"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbi.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=21&pageName=qualInfo",
+          "totalDurationMinutes": 60,
+          "summary": "기관 위탁 평가·60분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기평가",
+              "durationMinutes": 60,
+              "sections": [
+                {
+                  "name": "공식 공개 과목 구성 없음"
+                }
+              ],
+              "note": "한국금융연수원 공식 일정은 전체 시험시간만 공개합니다. 과목·문항·배점은 추정하지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "농협은행중소기업심사역",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "commissioned-assessment",
+        "label": "금융기관 위탁자격",
+        "authority": "농협은행·한국금융연수원",
+        "sourceUrl": "https://www.kbi.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=24&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "institutional",
+        "label": "기관 위탁 평가",
+        "passCriteria": "공식 공개 합격 기준 없음",
+        "note": "기관 지정 응시자 대상이며 세부 합격 기준은 공개되지 않았습니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기(세부 방식 미공개)"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbi.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=24&pageName=qualInfo",
+          "totalDurationMinutes": 60,
+          "summary": "기관 위탁 평가·60분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기평가",
+              "durationMinutes": 60,
+              "sections": [
+                {
+                  "name": "공식 공개 과목 구성 없음"
+                }
+              ],
+              "note": "한국금융연수원 공식 일정은 전체 시험시간만 공개합니다. 과목·문항·배점은 추정하지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "수협은행직무역량평가-SCA",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "commissioned-assessment",
+        "label": "금융기관 위탁자격",
+        "authority": "수협은행·한국금융연수원",
+        "sourceUrl": "https://suhyup.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=29&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "institutional",
+        "label": "기관 위탁 평가",
+        "passCriteria": "공식 공개 합격 기준 없음",
+        "note": "기관 지정 응시자 대상이며 세부 합격 기준은 공개되지 않았습니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기(세부 방식 미공개)"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://suhyup.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=29&pageName=qualInfo",
+          "totalDurationMinutes": 60,
+          "summary": "기관 위탁 평가·60분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기평가",
+              "durationMinutes": 60,
+              "sections": [
+                {
+                  "name": "공식 공개 과목 구성 없음"
+                }
+              ],
+              "note": "한국금융연수원 공식 일정은 전체 시험시간만 공개합니다. 과목·문항·배점은 추정하지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "프라이빗뱅커",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=25&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기 부별 합격 후 실무교육",
+        "passCriteria": "각 과목 40점 이상이면서 1부·2부 평균 각각 60점 이상; 이후 16시간 실무교육 90% 이상 출석",
+        "note": "필기 1부 또는 2부만 충족하면 부분합격으로 인정됩니다."
+      },
+      "deliveryModes": [
+        "1차 시험센터 필기·객관식·단답형·약술형",
+        "2차 16시간 실무교육"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=25&pageName=qualInfo",
+          "totalDurationMinutes": 270,
+          "summary": "1차 필기 1부 120분 + 2부 150분",
+          "stages": [
+            {
+              "id": "part1",
+              "name": "1부",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "금융상품 및 투자분석",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 30
+                  }
+                },
+                {
+                  "name": "포트폴리오 설계",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 30
+                  }
+                },
+                {
+                  "name": "보험설계 및 컴플라이언스",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 30
+                  }
+                },
+                {
+                  "name": "은퇴설계",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 40
+                  }
+                },
+                {
+                  "name": "부동산 투자설계",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 30
+                  }
+                },
+                {
+                  "name": "세금설계 및 상속설계",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 40
+                  }
+                }
+              ],
+              "totalScore": 200
+            },
+            {
+              "id": "part2",
+              "name": "2부",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "자산관리 실무사례Ⅰ",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 40
+                  },
+                  "mode": "mixed"
+                },
+                {
+                  "name": "자산관리 실무사례Ⅱ",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 70
+                  },
+                  "mode": "mixed"
+                },
+                {
+                  "name": "자산관리 실무사례Ⅲ",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 90
+                  },
+                  "mode": "mixed"
+                }
+              ],
+              "totalScore": 200
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "KBI금융DT테스트",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=26&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "graded",
+        "label": "DT-Gold·Blue·Green 등급 인증",
+        "passCriteria": "60점 이상: Green 60~79점, Blue 80~89점, Gold 90점 이상"
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식 4지선다"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=26&pageName=qualInfo",
+          "totalDurationMinutes": 90,
+          "summary": "4개 세부영역·100점·90분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "등급평가",
+              "durationMinutes": 90,
+              "sections": [
+                {
+                  "name": "DT의 이해",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 15
+                  }
+                },
+                {
+                  "name": "디지털금융 트렌드",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 15
+                  }
+                },
+                {
+                  "name": "디지털금융 기술",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 50
+                  }
+                },
+                {
+                  "name": "디지털 마케팅",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                }
+              ],
+              "totalScore": 100
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "자금세탁방지업무능력검정시험",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=28&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "graded",
+        "label": "TPAC 1+·1·2·3 등급 인증",
+        "passCriteria": "600점 이상: 3등급 600~699, 2등급 700~799, 1등급 800~899, 1+등급 900점 이상",
+        "note": "인증 유효기간은 3년입니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식 5지선다"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=28&pageName=qualInfo",
+          "totalDurationMinutes": 120,
+          "summary": "6개 세부영역·100문항·1,000점·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "등급평가",
+              "durationMinutes": 120,
+              "sections": [
+                {
+                  "name": "자금세탁방지 글로벌 기준",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 200
+                  },
+                  "itemCount": 20
+                },
+                {
+                  "name": "국내 자금세탁방지 제도",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 300
+                  },
+                  "itemCount": 30
+                },
+                {
+                  "name": "자금세탁 위험과 방법",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  },
+                  "itemCount": 10
+                },
+                {
+                  "name": "위험평가(RA)",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 50
+                  },
+                  "itemCount": 5
+                },
+                {
+                  "name": "고객확인의무(CDD)",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 150
+                  },
+                  "itemCount": 15
+                },
+                {
+                  "name": "CTR·STR·이상거래",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 200
+                  },
+                  "itemCount": 20
+                }
+              ],
+              "totalItemCount": 100,
+              "totalScore": 1000
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "KBI금융AI리터러시",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융연수원",
+        "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=30&pageName=qualInfo",
+        "checkedAt": "2026-08-26"
+      },
+      "result": {
+        "type": "graded",
+        "label": "AI-Gold·Blue·Green 등급 인증",
+        "passCriteria": "60점 이상: Green 60~79점, Blue 80~89점, Gold 90점 이상"
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식 4지선다"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=30&pageName=qualInfo",
+          "totalDurationMinutes": 90,
+          "summary": "5개 세부영역·100점·90분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "등급평가",
+              "durationMinutes": 90,
+              "sections": [
+                {
+                  "name": "AI 개념 및 주요 AI 기술의 이해",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "금융 데이터의 이해",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 15
+                  }
+                },
+                {
+                  "name": "금융 AI의 이해와 활용",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "AI 윤리 및 관련 법률",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 20
+                  }
+                },
+                {
+                  "name": "금융 AI 보안·리스크 관리·거버넌스",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 15
+                  }
+                }
+              ],
+              "totalScore": 100
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kbi-remaining-details"
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-26T03:34:41.029Z"
+}

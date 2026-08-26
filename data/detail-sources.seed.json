@@ -531,6 +531,47 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
       "examSlugs": ["신용분석사", "자산관리사-FP", "투자자산운용사"]
+    },
+    {
+      "id": "kbi-remaining-details",
+      "name": "한국금융연수원 금융·은행 16종 현행 시험 구성",
+      "authority": "한국금융연수원·농협은행·수협은행",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=02&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=03&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=05&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=07&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=09&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=10&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=14&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=15&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=16&pageName=qualInfo",
+        "https://www.kbi.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=21&pageName=qualInfo",
+        "https://www.kbi.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=24&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=25&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=26&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=28&pageName=qualInfo",
+        "https://suhyup.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=29&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=30&pageName=qualInfo"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "url": "https://www.kbitube.or.kr/robots.txt",
+        "note": "공식 자격 상세의 과목·배점·시험시간·합격기준을 수기 대조하고, 위탁 3종은 공식 일정에 공개된 전체 시험시간만 보존해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": [
+        "여신심사역", "국제금융역", "신용위험분석사-CRA", "은행텔러", "외환전문역1종", "외환전문역2종",
+        "영업점컴플라이언스오피서-은행", "영업점컴플라이언스오피서-보험", "영업점컴플라이언스오피서-증권",
+        "농협은행개인여신전문역", "농협은행중소기업심사역", "프라이빗뱅커", "KBI금융DT테스트",
+        "자금세탁방지업무능력검정시험", "수협은행직무역량평가-SCA", "KBI금융AI리터러시"
+      ]
     }
   ]
 }

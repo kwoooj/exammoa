@@ -1711,13 +1711,6 @@ h2 { margin-bottom: 0; font-size: 20px; line-height: 1.35; letter-spacing: -0.02
 .formatTable__sharedCell { background: #fbfcfa; text-align: center; }
 .formatTable__sharedCell small { display: block; margin-bottom: 4px; color: var(--ink-muted); font-size: 10px; }
 .formatTable__sharedCell strong { color: var(--ink); font-size: 13px; font-weight: 620; }
-.examStage__timing { display: grid; grid-template-columns: 94px minmax(0, 1fr); gap: 12px; align-items: start; padding: 12px 14px; border-top: 1px solid var(--line); background: #fbfcfa; color: var(--ink-secondary); font-size: 12px; }
-.examStage__timing > strong { color: var(--ink); font-size: 12px; }
-.examStage__timing ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.examStage__timing li { display: inline-flex; align-items: baseline; gap: 5px; }
-.examStage__timing li + li::before { content: "·"; margin-right: 3px; color: var(--ink-muted); }
-.examStage__timing b { color: var(--ink); font-weight: 650; }
-.examStage__timing em { color: var(--ink-muted); font-style: normal; }
 .examStage__note { margin: 0; padding: 11px 14px; border-top: 1px solid var(--line); background: #fbfcfa; }
 .examComposition__notice { margin: 16px 0 0; padding: 12px 14px; font-size: 13px; }
 .examComposition__source { margin: 13px 0 0; }
@@ -1847,11 +1840,7 @@ h2 { margin-bottom: 0; font-size: 20px; line-height: 1.35; letter-spacing: -0.02
   .formatTable td.formatTable__name { grid-column: 1 / -1; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
   .formatTable td small { display: block; margin-bottom: 3px; color: var(--ink-muted); font-size: 10px; }
   .formatTable td.formatTable__sharedCell { display: none; }
-  .examStage__timing { grid-template-columns: 1fr; gap: 8px; }
-  .examStage__timing ul { display: grid; gap: 6px; }
-  .examStage__timing li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px 12px; }
-  .examStage__timing li + li::before { content: none; }
-  .examStage__timing li em { grid-column: 1 / -1; }
+  .formatTable td.formatTable__timedCell { display: block; }
   .callayout--open { grid-template-columns: 1fr; }
   .callayout__panel { position: fixed; inset: auto 0 0; z-index: 50; max-height: 70vh; overflow: auto; border-radius: 16px 16px 0 0; box-shadow: var(--elev); }
   .footer__inner { padding: 28px 16px 18px; flex-direction: column; gap: 20px; }
