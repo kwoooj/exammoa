@@ -1,0 +1,739 @@
+{
+  "version": 1,
+  "sourceId": "hsk-levels-format",
+  "status": "approved",
+  "observedAt": "2026-08-26T00:08:32.093Z",
+  "contentHash": "2422eda6e7cbab9ddd3e3a03fd7e5a2924acefb31117e45b1e2673a1230fed98",
+  "archiveHash": "5ae153223ace8f8022493ca1e137a88f162a41433b8b4cf507bf1bc9aa3832af",
+  "archivePath": "data/archive/details/2026/hsk-levels-format.20260826T000149.050Z.5ae153223ace.txt",
+  "diagnostics": {
+    "discovered": 7,
+    "included": 7,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "HSK-1",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 중국어능력 평가",
+        "authority": "교육부 중외언어교류합작센터·CTI",
+        "sourceUrl": "https://www.chinesetest.cn/HSK/1",
+        "checkedAt": "2026-08-26",
+        "note": "중국어를 모국어로 사용하지 않는 응시자의 중국어 의사소통 능력을 평가하는 국제 표준화 시험입니다. HSK 1급 기준입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~200점·합격/불합격",
+        "passCriteria": "총점 120점 이상",
+        "validityLabel": "시험일로부터 2년",
+        "note": "영역 점수와 총점이 성적표에 제공됩니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험센터 IBT"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.chinesetest.cn/HSK/1",
+          "totalDurationMinutes": 35,
+          "summary": "40문항 · 순수 시험시간 약 35분",
+          "stages": [
+            {
+              "id": "hsk-1",
+              "name": "HSK 1급",
+              "durationMinutes": 35,
+              "totalItemCount": 40,
+              "totalScore": 200,
+              "sections": [
+                {
+                  "name": "듣기",
+                  "mode": "listening",
+                  "itemCount": 20,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "multiple-choice",
+                  "itemCount": 20,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "듣기",
+                  "durationMinutes": 15,
+                  "sectionNames": [
+                    "듣기"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                },
+                {
+                  "name": "듣기 답안 옮겨 적기",
+                  "durationMinutes": 3,
+                  "sectionNames": [
+                    "듣기"
+                  ]
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 17,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                }
+              ],
+              "note": "개인정보 작성 5분은 시험시간에서 제외했습니다. 2026년 9월 20일 HSK 3.0 글로벌 시범시험은 별도 회차이며 정규 시험 구성의 일괄 전환으로 보지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "hsk-levels-format"
+      ]
+    },
+    {
+      "examSlug": "HSK-2",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 중국어능력 평가",
+        "authority": "교육부 중외언어교류합작센터·CTI",
+        "sourceUrl": "https://www.chinesetest.cn/HSK/2",
+        "checkedAt": "2026-08-26",
+        "note": "중국어를 모국어로 사용하지 않는 응시자의 중국어 의사소통 능력을 평가하는 국제 표준화 시험입니다. HSK 2급 기준입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~200점·합격/불합격",
+        "passCriteria": "총점 120점 이상",
+        "validityLabel": "시험일로부터 2년",
+        "note": "영역 점수와 총점이 성적표에 제공됩니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험센터 IBT"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.chinesetest.cn/HSK/2",
+          "totalDurationMinutes": 50,
+          "summary": "60문항 · 순수 시험시간 약 50분",
+          "stages": [
+            {
+              "id": "hsk-2",
+              "name": "HSK 2급",
+              "durationMinutes": 50,
+              "totalItemCount": 60,
+              "totalScore": 200,
+              "sections": [
+                {
+                  "name": "듣기",
+                  "mode": "listening",
+                  "itemCount": 35,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "multiple-choice",
+                  "itemCount": 25,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "듣기",
+                  "durationMinutes": 25,
+                  "sectionNames": [
+                    "듣기"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                },
+                {
+                  "name": "듣기 답안 옮겨 적기",
+                  "durationMinutes": 3,
+                  "sectionNames": [
+                    "듣기"
+                  ]
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 22,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                }
+              ],
+              "note": "개인정보 작성 5분은 시험시간에서 제외했습니다. 2026년 9월 20일 HSK 3.0 글로벌 시범시험은 별도 회차이며 정규 시험 구성의 일괄 전환으로 보지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "hsk-levels-format"
+      ]
+    },
+    {
+      "examSlug": "HSK-3",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 중국어능력 평가",
+        "authority": "교육부 중외언어교류합작센터·CTI",
+        "sourceUrl": "https://www.chinesetest.cn/HSK/3",
+        "checkedAt": "2026-08-26",
+        "note": "중국어를 모국어로 사용하지 않는 응시자의 중국어 의사소통 능력을 평가하는 국제 표준화 시험입니다. HSK 3급 기준입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~300점·합격/불합격",
+        "passCriteria": "총점 180점 이상",
+        "validityLabel": "시험일로부터 2년",
+        "note": "영역 점수와 총점이 성적표에 제공됩니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험센터 IBT"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.chinesetest.cn/HSK/3",
+          "totalDurationMinutes": 85,
+          "summary": "80문항 · 순수 시험시간 약 85분",
+          "stages": [
+            {
+              "id": "hsk-3",
+              "name": "HSK 3급",
+              "durationMinutes": 85,
+              "totalItemCount": 80,
+              "totalScore": 300,
+              "sections": [
+                {
+                  "name": "듣기",
+                  "mode": "listening",
+                  "itemCount": 40,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "multiple-choice",
+                  "itemCount": 30,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "쓰기",
+                  "mode": "written",
+                  "itemCount": 10,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "듣기",
+                  "durationMinutes": 35,
+                  "sectionNames": [
+                    "듣기"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                },
+                {
+                  "name": "듣기 답안 옮겨 적기",
+                  "durationMinutes": 5,
+                  "sectionNames": [
+                    "듣기"
+                  ]
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "쓰기",
+                  "durationMinutes": 15,
+                  "sectionNames": [
+                    "쓰기"
+                  ]
+                }
+              ],
+              "note": "개인정보 작성 5분은 시험시간에서 제외했습니다. 2026년 9월 20일 HSK 3.0 글로벌 시범시험은 별도 회차이며 정규 시험 구성의 일괄 전환으로 보지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "hsk-levels-format"
+      ]
+    },
+    {
+      "examSlug": "HSK-4",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 중국어능력 평가",
+        "authority": "교육부 중외언어교류합작센터·CTI",
+        "sourceUrl": "https://www.chinesetest.cn/HSK/4",
+        "checkedAt": "2026-08-26",
+        "note": "중국어를 모국어로 사용하지 않는 응시자의 중국어 의사소통 능력을 평가하는 국제 표준화 시험입니다. HSK 4급 기준입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~300점·합격/불합격",
+        "passCriteria": "총점 180점 이상",
+        "validityLabel": "시험일로부터 2년",
+        "note": "영역 점수와 총점이 성적표에 제공됩니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험센터 IBT"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.chinesetest.cn/HSK/4",
+          "totalDurationMinutes": 100,
+          "summary": "100문항 · 순수 시험시간 약 100분",
+          "stages": [
+            {
+              "id": "hsk-4",
+              "name": "HSK 4급",
+              "durationMinutes": 100,
+              "totalItemCount": 100,
+              "totalScore": 300,
+              "sections": [
+                {
+                  "name": "듣기",
+                  "mode": "listening",
+                  "itemCount": 45,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "multiple-choice",
+                  "itemCount": 40,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "쓰기",
+                  "mode": "written",
+                  "itemCount": 15,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "듣기",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "듣기"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                },
+                {
+                  "name": "듣기 답안 옮겨 적기",
+                  "durationMinutes": 5,
+                  "sectionNames": [
+                    "듣기"
+                  ]
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "쓰기",
+                  "durationMinutes": 25,
+                  "sectionNames": [
+                    "쓰기"
+                  ]
+                }
+              ],
+              "note": "개인정보 작성 5분은 시험시간에서 제외했습니다. 2026년 9월 20일 HSK 3.0 글로벌 시범시험은 별도 회차이며 정규 시험 구성의 일괄 전환으로 보지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "hsk-levels-format"
+      ]
+    },
+    {
+      "examSlug": "HSK-5",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 중국어능력 평가",
+        "authority": "교육부 중외언어교류합작센터·CTI",
+        "sourceUrl": "https://www.chinesetest.cn/HSK/5",
+        "checkedAt": "2026-08-26",
+        "note": "중국어를 모국어로 사용하지 않는 응시자의 중국어 의사소통 능력을 평가하는 국제 표준화 시험입니다. HSK 5급 기준입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~300점·합격/불합격",
+        "passCriteria": "총점 180점 이상",
+        "validityLabel": "시험일로부터 2년",
+        "note": "영역 점수와 총점이 성적표에 제공됩니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험센터 IBT"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.chinesetest.cn/HSK/5",
+          "totalDurationMinutes": 120,
+          "summary": "100문항 · 순수 시험시간 약 120분",
+          "stages": [
+            {
+              "id": "hsk-5",
+              "name": "HSK 5급",
+              "durationMinutes": 120,
+              "totalItemCount": 100,
+              "totalScore": 300,
+              "sections": [
+                {
+                  "name": "듣기",
+                  "mode": "listening",
+                  "itemCount": 45,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "multiple-choice",
+                  "itemCount": 45,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "쓰기",
+                  "mode": "written",
+                  "itemCount": 10,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "듣기",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "듣기"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                },
+                {
+                  "name": "듣기 답안 옮겨 적기",
+                  "durationMinutes": 5,
+                  "sectionNames": [
+                    "듣기"
+                  ]
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 45,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "쓰기",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "쓰기"
+                  ]
+                }
+              ],
+              "note": "개인정보 작성 5분은 시험시간에서 제외했습니다. 2026년 9월 20일 HSK 3.0 글로벌 시범시험은 별도 회차이며 정규 시험 구성의 일괄 전환으로 보지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "hsk-levels-format"
+      ]
+    },
+    {
+      "examSlug": "HSK-6",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 중국어능력 평가",
+        "authority": "교육부 중외언어교류합작센터·CTI",
+        "sourceUrl": "https://www.chinesetest.cn/HSK/6",
+        "checkedAt": "2026-08-26",
+        "note": "중국어를 모국어로 사용하지 않는 응시자의 중국어 의사소통 능력을 평가하는 국제 표준화 시험입니다. HSK 6급 기준입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~300점·합격/불합격",
+        "passCriteria": "총점 180점 이상",
+        "validityLabel": "시험일로부터 2년",
+        "note": "영역 점수와 총점이 성적표에 제공됩니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험센터 IBT"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.chinesetest.cn/HSK/6",
+          "totalDurationMinutes": 135,
+          "summary": "101문항 · 순수 시험시간 약 135분",
+          "stages": [
+            {
+              "id": "hsk-6",
+              "name": "HSK 6급",
+              "durationMinutes": 135,
+              "totalItemCount": 101,
+              "totalScore": 300,
+              "sections": [
+                {
+                  "name": "듣기",
+                  "mode": "listening",
+                  "itemCount": 50,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "multiple-choice",
+                  "itemCount": 50,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "쓰기",
+                  "mode": "written",
+                  "itemCount": 1,
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "듣기",
+                  "durationMinutes": 35,
+                  "sectionNames": [
+                    "듣기"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                },
+                {
+                  "name": "듣기 답안 옮겨 적기",
+                  "durationMinutes": 5,
+                  "sectionNames": [
+                    "듣기"
+                  ]
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 50,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "쓰기",
+                  "durationMinutes": 45,
+                  "sectionNames": [
+                    "쓰기"
+                  ]
+                }
+              ],
+              "note": "개인정보 작성 5분은 시험시간에서 제외했습니다. 2026년 9월 20일 HSK 3.0 글로벌 시범시험은 별도 회차이며 정규 시험 구성의 일괄 전환으로 보지 않습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "hsk-levels-format"
+      ]
+    },
+    {
+      "examSlug": "HSK-7-9",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "국제 중국어능력 평가",
+        "authority": "교육부 중외언어교류합작센터·CTI",
+        "sourceUrl": "https://www.chinesetest.cn/HSK/7-9",
+        "checkedAt": "2026-08-26",
+        "note": "한 번의 시험으로 고급 중국어 의사소통 능력을 측정해 HSK 7급·8급·9급 중 하나를 판정합니다."
+      },
+      "result": {
+        "type": "level-awarded",
+        "label": "5개 영역 0~100점·7/8/9급 판정",
+        "validityLabel": "시험일로부터 2년",
+        "note": "듣기·독해·쓰기·번역·말하기 영역별 성적이 제공되며, IRT 능력값과 문항 내용·난이도를 함께 반영해 7급 미만·7급·8급·9급을 판정합니다."
+      },
+      "deliveryModes": [
+        "시험센터 IBT",
+        "회차별 홈테스트"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.chinesetest.cn/HSK/7-9",
+          "totalDurationMinutes": 210,
+          "summary": "98문항 · 순수 시험시간 약 210분",
+          "stages": [
+            {
+              "id": "hsk-7-9",
+              "name": "HSK 7~9급 통합시험",
+              "durationMinutes": 210,
+              "totalItemCount": 98,
+              "sections": [
+                {
+                  "name": "듣기",
+                  "itemCount": 40,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "독해",
+                  "itemCount": 47,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "쓰기",
+                  "itemCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "번역",
+                  "itemCount": 4,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                },
+                {
+                  "name": "말하기",
+                  "itemCount": 5,
+                  "mode": "speaking",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 100
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "듣기",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "듣기"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 60,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "쓰기",
+                  "durationMinutes": 55,
+                  "sectionNames": [
+                    "쓰기"
+                  ]
+                },
+                {
+                  "name": "번역",
+                  "durationMinutes": 41,
+                  "sectionNames": [
+                    "번역"
+                  ]
+                },
+                {
+                  "name": "말하기",
+                  "durationMinutes": 24,
+                  "sectionNames": [
+                    "말하기"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                }
+              ],
+              "note": "공식 영역별 순수 시험시간 합계 약 210분입니다. 휴식·재로그인 시간은 제외했습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "hsk-levels-format"
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-26T00:08:45.666Z"
+}

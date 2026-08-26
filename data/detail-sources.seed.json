@@ -418,6 +418,37 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
       "examSlugs": ["JLPT-N1", "JLPT-N2", "JLPT-N3", "JLPT-N4", "JLPT-N5"]
+    },
+    {
+      "id": "hsk-levels-format",
+      "name": "HSK 1~6·7~9급 현행 시험 구성",
+      "authority": "CTI·교육부 중외언어교류합작센터·HSK한국고시처",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.chinesetest.cn/HSK/1",
+        "https://www.chinesetest.cn/HSK/2",
+        "https://www.chinesetest.cn/HSK/3",
+        "https://www.chinesetest.cn/HSK/4",
+        "https://www.chinesetest.cn/HSK/5",
+        "https://www.chinesetest.cn/HSK/6",
+        "https://www.chinesetest.cn/HSK/7-9",
+        "https://www.chinesetest.cn/notice",
+        "https://www.hsk-korea.co.kr/about/about_hsk.aspx",
+        "https://www.hsk-korea.co.kr/about/about_hsk_ibt.aspx",
+        "https://www.hsk-korea.co.kr/about/test_hsk_ibt_7.aspx"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "url": "https://www.chinesetest.cn/robots.txt",
+        "note": "CTI의 현행 급수별 구성·성적 안내와 한국 공식 고시처의 시험 방식·응시료를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["HSK-1", "HSK-2", "HSK-3", "HSK-4", "HSK-5", "HSK-6", "HSK-7-9"]
     }
   ]
 }
