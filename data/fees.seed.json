@@ -1840,28 +1840,34 @@
       "note": "한국 공식 총괄센터 공개 페이지에서 현행 금액을 안정적으로 확인할 수 없어 접수 화면에서 확인합니다."
     },
     {
-      "slug": "DELE-A1", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
+      "slug": "DELE-A1", "items": [{ "label": "응시료", "amount": 166000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/dele_fees_dates_discounts.htm", "recheckAfterDays": 30 },
+      "note": "주한 세르반테스 문화원 2026년 국내 일반 DELE 응시료 기준입니다."
     },
     {
-      "slug": "DELE-A2", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
+      "slug": "DELE-A2", "items": [{ "label": "응시료", "amount": 215600 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/dele_fees_dates_discounts.htm", "recheckAfterDays": 30 },
+      "note": "주한 세르반테스 문화원 2026년 국내 일반 DELE 응시료 기준입니다."
     },
     {
-      "slug": "DELE-B1", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
+      "slug": "DELE-B1", "items": [{ "label": "응시료", "amount": 260000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/dele_fees_dates_discounts.htm", "recheckAfterDays": 30 },
+      "note": "주한 세르반테스 문화원 2026년 국내 일반 DELE 응시료 기준입니다."
     },
     {
-      "slug": "DELE-B2", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
+      "slug": "DELE-B2", "items": [{ "label": "응시료", "amount": 285000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/dele_fees_dates_discounts.htm", "recheckAfterDays": 30 },
+      "note": "주한 세르반테스 문화원 2026년 국내 일반 DELE 응시료 기준입니다."
     },
     {
-      "slug": "DELE-C1", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
+      "slug": "DELE-C1", "items": [{ "label": "응시료", "amount": 325000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/dele_fees_dates_discounts.htm", "recheckAfterDays": 30 },
+      "note": "주한 세르반테스 문화원 2026년 국내 일반 DELE 응시료 기준입니다."
     },
     {
-      "slug": "DELE-C2", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://examenes.cervantes.es/es/dele/preparar-prueba", "recheckAfterDays": 30 }
+      "slug": "DELE-C2", "items": [{ "label": "응시료", "amount": 348000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/dele_fees_dates_discounts.htm", "recheckAfterDays": 30 },
+      "note": "주한 세르반테스 문화원 2026년 국내 일반 DELE 응시료 기준입니다."
     }
   ]
 }

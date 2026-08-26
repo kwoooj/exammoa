@@ -8456,6 +8456,667 @@
       "sourceRefs": [
         "delf-dalf-levels-format"
       ]
+    },
+    {
+      "examSlug": "DELE-A1",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "스페인 교육부 명의 국제 스페인어 학위",
+        "authority": "스페인 교육부·Instituto Cervantes",
+        "sourceUrl": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/faq_dele.htm",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR A1 수준을 인증하며 이전 급수 취득 없이 응시할 수 있는 독립 학위입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "두 평가 그룹 각각 30점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "독해·작문 그룹과 청해·구술 그룹에서 각각 30점 이상을 받아야 하며 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://examenes.cervantes.es/es/dele/examenes/a1",
+          "totalDurationMinutes": 105,
+          "summary": "필기 95분 + 개인 구술 10분 · 구술 준비 10분 별도",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기 시험",
+              "durationMinutes": 95,
+              "sections": [
+                {
+                  "name": "독해",
+                  "itemCount": 25,
+                  "taskCount": 4,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "청해",
+                  "itemCount": 25,
+                  "taskCount": 4,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "작문",
+                  "taskCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "독해",
+                  "durationMinutes": 45,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "청해",
+                  "durationMinutes": 25,
+                  "sectionNames": [
+                    "청해"
+                  ]
+                },
+                {
+                  "name": "작문",
+                  "durationMinutes": 25,
+                  "sectionNames": [
+                    "작문"
+                  ]
+                }
+              ],
+              "note": "공식 운영상 각 시험의 제한시간이 구분됩니다. 쉬는 시간과 입실·안내 시간은 순수 시험시간 합계에 포함하지 않았습니다."
+            },
+            {
+              "id": "oral",
+              "name": "개인 구술 시험",
+              "durationMinutes": 10,
+              "sections": [
+                {
+                  "name": "구술",
+                  "taskCount": 3,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "note": "시험 전 준비시간 10분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다. 시험센터에 따라 공식 필기일 전후 다른 날에 시행될 수 있습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "dele-levels-format"
+      ]
+    },
+    {
+      "examSlug": "DELE-A2",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "스페인 교육부 명의 국제 스페인어 학위",
+        "authority": "스페인 교육부·Instituto Cervantes",
+        "sourceUrl": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/faq_dele.htm",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR A2 수준을 인증하며 이전 급수 취득 없이 응시할 수 있는 독립 학위입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "두 평가 그룹 각각 30점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "독해·작문 그룹과 청해·구술 그룹에서 각각 30점 이상을 받아야 하며 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://examenes.cervantes.es/es/dele/examenes/a2",
+          "totalDurationMinutes": 157,
+          "summary": "필기 145분 + 개인 구술 12분 · 구술 준비 12분 별도",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기 시험",
+              "durationMinutes": 145,
+              "sections": [
+                {
+                  "name": "독해",
+                  "itemCount": 25,
+                  "taskCount": 4,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "청해",
+                  "itemCount": 25,
+                  "taskCount": 4,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "작문",
+                  "taskCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "독해",
+                  "durationMinutes": 60,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "청해",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "청해"
+                  ]
+                },
+                {
+                  "name": "작문",
+                  "durationMinutes": 45,
+                  "sectionNames": [
+                    "작문"
+                  ]
+                }
+              ],
+              "note": "공식 운영상 각 시험의 제한시간이 구분됩니다. 쉬는 시간과 입실·안내 시간은 순수 시험시간 합계에 포함하지 않았습니다."
+            },
+            {
+              "id": "oral",
+              "name": "개인 구술 시험",
+              "durationMinutes": 12,
+              "sections": [
+                {
+                  "name": "구술",
+                  "taskCount": 3,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "note": "시험 전 준비시간 12분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다. 시험센터에 따라 공식 필기일 전후 다른 날에 시행될 수 있습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "dele-levels-format"
+      ]
+    },
+    {
+      "examSlug": "DELE-B1",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "스페인 교육부 명의 국제 스페인어 학위",
+        "authority": "스페인 교육부·Instituto Cervantes",
+        "sourceUrl": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/faq_dele.htm",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR B1 수준을 인증하며 이전 급수 취득 없이 응시할 수 있는 독립 학위입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "두 평가 그룹 각각 30점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "독해·작문 그룹과 청해·구술 그룹에서 각각 30점 이상을 받아야 하며 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://examenes.cervantes.es/es/dele/examenes/b1",
+          "totalDurationMinutes": 185,
+          "summary": "필기 170분 + 개인 구술 15분 · 구술 준비 15분 별도",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기 시험",
+              "durationMinutes": 170,
+              "sections": [
+                {
+                  "name": "독해",
+                  "itemCount": 30,
+                  "taskCount": 5,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "청해",
+                  "itemCount": 30,
+                  "taskCount": 5,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "작문",
+                  "taskCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "독해",
+                  "durationMinutes": 70,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "청해",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "청해"
+                  ]
+                },
+                {
+                  "name": "작문",
+                  "durationMinutes": 60,
+                  "sectionNames": [
+                    "작문"
+                  ]
+                }
+              ],
+              "note": "공식 운영상 각 시험의 제한시간이 구분됩니다. 쉬는 시간과 입실·안내 시간은 순수 시험시간 합계에 포함하지 않았습니다."
+            },
+            {
+              "id": "oral",
+              "name": "개인 구술 시험",
+              "durationMinutes": 15,
+              "sections": [
+                {
+                  "name": "구술",
+                  "taskCount": 4,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "note": "시험 전 준비시간 15분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다. 시험센터에 따라 공식 필기일 전후 다른 날에 시행될 수 있습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "dele-levels-format"
+      ]
+    },
+    {
+      "examSlug": "DELE-B2",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "스페인 교육부 명의 국제 스페인어 학위",
+        "authority": "스페인 교육부·Instituto Cervantes",
+        "sourceUrl": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/faq_dele.htm",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR B2 수준을 인증하며 이전 급수 취득 없이 응시할 수 있는 독립 학위입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "두 평가 그룹 각각 30점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "독해·작문 그룹과 청해·구술 그룹에서 각각 30점 이상을 받아야 하며 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://examenes.cervantes.es/es/dele/examenes/b2",
+          "totalDurationMinutes": 210,
+          "summary": "필기 190분 + 개인 구술 20분 · 구술 준비 20분 별도",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기 시험",
+              "durationMinutes": 190,
+              "sections": [
+                {
+                  "name": "독해",
+                  "itemCount": 36,
+                  "taskCount": 4,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "청해",
+                  "itemCount": 30,
+                  "taskCount": 5,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "작문",
+                  "taskCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "독해",
+                  "durationMinutes": 70,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "청해",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "청해"
+                  ]
+                },
+                {
+                  "name": "작문",
+                  "durationMinutes": 80,
+                  "sectionNames": [
+                    "작문"
+                  ]
+                }
+              ],
+              "note": "공식 운영상 각 시험의 제한시간이 구분됩니다. 쉬는 시간과 입실·안내 시간은 순수 시험시간 합계에 포함하지 않았습니다."
+            },
+            {
+              "id": "oral",
+              "name": "개인 구술 시험",
+              "durationMinutes": 20,
+              "sections": [
+                {
+                  "name": "구술",
+                  "taskCount": 3,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "note": "시험 전 준비시간 20분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다. 시험센터에 따라 공식 필기일 전후 다른 날에 시행될 수 있습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "dele-levels-format"
+      ]
+    },
+    {
+      "examSlug": "DELE-C1",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "스페인 교육부 명의 국제 스페인어 학위",
+        "authority": "스페인 교육부·Instituto Cervantes",
+        "sourceUrl": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/faq_dele.htm",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR C1 수준을 인증하며 이전 급수 취득 없이 응시할 수 있는 독립 학위입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "두 평가 그룹 각각 30점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "독해·작문 그룹과 청해·구술 그룹에서 각각 30점 이상을 받아야 하며 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://examenes.cervantes.es/es/dele/examenes/c1",
+          "totalDurationMinutes": 240,
+          "summary": "필기 220분 + 개인 구술 20분 · 구술 준비 20분 별도",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기 시험",
+              "durationMinutes": 220,
+              "sections": [
+                {
+                  "name": "독해·언어 사용",
+                  "itemCount": 40,
+                  "taskCount": 5,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "청해·언어 사용",
+                  "itemCount": 30,
+                  "taskCount": 4,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "작문·중재",
+                  "taskCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "독해·언어 사용",
+                  "durationMinutes": 90,
+                  "sectionNames": [
+                    "독해·언어 사용"
+                  ]
+                },
+                {
+                  "name": "청해·언어 사용",
+                  "durationMinutes": 50,
+                  "sectionNames": [
+                    "청해·언어 사용"
+                  ]
+                },
+                {
+                  "name": "작문·중재",
+                  "durationMinutes": 80,
+                  "sectionNames": [
+                    "작문·중재"
+                  ]
+                }
+              ],
+              "note": "공식 운영상 각 시험의 제한시간이 구분됩니다. 쉬는 시간과 입실·안내 시간은 순수 시험시간 합계에 포함하지 않았습니다."
+            },
+            {
+              "id": "oral",
+              "name": "개인 구술 시험",
+              "durationMinutes": 20,
+              "sections": [
+                {
+                  "name": "구술·중재",
+                  "taskCount": 3,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "note": "시험 전 준비시간 20분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다. 시험센터에 따라 공식 필기일 전후 다른 날에 시행될 수 있습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "dele-levels-format"
+      ]
+    },
+    {
+      "examSlug": "DELE-C2",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "스페인 교육부 명의 국제 스페인어 학위",
+        "authority": "스페인 교육부·Instituto Cervantes",
+        "sourceUrl": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/faq_dele.htm",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR C2 수준을 인증하며 이전 급수 취득 없이 응시할 수 있는 독립 학위입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "3개 시험 각각 20점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "시험 1·2는 각각 33.33점, 시험 3은 33.34점 만점입니다. 세 시험을 모두 통과해야 하며 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://examenes.cervantes.es/es/dele/examenes/c2",
+          "totalDurationMinutes": 275,
+          "summary": "필기 255분 + 개인 구술 20분 · 구술 준비 30분 별도",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기 시험",
+              "durationMinutes": 255,
+              "sections": [
+                {
+                  "name": "언어 사용·독해·청해",
+                  "itemCount": 52,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 33.33
+                  },
+                  "note": "공식 페이지의 과제 총수와 세부 과제 번호 표기가 서로 달라 과제 수는 표시하지 않습니다."
+                },
+                {
+                  "name": "작문·중재",
+                  "taskCount": 3,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 33.33
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "언어 사용·독해·청해",
+                  "durationMinutes": 105,
+                  "sectionNames": [
+                    "언어 사용·독해·청해"
+                  ]
+                },
+                {
+                  "name": "작문·중재",
+                  "durationMinutes": 150,
+                  "sectionNames": [
+                    "작문·중재"
+                  ]
+                }
+              ],
+              "note": "공식 운영상 각 시험의 제한시간이 구분됩니다. 쉬는 시간과 입실·안내 시간은 순수 시험시간 합계에 포함하지 않았습니다."
+            },
+            {
+              "id": "oral",
+              "name": "개인 구술 시험",
+              "durationMinutes": 20,
+              "sections": [
+                {
+                  "name": "구술·중재",
+                  "taskCount": 3,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 33.34
+                  }
+                }
+              ],
+              "note": "시험 전 준비시간 30분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다. 시험센터에 따라 공식 필기일 전후 다른 날에 시행될 수 있습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "dele-levels-format"
+      ]
     }
   ]
 }
