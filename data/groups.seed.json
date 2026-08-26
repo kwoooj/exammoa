@@ -274,7 +274,7 @@
     {
       "id": "opic",
       "name": "OPIc",
-      "agency": "크레듀",
+      "agency": "멀티캠퍼스 OPIc",
       "cadence": "rolling",
       "rollingRule": "상시 시행. 센터별 좌석 예약제",
       "examSlugs": [

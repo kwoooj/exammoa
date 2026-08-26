@@ -20,6 +20,7 @@ const EXAMS: Exam[] = [
   exam({ slug: 'SQLD', name: 'SQL 개발자', short: 'SQLD', groupId: 'kdata-sqld', category: 'it', priority: 1 }),
   exam({ slug: 'ADsP', name: '데이터분석 준전문가', short: 'ADsP', groupId: 'kdata-adsp', category: 'it', priority: 2 }),
   exam({ slug: '토익', name: 'TOEIC', short: '토익', groupId: 'toeic', category: 'lang', priority: 1, agency: 'YBM' }),
+  exam({ slug: '오픽', name: 'OPIc', short: '오픽', groupId: 'opic', category: 'lang', priority: 2, agency: '멀티캠퍼스 OPIc' }),
   exam({ slug: '산업안전기사', name: '산업안전기사', short: null, groupId: 'hrdk-regular', category: 'safety', priority: 1, jmCd: '2290' }),
 ];
 
@@ -29,6 +30,7 @@ const GROUPS: ScheduleGroup[] = [
   { id: 'kdata-sqld', name: 'SQLD', agency: '한국데이터산업진흥원', cadence: 'periodic', examSlugs: [] },
   { id: 'kdata-adsp', name: 'ADsP', agency: '한국데이터산업진흥원', cadence: 'periodic', examSlugs: [] },
   { id: 'toeic', name: 'TOEIC', agency: 'YBM', cadence: 'frequent', examSlugs: [] },
+  { id: 'opic', name: 'OPIc', agency: '멀티캠퍼스 OPIc', cadence: 'rolling', rollingRule: '상시 시행', examSlugs: [] },
 ];
 
 const CATEGORIES: Category[] = [
@@ -71,7 +73,7 @@ test('5단계 — 시행기관 일치', () => {
 
 test('5단계 — 카테고리명 일치', () => {
   const hits = find('어학');
-  assert.deepEqual(hits, ['토익']);
+  assert.deepEqual(hits, ['토익', '오픽']);
 });
 
 test('단계가 낮은 것이 항상 앞에 온다', () => {
@@ -98,6 +100,11 @@ test('약칭 정확 일치가 이름 앞부분 일치를 이긴다', () => {
 test('대소문자를 가리지 않는다', () => {
   for (const q of ['SQLD', 'sqld', 'Sqld']) assert.deepEqual(find(q), ['SQLD'], q);
   for (const q of ['ADsP', 'adsp', 'ADSP']) assert.deepEqual(find(q), ['ADsP'], q);
+});
+
+test('한글 별칭으로 영문 시험명 OPIc을 찾는다', () => {
+  assert.deepEqual(find('오픽'), ['오픽']);
+  assert.equal(levelOf('오픽', '오픽'), 2);
 });
 
 test('조합형으로 들어와도 완성형 데이터에 걸린다', () => {

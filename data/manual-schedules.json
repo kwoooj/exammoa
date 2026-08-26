@@ -117,7 +117,7 @@
     {
       "id": "opic",
       "name": "OPIc",
-      "agency": "크레듀",
+      "agency": "멀티캠퍼스 OPIc",
       "cadence": "rolling",
       "rollingRule": "상시 시행. 센터별 좌석 예약제",
       "examSlugs": ["오픽"],
@@ -161,7 +161,7 @@
     { "slug": "토익", "name": "TOEIC", "short": "토익", "category": "lang", "priority": 1 },
     { "slug": "토익스피킹", "name": "TOEIC Speaking", "short": "토스", "category": "lang", "priority": 2 },
     { "slug": "KBS한국어능력시험", "name": "KBS한국어능력시험", "short": "KBS한국어", "category": "lang", "priority": 2 },
-    { "slug": "오픽", "name": "OPIc", "short": null, "category": "lang", "priority": 2 },
+    { "slug": "오픽", "name": "OPIc", "short": "오픽", "category": "lang", "priority": 2 },
     { "slug": "SQLD", "name": "SQL 개발자(SQLD)", "short": "SQLD", "category": "it", "priority": 1 },
     { "slug": "ADsP", "name": "데이터분석 준전문가(ADsP)", "short": "ADsP", "category": "it", "priority": 2 },
     { "slug": "리눅스마스터2급", "name": "리눅스마스터 2급", "short": null, "category": "it", "priority": 3 },

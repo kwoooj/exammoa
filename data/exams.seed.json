@@ -992,7 +992,7 @@
     {
       "slug": "오픽",
       "name": "OPIc",
-      "short": null,
+      "short": "오픽",
       "groupId": "opic",
       "jmCd": null,
       "qualgbCd": null,
@@ -1000,7 +1000,7 @@
       "category": "lang",
       "tier": "T4",
       "priority": 2,
-      "agency": "크레듀",
+      "agency": "멀티캠퍼스 OPIc",
       "rolling": true,
       "rollingRule": "상시 시행. 센터별 좌석 예약제",
       "collect": "manual"
