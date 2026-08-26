@@ -478,6 +478,35 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
       "examSlugs": ["DELF-A1", "DELF-A2", "DELF-B1", "DELF-B2", "DALF-C1", "DALF-C2"]
+    },
+    {
+      "id": "dele-levels-format",
+      "name": "DELE A1~C2 현행 시험 구성",
+      "authority": "Instituto Cervantes·주한 세르반테스 문화원",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://examenes.cervantes.es/es/dele/examenes/a1",
+        "https://examenes.cervantes.es/es/dele/examenes/a2",
+        "https://examenes.cervantes.es/es/dele/examenes/b1",
+        "https://examenes.cervantes.es/es/dele/examenes/b2",
+        "https://examenes.cervantes.es/es/dele/examenes/c1",
+        "https://examenes.cervantes.es/es/dele/examenes/c2",
+        "https://examenes.cervantes.es/es/dele/como",
+        "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/faq_dele.htm",
+        "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/dele_fees_dates_discounts.htm"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "url": "https://examenes.cervantes.es/robots.txt",
+        "note": "Instituto Cervantes 급수별 시험 구성과 주한 세르반테스 문화원의 국내 응시료·학위 안내를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["DELE-A1", "DELE-A2", "DELE-B1", "DELE-B2", "DELE-C1", "DELE-C2"]
     }
   ]
 }
