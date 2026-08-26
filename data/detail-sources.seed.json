@@ -572,6 +572,37 @@
         "농협은행개인여신전문역", "농협은행중소기업심사역", "프라이빗뱅커", "KBI금융DT테스트",
         "자금세탁방지업무능력검정시험", "수협은행직무역량평가-SCA", "KBI금융AI리터러시"
       ]
+    },
+    {
+      "id": "kofia-remaining-details",
+      "name": "금융투자협회 금융자격 7종 현행 시험 구성",
+      "authority": "한국금융투자협회",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FCS005",
+        "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FCF008",
+        "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FCD006",
+        "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=SCS003",
+        "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=SCF003",
+        "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FWR005",
+        "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FWD003",
+        "https://license.kofia.or.kr/resources/etc/PLIO.pdf"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "url": "https://license.kofia.or.kr/robots.txt",
+        "note": "공식 시험개요의 과목·문항·시험시간·합격기준과 민간자격 표시의무 문서의 등록번호·응시료를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": [
+        "증권투자권유자문인력", "펀드투자권유자문인력", "파생상품투자권유자문인력",
+        "증권투자권유대행인", "펀드투자권유대행인", "금융투자분석사", "재무위험관리사"
+      ]
     }
   ]
 }

@@ -1,0 +1,440 @@
+{
+  "version": 1,
+  "sourceId": "kofia-remaining-details",
+  "status": "approved",
+  "observedAt": "2026-08-26T03:48:07.750Z",
+  "contentHash": "0f5cce8061430ba56e14e2dfffa82438347928d44e0a326c20ff4000028b07b8",
+  "archiveHash": "d81605eb08e2a61bc858e837254e98fd0a03e8f6cb5da9321f193823999bb435",
+  "archivePath": "data/archive/details/2026/kofia-remaining-details.20260826T034807.750Z.d81605eb08e2.txt",
+  "diagnostics": {
+    "discovered": 7,
+    "included": 7,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "증권투자권유자문인력",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융투자협회",
+        "sourceUrl": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "checkedAt": "2026-08-26",
+        "note": "민간자격 등록번호 2013-2420이며 자본시장법 등에 근거를 둔 자격입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "100문항·합격/불합격",
+        "passCriteria": "각 과목 정답률 50% 이상이면서 전체 정답률 70% 이상",
+        "note": "공식 과락 문항은 증권분석 및 증권시장 18문항, 금융상품 및 직무윤리 15문항, 법규 및 세제 18문항입니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FCS005",
+          "totalDurationMinutes": 120,
+          "summary": "3과목·100문항·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "totalItemCount": 100,
+              "sections": [
+                {
+                  "name": "증권분석 및 증권시장",
+                  "itemCount": 35,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "금융상품 및 직무윤리",
+                  "itemCount": 30,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "법규 및 세제",
+                  "itemCount": 35,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "과목별 강제 시간 구간 없이 전체 120분으로 운영되므로 시험시간은 통합해 표시합니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kofia-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "펀드투자권유자문인력",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융투자협회",
+        "sourceUrl": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "checkedAt": "2026-08-26",
+        "note": "민간자격 등록번호 2013-2423이며 자본시장법 등에 근거를 둔 자격입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "100문항·합격/불합격",
+        "passCriteria": "각 과목 정답률 50% 이상이면서 전체 정답률 70% 이상",
+        "note": "공식 과락 문항은 펀드일반 30문항, 파생상품펀드 13문항, 부동산펀드 8문항입니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FCF008",
+          "totalDurationMinutes": 120,
+          "summary": "3과목·100문항·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "totalItemCount": 100,
+              "sections": [
+                {
+                  "name": "펀드일반",
+                  "itemCount": 60,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "파생상품펀드",
+                  "itemCount": 25,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "부동산펀드",
+                  "itemCount": 15,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "과목별 강제 시간 구간 없이 전체 120분으로 운영되므로 시험시간은 통합해 표시합니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kofia-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "파생상품투자권유자문인력",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융투자협회",
+        "sourceUrl": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "checkedAt": "2026-08-26",
+        "note": "민간자격 등록번호 2013-2422이며 자본시장법 등에 근거를 둔 자격입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "100문항·합격/불합격",
+        "passCriteria": "각 과목 정답률 50% 이상이면서 전체 정답률 70% 이상",
+        "note": "공식 과락 문항은 파생상품 I 13문항, 파생상품 II 13문항, 리스크관리 및 직무윤리 13문항, 파생상품법규 13문항입니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FCD006",
+          "totalDurationMinutes": 120,
+          "summary": "4과목·100문항·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "totalItemCount": 100,
+              "sections": [
+                {
+                  "name": "파생상품 I",
+                  "itemCount": 25,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "파생상품 II",
+                  "itemCount": 25,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "리스크관리 및 직무윤리",
+                  "itemCount": 25,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "파생상품법규",
+                  "itemCount": 25,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "과목별 강제 시간 구간 없이 전체 120분으로 운영되므로 시험시간은 통합해 표시합니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kofia-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "증권투자권유대행인",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융투자협회",
+        "sourceUrl": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "checkedAt": "2026-08-26",
+        "note": "민간자격 등록번호 2015-001262이며 자본시장법 등에 근거를 둔 자격입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "100문항·합격/불합격",
+        "passCriteria": "각 과목 정답률 40% 이상이면서 전체 정답률 60% 이상",
+        "note": "공식 과락 문항은 증권분석 및 증권시장 12문항, 금융상품 및 윤리 20문항, 법규 및 규정 8문항입니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=SCS003",
+          "totalDurationMinutes": 120,
+          "summary": "3과목·100문항·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "totalItemCount": 100,
+              "sections": [
+                {
+                  "name": "증권분석 및 증권시장",
+                  "itemCount": 30,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "금융상품 및 윤리",
+                  "itemCount": 50,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "법규 및 규정",
+                  "itemCount": 20,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "과목별 강제 시간 구간 없이 전체 120분으로 운영되므로 시험시간은 통합해 표시합니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kofia-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "펀드투자권유대행인",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융투자협회",
+        "sourceUrl": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "checkedAt": "2026-08-26",
+        "note": "민간자격 등록번호 2015-001261이며 자본시장법 등에 근거를 둔 자격입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "100문항·합격/불합격",
+        "passCriteria": "각 과목 정답률 40% 이상이면서 전체 정답률 60% 이상",
+        "note": "공식 과락 문항은 투자 권유 20문항, 펀드 투자 12문항, 부동산펀드 8문항입니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=SCF003",
+          "totalDurationMinutes": 120,
+          "summary": "3과목·100문항·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "totalItemCount": 100,
+              "sections": [
+                {
+                  "name": "투자 권유",
+                  "itemCount": 50,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "펀드 투자",
+                  "itemCount": 30,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "부동산펀드",
+                  "itemCount": 20,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "과목별 강제 시간 구간 없이 전체 120분으로 운영되므로 시험시간은 통합해 표시합니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kofia-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "금융투자분석사",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융투자협회",
+        "sourceUrl": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "checkedAt": "2026-08-26",
+        "note": "민간자격 등록번호 2013-2419이며 자본시장법 등에 근거를 둔 자격입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "100문항·합격/불합격",
+        "passCriteria": "각 과목 정답률 40% 이상이면서 전체 정답률 70% 이상",
+        "note": "공식 과락 문항은 증권분석기초 10문항, 가치평가론 14문항, 재무분석론 8문항, 증권법규 및 직무윤리 8문항입니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FWR005",
+          "totalDurationMinutes": 120,
+          "summary": "4과목·100문항·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "totalItemCount": 100,
+              "sections": [
+                {
+                  "name": "증권분석기초",
+                  "itemCount": 25,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "가치평가론",
+                  "itemCount": 35,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "재무분석론",
+                  "itemCount": 20,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "증권법규 및 직무윤리",
+                  "itemCount": 20,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "과목별 강제 시간 구간 없이 전체 120분으로 운영되므로 시험시간은 통합해 표시합니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kofia-remaining-details"
+      ]
+    },
+    {
+      "examSlug": "재무위험관리사",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "private-registered",
+        "label": "등록민간자격",
+        "authority": "한국금융투자협회",
+        "sourceUrl": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
+        "checkedAt": "2026-08-26",
+        "note": "민간자격 등록번호 2013-2424이며 자본시장법 등에 근거를 둔 자격입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "100문항·합격/불합격",
+        "passCriteria": "각 과목 정답률 40% 이상이면서 전체 정답률 70% 이상",
+        "note": "공식 과락 문항은 리스크관리기초 12문항, 금융선물 및 옵션 8문항, 장외파생상품 6문항, 리스크관리기법 14문항입니다."
+      },
+      "deliveryModes": [
+        "시험센터 필기·객관식"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FWD003",
+          "totalDurationMinutes": 120,
+          "summary": "4과목·100문항·120분",
+          "stages": [
+            {
+              "id": "written",
+              "name": "필기시험",
+              "durationMinutes": 120,
+              "totalItemCount": 100,
+              "sections": [
+                {
+                  "name": "리스크관리기초",
+                  "itemCount": 30,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "금융선물 및 옵션",
+                  "itemCount": 20,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "장외파생상품",
+                  "itemCount": 15,
+                  "mode": "multiple-choice"
+                },
+                {
+                  "name": "리스크관리기법",
+                  "itemCount": 35,
+                  "mode": "multiple-choice"
+                }
+              ],
+              "note": "과목별 강제 시간 구간 없이 전체 120분으로 운영되므로 시험시간은 통합해 표시합니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "kofia-remaining-details"
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-26T03:48:15.963Z"
+}
