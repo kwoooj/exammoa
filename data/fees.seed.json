@@ -1912,6 +1912,68 @@
       "checkedAt": "2026-08-26",
       "source": { "kind": "manual", "url": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=333&boardSeq=104354&lev=0&m=020501&opType=N&page=1&s=moe&searchType=null&statusYN=W", "recheckAfterDays": 30 },
       "note": "교육부 2026년 한국어능력시험 시행계획의 대한민국 기준입니다."
+    },
+    {
+      "slug": "재경관리사", "items": [{ "label": "응시료", "amount": 70000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.samilexam.com/usr/regulation.do", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "회계관리1급", "items": [{ "label": "응시료", "amount": 50000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.samilexam.com/usr/regulation.do", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "회계관리2급", "items": [{ "label": "응시료", "amount": 30000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.samilexam.com/usr/regulation.do", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "FAT-1급", "items": [{ "label": "응시료", "amount": 39000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://at.kicpa.or.kr/home/at/at04001l.jsp", "recheckAfterDays": 30 },
+      "note": "결제수수료 500원이 별도입니다."
+    },
+    {
+      "slug": "FAT-2급", "items": [{ "label": "응시료", "amount": 39000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://at.kicpa.or.kr/home/at/at04001l.jsp", "recheckAfterDays": 30 },
+      "note": "결제수수료 500원이 별도입니다."
+    },
+    {
+      "slug": "TAT-1급", "items": [{ "label": "응시료", "amount": 39000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://at.kicpa.or.kr/home/at/at04001l.jsp", "recheckAfterDays": 30 },
+      "note": "결제수수료 500원이 별도입니다."
+    },
+    {
+      "slug": "TAT-2급", "items": [{ "label": "응시료", "amount": 39000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://at.kicpa.or.kr/home/at/at04001l.jsp", "recheckAfterDays": 30 },
+      "note": "결제수수료 500원이 별도입니다."
+    },
+    {
+      "slug": "GTQ-1급", "items": [{ "label": "일반접수", "amount": 42000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectGtqinfomg.do?pageKind=announcement_gtq", "recheckAfterDays": 30 },
+      "note": "결제대행수수료 1,000원이 별도입니다."
+    },
+    {
+      "slug": "GTQ-2급", "items": [{ "label": "일반접수", "amount": 32000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectGtqinfomg.do?pageKind=announcement_gtq", "recheckAfterDays": 30 },
+      "note": "결제대행수수료 1,000원이 별도입니다."
+    },
+    {
+      "slug": "GTQi-1급", "items": [{ "label": "일반접수", "amount": 42000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectGtqinfomg.do?pageKind=announcement_gtqi", "recheckAfterDays": 30 },
+      "note": "결제대행수수료 1,000원이 별도입니다."
+    },
+    {
+      "slug": "GTQi-2급", "items": [{ "label": "일반접수", "amount": 32000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectGtqinfomg.do?pageKind=announcement_gtqi", "recheckAfterDays": 30 },
+      "note": "결제대행수수료 1,000원이 별도입니다."
+    },
+    {
+      "slug": "ERP정보관리사",
+      "items": [
+        { "label": "1급 1과목", "amount": 40000 }, { "label": "1급 2과목", "amount": 70000 },
+        { "label": "2급 1과목", "amount": 28000 }, { "label": "2급 2과목", "amount": 50000 }
+      ],
+      "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectErpinfomg.do?pageKind=announcement", "recheckAfterDays": 30 },
+      "note": "동일 등급 2과목 동시 접수 할인 기준이며 결제대행수수료 1,000원이 별도입니다."
     }
   ]
 }
