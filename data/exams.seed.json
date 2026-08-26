@@ -1800,6 +1800,67 @@
       "slug": "TOPIK-II", "name": "TOPIK II", "short": "토픽2", "groupId": "topik-i-ii",
       "jmCd": null, "qualgbCd": null, "series": null, "category": "lang", "tier": "T3", "priority": 1,
       "agency": "국립국제교육원", "collect": "manual"
+    },
+    {
+      "slug": "재경관리사", "name": "재경관리사", "short": "재경관리사", "groupId": "samil-accounting",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 1,
+      "agency": "삼일회계법인", "collect": "manual"
+    },
+    {
+      "slug": "회계관리1급", "name": "회계관리 1급", "short": "회계관리1급", "groupId": "samil-accounting",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 2,
+      "agency": "삼일회계법인", "collect": "manual"
+    },
+    {
+      "slug": "회계관리2급", "name": "회계관리 2급", "short": "회계관리2급", "groupId": "samil-accounting",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 3,
+      "agency": "삼일회계법인", "collect": "manual"
+    },
+    {
+      "slug": "FAT-1급", "name": "FAT 1급", "short": "FAT1급", "groupId": "kicpa-at",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 1,
+      "agency": "한국공인회계사회", "collect": "manual"
+    },
+    {
+      "slug": "FAT-2급", "name": "FAT 2급", "short": "FAT2급", "groupId": "kicpa-at",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 2,
+      "agency": "한국공인회계사회", "collect": "manual"
+    },
+    {
+      "slug": "TAT-1급", "name": "TAT 1급", "short": "TAT1급", "groupId": "kicpa-at",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 1,
+      "agency": "한국공인회계사회", "collect": "manual"
+    },
+    {
+      "slug": "TAT-2급", "name": "TAT 2급", "short": "TAT2급", "groupId": "kicpa-at",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 2,
+      "agency": "한국공인회계사회", "collect": "manual"
+    },
+    {
+      "slug": "GTQ-1급", "name": "GTQ 1급", "short": "GTQ1급", "groupId": "kpc-gtq-gtqi",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 1,
+      "agency": "한국생산성본부", "collect": "manual"
+    },
+    {
+      "slug": "GTQ-2급", "name": "GTQ 2급", "short": "GTQ2급", "groupId": "kpc-gtq-gtqi",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 2,
+      "agency": "한국생산성본부", "collect": "manual"
+    },
+    {
+      "slug": "GTQi-1급", "name": "GTQi 1급", "short": "GTQi1급", "groupId": "kpc-gtq-gtqi",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 1,
+      "agency": "한국생산성본부", "collect": "manual"
+    },
+    {
+      "slug": "GTQi-2급", "name": "GTQi 2급", "short": "GTQi2급", "groupId": "kpc-gtq-gtqi",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 2,
+      "agency": "한국생산성본부", "collect": "manual"
+    },
+    {
+      "slug": "ERP정보관리사", "name": "ERP정보관리사", "short": "ERP", "groupId": "kpc-erp",
+      "jmCd": null, "qualgbCd": null, "series": null, "category": "office", "tier": "T3", "priority": 1,
+      "agency": "한국생산성본부", "collect": "manual",
+      "note": "회계·인사·생산·물류 4개 모듈과 1·2급을 선택해 응시"
     }
   ],
   "excluded": [

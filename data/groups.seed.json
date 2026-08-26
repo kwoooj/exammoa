@@ -1019,6 +1019,34 @@
       "agencyUrl": "https://www.topik.go.kr",
       "applyUrl": "https://register.topik.go.kr",
       "note": "TOPIK I·II는 PBT·IBT 회차 일정을 공유한다. 시험 방식 차이는 각 상세 페이지에 표시한다."
+    },
+    {
+      "id": "samil-accounting", "name": "재경관리사·회계관리", "agency": "삼일회계법인", "cadence": "frequent",
+      "examSlugs": ["재경관리사", "회계관리1급", "회계관리2급"], "collect": "none",
+      "agencyUrl": "https://www.samilexam.com/usr/groupguide.do",
+      "applyUrl": "https://www.samilexam.com",
+      "note": "세 종목은 같은 접수·시험·발표 일정을 공유한다. 공식 일정 링크를 제공하며 자동 수집 어댑터는 후속 작업에서 연결한다."
+    },
+    {
+      "id": "kicpa-at", "name": "AT 자격시험 FAT·TAT", "agency": "한국공인회계사회", "cadence": "frequent",
+      "examSlugs": ["FAT-1급", "FAT-2급", "TAT-1급", "TAT-2급"], "collect": "none",
+      "agencyUrl": "https://at.kicpa.or.kr/index.jsp",
+      "applyUrl": "https://at.kicpa.or.kr/index.jsp",
+      "note": "FAT·TAT 네 등급은 같은 회차 일정을 공유한다. 공식 일정 링크를 제공하며 자동 수집 어댑터는 후속 작업에서 연결한다."
+    },
+    {
+      "id": "kpc-gtq-gtqi", "name": "GTQ·GTQi", "agency": "한국생산성본부", "cadence": "frequent",
+      "examSlugs": ["GTQ-1급", "GTQ-2급", "GTQi-1급", "GTQi-2급"], "collect": "none",
+      "agencyUrl": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectGtqinfomg.do",
+      "applyUrl": "https://license.kpc.or.kr/nasec/rceptexmncnfirm/orgrcept/selectItemfx.do",
+      "note": "GTQ·GTQi 1·2급은 정기시험 일정을 공유한다. 공식 일정 링크를 제공하며 자동 수집 어댑터는 후속 작업에서 연결한다."
+    },
+    {
+      "id": "kpc-erp", "name": "ERP정보관리사", "agency": "한국생산성본부", "cadence": "periodic",
+      "examSlugs": ["ERP정보관리사"], "collect": "none",
+      "agencyUrl": "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectErpinfomg.do",
+      "applyUrl": "https://license.kpc.or.kr/nasec/rceptexmncnfirm/orgrcept/selectItemfx.do",
+      "note": "회계·인사·생산·물류 모듈과 1·2급의 공통 일정을 제공하며 자동 수집 어댑터는 후속 작업에서 연결한다."
     }
   ]
 }
