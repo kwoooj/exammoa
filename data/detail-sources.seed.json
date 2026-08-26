@@ -650,6 +650,93 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
       "examSlugs": ["TOPIK-I", "TOPIK-II"]
+    },
+    {
+      "id": "samil-accounting-details",
+      "name": "삼일회계법인 회계관리 3종 현행 시험 구성",
+      "authority": "삼일회계법인",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.samilexam.com/usr/greeting.do",
+        "https://www.samilexam.com/usr/groupguide.do",
+        "https://www.samilexam.com/usr/regulation.do"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "note": "공식 시험안내·연간일정·관리규정의 문항·시간·합격기준·응시료를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["재경관리사", "회계관리1급", "회계관리2급"]
+    },
+    {
+      "id": "kicpa-at-details",
+      "name": "한국공인회계사회 AT 4종 현행 시험 구성",
+      "authority": "한국공인회계사회",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://at.kicpa.or.kr/home/at/at02001l.jsp",
+        "https://at.kicpa.or.kr/home/at/at04001l.jsp",
+        "https://at.kicpa.or.kr/index.jsp"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "note": "공식 검정기준·응시료·연간일정을 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["FAT-1급", "FAT-2급", "TAT-1급", "TAT-2급"]
+    },
+    {
+      "id": "kpc-gtq-gtqi-details",
+      "name": "KPC GTQ·GTQi 1·2급 현행 시험 구성",
+      "authority": "한국생산성본부",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectGtqinfomg.do?pageKind=announcement_gtq",
+        "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectGtqinfomg.do?pageKind=announcement_gtqi",
+        "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectGtqinfomg.do?pageKind=testSchedule"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "note": "공식 동적 시험안내 탭의 문항·시간·합격기준·응시료와 일정 경로를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["GTQ-1급", "GTQ-2급", "GTQi-1급", "GTQi-2급"]
+    },
+    {
+      "id": "kpc-erp-details",
+      "name": "KPC ERP정보관리사 현행 시험 구성",
+      "authority": "한국생산성본부",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectErpinfomg.do?pageKind=announcement",
+        "https://license.kpc.or.kr/nasec/qlfint/qlfint/selectErpinfomg.do?pageKind=testSchedule"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "note": "공식 동적 시험안내 탭의 모듈·급수·문항·시간·합격기준·응시료를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["ERP정보관리사"]
     }
   ]
 }
