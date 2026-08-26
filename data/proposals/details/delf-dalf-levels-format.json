@@ -1,0 +1,650 @@
+{
+  "version": 1,
+  "sourceId": "delf-dalf-levels-format",
+  "status": "approved",
+  "observedAt": "2026-08-26T00:37:13.323Z",
+  "contentHash": "9b37338acb55b26e0f060847dccaebb919b10d4abfb6a64f458e45793eb9adba",
+  "archiveHash": "67a7193445fb0d87dad76cbb64319e75e33def57f2cc6051167c562a8a6d9bb5",
+  "archivePath": "data/archive/details/2026/delf-dalf-levels-format.20260826T003713.323Z.67a7193445fb.txt",
+  "diagnostics": {
+    "discovered": 6,
+    "included": 6,
+    "missing": [],
+    "unclassified": [],
+    "failures": []
+  },
+  "details": [
+    {
+      "examSlug": "DELF-A1",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "프랑스 교육부 공인 국제 프랑스어 학위",
+        "authority": "프랑스 교육부·France Éducation international",
+        "sourceUrl": "https://www.delf-dalf.co.kr/ko/tout-public/",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR A1 수준을 인증하는 DELF tout public 독립 학위입니다. 이전 급수 취득 없이 응시할 수 있습니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "총점 50점 이상이면서 4개 영역 각각 5점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "각 영역은 25점 만점이며 한 영역이라도 5점 미만이면 불합격입니다. 취득한 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a1",
+          "totalDurationMinutes": {
+            "min": 85,
+            "max": 87
+          },
+          "summary": "단체 시험 80분 + 개인 구술 5~7분 · 구술 준비 10분 별도",
+          "stages": [
+            {
+              "id": "collective",
+              "name": "단체 시험",
+              "durationMinutes": 80,
+              "sections": [
+                {
+                  "name": "청해",
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "작문",
+                  "taskCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "청해",
+                  "durationMinutes": 20,
+                  "sectionNames": [
+                    "청해"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "작문",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "작문"
+                  ]
+                }
+              ],
+              "note": "A1~B2 청해·독해는 공식적으로 두 출제 유형이 병행되어 개별 문항·과제 수가 달라질 수 있으므로 고정 수를 표시하지 않습니다."
+            },
+            {
+              "id": "oral",
+              "name": "개인 구술 시험",
+              "durationMinutes": {
+                "min": 5,
+                "max": 7
+              },
+              "sections": [
+                {
+                  "name": "구술",
+                  "taskCount": 3,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "note": "시험 전 준비시간 10분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "delf-dalf-levels-format"
+      ]
+    },
+    {
+      "examSlug": "DELF-A2",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "프랑스 교육부 공인 국제 프랑스어 학위",
+        "authority": "프랑스 교육부·France Éducation international",
+        "sourceUrl": "https://www.delf-dalf.co.kr/ko/tout-public/",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR A2 수준을 인증하는 DELF tout public 독립 학위입니다. 이전 급수 취득 없이 응시할 수 있습니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "총점 50점 이상이면서 4개 영역 각각 5점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "각 영역은 25점 만점이며 한 영역이라도 5점 미만이면 불합격입니다. 취득한 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a2",
+          "totalDurationMinutes": {
+            "min": 106,
+            "max": 108
+          },
+          "summary": "단체 시험 100분 + 개인 구술 6~8분 · 구술 준비 10분 별도",
+          "stages": [
+            {
+              "id": "collective",
+              "name": "단체 시험",
+              "durationMinutes": 100,
+              "sections": [
+                {
+                  "name": "청해",
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "작문",
+                  "taskCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "청해",
+                  "durationMinutes": 25,
+                  "sectionNames": [
+                    "청해"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "작문",
+                  "durationMinutes": 45,
+                  "sectionNames": [
+                    "작문"
+                  ]
+                }
+              ],
+              "note": "A1~B2 청해·독해는 공식적으로 두 출제 유형이 병행되어 개별 문항·과제 수가 달라질 수 있으므로 고정 수를 표시하지 않습니다."
+            },
+            {
+              "id": "oral",
+              "name": "개인 구술 시험",
+              "durationMinutes": {
+                "min": 6,
+                "max": 8
+              },
+              "sections": [
+                {
+                  "name": "구술",
+                  "taskCount": 3,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "note": "시험 전 준비시간 10분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "delf-dalf-levels-format"
+      ]
+    },
+    {
+      "examSlug": "DELF-B1",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "프랑스 교육부 공인 국제 프랑스어 학위",
+        "authority": "프랑스 교육부·France Éducation international",
+        "sourceUrl": "https://www.delf-dalf.co.kr/ko/tout-public/",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR B1 수준을 인증하는 DELF tout public 독립 학위입니다. 이전 급수 취득 없이 응시할 수 있습니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "총점 50점 이상이면서 4개 영역 각각 5점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "각 영역은 25점 만점이며 한 영역이라도 5점 미만이면 불합격입니다. 취득한 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b1",
+          "totalDurationMinutes": 130,
+          "summary": "단체 시험 115분 + 개인 구술 15분 · 구술 준비 10분 별도",
+          "stages": [
+            {
+              "id": "collective",
+              "name": "단체 시험",
+              "durationMinutes": 115,
+              "sections": [
+                {
+                  "name": "청해",
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "작문",
+                  "taskCount": 1,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "청해",
+                  "durationMinutes": 25,
+                  "sectionNames": [
+                    "청해"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 45,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "작문",
+                  "durationMinutes": 45,
+                  "sectionNames": [
+                    "작문"
+                  ]
+                }
+              ],
+              "note": "A1~B2 청해·독해는 공식적으로 두 출제 유형이 병행되어 개별 문항·과제 수가 달라질 수 있으므로 고정 수를 표시하지 않습니다."
+            },
+            {
+              "id": "oral",
+              "name": "개인 구술 시험",
+              "durationMinutes": 15,
+              "sections": [
+                {
+                  "name": "구술",
+                  "taskCount": 3,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "note": "시험 전 준비시간 10분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "delf-dalf-levels-format"
+      ]
+    },
+    {
+      "examSlug": "DELF-B2",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "프랑스 교육부 공인 국제 프랑스어 학위",
+        "authority": "프랑스 교육부·France Éducation international",
+        "sourceUrl": "https://www.delf-dalf.co.kr/ko/tout-public/",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR B2 수준을 인증하는 DELF tout public 독립 학위입니다. 이전 급수 취득 없이 응시할 수 있습니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "총점 50점 이상이면서 4개 영역 각각 5점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "각 영역은 25점 만점이며 한 영역이라도 5점 미만이면 불합격입니다. 취득한 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b2",
+          "totalDurationMinutes": 170,
+          "summary": "단체 시험 150분 + 개인 구술 20분 · 구술 준비 30분 별도",
+          "stages": [
+            {
+              "id": "collective",
+              "name": "단체 시험",
+              "durationMinutes": 150,
+              "sections": [
+                {
+                  "name": "청해",
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "독해",
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "작문",
+                  "taskCount": 1,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "청해",
+                  "durationMinutes": 30,
+                  "sectionNames": [
+                    "청해"
+                  ],
+                  "note": "공식 안내의 약 소요시간"
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 60,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "작문",
+                  "durationMinutes": 60,
+                  "sectionNames": [
+                    "작문"
+                  ]
+                }
+              ],
+              "note": "A1~B2 청해·독해는 공식적으로 두 출제 유형이 병행되어 개별 문항·과제 수가 달라질 수 있으므로 고정 수를 표시하지 않습니다."
+            },
+            {
+              "id": "oral",
+              "name": "개인 구술 시험",
+              "durationMinutes": 20,
+              "sections": [
+                {
+                  "name": "구술",
+                  "taskCount": 2,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "note": "시험 전 준비시간 30분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "delf-dalf-levels-format"
+      ]
+    },
+    {
+      "examSlug": "DALF-C1",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "프랑스 교육부 공인 국제 프랑스어 학위",
+        "authority": "프랑스 교육부·France Éducation international",
+        "sourceUrl": "https://www.delf-dalf.co.kr/ko/tout-public/",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR C1 수준의 고급 프랑스어 능력을 인증하는 DALF 독립 학위입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "총점 50점 이상이면서 4개 영역 각각 5점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "각 영역은 25점 만점이며 한 영역이라도 5점 미만이면 불합격입니다. 취득한 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.france-education-international.fr/article/dalf-c1?langue=en",
+          "totalDurationMinutes": 270,
+          "summary": "단체 시험 240분 + 개인 구술 30분 · 구술 준비 60분 별도",
+          "stages": [
+            {
+              "id": "collective",
+              "name": "단체 시험",
+              "durationMinutes": 240,
+              "sections": [
+                {
+                  "name": "청해",
+                  "taskCount": 2,
+                  "mode": "listening",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "독해",
+                  "taskCount": 1,
+                  "mode": "mixed",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                },
+                {
+                  "name": "작문",
+                  "taskCount": 2,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "timedBlocks": [
+                {
+                  "name": "청해",
+                  "durationMinutes": 40,
+                  "sectionNames": [
+                    "청해"
+                  ]
+                },
+                {
+                  "name": "독해",
+                  "durationMinutes": 50,
+                  "sectionNames": [
+                    "독해"
+                  ]
+                },
+                {
+                  "name": "작문",
+                  "durationMinutes": 150,
+                  "sectionNames": [
+                    "작문"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "oral",
+              "name": "개인 구술 시험",
+              "durationMinutes": 30,
+              "sections": [
+                {
+                  "name": "구술",
+                  "taskCount": 2,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 25
+                  }
+                }
+              ],
+              "note": "시험 전 준비시간 60분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "delf-dalf-levels-format"
+      ]
+    },
+    {
+      "examSlug": "DALF-C2",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "international-assessment",
+        "label": "프랑스 교육부 공인 국제 프랑스어 학위",
+        "authority": "프랑스 교육부·France Éducation international",
+        "sourceUrl": "https://www.delf-dalf.co.kr/ko/tout-public/",
+        "checkedAt": "2026-08-26",
+        "note": "CEFR C2 수준의 최고 단계 프랑스어 능력을 인증하는 DALF 독립 학위입니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "0~100점·합격/불합격",
+        "passCriteria": "총점 50점 이상이면서 2개 통합 영역 각각 10점 이상",
+        "validityLabel": "유효기간 없음",
+        "note": "통합 필기와 통합 구술은 각각 50점 만점이며 한 영역이라도 10점 미만이면 불합격입니다. 취득한 학위는 평생 유효합니다."
+      },
+      "deliveryModes": [
+        "시험센터 지필",
+        "시험관 대면 구술"
+      ],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.france-education-international.fr/article/dalf-c2?langue=en",
+          "totalDurationMinutes": 240,
+          "summary": "통합 필기 210분 + 통합 구술 30분 · 구술 준비 60분 별도",
+          "stages": [
+            {
+              "id": "written",
+              "name": "통합 필기 시험",
+              "durationMinutes": 210,
+              "sections": [
+                {
+                  "name": "독해·작문",
+                  "taskCount": 1,
+                  "mode": "written",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 50
+                  }
+                }
+              ]
+            },
+            {
+              "id": "oral",
+              "name": "통합 구술 시험",
+              "durationMinutes": 30,
+              "sections": [
+                {
+                  "name": "청해·구술",
+                  "taskCount": 3,
+                  "mode": "interview",
+                  "scoreRange": {
+                    "min": 0,
+                    "max": 50
+                  }
+                }
+              ],
+              "note": "약 14분 분량의 음원을 두 번 들은 뒤 준비시간 60분이 별도로 주어지며 순수 시험시간 합계에는 포함하지 않았습니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": [
+        "delf-dalf-levels-format"
+      ]
+    }
+  ],
+  "approvedAt": "2026-08-26T00:37:25.391Z"
+}

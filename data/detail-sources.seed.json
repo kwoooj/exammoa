@@ -449,6 +449,35 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
       "examSlugs": ["HSK-1", "HSK-2", "HSK-3", "HSK-4", "HSK-5", "HSK-6", "HSK-7-9"]
+    },
+    {
+      "id": "delf-dalf-levels-format",
+      "name": "DELF A1~B2·DALF C1~C2 현행 시험 구성",
+      "authority": "France Éducation international·주한 프랑스대사관 문화과",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a1",
+        "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a2",
+        "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b1",
+        "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b2",
+        "https://www.france-education-international.fr/article/dalf-c1?langue=en",
+        "https://www.france-education-international.fr/article/dalf-c2?langue=en",
+        "https://www.delf-dalf.co.kr/ko/tout-public/",
+        "https://www.delf-dalf.co.kr/ko/calendriers/",
+        "https://www.delf-dalf.co.kr/ko/2026%EB%85%84-delf-dalf-%EC%8B%9C%ED%97%98%EC%9D%BC%EC%A0%95-%EB%B0%8F-%EC%8B%9C%ED%97%98%EC%9C%A0%ED%98%95-%EA%B4%80%EB%A0%A8-%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "url": "https://www.france-education-international.fr/robots.txt",
+        "note": "공식 사이트가 자동 요청을 차단하므로 FEI 급수별 안내와 한국 공식 총괄센터 안내를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["DELF-A1", "DELF-A2", "DELF-B1", "DELF-B2", "DALF-C1", "DALF-C2"]
     }
   ]
 }
