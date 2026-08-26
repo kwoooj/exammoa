@@ -507,6 +507,30 @@
       },
       "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
       "examSlugs": ["DELE-A1", "DELE-A2", "DELE-B1", "DELE-B2", "DELE-C1", "DELE-C2"]
+    },
+    {
+      "id": "finance-priority-details",
+      "name": "금융·은행 우선 3종 현행 시험 구성",
+      "authority": "한국금융연수원·한국금융투자협회",
+      "method": "manual-upload",
+      "collectionStatus": "active",
+      "adapter": "normalized-detail-json",
+      "sourceUrls": [
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=01&pageName=qualInfo",
+        "https://www.kbitube.or.kr/platformWeb/Qual.do?cmd=openPage&p_iQlfn=04&pageName=qualInfo",
+        "https://license.kofia.or.kr/examInfo/examInfo.do?selLicenseCd=FWM006",
+        "https://license.kofia.or.kr/resources/etc/PLIO.pdf"
+      ],
+      "cadenceDays": 30,
+      "reviewMode": "draft-pr",
+      "robots": {
+        "status": "not-applicable",
+        "checkedAt": "2026-08-26",
+        "url": "https://www.kbitube.or.kr/robots.txt",
+        "note": "두 공식 기관의 시험개요·자격 표시의무 페이지를 수기 대조해 승인형 업로드"
+      },
+      "covers": ["classification", "result", "deliveryModes", "formats", "fees"],
+      "examSlugs": ["신용분석사", "자산관리사-FP", "투자자산운용사"]
     }
   ]
 }

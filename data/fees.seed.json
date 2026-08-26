@@ -1073,7 +1073,7 @@
           "amount": 66000
         }
       ],
-      "checkedAt": "2026-08-20",
+      "checkedAt": "2026-08-26",
       "note": "부분응시: 1부 28,000원, 2부 39,000원",
       "source": {
         "kind": "page",
@@ -1093,7 +1093,7 @@
           "amount": 55000
         }
       ],
-      "checkedAt": "2026-08-20",
+      "checkedAt": "2026-08-26",
       "note": "부분응시: 1부 또는 2부 각 28,000원",
       "source": {
         "kind": "page",
@@ -1146,7 +1146,7 @@
           "amount": 50000
         }
       ],
-      "checkedAt": "2026-08-20",
+      "checkedAt": "2026-08-26",
       "source": {
         "kind": "manual",
         "url": "https://license.kofia.or.kr/resources/etc/PLIO.pdf",
