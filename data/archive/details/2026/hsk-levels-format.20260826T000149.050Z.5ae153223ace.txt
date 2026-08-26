@@ -1,0 +1,8 @@
+HSK 1~6·7~9 공식 근거 수기 대조 기록 (2026-08-26)
+https://www.chinesetest.cn/HSK/1 ~ /6: 급수별 문항 수, 영역, 순수 시험시간, 점수, 합격선, 2년 유효기간
+https://www.chinesetest.cn/HSK/7-9: 98문항, 5개 영역, 약 210분, 영역별 0~100점, IRT 등급 판정, IBT
+https://www.chinesetest.cn/notice: 2026-09-20 HSK 3.0은 별도 글로벌 시범시험
+https://www.hsk-korea.co.kr/about/about_hsk.aspx: 국내 지필 시험시간·응시료
+https://www.hsk-korea.co.kr/about/about_hsk_ibt.aspx: 국내 IBT 시험시간·응시료
+https://www.hsk-korea.co.kr/about/test_hsk_ibt_7.aspx: 7~9급 국내 시험 구성·방식
+해커스 등 시험 준비 서비스는 검토했으나 공식 자료가 모든 구성 필드를 제공하므로 사용하지 않음.

@@ -1775,32 +1775,39 @@
       "note": "2026년 국내 공식 실시기관 기준. 추가접수는 정규 수험료의 10%가 가산됩니다."
     },
     {
-      "slug": "HSK-1", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/1?type=1", "recheckAfterDays": 30 }
+      "slug": "HSK-1", "items": [{ "label": "지필", "amount": 30000 }, { "label": "IBT", "amount": 35000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.hsk-korea.co.kr/about/about_hsk_ibt.aspx", "recheckAfterDays": 30 },
+      "note": "한국 공식 고시처 기준. 시험 방식에 따라 지필 또는 IBT를 선택합니다."
     },
     {
-      "slug": "HSK-2", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/2?type=1", "recheckAfterDays": 30 }
+      "slug": "HSK-2", "items": [{ "label": "지필", "amount": 40000 }, { "label": "IBT", "amount": 50000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.hsk-korea.co.kr/about/about_hsk_ibt.aspx", "recheckAfterDays": 30 },
+      "note": "한국 공식 고시처 기준. 시험 방식에 따라 지필 또는 IBT를 선택합니다."
     },
     {
-      "slug": "HSK-3", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/3?type=1", "recheckAfterDays": 30 }
+      "slug": "HSK-3", "items": [{ "label": "지필", "amount": 60000 }, { "label": "IBT", "amount": 70000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.hsk-korea.co.kr/about/about_hsk_ibt.aspx", "recheckAfterDays": 30 },
+      "note": "한국 공식 고시처 기준. 시험 방식에 따라 지필 또는 IBT를 선택합니다."
     },
     {
-      "slug": "HSK-4", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/4?type=1", "recheckAfterDays": 30 }
+      "slug": "HSK-4", "items": [{ "label": "지필", "amount": 80000 }, { "label": "IBT", "amount": 90000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.hsk-korea.co.kr/about/about_hsk_ibt.aspx", "recheckAfterDays": 30 },
+      "note": "한국 공식 고시처 기준. 시험 방식에 따라 지필 또는 IBT를 선택합니다."
     },
     {
-      "slug": "HSK-5", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/5?type=1", "recheckAfterDays": 30 }
+      "slug": "HSK-5", "items": [{ "label": "지필", "amount": 100000 }, { "label": "IBT", "amount": 110000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.hsk-korea.co.kr/about/about_hsk_ibt.aspx", "recheckAfterDays": 30 },
+      "note": "한국 공식 고시처 기준. 시험 방식에 따라 지필 또는 IBT를 선택합니다."
     },
     {
-      "slug": "HSK-6", "items": [{ "label": "응시료", "amountLabel": "시험센터·방식별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/6?type=1", "recheckAfterDays": 30 }
+      "slug": "HSK-6", "items": [{ "label": "지필", "amount": 120000 }, { "label": "IBT", "amount": 130000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.hsk-korea.co.kr/about/about_hsk_ibt.aspx", "recheckAfterDays": 30 },
+      "note": "한국 공식 고시처 기준. 시험 방식에 따라 지필 또는 IBT를 선택합니다."
     },
     {
-      "slug": "HSK-7-9", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
-      "source": { "kind": "manual", "url": "https://www.chinesetest.cn/HSK/7-9", "recheckAfterDays": 30 }
+      "slug": "HSK-7-9", "items": [{ "label": "응시료", "amountLabel": "공식 접수 화면에서 확인" }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.hsk-korea.co.kr/about/test_hsk_ibt_7.aspx", "recheckAfterDays": 30 },
+      "note": "한국 공식 공개 안내에 확정 금액이 없어 접수 회차·방식 선택 후 확인합니다."
     },
     {
       "slug": "DELF-A1", "items": [{ "label": "응시료", "amountLabel": "시험센터별 확인" }], "checkedAt": "2026-08-20",
