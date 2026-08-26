@@ -10960,6 +10960,349 @@
       "sourceRefs": [
         "kofia-remaining-details"
       ]
+    },
+    {
+      "examSlug": "공인중개사",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "national-professional",
+        "label": "국가전문자격",
+        "authority": "한국산업인력공단(Q-Net)",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=36&gSite=Q&id=crf00503s02&jmCd=9630&jmInfoDivCcd=B0",
+        "checkedAt": "2026-08-26",
+        "note": "국토교통부 소관 자격시험이며 한국산업인력공단이 시행합니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "1·2차 합격제",
+        "passCriteria": "1차와 2차 각각 매 과목 40점 이상이면서 전 과목 평균 60점 이상",
+        "note": "1차 합격자는 다음 회 시험에 한해 1차 시험을 면제받습니다."
+      },
+      "deliveryModes": ["지필 5지선다 객관식"],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=36&gSite=Q&id=crf00503s02&jmCd=9630&jmInfoDivCcd=B0",
+          "totalDurationMinutes": 250,
+          "summary": "1차 2과목·80문항·100분 + 2차 3과목·120문항·150분",
+          "stages": [
+            {
+              "id": "first", "name": "제1차 시험", "durationMinutes": 100, "totalItemCount": 80, "totalScore": 200,
+              "sections": [
+                { "name": "부동산학개론", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "민법 및 민사특별법 중 부동산 중개 관련 규정", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } }
+              ]
+            },
+            {
+              "id": "second", "name": "제2차 시험", "durationMinutes": 150, "totalItemCount": 120, "totalScore": 300,
+              "sections": [
+                { "name": "공인중개사법령 및 중개실무", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "부동산공법 중 부동산 중개 관련 규정", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "부동산공시법 및 부동산세법", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } }
+              ],
+              "timedBlocks": [
+                { "name": "제2차 1교시", "durationMinutes": 100, "sectionNames": ["공인중개사법령 및 중개실무", "부동산공법 중 부동산 중개 관련 규정"] },
+                { "name": "제2차 2교시", "durationMinutes": 50, "sectionNames": ["부동산공시법 및 부동산세법"] }
+              ]
+            }
+          ],
+          "note": "실제 입실·시작 시각은 해당 회차 시행계획과 수험표를 확인해야 합니다."
+        }
+      ],
+      "sourceRefs": ["qnet-priority-professional-details"]
+    },
+    {
+      "examSlug": "사회복지사1급",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "national-professional",
+        "label": "국가전문자격",
+        "authority": "한국산업인력공단(Q-Net)",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmCd=9738&jmInfoDivCcd=B0",
+        "checkedAt": "2026-08-26",
+        "note": "보건복지부 소관 자격시험이며 한국산업인력공단이 시험을 시행합니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기 합격예정 후 자격심사",
+        "passCriteria": "매 과목 40% 이상이면서 전 과목 총점의 60% 이상을 득점하고 응시자격 서류심사를 통과",
+        "note": "필기 합격예정자는 한국사회복지사협회의 응시자격 서류심사를 거쳐 최종 합격합니다."
+      },
+      "deliveryModes": ["지필 5지선다 객관식"],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmCd=9738&jmInfoDivCcd=B0",
+          "totalDurationMinutes": 200,
+          "summary": "3과목·8영역·200문항·200분",
+          "stages": [
+            {
+              "id": "written", "name": "필기시험", "durationMinutes": 200, "totalItemCount": 200, "totalScore": 200,
+              "sections": [
+                { "name": "인간행동과 사회환경", "itemCount": 25, "mode": "multiple-choice" },
+                { "name": "사회복지조사론", "itemCount": 25, "mode": "multiple-choice" },
+                { "name": "사회복지실천론", "itemCount": 25, "mode": "multiple-choice" },
+                { "name": "사회복지실천기술론", "itemCount": 25, "mode": "multiple-choice" },
+                { "name": "지역사회복지론", "itemCount": 25, "mode": "multiple-choice" },
+                { "name": "사회복지정책론", "itemCount": 25, "mode": "multiple-choice" },
+                { "name": "사회복지행정론", "itemCount": 25, "mode": "multiple-choice" },
+                { "name": "사회복지법제론", "itemCount": 25, "mode": "multiple-choice" }
+              ],
+              "timedBlocks": [
+                { "name": "1교시 사회복지기초", "durationMinutes": 50, "sectionNames": ["인간행동과 사회환경", "사회복지조사론"] },
+                { "name": "2교시 사회복지실천", "durationMinutes": 75, "sectionNames": ["사회복지실천론", "사회복지실천기술론", "지역사회복지론"] },
+                { "name": "3교시 사회복지정책과 제도", "durationMinutes": 75, "sectionNames": ["사회복지정책론", "사회복지행정론", "사회복지법제론"] }
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceRefs": ["qnet-priority-professional-details"]
+    },
+    {
+      "examSlug": "주택관리사보",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "national-professional",
+        "label": "국가전문자격",
+        "authority": "한국산업인력공단(Q-Net)",
+        "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmCd=9744&jmInfoDivCcd=B0",
+        "checkedAt": "2026-08-26",
+        "note": "국토교통부 소관 자격시험이며 한국산업인력공단이 시행합니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "1차 절대평가·2차 선발제",
+        "passCriteria": "1차는 매 과목 40점 이상·평균 60점 이상. 2차는 매 과목 40점 이상·평균 60점 이상인 사람 중 선발예정인원 범위에서 고득점 순으로 결정",
+        "note": "2차 동점으로 선발예정인원을 초과하면 동점자를 모두 합격자로 결정합니다."
+      },
+      "deliveryModes": ["1차 지필 객관식", "2차 객관식·주관식 혼합"],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmCd=9744&jmInfoDivCcd=B0",
+          "totalDurationMinutes": 250,
+          "summary": "1차 3과목·120문항·150분 + 2차 2과목·80문항·100분",
+          "stages": [
+            {
+              "id": "first", "name": "제1차 시험", "durationMinutes": 150, "totalItemCount": 120, "totalScore": 300,
+              "sections": [
+                { "name": "회계원리", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "공동주택시설개론", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "민법", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } }
+              ],
+              "timedBlocks": [
+                { "name": "1교시", "durationMinutes": 100, "sectionNames": ["회계원리", "공동주택시설개론"] },
+                { "name": "2교시", "durationMinutes": 50, "sectionNames": ["민법"] }
+              ]
+            },
+            {
+              "id": "second", "name": "제2차 시험", "durationMinutes": 100, "totalItemCount": 80, "totalScore": 200,
+              "sections": [
+                { "name": "주택관리 관계법규", "itemCount": 40, "mode": "mixed", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "공동주택관리실무", "itemCount": 40, "mode": "mixed", "scoreRange": { "min": 0, "max": 100 } }
+              ],
+              "note": "제2차는 객관식과 주관식 단답형 또는 기입형을 함께 출제합니다."
+            }
+          ]
+        }
+      ],
+      "sourceRefs": ["qnet-priority-professional-details"]
+    },
+    {
+      "examSlug": "물류관리사",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "national-professional",
+        "label": "국가전문자격",
+        "authority": "한국산업인력공단(Q-Net)",
+        "sourceUrl": "https://www.q-net.or.kr/site/CPL",
+        "checkedAt": "2026-08-26",
+        "note": "국토교통부 소관 자격시험이며 한국산업인력공단이 시행합니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "필기 합격제",
+        "passCriteria": "매 과목 40점 이상이면서 전 과목 평균 60점 이상"
+      },
+      "deliveryModes": ["지필 5지선다 객관식"],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.q-net.or.kr/site/CPL",
+          "totalDurationMinutes": 200,
+          "summary": "5과목·200문항·200분",
+          "stages": [
+            {
+              "id": "written", "name": "필기시험", "durationMinutes": 200, "totalItemCount": 200, "totalScore": 500,
+              "sections": [
+                { "name": "물류관리론", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "화물운송론", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "국제물류론", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "보관하역론", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "물류관련법규", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } }
+              ],
+              "timedBlocks": [
+                { "name": "1교시", "durationMinutes": 120, "sectionNames": ["물류관리론", "화물운송론", "국제물류론"] },
+                { "name": "2교시", "durationMinutes": 80, "sectionNames": ["보관하역론", "물류관련법규"] }
+              ]
+            }
+          ]
+        }
+      ],
+      "sourceRefs": ["qnet-priority-professional-details"]
+    },
+    {
+      "examSlug": "경비지도사",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "national-professional",
+        "label": "국가전문자격",
+        "authority": "한국산업인력공단(Q-Net)",
+        "sourceUrl": "https://www.q-net.or.kr/site/security",
+        "checkedAt": "2026-08-26",
+        "note": "경찰청 소관 자격시험이며 한국산업인력공단이 시행합니다. 일반·기계경비지도사로 구분됩니다."
+      },
+      "result": {
+        "type": "pass-fail",
+        "label": "1차 절대평가·2차 선발제",
+        "passCriteria": "1차는 매 과목 40점 이상·평균 60점 이상. 2차는 매 과목 40점 이상·평균 60점 이상인 사람 중 선발예정인원 범위에서 고득점 순으로 결정"
+      },
+      "deliveryModes": ["지필 4지선다 객관식"],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.q-net.or.kr/site/security",
+          "totalDurationMinutes": 160,
+          "summary": "1차 2과목·80문항·80분 + 2차 필수·선택 2과목·80문항·80분",
+          "stages": [
+            {
+              "id": "first", "name": "제1차 시험", "durationMinutes": 80, "totalItemCount": 80, "totalScore": 200,
+              "sections": [
+                { "name": "법학개론", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "민간경비론", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } }
+              ]
+            },
+            {
+              "id": "second", "name": "제2차 시험", "durationMinutes": 80, "totalItemCount": 80, "totalScore": 200,
+              "sections": [
+                { "name": "경비업법(청원경찰법 포함)", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 } },
+                { "name": "종목별 선택 1과목", "itemCount": 40, "mode": "multiple-choice", "scoreRange": { "min": 0, "max": 100 }, "note": "일반: 소방학·범죄학·경호학 중 1과목 / 기계: 기계경비개론·기계경비기획 및 설계 중 1과목" }
+              ]
+            }
+          ],
+          "note": "일반경비지도사와 기계경비지도사는 공통 필수과목을 치르고 제2차 선택과목이 다릅니다."
+        }
+      ],
+      "sourceRefs": ["qnet-priority-professional-details"]
+    },
+    {
+      "examSlug": "TOPIK-I",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "institutional-assessment",
+        "label": "국가 시행 한국어능력 평가",
+        "authority": "교육부·국립국제교육원",
+        "sourceUrl": "https://www.niied.go.kr/web/niied/contents/niied_topik",
+        "checkedAt": "2026-08-26",
+        "note": "한국어를 모국어로 하지 않는 재외동포·외국인의 초급 한국어 능력을 평가합니다."
+      },
+      "result": {
+        "type": "level-awarded",
+        "label": "PBT 1~2급·200점 / IBT 1~2급·400점",
+        "passCriteria": "PBT는 80~139점 1급, 140~200점 2급. IBT는 121~235점 1급, 236~400점 2급",
+        "validityLabel": "성적 발표일로부터 2년"
+      },
+      "deliveryModes": ["PBT 지필", "IBT 컴퓨터 기반"],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.niied.go.kr/convert/preview/1764682307493/index.html",
+          "summary": "PBT 70문항·100분 / IBT 52문항·70분",
+          "stages": [
+            {
+              "id": "pbt", "name": "TOPIK I PBT", "durationMinutes": 100, "totalItemCount": 70, "totalScore": 200,
+              "sections": [
+                { "name": "듣기", "itemCount": 30, "mode": "listening" },
+                { "name": "읽기", "itemCount": 40, "mode": "multiple-choice" }
+              ],
+              "timedBlocks": [
+                { "name": "듣기", "durationMinutes": 40, "sectionNames": ["듣기"] },
+                { "name": "읽기", "durationMinutes": 60, "sectionNames": ["읽기"] }
+              ]
+            },
+            {
+              "id": "ibt", "name": "TOPIK I IBT", "durationMinutes": 70, "totalItemCount": 52, "totalScore": 400,
+              "sections": [
+                { "name": "듣기", "itemCount": 26, "mode": "listening" },
+                { "name": "읽기", "itemCount": 26, "mode": "multiple-choice" }
+              ],
+              "timedBlocks": [
+                { "name": "듣기", "durationMinutes": 30, "sectionNames": ["듣기"] },
+                { "name": "읽기", "durationMinutes": 40, "sectionNames": ["읽기"] }
+              ]
+            }
+          ],
+          "note": "PBT와 IBT는 문항 수·시험시간·총점과 등급 점수 기준이 서로 다릅니다."
+        }
+      ],
+      "sourceRefs": ["topik-i-ii-details"]
+    },
+    {
+      "examSlug": "TOPIK-II",
+      "catalogStatus": "published",
+      "classification": {
+        "kind": "institutional-assessment",
+        "label": "국가 시행 한국어능력 평가",
+        "authority": "교육부·국립국제교육원",
+        "sourceUrl": "https://www.niied.go.kr/web/niied/contents/niied_topik",
+        "checkedAt": "2026-08-26",
+        "note": "한국어를 모국어로 하지 않는 재외동포·외국인의 중·고급 한국어 능력을 평가합니다."
+      },
+      "result": {
+        "type": "level-awarded",
+        "label": "PBT 3~6급·300점 / IBT 3~6급·600점",
+        "passCriteria": "PBT는 120~149점 3급, 150~189점 4급, 190~229점 5급, 230~300점 6급. IBT는 191~290점 3급, 291~360점 4급, 361~430점 5급, 431~600점 6급",
+        "validityLabel": "성적 발표일로부터 2년"
+      },
+      "deliveryModes": ["PBT 지필", "IBT 컴퓨터 기반"],
+      "formats": [
+        {
+          "checkedAt": "2026-08-26",
+          "sourceUrl": "https://www.niied.go.kr/convert/preview/1764682307493/index.html",
+          "summary": "PBT 104문항·180분 / IBT 63문항·125분",
+          "stages": [
+            {
+              "id": "pbt", "name": "TOPIK II PBT", "durationMinutes": 180, "totalItemCount": 104, "totalScore": 300,
+              "sections": [
+                { "name": "듣기", "itemCount": 50, "mode": "listening" },
+                { "name": "쓰기", "itemCount": 4, "mode": "written" },
+                { "name": "읽기", "itemCount": 50, "mode": "multiple-choice" }
+              ],
+              "timedBlocks": [
+                { "name": "듣기", "durationMinutes": 60, "sectionNames": ["듣기"] },
+                { "name": "쓰기", "durationMinutes": 50, "sectionNames": ["쓰기"] },
+                { "name": "읽기", "durationMinutes": 70, "sectionNames": ["읽기"] }
+              ]
+            },
+            {
+              "id": "ibt", "name": "TOPIK II IBT", "durationMinutes": 125, "totalItemCount": 63, "totalScore": 600,
+              "sections": [
+                { "name": "듣기", "itemCount": 30, "mode": "listening" },
+                { "name": "쓰기", "itemCount": 3, "mode": "written" },
+                { "name": "읽기", "itemCount": 30, "mode": "multiple-choice" }
+              ],
+              "timedBlocks": [
+                { "name": "듣기", "durationMinutes": 35, "sectionNames": ["듣기"] },
+                { "name": "쓰기", "durationMinutes": 50, "sectionNames": ["쓰기"] },
+                { "name": "읽기", "durationMinutes": 40, "sectionNames": ["읽기"] }
+              ]
+            }
+          ],
+          "note": "PBT와 IBT는 문항 수·시험시간·총점과 등급 점수 기준이 서로 다릅니다."
+        }
+      ],
+      "sourceRefs": ["topik-i-ii-details"]
     }
   ]
 }

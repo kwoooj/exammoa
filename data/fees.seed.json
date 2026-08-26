@@ -1868,6 +1868,50 @@
       "slug": "DELE-C2", "items": [{ "label": "응시료", "amount": 348000 }], "checkedAt": "2026-08-26",
       "source": { "kind": "manual", "url": "https://seul.cervantes.es/ko/spanish_exams/dele_diplomas/dele_fees_dates_discounts.htm", "recheckAfterDays": 30 },
       "note": "주한 세르반테스 문화원 2026년 국내 일반 DELE 응시료 기준입니다."
+    },
+    {
+      "slug": "공인중개사",
+      "items": [
+        { "label": "1차", "amount": 13700 },
+        { "label": "2차", "amount": 14300 },
+        { "label": "1·2차 동시 응시", "amount": 28000 }
+      ],
+      "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.q-net.or.kr/crf005.do?gId=36&gSite=Q&id=crf00503s02&jmCd=9630&jmInfoDivCcd=B0", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "사회복지사1급", "items": [{ "label": "필기", "amount": 25000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmCd=9738&jmInfoDivCcd=B0", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "주택관리사보",
+      "items": [{ "label": "1차", "amount": 21000 }, { "label": "2차", "amount": 14000 }],
+      "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.q-net.or.kr/crf005.do?gId=&gSite=Q&id=crf00503s02&jmCd=9744&jmInfoDivCcd=B0", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "물류관리사", "items": [{ "label": "필기", "amount": 20000 }], "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.q-net.or.kr/site/CPL", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "경비지도사",
+      "items": [{ "label": "1·2차 동시 응시", "amount": 28000 }, { "label": "1차 면제자", "amount": 18000 }],
+      "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.q-net.or.kr/site/security", "recheckAfterDays": 30 }
+    },
+    {
+      "slug": "TOPIK-I",
+      "items": [{ "label": "PBT", "amount": 40000 }, { "label": "IBT", "amount": 70000 }],
+      "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=333&boardSeq=104354&lev=0&m=020501&opType=N&page=1&s=moe&searchType=null&statusYN=W", "recheckAfterDays": 30 },
+      "note": "교육부 2026년 한국어능력시험 시행계획의 대한민국 기준입니다."
+    },
+    {
+      "slug": "TOPIK-II",
+      "items": [{ "label": "PBT", "amount": 55000 }, { "label": "IBT", "amount": 95000 }],
+      "checkedAt": "2026-08-26",
+      "source": { "kind": "manual", "url": "https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=333&boardSeq=104354&lev=0&m=020501&opType=N&page=1&s=moe&searchType=null&statusYN=W", "recheckAfterDays": 30 },
+      "note": "교육부 2026년 한국어능력시험 시행계획의 대한민국 기준입니다."
     }
   ]
 }
