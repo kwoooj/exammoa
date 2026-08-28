@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-27T03:04:49.359Z",
+  "fetchedAt": "2026-08-28T06:04:26.736Z",
   "year": 2026,
   "examCount": 150,
   "qnetExamCount": 47,
@@ -7,7 +7,7 @@
   "sessionCount": 351,
   "eventCount": 1190,
   "tbdCount": 36,
-  "staleCount": 60,
+  "staleCount": 66,
   "contradictionCount": 0,
   "groupSplitCount": 0,
   "groupSplits": [],
@@ -16,44 +16,39 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-08-27T03:04:49.359Z",
+      "fetchedAt": "2026-08-28T06:04:26.736Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-27T03:04:49.359Z",
+      "fetchedAt": "2026-08-28T06:04:26.736Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-27T03:04:49.359Z",
+      "fetchedAt": "2026-08-28T06:04:26.736Z",
       "sessionCount": 10
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-27T03:04:49.359Z",
+      "fetchedAt": "2026-08-28T06:04:26.736Z",
       "sessionCount": 43
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-27T03:04:49.359Z",
+      "fetchedAt": "2026-08-28T06:04:26.736Z",
       "sessionCount": 6
     },
     "kait-linux": {
-      "health": "ok",
+      "health": "stale",
       "method": "crawl",
       "fetchedAt": "2026-08-27T03:04:49.359Z",
       "sessionCount": 6,
-      "coverage": {
-        "discovered": 2,
-        "included": 2,
-        "unclassified": [],
-        "missing": []
-      }
+      "reason": "타임아웃"
     },
     "kacpta-tax": {
       "health": "stale",
@@ -65,7 +60,7 @@
     "kbi-finance": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-27T03:04:49.359Z",
+      "fetchedAt": "2026-08-28T06:04:26.736Z",
       "sessionCount": 37,
       "coverage": {
         "discovered": 18,
@@ -77,7 +72,7 @@
     "kofia-investment": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-27T03:04:49.359Z",
+      "fetchedAt": "2026-08-28T06:04:26.736Z",
       "sessionCount": 19,
       "coverage": {
         "discovered": 8,
@@ -89,7 +84,7 @@
     "ifpk-afpk": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-08-27T03:04:49.359Z",
+      "fetchedAt": "2026-08-28T06:04:26.736Z",
       "sessionCount": 3
     },
     "dataq-csv": {
@@ -120,8 +115,9 @@
       "staleAfterDays": 365
     }
   },
-  "archive": "data/archive/2026/qnet.2026-08-27.00d16d0c7620.json",
+  "archive": "data/archive/2026/qnet.2026-08-28.6d81e91534dd.json",
   "notes": [
+    "kait-linux 실패 — 이전 6회차를 유지하고 stale 로 표시했다 (타임아웃)",
     "kacpta-tax 실패 — 이전 60회차를 유지하고 stale 로 표시했다 (타임아웃)"
   ],
   "failed": [],
