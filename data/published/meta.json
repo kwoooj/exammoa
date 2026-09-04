@@ -1,11 +1,11 @@
 {
-  "fetchedAt": "2026-09-03T00:04:52.059Z",
+  "fetchedAt": "2026-09-03T23:58:54.748Z",
   "year": 2026,
   "examCount": 150,
   "qnetExamCount": 47,
   "groupCount": 99,
-  "sessionCount": 350,
-  "eventCount": 1187,
+  "sessionCount": 349,
+  "eventCount": 1184,
   "tbdCount": 36,
   "staleCount": 173,
   "contradictionCount": 0,
@@ -30,19 +30,19 @@
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-03T00:04:52.059Z",
+      "fetchedAt": "2026-09-03T23:58:54.748Z",
       "sessionCount": 10
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-03T00:04:52.059Z",
-      "sessionCount": 42
+      "fetchedAt": "2026-09-03T23:58:54.748Z",
+      "sessionCount": 41
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-03T00:04:52.059Z",
+      "fetchedAt": "2026-09-03T23:58:54.748Z",
       "sessionCount": 6
     },
     "kait-linux": {
@@ -50,7 +50,7 @@
       "method": "crawl",
       "fetchedAt": "2026-09-02T00:00:55.597Z",
       "sessionCount": 6,
-      "reason": "fetch failed"
+      "reason": "타임아웃"
     },
     "kacpta-tax": {
       "health": "stale",
@@ -62,7 +62,7 @@
     "kbi-finance": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-03T00:04:52.059Z",
+      "fetchedAt": "2026-09-03T23:58:54.748Z",
       "sessionCount": 37,
       "coverage": {
         "discovered": 18,
@@ -74,7 +74,7 @@
     "kofia-investment": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-03T00:04:52.059Z",
+      "fetchedAt": "2026-09-03T23:58:54.748Z",
       "sessionCount": 19,
       "coverage": {
         "discovered": 8,
@@ -86,7 +86,7 @@
     "ifpk-afpk": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-03T00:04:52.059Z",
+      "fetchedAt": "2026-09-03T23:58:54.748Z",
       "sessionCount": 3
     },
     "dataq-csv": {
@@ -121,7 +121,7 @@
   "notes": [
     "qnet 실패 — 이전 102회차를 유지하고 stale 로 표시했다 (연속 5종목 네트워크 실패 — The operation was aborted due to timeout)",
     "history-exam 실패 — 이전 5회차를 유지하고 stale 로 표시했다 (타임아웃)",
-    "kait-linux 실패 — 이전 6회차를 유지하고 stale 로 표시했다 (fetch failed)",
+    "kait-linux 실패 — 이전 6회차를 유지하고 stale 로 표시했다 (타임아웃)",
     "kacpta-tax 실패 — 이전 60회차를 유지하고 stale 로 표시했다 (타임아웃)"
   ],
   "failed": [
@@ -167,7 +167,7 @@
     },
     {
       "slug": "리눅스마스터2급",
-      "reason": "fetch failed"
+      "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
     },
     {
       "slug": "한국사능력검정시험",
@@ -207,7 +207,7 @@
     },
     {
       "slug": "리눅스마스터1급",
-      "reason": "fetch failed"
+      "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
     }
   ]
 }
