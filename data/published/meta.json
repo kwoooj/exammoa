@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-11T00:01:58.622Z",
+  "fetchedAt": "2026-09-12T00:10:16.376Z",
   "year": 2026,
   "examCount": 150,
   "qnetExamCount": 47,
@@ -30,19 +30,19 @@
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-11T00:01:58.622Z",
+      "fetchedAt": "2026-09-12T00:10:16.376Z",
       "sessionCount": 9
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-11T00:01:58.622Z",
+      "fetchedAt": "2026-09-12T00:10:16.376Z",
       "sessionCount": 40
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-11T00:01:58.622Z",
+      "fetchedAt": "2026-09-12T00:10:16.376Z",
       "sessionCount": 6
     },
     "kait-linux": {
@@ -62,7 +62,7 @@
     "kbi-finance": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-11T00:01:58.622Z",
+      "fetchedAt": "2026-09-12T00:10:16.376Z",
       "sessionCount": 37,
       "coverage": {
         "discovered": 18,
@@ -74,7 +74,7 @@
     "kofia-investment": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-11T00:01:58.622Z",
+      "fetchedAt": "2026-09-12T00:10:16.376Z",
       "sessionCount": 19,
       "coverage": {
         "discovered": 8,
@@ -86,7 +86,7 @@
     "ifpk-afpk": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-11T00:01:58.622Z",
+      "fetchedAt": "2026-09-12T00:10:16.376Z",
       "sessionCount": 3
     },
     "dataq-csv": {
