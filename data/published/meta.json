@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-12T00:10:16.376Z",
+  "fetchedAt": "2026-09-12T23:56:25.674Z",
   "year": 2026,
   "examCount": 150,
   "qnetExamCount": 47,
@@ -7,42 +7,40 @@
   "sessionCount": 347,
   "eventCount": 1177,
   "tbdCount": 36,
-  "staleCount": 173,
+  "staleCount": 66,
   "contradictionCount": 0,
   "groupSplitCount": 0,
   "groupSplits": [],
-  "sessionsBeforeFold": 0,
+  "sessionsBeforeFold": 499,
   "sources": {
     "qnet": {
-      "health": "stale",
+      "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-09-10T00:05:46.760Z",
-      "sessionCount": 102,
-      "reason": "연속 5종목 네트워크 실패 — The operation was aborted due to timeout"
+      "fetchedAt": "2026-09-12T23:56:25.674Z",
+      "sessionCount": 102
     },
     "history-exam": {
-      "health": "stale",
+      "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-10T00:05:46.760Z",
-      "sessionCount": 5,
-      "reason": "타임아웃"
+      "fetchedAt": "2026-09-12T23:56:25.674Z",
+      "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-12T00:10:16.376Z",
+      "fetchedAt": "2026-09-12T23:56:25.674Z",
       "sessionCount": 9
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-12T00:10:16.376Z",
+      "fetchedAt": "2026-09-12T23:56:25.674Z",
       "sessionCount": 40
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-12T00:10:16.376Z",
+      "fetchedAt": "2026-09-12T23:56:25.674Z",
       "sessionCount": 6
     },
     "kait-linux": {
@@ -62,7 +60,7 @@
     "kbi-finance": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-12T00:10:16.376Z",
+      "fetchedAt": "2026-09-12T23:56:25.674Z",
       "sessionCount": 37,
       "coverage": {
         "discovered": 18,
@@ -74,7 +72,7 @@
     "kofia-investment": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-12T00:10:16.376Z",
+      "fetchedAt": "2026-09-12T23:56:25.674Z",
       "sessionCount": 19,
       "coverage": {
         "discovered": 8,
@@ -86,7 +84,7 @@
     "ifpk-afpk": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-12T00:10:16.376Z",
+      "fetchedAt": "2026-09-12T23:56:25.674Z",
       "sessionCount": 3
     },
     "dataq-csv": {
@@ -117,46 +115,22 @@
       "staleAfterDays": 365
     }
   },
-  "archive": null,
+  "archive": "data/archive/2026/qnet.2026-09-12.37465b96cc89.json",
   "notes": [
-    "qnet 실패 — 이전 102회차를 유지하고 stale 로 표시했다 (연속 5종목 네트워크 실패 — The operation was aborted due to timeout)",
-    "history-exam 실패 — 이전 5회차를 유지하고 stale 로 표시했다 (타임아웃)",
     "kait-linux 실패 — 이전 6회차를 유지하고 stale 로 표시했다 (타임아웃)",
     "kacpta-tax 실패 — 이전 60회차를 유지하고 stale 로 표시했다 (타임아웃)"
   ],
-  "failed": [
-    {
-      "slug": "전기기사",
-      "jmCd": "1150",
-      "reason": "The operation was aborted due to timeout"
-    },
-    {
-      "slug": "전기산업기사",
-      "jmCd": "2140",
-      "reason": "The operation was aborted due to timeout"
-    },
-    {
-      "slug": "정보처리기사",
-      "jmCd": "1320",
-      "reason": "The operation was aborted due to timeout"
-    },
-    {
-      "slug": "산업안전기사",
-      "jmCd": "1431",
-      "reason": "The operation was aborted due to timeout"
-    },
-    {
-      "slug": "위험물산업기사",
-      "jmCd": "2121",
-      "reason": "The operation was aborted due to timeout"
-    }
-  ],
+  "failed": [],
   "feeCoverage": 150,
-  "feeVerifiedCount": 60,
+  "feeVerifiedCount": 58,
   "feeManualCount": 79,
-  "feeFallbackCount": 11,
+  "feeFallbackCount": 13,
   "feeChanges": [],
   "feeFailures": [
+    {
+      "slug": "ITQ",
+      "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
+    },
     {
       "slug": "전산회계1급",
       "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
@@ -166,7 +140,7 @@
       "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
     },
     {
-      "slug": "한국사능력검정시험",
+      "slug": "리눅스마스터2급",
       "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
     },
     {
@@ -199,6 +173,10 @@
     },
     {
       "slug": "기업회계3급",
+      "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
+    },
+    {
+      "slug": "리눅스마스터1급",
       "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
     }
   ]
