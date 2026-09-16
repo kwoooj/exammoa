@@ -1,11 +1,11 @@
 {
-  "fetchedAt": "2026-09-15T00:30:20.093Z",
+  "fetchedAt": "2026-09-16T00:10:57.356Z",
   "year": 2026,
   "examCount": 150,
   "qnetExamCount": 47,
   "groupCount": 99,
-  "sessionCount": 346,
-  "eventCount": 1174,
+  "sessionCount": 345,
+  "eventCount": 1171,
   "tbdCount": 36,
   "staleCount": 173,
   "contradictionCount": 0,
@@ -30,19 +30,19 @@
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-15T00:30:20.093Z",
+      "fetchedAt": "2026-09-16T00:10:57.356Z",
       "sessionCount": 9
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-15T00:30:20.093Z",
-      "sessionCount": 39
+      "fetchedAt": "2026-09-16T00:10:57.356Z",
+      "sessionCount": 38
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-15T00:30:20.093Z",
+      "fetchedAt": "2026-09-16T00:10:57.356Z",
       "sessionCount": 6
     },
     "kait-linux": {
@@ -62,7 +62,7 @@
     "kbi-finance": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-15T00:30:20.093Z",
+      "fetchedAt": "2026-09-16T00:10:57.356Z",
       "sessionCount": 37,
       "coverage": {
         "discovered": 18,
@@ -74,7 +74,7 @@
     "kofia-investment": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-15T00:30:20.093Z",
+      "fetchedAt": "2026-09-16T00:10:57.356Z",
       "sessionCount": 19,
       "coverage": {
         "discovered": 8,
@@ -86,7 +86,7 @@
     "ifpk-afpk": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-15T00:30:20.093Z",
+      "fetchedAt": "2026-09-16T00:10:57.356Z",
       "sessionCount": 3
     },
     "dataq-csv": {
@@ -167,7 +167,7 @@
     },
     {
       "slug": "리눅스마스터2급",
-      "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
+      "reason": "robots 보류: robots.txt 요청 실패(2회): fetch failed"
     },
     {
       "slug": "한국사능력검정시험",
@@ -207,7 +207,7 @@
     },
     {
       "slug": "리눅스마스터1급",
-      "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
+      "reason": "robots 보류: robots.txt 요청 실패(2회): fetch failed"
     }
   ]
 }
