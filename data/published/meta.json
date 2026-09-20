@@ -1,13 +1,13 @@
 {
-  "fetchedAt": "2026-09-19T00:11:08.552Z",
+  "fetchedAt": "2026-09-20T00:04:47.903Z",
   "year": 2026,
   "examCount": 150,
   "qnetExamCount": 47,
   "groupCount": 99,
-  "sessionCount": 343,
-  "eventCount": 1165,
+  "sessionCount": 342,
+  "eventCount": 1162,
   "tbdCount": 36,
-  "staleCount": 60,
+  "staleCount": 66,
   "contradictionCount": 0,
   "groupSplitCount": 0,
   "groupSplits": [],
@@ -16,44 +16,39 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-09-19T00:11:08.552Z",
+      "fetchedAt": "2026-09-20T00:04:47.903Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-19T00:11:08.552Z",
+      "fetchedAt": "2026-09-20T00:04:47.903Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-19T00:11:08.552Z",
+      "fetchedAt": "2026-09-20T00:04:47.903Z",
       "sessionCount": 9
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-19T00:11:08.552Z",
-      "sessionCount": 36
+      "fetchedAt": "2026-09-20T00:04:47.903Z",
+      "sessionCount": 35
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-19T00:11:08.552Z",
+      "fetchedAt": "2026-09-20T00:04:47.903Z",
       "sessionCount": 6
     },
     "kait-linux": {
-      "health": "ok",
+      "health": "stale",
       "method": "crawl",
       "fetchedAt": "2026-09-19T00:11:08.552Z",
       "sessionCount": 6,
-      "coverage": {
-        "discovered": 2,
-        "included": 2,
-        "unclassified": [],
-        "missing": []
-      }
+      "reason": "타임아웃"
     },
     "kacpta-tax": {
       "health": "stale",
@@ -65,7 +60,7 @@
     "kbi-finance": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-19T00:11:08.552Z",
+      "fetchedAt": "2026-09-20T00:04:47.903Z",
       "sessionCount": 37,
       "coverage": {
         "discovered": 18,
@@ -77,7 +72,7 @@
     "kofia-investment": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-19T00:11:08.552Z",
+      "fetchedAt": "2026-09-20T00:04:47.903Z",
       "sessionCount": 19,
       "coverage": {
         "discovered": 8,
@@ -89,7 +84,7 @@
     "ifpk-afpk": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-19T00:11:08.552Z",
+      "fetchedAt": "2026-09-20T00:04:47.903Z",
       "sessionCount": 3
     },
     "dataq-csv": {
@@ -122,13 +117,14 @@
   },
   "archive": null,
   "notes": [
+    "kait-linux 실패 — 이전 6회차를 유지하고 stale 로 표시했다 (타임아웃)",
     "kacpta-tax 실패 — 이전 60회차를 유지하고 stale 로 표시했다 (타임아웃)"
   ],
   "failed": [],
   "feeCoverage": 150,
-  "feeVerifiedCount": 61,
+  "feeVerifiedCount": 59,
   "feeManualCount": 79,
-  "feeFallbackCount": 10,
+  "feeFallbackCount": 12,
   "feeChanges": [],
   "feeFailures": [
     {
@@ -137,6 +133,10 @@
     },
     {
       "slug": "전산세무2급",
+      "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
+    },
+    {
+      "slug": "리눅스마스터2급",
       "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
     },
     {
@@ -169,6 +169,10 @@
     },
     {
       "slug": "기업회계3급",
+      "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
+    },
+    {
+      "slug": "리눅스마스터1급",
       "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
     }
   ]
