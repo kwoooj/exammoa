@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-28T00:34:14.763Z",
+  "fetchedAt": "2026-09-29T01:47:45.564Z",
   "year": 2026,
   "examCount": 150,
   "qnetExamCount": 47,
@@ -16,31 +16,31 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-09-28T00:34:14.763Z",
+      "fetchedAt": "2026-09-29T01:47:45.564Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-28T00:34:14.763Z",
+      "fetchedAt": "2026-09-29T01:47:45.564Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-28T00:34:14.763Z",
+      "fetchedAt": "2026-09-29T01:47:45.564Z",
       "sessionCount": 8
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-28T00:34:14.763Z",
+      "fetchedAt": "2026-09-29T01:47:45.564Z",
       "sessionCount": 30
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-28T00:34:14.763Z",
+      "fetchedAt": "2026-09-29T01:47:45.564Z",
       "sessionCount": 6
     },
     "kait-linux": {
@@ -60,7 +60,7 @@
     "kbi-finance": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-28T00:34:14.763Z",
+      "fetchedAt": "2026-09-29T01:47:45.564Z",
       "sessionCount": 37,
       "coverage": {
         "discovered": 18,
@@ -72,7 +72,7 @@
     "kofia-investment": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-28T00:34:14.763Z",
+      "fetchedAt": "2026-09-29T01:47:45.564Z",
       "sessionCount": 19,
       "coverage": {
         "discovered": 8,
@@ -84,7 +84,7 @@
     "ifpk-afpk": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-09-28T00:34:14.763Z",
+      "fetchedAt": "2026-09-29T01:47:45.564Z",
       "sessionCount": 3
     },
     "dataq-csv": {
@@ -169,195 +169,195 @@
     },
     {
       "slug": "TOEFL-iBT",
-      "reason": "수기 확인 34일 경과 (기한 30일)"
+      "reason": "수기 확인 35일 경과 (기한 30일)"
     },
     {
       "slug": "New-TEPS",
-      "reason": "수기 확인 34일 경과 (기한 30일)"
+      "reason": "수기 확인 35일 경과 (기한 30일)"
     },
     {
       "slug": "G-TELP-Level-2",
-      "reason": "수기 확인 34일 경과 (기한 30일)"
+      "reason": "수기 확인 35일 경과 (기한 30일)"
     },
     {
       "slug": "IELTS-Academic",
-      "reason": "수기 확인 34일 경과 (기한 30일)"
+      "reason": "수기 확인 35일 경과 (기한 30일)"
     },
     {
       "slug": "IELTS-General-Training",
-      "reason": "수기 확인 34일 경과 (기한 30일)"
+      "reason": "수기 확인 35일 경과 (기한 30일)"
     },
     {
       "slug": "JLPT-N1",
-      "reason": "수기 확인 34일 경과 (기한 30일)"
+      "reason": "수기 확인 35일 경과 (기한 30일)"
     },
     {
       "slug": "JLPT-N2",
-      "reason": "수기 확인 34일 경과 (기한 30일)"
+      "reason": "수기 확인 35일 경과 (기한 30일)"
     },
     {
       "slug": "JLPT-N3",
-      "reason": "수기 확인 34일 경과 (기한 30일)"
+      "reason": "수기 확인 35일 경과 (기한 30일)"
     },
     {
       "slug": "JLPT-N4",
-      "reason": "수기 확인 34일 경과 (기한 30일)"
+      "reason": "수기 확인 35일 경과 (기한 30일)"
     },
     {
       "slug": "JLPT-N5",
-      "reason": "수기 확인 34일 경과 (기한 30일)"
+      "reason": "수기 확인 35일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-1",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-2",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-3",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-4",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-5",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-6",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-7-9",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DELF-A1",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DELF-A2",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DELF-B1",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DELF-B2",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DALF-C1",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DALF-C2",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-A1",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-A2",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-B1",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-B2",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-C1",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-C2",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "공인중개사",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "사회복지사1급",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "주택관리사보",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "물류관리사",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "경비지도사",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "TOPIK-I",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "TOPIK-II",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "재경관리사",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "회계관리1급",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "회계관리2급",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "FAT-1급",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "FAT-2급",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "TAT-1급",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "TAT-2급",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "GTQ-1급",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "GTQ-2급",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "GTQi-1급",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "GTQi-2급",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     },
     {
       "slug": "ERP정보관리사",
-      "reason": "수기 확인 33일 경과 (기한 30일)"
+      "reason": "수기 확인 34일 경과 (기한 30일)"
     }
   ]
 }
