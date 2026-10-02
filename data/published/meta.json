@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-01T01:13:22.632Z",
+  "fetchedAt": "2026-10-02T01:35:28.552Z",
   "year": 2026,
   "examCount": 150,
   "qnetExamCount": 47,
@@ -16,31 +16,31 @@
     "qnet": {
       "health": "ok",
       "method": "api",
-      "fetchedAt": "2026-10-01T01:13:22.632Z",
+      "fetchedAt": "2026-10-02T01:35:28.552Z",
       "sessionCount": 102
     },
     "history-exam": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-10-01T01:13:22.632Z",
+      "fetchedAt": "2026-10-02T01:35:28.552Z",
       "sessionCount": 5
     },
     "toeic": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-10-01T01:13:22.632Z",
+      "fetchedAt": "2026-10-02T01:35:28.552Z",
       "sessionCount": 8
     },
     "toeic-speaking": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-10-01T01:13:22.632Z",
+      "fetchedAt": "2026-10-02T01:35:28.552Z",
       "sessionCount": 28
     },
     "kbs-korean": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-10-01T01:13:22.632Z",
+      "fetchedAt": "2026-10-02T01:35:28.552Z",
       "sessionCount": 6
     },
     "kait-linux": {
@@ -48,7 +48,7 @@
       "method": "crawl",
       "fetchedAt": "2026-09-27T00:27:18.422Z",
       "sessionCount": 6,
-      "reason": "타임아웃"
+      "reason": "fetch failed"
     },
     "kacpta-tax": {
       "health": "stale",
@@ -60,7 +60,7 @@
     "kbi-finance": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-10-01T01:13:22.632Z",
+      "fetchedAt": "2026-10-02T01:35:28.552Z",
       "sessionCount": 37,
       "coverage": {
         "discovered": 18,
@@ -72,7 +72,7 @@
     "kofia-investment": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-10-01T01:13:22.632Z",
+      "fetchedAt": "2026-10-02T01:35:28.552Z",
       "sessionCount": 19,
       "coverage": {
         "discovered": 8,
@@ -84,7 +84,7 @@
     "ifpk-afpk": {
       "health": "ok",
       "method": "crawl",
-      "fetchedAt": "2026-10-01T01:13:22.632Z",
+      "fetchedAt": "2026-10-02T01:35:28.552Z",
       "sessionCount": 3
     },
     "dataq-csv": {
@@ -115,9 +115,9 @@
       "staleAfterDays": 365
     }
   },
-  "archive": "data/archive/2026/qnet.2026-10-01.3223306cf843.json",
+  "archive": "data/archive/2026/qnet.2026-10-02.12a6136509c8.json",
   "notes": [
-    "kait-linux 실패 — 이전 6회차를 유지하고 stale 로 표시했다 (타임아웃)",
+    "kait-linux 실패 — 이전 6회차를 유지하고 stale 로 표시했다 (fetch failed)",
     "kacpta-tax 실패 — 이전 60회차를 유지하고 stale 로 표시했다 (타임아웃)"
   ],
   "failed": [],
@@ -137,7 +137,7 @@
     },
     {
       "slug": "리눅스마스터2급",
-      "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
+      "reason": "fetch failed"
     },
     {
       "slug": "전산세무1급",
@@ -173,199 +173,199 @@
     },
     {
       "slug": "리눅스마스터1급",
-      "reason": "robots 보류: robots.txt 요청 실패(2회): The operation was aborted due to timeout"
+      "reason": "fetch failed"
     },
     {
       "slug": "TOEFL-iBT",
-      "reason": "수기 확인 37일 경과 (기한 30일)"
+      "reason": "수기 확인 38일 경과 (기한 30일)"
     },
     {
       "slug": "New-TEPS",
-      "reason": "수기 확인 37일 경과 (기한 30일)"
+      "reason": "수기 확인 38일 경과 (기한 30일)"
     },
     {
       "slug": "G-TELP-Level-2",
-      "reason": "수기 확인 37일 경과 (기한 30일)"
+      "reason": "수기 확인 38일 경과 (기한 30일)"
     },
     {
       "slug": "IELTS-Academic",
-      "reason": "수기 확인 37일 경과 (기한 30일)"
+      "reason": "수기 확인 38일 경과 (기한 30일)"
     },
     {
       "slug": "IELTS-General-Training",
-      "reason": "수기 확인 37일 경과 (기한 30일)"
+      "reason": "수기 확인 38일 경과 (기한 30일)"
     },
     {
       "slug": "JLPT-N1",
-      "reason": "수기 확인 37일 경과 (기한 30일)"
+      "reason": "수기 확인 38일 경과 (기한 30일)"
     },
     {
       "slug": "JLPT-N2",
-      "reason": "수기 확인 37일 경과 (기한 30일)"
+      "reason": "수기 확인 38일 경과 (기한 30일)"
     },
     {
       "slug": "JLPT-N3",
-      "reason": "수기 확인 37일 경과 (기한 30일)"
+      "reason": "수기 확인 38일 경과 (기한 30일)"
     },
     {
       "slug": "JLPT-N4",
-      "reason": "수기 확인 37일 경과 (기한 30일)"
+      "reason": "수기 확인 38일 경과 (기한 30일)"
     },
     {
       "slug": "JLPT-N5",
-      "reason": "수기 확인 37일 경과 (기한 30일)"
+      "reason": "수기 확인 38일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-1",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-2",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-3",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-4",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-5",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-6",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "HSK-7-9",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DELF-A1",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DELF-A2",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DELF-B1",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DELF-B2",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DALF-C1",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DALF-C2",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-A1",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-A2",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-B1",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-B2",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-C1",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "DELE-C2",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "공인중개사",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "사회복지사1급",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "주택관리사보",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "물류관리사",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "경비지도사",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "TOPIK-I",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "TOPIK-II",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "재경관리사",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "회계관리1급",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "회계관리2급",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "FAT-1급",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "FAT-2급",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "TAT-1급",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "TAT-2급",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "GTQ-1급",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "GTQ-2급",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "GTQi-1급",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "GTQi-2급",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     },
     {
       "slug": "ERP정보관리사",
-      "reason": "수기 확인 36일 경과 (기한 30일)"
+      "reason": "수기 확인 37일 경과 (기한 30일)"
     }
   ]
 }
